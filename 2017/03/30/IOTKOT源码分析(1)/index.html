@@ -105,21 +105,21 @@
 
 
 <meta name="description" content="title: IOTKOT源码分析date: 2017-03-29categories: 物联网开发tags: [物联网]
-comments: false#前言针对宠物屋MCU源码，进行相关分析与理解">
+comments: false前言针对宠物屋MCU源码，进行相关分析与理解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BlueSky-chamo">
 <meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/30/IOTKOT源码分析(1)/index.html">
 <meta property="og:site_name" content="BlueSky-chamo">
 <meta property="og:description" content="title: IOTKOT源码分析date: 2017-03-29categories: 物联网开发tags: [物联网]
-comments: false#前言针对宠物屋MCU源码，进行相关分析与理解">
+comments: false前言针对宠物屋MCU源码，进行相关分析与理解">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-29/8660472-file_1490785000453_15db2.png">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-30/46477138-file_1490839645817_e9af.png">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-30/15628679-file_1490839969174_161cc.png">
-<meta property="og:updated_time" content="2017-03-30T09:07:45.709Z">
+<meta property="og:updated_time" content="2017-03-30T09:12:15.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BlueSky-chamo">
 <meta name="twitter:description" content="title: IOTKOT源码分析date: 2017-03-29categories: 物联网开发tags: [物联网]
-comments: false#前言针对宠物屋MCU源码，进行相关分析与理解">
+comments: false前言针对宠物屋MCU源码，进行相关分析与理解">
 <meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-29/8660472-file_1490785000453_15db2.png">
 
 
@@ -593,12 +593,11 @@ comments: false#前言针对宠物屋MCU源码，进行相关分析与理解">
       
         <hr>
 <p>title: IOTKOT源码分析<br>date: 2017-03-29<br>categories: 物联网开发<br>tags: [物联网]</p>
-<h2 id="comments-false"><a href="#comments-false" class="headerlink" title="comments: false"></a>comments: false</h2><p>#前言<br>针对宠物屋MCU源码，进行相关分析与理解  </p>
+<h2 id="comments-false"><a href="#comments-false" class="headerlink" title="comments: false"></a>comments: false</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>针对宠物屋MCU源码，进行相关分析与理解  </p>
 <a id="more"></a>
-<p>#目录结构<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-3-29/8660472-file_1490785000453_15db2.png" alt="">  </p>
-<p>#源码过程分析  </p>
-<p>##SystemInit()<br>系统时钟初始化，配置时钟72MHZ  </p>
-<p>##HW_Init()<br>用户相关初始化，包括要使用的外设初始化，串口初始化，定时器初始化等。<br>如下：  </p>
+<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><p><img src="http://ogdiq8qnd.bkt.clouddn.com/17-3-29/8660472-file_1490785000453_15db2.png" alt="">  </p>
+<h1 id="源码过程分析"><a href="#源码过程分析" class="headerlink" title="源码过程分析"></a>源码过程分析</h1><h2 id="SystemInit"><a href="#SystemInit" class="headerlink" title="SystemInit()"></a>SystemInit()</h2><p>系统时钟初始化，配置时钟72MHZ  </p>
+<h2 id="HW-Init"><a href="#HW-Init" class="headerlink" title="HW_Init()"></a>HW_Init()</h2><p>用户相关初始化，包括要使用的外设初始化，串口初始化，定时器初始化等。<br>如下：  </p>
 <pre><code>Delay_Init(72);    
 UARTx_Init();
 RGB_KEY_GPIO_Init();
@@ -609,9 +608,9 @@ TIM3_Int_Init(7199,9);
 Motor_Init();    
 DHT11_Init();    
 IR_Init();
-</code></pre><p>##Printf_SystemRccClocks()<br>时钟频率打印，包括SYSCLK,HCLK,PCLK1,PLCK2,SADCCLK时钟频率  </p>
-<p>##SW_Init()<br>机智云平台初始化，包含数据点的初始化，协议处理初始化  </p>
-<p>###GizWits_init(sizeof(ReadTypeDef_t))<br>形参ReadTypeDef_t为结构体 ，数据类型所占字节数不能大于MAX_P0_LEN(128),结构体声明具体如下：  </p>
+</code></pre><h2 id="Printf-SystemRccClocks"><a href="#Printf-SystemRccClocks" class="headerlink" title="Printf_SystemRccClocks()"></a>Printf_SystemRccClocks()</h2><p>时钟频率打印，包括SYSCLK,HCLK,PCLK1,PLCK2,SADCCLK时钟频率  </p>
+<h2 id="SW-Init"><a href="#SW-Init" class="headerlink" title="SW_Init()"></a>SW_Init()</h2><p>机智云平台初始化，包含数据点的初始化，协议处理初始化  </p>
+<h3 id="GizWits-init-sizeof-ReadTypeDef-t"><a href="#GizWits-init-sizeof-ReadTypeDef-t" class="headerlink" title="GizWits_init(sizeof(ReadTypeDef_t))"></a>GizWits_init(sizeof(ReadTypeDef_t))</h3><p>形参ReadTypeDef_t为结构体 ，数据类型所占字节数不能大于MAX_P0_LEN(128),结构体声明具体如下：  </p>
 <pre><code>_packed    typedef struct    
 {
 uint8_t                LED_Cmd;
@@ -672,9 +671,8 @@ Pro_HeadPart.Cmd = 0x0;
 Pro_HeadPart.SN = 0;  
 Pro_HeadPart.Flags[0] = 0x0;  
 Pro_HeadPart.Flags[1] = 0x0;
-</code></pre><p>##While(1)循环  </p>
-<p>###KEY_Handle()<br>按键处理函数，主要判断相应按键是否按下以及事件处理  </p>
-<p>####ReadKeyValue()<br>键值读取函数   </p>
+</code></pre><h2 id="While-1-循环"><a href="#While-1-循环" class="headerlink" title="While(1)循环"></a>While(1)循环</h2><h3 id="KEY-Handle"><a href="#KEY-Handle" class="headerlink" title="KEY_Handle()"></a>KEY_Handle()</h3><p>按键处理函数，主要判断相应按键是否按下以及事件处理  </p>
+<h4 id="ReadKeyValue"><a href="#ReadKeyValue" class="headerlink" title="ReadKeyValue()"></a>ReadKeyValue()</h4><p>键值读取函数   </p>
 <pre><code>static uint8_t Key_Check;  
 static uint8_t Key_State;  
 static uint16_t Key_LongCheck;  
@@ -745,14 +743,14 @@ if(Key_Check == 1)
 
 return  NO_KEY;
 }
-</code></pre><p>####LED_RGB_Control(255, 0, 0)<br>RGB等控制函数  </p>
+</code></pre><h4 id="LED-RGB-Control-255-0-0"><a href="#LED-RGB-Control-255-0-0" class="headerlink" title="LED_RGB_Control(255, 0, 0)"></a>LED_RGB_Control(255, 0, 0)</h4><p>RGB等控制函数  </p>
 <pre><code>void LED_RGB_Control(uint8_t R, uint8_t G, uint8_t B)
 {
 GPIO_SetBits(GPIO_RGB_PORT,GPIO_RGB_PIN);
 Send32Zero();
 DataDealWithAndSend(R, G, B);      // display red
 }
-</code></pre><p>####GizWits_D2WConfigCmd(SoftAp_Mode)<br>MCU通知wifi模组进入配置模式，形参代表SoftAp_Mod模式，0x01  </p>
+</code></pre><h4 id="GizWits-D2WConfigCmd-SoftAp-Mode"><a href="#GizWits-D2WConfigCmd-SoftAp-Mode" class="headerlink" title="GizWits_D2WConfigCmd(SoftAp_Mode)"></a>GizWits_D2WConfigCmd(SoftAp_Mode)</h4><p>MCU通知wifi模组进入配置模式，形参代表SoftAp_Mod模式，0x01  </p>
 <pre><code>Pro_D2W_ConfigWifiTypeDef Pro_D2WConfigWiFiMode;
 Pro_D2WConfigWiFiMode.Pro_HeadPart.Head[0] = 0xFF;
 Pro_D2WConfigWiFiMode.Pro_HeadPart.Head[1] = 0xFF;
@@ -793,7 +791,7 @@ if(Tag == 1)
     memcpy(Wait_AckStruct.Cmd_Buff, Buf, PackLen);
 }
 }
-</code></pre><p>####GizWits_D2WResetCmd()<br>若按键1长按，则进入复位状态，发送复位命令  </p>
+</code></pre><h4 id="GizWits-D2WResetCmd"><a href="#GizWits-D2WResetCmd" class="headerlink" title="GizWits_D2WResetCmd()"></a>GizWits_D2WResetCmd()</h4><p>若按键1长按，则进入复位状态，发送复位命令  </p>
 <pre><code>void GizWits_D2WResetCmd(void)
 {
 Pro_CommonCmdTypeDef Pro_D2WReset;
@@ -815,8 +813,8 @@ for(uint16_t i=0; i&lt;sizeof(Pro_CommonCmdTypeDef); i++)
 printf(&quot;\r\n&quot;);
 #endif
 } 
-</code></pre><p>####GizWits_D2WConfigCmd(AirLink_Mode)<br>若KEY2长按，则控制RGB灯变绿灯，同时进入Airlink_Mode设置模式，函数如同GizWits_D2WConfigCmd(SoftAp_Mode)  </p>
-<p>###GizWits_MessageHandle(p0_control_buf, sizeof(WirteTypeDef_t))<br>消息处理函数  </p>
+</code></pre><h4 id="GizWits-D2WConfigCmd-AirLink-Mode"><a href="#GizWits-D2WConfigCmd-AirLink-Mode" class="headerlink" title="GizWits_D2WConfigCmd(AirLink_Mode)"></a>GizWits_D2WConfigCmd(AirLink_Mode)</h4><p>若KEY2长按，则控制RGB灯变绿灯，同时进入Airlink_Mode设置模式，函数如同GizWits_D2WConfigCmd(SoftAp_Mode)  </p>
+<h3 id="GizWits-MessageHandle-p0-control-buf-sizeof-WirteTypeDef-t"><a href="#GizWits-MessageHandle-p0-control-buf-sizeof-WirteTypeDef-t" class="headerlink" title="GizWits_MessageHandle(p0_control_buf, sizeof(WirteTypeDef_t))"></a>GizWits_MessageHandle(p0_control_buf, sizeof(WirteTypeDef_t))</h3><p>消息处理函数  </p>
 <pre><code>u8 GizWits_MessageHandle(u8 * Message_Buf, u8 Length_buf)
 {
 uint8_t ret = 0;
@@ -896,7 +894,7 @@ if(packageFlag)
 
 return 1;
 }  
-</code></pre><p>####Pro_GetFrame()<br>抓包函数  </p>
+</code></pre><h4 id="Pro-GetFrame"><a href="#Pro-GetFrame" class="headerlink" title="Pro_GetFrame()"></a>Pro_GetFrame()</h4><p>抓包函数  </p>
 <pre><code>static uint8_t Pro_GetFrame()
 {
     if(rb_can_read(&amp;u_ring_buff) &gt;= 1)
@@ -946,8 +944,7 @@ return 1;
     }
         return 1;
 }
-</code></pre><p>#####环形缓冲区RingBuffer  </p>
-<pre><code>typedef struct {
+</code></pre><h5 id="环形缓冲区RingBuffer"><a href="#环形缓冲区RingBuffer" class="headerlink" title="环形缓冲区RingBuffer"></a>环形缓冲区RingBuffer</h5><pre><code>typedef struct {
 size_t rb_capacity;/缓冲区容量
 char  *rb_head;//用于读出的指针
 char  *rb_tail;//用于写入的指针
@@ -1059,7 +1056,7 @@ else
     return count;
 }
 }
-</code></pre><p>####GizWits_D2W_Resend_AckCmdHandle()<br>重发机制，Wait_AckStruct.Flag == 1则重发  </p>
+</code></pre><h4 id="GizWits-D2W-Resend-AckCmdHandle"><a href="#GizWits-D2W-Resend-AckCmdHandle" class="headerlink" title="GizWits_D2W_Resend_AckCmdHandle()"></a>GizWits_D2W_Resend_AckCmdHandle()</h4><p>重发机制，Wait_AckStruct.Flag == 1则重发  </p>
 <pre><code>static uint8_t GizWits_D2W_Resend_AckCmdHandle(void)
 {                                                                                    
     if(Wait_AckStruct.Flag == 1)//在Pro_UART_SendBuf()中设置Flag
@@ -1093,7 +1090,7 @@ if(Tag == 1)
     Wait_AckStruct.Flag = 1;//1,表示有需要等待的ACk,0表示无需等待的ACK
     memcpy(Wait_AckStruct.Cmd_Buff, Buf, PackLen);重发数据缓冲区
 }
-</code></pre><p>####GizWits_W2D_AckCmdHandle()<br>判断ACK,但是函数返回值ret并没有利用起来，应该利用ret返回值来判断是否启动重发机制，返回值ret=0,则表示ACK成功  </p>
+</code></pre><h4 id="GizWits-W2D-AckCmdHandle"><a href="#GizWits-W2D-AckCmdHandle" class="headerlink" title="GizWits_W2D_AckCmdHandle()"></a>GizWits_W2D_AckCmdHandle()</h4><p>判断ACK,但是函数返回值ret并没有利用起来，应该利用ret返回值来判断是否启动重发机制，返回值ret=0,则表示ACK成功  </p>
 <pre><code>/*判断ACK*/
 static uint8_t GizWits_W2D_AckCmdHandle(void)
 {
@@ -1111,7 +1108,7 @@ if(Wait_AckStruct.Flag == 1)//在Pro_UART_SendBuf()中设置Flag
 }
 return 1;
 }
-</code></pre><p>####switch (Recv_HeadPart-&gt;Cmd)<br>根据对应的命令码进行对应操作  </p>
+</code></pre><h4 id="switch-Recv-HeadPart-gt-Cmd"><a href="#switch-Recv-HeadPart-gt-Cmd" class="headerlink" title="switch (Recv_HeadPart-&gt;Cmd)"></a>switch (Recv_HeadPart-&gt;Cmd)</h4><p>根据对应的命令码进行对应操作  </p>
 <pre><code>switch (Recv_HeadPart-&gt;Cmd)
     {
         //wifi模组请求信息，获取MUC信息
@@ -1159,7 +1156,7 @@ return 1;
             Pro_W2D_ErrorCmdHandle(Error_Cmd);
             break;
     }
-</code></pre><p>#####Pro_W2D_GetMcuInfo()<br>条件：case Pro_W2D_GetDeviceInfo_Cmd://0x01,设备信息命令码<br>WIFI模组请求设备信息，获取mcu信息  </p>
+</code></pre><h5 id="Pro-W2D-GetMcuInfo"><a href="#Pro-W2D-GetMcuInfo" class="headerlink" title="Pro_W2D_GetMcuInfo()"></a>Pro_W2D_GetMcuInfo()</h5><p>条件：case Pro_W2D_GetDeviceInfo_Cmd://0x01,设备信息命令码<br>WIFI模组请求设备信息，获取mcu信息  </p>
 <pre><code>static void Pro_W2D_GetMcuInfo(void)
 {
 memcpy(&amp;Pro_CommonCmdStruct, UART_HandleStruct.Message_Buf, sizeof(Pro_CommonCmdStruct));
@@ -1198,7 +1195,7 @@ uint8_t                            SN;
 uint8_t                            Flags[2];
 
 } Pro_HeadPartTypeDef;
-</code></pre><p>#####Pro_W2D_CommonCmdHandle()<br>回复通用协议帧<br>条件：Pro_W2D_P0_Cmd &amp;&amp; P0_W2D_Control_Devce_Action  </p>
+</code></pre><h5 id="Pro-W2D-CommonCmdHandle"><a href="#Pro-W2D-CommonCmdHandle" class="headerlink" title="Pro_W2D_CommonCmdHandle()"></a>Pro_W2D_CommonCmdHandle()</h5><p>回复通用协议帧<br>条件：Pro_W2D_P0_Cmd &amp;&amp; P0_W2D_Control_Devce_Action  </p>
 <pre><code>static void Pro_W2D_CommonCmdHandle(void)
 {
 memcpy(&amp;Pro_CommonCmdStruct, UART_HandleStruct.Message_Buf, sizeof(Pro_CommonCmdStruct));
@@ -1224,7 +1221,7 @@ memset(&amp;Pro_CommonCmdStruct, 0, sizeof(Pro_CommonCmdStruct));
 Pro_HeadPartTypeDef        Pro_HeadPart;
 uint8_t                    Sum;
 } Pro_CommonCmdTypeDef;
-</code></pre><p>#####Pro_W2D_ReadDevStatusHandle()<br>读取设备状态<br>条件：Pro_W2D_P0_Cmd &amp;&amp; P0_W2D_ReadDevStatus_Action<br>函数中调用Pro_D2W_ReportDevStatusHandle()</p>
+</code></pre><h5 id="Pro-W2D-ReadDevStatusHandle"><a href="#Pro-W2D-ReadDevStatusHandle" class="headerlink" title="Pro_W2D_ReadDevStatusHandle()"></a>Pro_W2D_ReadDevStatusHandle()</h5><p>读取设备状态<br>条件：Pro_W2D_P0_Cmd &amp;&amp; P0_W2D_ReadDevStatus_Action<br>函数中调用Pro_D2W_ReportDevStatusHandle()</p>
 <pre><code>static void Pro_D2W_ReportDevStatusHandle(void)
 {
 Pro_HeadPartP0CmdTypeDef *Pro_HeadPartP0Cmd = (Pro_HeadPartP0CmdTypeDef *)g_DevStatus;
@@ -1251,7 +1248,7 @@ printf(&quot;\r\n&quot;);
 Pro_HeadPartTypeDef          Pro_HeadPart;
 P0_ActionTypeDef            Action;
 } Pro_HeadPartP0CmdTypeDef;
-</code></pre><p>#####Pro_W2D_WifiStatusHandle()<br>条件：case Pro_W2D_ReportWifiStatus_Cmd<br>wifi状态处理函数  </p>
+</code></pre><h5 id="Pro-W2D-WifiStatusHandle"><a href="#Pro-W2D-WifiStatusHandle" class="headerlink" title="Pro_W2D_WifiStatusHandle()"></a>Pro_W2D_WifiStatusHandle()</h5><p>条件：case Pro_W2D_ReportWifiStatus_Cmd<br>wifi状态处理函数  </p>
 <pre><code>void (*callBackFunc)(uint16_t);
 static void Pro_W2D_WifiStatusHandle(void)
 {
@@ -1261,7 +1258,7 @@ callBackFunc  = GizWits_WiFiStatueHandle;
 (*callBackFunc)(exchangeBytes(Pro_W2D_WifiStatusStruct.Wifi_Status));
 
 }
-</code></pre><p>#####Pr0_W2D_RequestResetDeviceHandle()<br>请求复位设备<br>条件：case Pro_W2D_ReportMCUReset_Cmd  </p>
+</code></pre><h5 id="Pr0-W2D-RequestResetDeviceHandle"><a href="#Pr0-W2D-RequestResetDeviceHandle" class="headerlink" title="Pr0_W2D_RequestResetDeviceHandle()"></a>Pr0_W2D_RequestResetDeviceHandle()</h5><p>请求复位设备<br>条件：case Pro_W2D_ReportMCUReset_Cmd  </p>
 <pre><code>void Pr0_W2D_RequestResetDeviceHandle(void)
 {
 Pro_W2D_CommonCmdHandle();
@@ -1276,7 +1273,7 @@ __set_FAULTMASK(1);
 NVIC_SystemReset();
 /******************************************************************************/
 }
-</code></pre><p>###GizWits_ControlDeviceHandle()<br>设备控制处理<br>在GizWits_MessageHandle()中的命令码解析中解析到P0_W2D_Control_Devce_Action，置P0标志p0Flag=1，执行设备控制处理函数  </p>
+</code></pre><h3 id="GizWits-ControlDeviceHandle"><a href="#GizWits-ControlDeviceHandle" class="headerlink" title="GizWits_ControlDeviceHandle()"></a>GizWits_ControlDeviceHandle()</h3><p>设备控制处理<br>在GizWits_MessageHandle()中的命令码解析中解析到P0_W2D_Control_Devce_Action，置P0标志p0Flag=1，执行设备控制处理函数  </p>
 <pre><code>void GizWits_ControlDeviceHandle()
 {
 if( (WirteTypeDef.Attr_Flags &amp; (1&lt;&lt;0)) == (1&lt;&lt;0))
@@ -1411,7 +1408,7 @@ uint8_t               Humidity;
 uint8_t                Alert;
 uint8_t                Fault;
 }ReadTypeDef_t; 
-</code></pre><p>###GizWits_DevStatusUpgrade（）<br>设备状态更新 </p>
+</code></pre><h3 id="GizWits-DevStatusUpgrade（）"><a href="#GizWits-DevStatusUpgrade（）" class="headerlink" title="GizWits_DevStatusUpgrade（）"></a>GizWits_DevStatusUpgrade（）</h3><p>设备状态更新 </p>
 <pre><code>void GizWits_DevStatusUpgrade(uint8_t *P0_Buff, uint32_t Time, uint8_t flag)
 {
     uint8_t Report_Flag = 0;
@@ -1469,7 +1466,7 @@ Report:
     }
     return;
 }
-</code></pre><p>###GizWits_GatherSensorData()<br>获取传感器数据  </p>
+</code></pre><h3 id="GizWits-GatherSensorData"><a href="#GizWits-GatherSensorData" class="headerlink" title="GizWits_GatherSensorData()"></a>GizWits_GatherSensorData()</h3><p>获取传感器数据  </p>
 <pre><code>void GizWits_GatherSensorData(void)
 {
 ReadTypeDef.Infrared = IR_Handle();
@@ -1685,7 +1682,7 @@ lastHum = curHum;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#comments-false"><span class="nav-number">1.</span> <span class="nav-text">comments: false</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#comments-false"><span class="nav-number">1.</span> <span class="nav-text">comments: false</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number"></span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录结构"><span class="nav-number"></span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码过程分析"><span class="nav-number"></span> <span class="nav-text">源码过程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SystemInit"><span class="nav-number">1.</span> <span class="nav-text">SystemInit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HW-Init"><span class="nav-number">2.</span> <span class="nav-text">HW_Init()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Printf-SystemRccClocks"><span class="nav-number">3.</span> <span class="nav-text">Printf_SystemRccClocks()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SW-Init"><span class="nav-number">4.</span> <span class="nav-text">SW_Init()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GizWits-init-sizeof-ReadTypeDef-t"><span class="nav-number">4.1.</span> <span class="nav-text">GizWits_init(sizeof(ReadTypeDef_t))</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#While-1-循环"><span class="nav-number">5.</span> <span class="nav-text">While(1)循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KEY-Handle"><span class="nav-number">5.1.</span> <span class="nav-text">KEY_Handle()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ReadKeyValue"><span class="nav-number">5.1.1.</span> <span class="nav-text">ReadKeyValue()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LED-RGB-Control-255-0-0"><span class="nav-number">5.1.2.</span> <span class="nav-text">LED_RGB_Control(255, 0, 0)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GizWits-D2WConfigCmd-SoftAp-Mode"><span class="nav-number">5.1.3.</span> <span class="nav-text">GizWits_D2WConfigCmd(SoftAp_Mode)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GizWits-D2WResetCmd"><span class="nav-number">5.1.4.</span> <span class="nav-text">GizWits_D2WResetCmd()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GizWits-D2WConfigCmd-AirLink-Mode"><span class="nav-number">5.1.5.</span> <span class="nav-text">GizWits_D2WConfigCmd(AirLink_Mode)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GizWits-MessageHandle-p0-control-buf-sizeof-WirteTypeDef-t"><span class="nav-number">5.2.</span> <span class="nav-text">GizWits_MessageHandle(p0_control_buf, sizeof(WirteTypeDef_t))</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pro-GetFrame"><span class="nav-number">5.2.1.</span> <span class="nav-text">Pro_GetFrame()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#环形缓冲区RingBuffer"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">环形缓冲区RingBuffer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GizWits-D2W-Resend-AckCmdHandle"><span class="nav-number">5.2.2.</span> <span class="nav-text">GizWits_D2W_Resend_AckCmdHandle()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GizWits-W2D-AckCmdHandle"><span class="nav-number">5.2.3.</span> <span class="nav-text">GizWits_W2D_AckCmdHandle()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switch-Recv-HeadPart-gt-Cmd"><span class="nav-number">5.2.4.</span> <span class="nav-text">switch (Recv_HeadPart->Cmd)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pro-W2D-GetMcuInfo"><span class="nav-number">5.2.4.1.</span> <span class="nav-text">Pro_W2D_GetMcuInfo()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pro-W2D-CommonCmdHandle"><span class="nav-number">5.2.4.2.</span> <span class="nav-text">Pro_W2D_CommonCmdHandle()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pro-W2D-ReadDevStatusHandle"><span class="nav-number">5.2.4.3.</span> <span class="nav-text">Pro_W2D_ReadDevStatusHandle()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pro-W2D-WifiStatusHandle"><span class="nav-number">5.2.4.4.</span> <span class="nav-text">Pro_W2D_WifiStatusHandle()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pr0-W2D-RequestResetDeviceHandle"><span class="nav-number">5.2.4.5.</span> <span class="nav-text">Pr0_W2D_RequestResetDeviceHandle()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GizWits-ControlDeviceHandle"><span class="nav-number">5.3.</span> <span class="nav-text">GizWits_ControlDeviceHandle()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GizWits-DevStatusUpgrade（）"><span class="nav-number">5.4.</span> <span class="nav-text">GizWits_DevStatusUpgrade（）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GizWits-GatherSensorData"><span class="nav-number">5.5.</span> <span class="nav-text">GizWits_GatherSensorData()</span></a></li></ol></li></ol></div>
             
 
           </div>
