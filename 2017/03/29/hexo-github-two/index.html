@@ -118,7 +118,7 @@ cd bloggit clone https://github.com/iissnan/hexo-theme-next themes/next
 
 cd bloggit clone https://github.com/iissnan/hexo-theme-next themes/next
 ###启用next主题在站点配置文件_config.yml中：theme: next">
-<meta property="og:updated_time" content="2017-03-29T01:23:27.604Z">
+<meta property="og:updated_time" content="2017-03-30T08:39:05.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+Github搭建个人博客（二）">
 <meta name="twitter:description" content="##安装NEXT主题  
@@ -639,6 +639,8 @@ cd bloggit clone https://github.com/iissnan/hexo-theme-next themes/next
 </ol>
 <p>####修改文章内链接文本样式<br>将链接文本设置为蓝色，鼠标划过时文字颜色加深，并显示下划线。<br>找到文件 <code>themes\next\source\css\_custom\custom.styl</code> ，添加如下 css 样式：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.post-body p a &#123;</div><div class="line">  color: #0593d3;</div><div class="line">  border-bottom: none;</div><div class="line">  &amp;:hover &#123;</div><div class="line">    color: #0477ab;</div><div class="line">    text-decoration: underline;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="给-Github-添加-README"><a href="#给-Github-添加-README" class="headerlink" title="给 Github 添加 README"></a>给 Github 添加 README</h4><p>默认情况下，Github中每一个项目，我们希望有一份 README.md 的文件来作为项目的说明，但是我们在项目根目录下的 blog\source 目录下创建一份 README.md 文件，写好说明介绍，部署的时候，这个 README.md 会被 hexo 解析掉，而不会被解析到 Github 中去的。<br>正确的解决方法其实很简单：<br><strong> 把 README.md 文件的后缀名改成 “MDOWN” 然后扔到<code>blog/source</code>文件夹下即可，这样 hexo 不会解析，Github 也会将其作为 MD 文件解析。 </strong></p>
+<p>####插入网易云音乐<br>如果只加入单曲，只需要搜索歌曲，点开歌曲名，点击生成外链播放器，复制html代码将html代码无需任何修改放入markdown文章里就OK了。</p>
+<p>如果想要加入歌单，就需要自己创建歌单，然后分享歌单，找到自己的分享动态，点进去可以看到有“生成外链播放器”这些字眼，其余操作就和上面一样了。</p>
 <p>##参考<br><a href="https://neveryu.github.io/2016/09/30/hexo-next-two/" target="_blank" rel="external">Never_yu’s Blog</a>  </p>
 
       
