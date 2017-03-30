@@ -1,0 +1,1895 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="title: IOTKOT源码分析date: 2017-03-29categories: 物联网开发tags: [物联网]
+comments: false#前言针对宠物屋MCU源码，进行相关分析与理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlueSky-chamo">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/30/IOTKOT源码分析(1)/index.html">
+<meta property="og:site_name" content="BlueSky-chamo">
+<meta property="og:description" content="title: IOTKOT源码分析date: 2017-03-29categories: 物联网开发tags: [物联网]
+comments: false#前言针对宠物屋MCU源码，进行相关分析与理解">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-29/8660472-file_1490785000453_15db2.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-30/46477138-file_1490839645817_e9af.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-30/15628679-file_1490839969174_161cc.png">
+<meta property="og:updated_time" content="2017-03-30T09:07:45.709Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BlueSky-chamo">
+<meta name="twitter:description" content="title: IOTKOT源码分析date: 2017-03-29categories: 物联网开发tags: [物联网]
+comments: false#前言针对宠物屋MCU源码，进行相关分析与理解">
+<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-3-29/8660472-file_1490785000453_15db2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/30/IOTKOT源码分析(1)/"/>
+
+
+
+
+
+  <title>  | BlueSky-chamo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BlueSky-chamo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/IOTKOT源码分析(1)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BlueSky-chamo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T17:06:50+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>title: IOTKOT源码分析<br>date: 2017-03-29<br>categories: 物联网开发<br>tags: [物联网]</p>
+<h2 id="comments-false"><a href="#comments-false" class="headerlink" title="comments: false"></a>comments: false</h2><p>#前言<br>针对宠物屋MCU源码，进行相关分析与理解  </p>
+<a id="more"></a>
+<p>#目录结构<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-3-29/8660472-file_1490785000453_15db2.png" alt="">  </p>
+<p>#源码过程分析  </p>
+<p>##SystemInit()<br>系统时钟初始化，配置时钟72MHZ  </p>
+<p>##HW_Init()<br>用户相关初始化，包括要使用的外设初始化，串口初始化，定时器初始化等。<br>如下：  </p>
+<pre><code>Delay_Init(72);    
+UARTx_Init();
+RGB_KEY_GPIO_Init();
+RGB_LED_Init();    
+LED_GPIO_Init();    
+KEY_GPIO_Init();
+TIM3_Int_Init(7199,9);
+Motor_Init();    
+DHT11_Init();    
+IR_Init();
+</code></pre><p>##Printf_SystemRccClocks()<br>时钟频率打印，包括SYSCLK,HCLK,PCLK1,PLCK2,SADCCLK时钟频率  </p>
+<p>##SW_Init()<br>机智云平台初始化，包含数据点的初始化，协议处理初始化  </p>
+<p>###GizWits_init(sizeof(ReadTypeDef_t))<br>形参ReadTypeDef_t为结构体 ，数据类型所占字节数不能大于MAX_P0_LEN(128),结构体声明具体如下：  </p>
+<pre><code>_packed    typedef struct    
+{
+uint8_t                LED_Cmd;
+uint8_t                LED_R;
+uint8_t                LED_G;  
+uint8_t                LED_B;    
+MOTOR_T                Motor;
+uint8_t               Infrared;
+uint8_t               Temperature;
+uint8_t               Humidity;
+uint8_t                Alert;
+uint8_t                Fault;
+}ReadTypeDef_t;    
+</code></pre><p>涉及到的几个结构体如下：    </p>
+<p>WIFI模组请求设备信息: </p>
+<pre><code>_packed typedef struct
+{
+Pro_HeadPartTypeDef                      Pro_HeadPart;
+uint8_t                                    Pro_ver[8];
+uint8_t                                    P0_ver[8];
+uint8_t                                    Hard_ver[8];
+uint8_t                                    Soft_ver[8];
+uint8_t                                    Product_Key[32];
+uint16_t                                Binable_Time;
+uint8_t                                    Sum;
+} Pro_M2W_ReturnInfoTypeDef;
+</code></pre><p>协议标准头:    </p>
+<pre><code>_packed    typedef struct
+{
+uint8_t                            Head[2];
+uint16_t                        Len;
+uint8_t                            Cmd;
+uint8_t                            SN;
+uint8_t                            Flags[2];
+
+} Pro_HeadPartTypeDef;
+</code></pre><p>P0报文标准头:  </p>
+<pre><code>_packed typedef struct  
+{
+Pro_HeadPartTypeDef          Pro_HeadPart; 
+P0_ActionTypeDef            Action;  
+} Pro_HeadPartP0CmdTypeDef;  
+</code></pre><p>函数中主要完成WIFI模组请求设备信息与P0报文标准头的初始化，主要是对其中的协议标准头等赋值。<br>对于WIFI模组设备请求信息： Pro_M2W_ReturnInfoStruct </p>
+<pre><code>Pro_HeadPart.Head[0] = 0xFF;  
+Pro_HeadPart.Head[1] = 0xFF;   
+Pro_HeadPart.Len=exchangeBytes(sizeof(Pro_M2W_ReturnInfoStruct) - 4)；  
+Pro_HeadPart.Cmd=Pro_D2W__GetDeviceInfo_Ack_Cmd； //命令码0x02;
+Pro_M2W_ReturnInfoStruct.Pro_ver=00000004；  
+Pro_M2W_ReturnInfoStruct.P0_ver=00000004；  
+Pro_M2W_ReturnInfoStruct.Hard_ver=00000001；  
+Pro_M2W_ReturnInfoStruct.Soft_ver=00000001；  
+Pro_M2W_ReturnInfoStruct.Product_Key=6f3074fe43894547a4f1314bd7e3ae0b；
+</code></pre><p>对于P0报文标准头：Pro_HeadPartP0Cmd</p>
+<pre><code>Pro_HeadPart.Head[0] = 0xFF；  
+Pro_HeadPart.Head[1] = 0xFF;  
+Pro_HeadPart.Len = exchangeBytes(sizeof(Pro_HeadPartP0CmdTypeDef) - 4);  
+Pro_HeadPart.Cmd = 0x0;  
+Pro_HeadPart.SN = 0;  
+Pro_HeadPart.Flags[0] = 0x0;  
+Pro_HeadPart.Flags[1] = 0x0;
+</code></pre><p>##While(1)循环  </p>
+<p>###KEY_Handle()<br>按键处理函数，主要判断相应按键是否按下以及事件处理  </p>
+<p>####ReadKeyValue()<br>键值读取函数   </p>
+<pre><code>static uint8_t Key_Check;  
+static uint8_t Key_State;  
+static uint16_t Key_LongCheck;  
+static uint8_t Key_Prev    = 0;                                      //上一次按键  
+uint8_t Key_press;  
+uint8_t Key_return = 0;  
+if(KeyCountTime &gt;= 10)  //按键消抖10ms
+{
+    KeyCountTime = 0;
+    Key_Check = 1;
+}
+if(Key_Check == 1)
+{
+    Key_Check = 0;
+    Key_press = Get_Key();//KEY1按下为0x01,KEY2按下为0x02,KEY3按下为0x04
+    switch (Key_State)
+    {
+    case 0:
+        if(Key_press != 0)//有按键按下
+        {
+            Key_Prev = Key_press;记录上个时间点按下的按键，然后下次程序读取按键是否有按键按下，并跟上个时间点的按下的按键比较  
+            Key_State = 1;//程序往case 1进行 
+        }
+
+        break;
+    case 1:
+        if(Key_press == Key_Prev)//按下的按键没有抬起  
+        {
+            Key_State = 2;//往case 2进行
+            Key_return= Key_Prev | KEY_DOWN;返回值，如按键按下，0x01|0x10 返回0x11
+        }
+        else                                                                                     //按键抬起为抖动，不是相应按键
+        {
+            Key_State = 0;
+        }
+        break;
+    case 2:
+
+        if(Key_press != Key_Prev)//判断是否是短按  
+        {
+            Key_State = 0;
+            Key_LongCheck = 0;
+            Key_return = Key_Prev | KEY_UP;0x01|0x20 返回0x21
+            return Key_return;
+        }
+
+        if(Key_press == Key_Prev)
+        {
+            Key_LongCheck++;
+            if(Key_LongCheck &gt;= 100)    //长按2S
+            {
+                Key_LongCheck = 0;
+                Key_State = 3;
+                Key_return= Key_press |  KEY_LONG;
+                return Key_return;
+            }
+        }
+        break;
+
+    case 3:
+        if(Key_press != Key_Prev)
+        {
+            Key_State = 0;
+        }
+        break;
+    }
+}
+
+return  NO_KEY;
+}
+</code></pre><p>####LED_RGB_Control(255, 0, 0)<br>RGB等控制函数  </p>
+<pre><code>void LED_RGB_Control(uint8_t R, uint8_t G, uint8_t B)
+{
+GPIO_SetBits(GPIO_RGB_PORT,GPIO_RGB_PIN);
+Send32Zero();
+DataDealWithAndSend(R, G, B);      // display red
+}
+</code></pre><p>####GizWits_D2WConfigCmd(SoftAp_Mode)<br>MCU通知wifi模组进入配置模式，形参代表SoftAp_Mod模式，0x01  </p>
+<pre><code>Pro_D2W_ConfigWifiTypeDef Pro_D2WConfigWiFiMode;
+Pro_D2WConfigWiFiMode.Pro_HeadPart.Head[0] = 0xFF;
+Pro_D2WConfigWiFiMode.Pro_HeadPart.Head[1] = 0xFF;
+Pro_D2WConfigWiFiMode.Pro_HeadPart.Len = exchangeBytes(sizeof(Pro_D2W_ConfigWifiTypeDef) - 4);
+Pro_D2WConfigWiFiMode.Pro_HeadPart.Cmd = Pro_D2W_ControlWifi_Config_Cmd;//0x09  
+Pro_D2WConfigWiFiMode.Pro_HeadPart.SN = SN++;
+Pro_D2WConfigWiFiMode.Pro_HeadPart.Flags[0] = 0x00;
+Pro_D2WConfigWiFiMode.Pro_HeadPart.Flags[1] = 0x00;
+Pro_D2WConfigWiFiMode.Config_Method = WiFi_Mode;
+Pro_D2WConfigWiFiMode.Sum = CheckSum((uint8_t *)&amp;Pro_D2WConfigWiFiMode, sizeof(Pro_D2W_ConfigWifiTypeDef));
+Pro_UART_SendBuf((uint8_t *)&amp;Pro_D2WConfigWiFiMode, sizeof(Pro_D2W_ConfigWifiTypeDef), 1);
+#ifdef PROTOCOL_DEBUG
+printf(&quot;[%d] MCU   : &quot;, SystemTimeCount);
+for(uint16_t i=0; i&lt;sizeof(Pro_D2W_ConfigWifiTypeDef); i++)
+{
+    printf(&quot;%2x &quot;, *((uint8_t *)&amp;Pro_D2WConfigWiFiMode + i));
+}
+printf(&quot;\r\n&quot;);
+#endif
+</code></pre><p>其中Pro_UART_SendBuf()为串口发送函数<br>形参： buf:数据起始地址； packLen:数据长度； tag=0,不等待ACK；tag=1,等待ACK<br>功能：若等待ACK，按照协议失败重发3次；数据区出现FF，在其后增加55  </p>
+<pre><code>static void Pro_UART_SendBuf(uint8_t *Buf, uint16_t PackLen, uint8_t Tag)  
+{
+uint16_t i;
+for(i=0; i&lt;PackLen; i++)
+{
+    UART2_Send_DATA(Buf[i]);
+    if(i &gt;=2 &amp;&amp; Buf[i] == 0xFF)
+    {
+        UART2_Send_DATA(0x55);
+    }
+}
+//需要实现重发的报文
+if(Tag == 1)
+{
+    Wait_AckStruct.SendTime = SystemTimeCount;
+    Wait_AckStruct.SendNum = 0;
+    Wait_AckStruct.Flag = 1;
+    memcpy(Wait_AckStruct.Cmd_Buff, Buf, PackLen);
+}
+}
+</code></pre><p>####GizWits_D2WResetCmd()<br>若按键1长按，则进入复位状态，发送复位命令  </p>
+<pre><code>void GizWits_D2WResetCmd(void)
+{
+Pro_CommonCmdTypeDef Pro_D2WReset;
+Pro_D2WReset.Pro_HeadPart.Head[0] = 0xFF;
+Pro_D2WReset.Pro_HeadPart.Head[1] = 0xFF;
+Pro_D2WReset.Pro_HeadPart.Len = exchangeBytes(sizeof(Pro_CommonCmdTypeDef) - 4);
+Pro_D2WReset.Pro_HeadPart.Cmd = Pro_D2W_ResetWifi_Cmd;
+Pro_D2WReset.Pro_HeadPart.SN = SN++;
+Pro_D2WReset.Pro_HeadPart.Flags[0] = 0x00;
+Pro_D2WReset.Pro_HeadPart.Flags[1] = 0x00;
+Pro_D2WReset.Sum = CheckSum((uint8_t *)&amp;Pro_D2WReset, sizeof(Pro_CommonCmdTypeDef));
+Pro_UART_SendBuf((uint8_t *)&amp;Pro_D2WReset, sizeof(Pro_CommonCmdTypeDef), 1);
+#ifdef PROTOCOL_DEBUG
+printf(&quot;[%d] MCU   : &quot;, SystemTimeCount);
+for(uint16_t i=0; i&lt;sizeof(Pro_CommonCmdTypeDef); i++)
+{
+    printf(&quot;%2x &quot;, *((uint8_t *)&amp;Pro_D2WReset + i));
+}
+printf(&quot;\r\n&quot;);
+#endif
+} 
+</code></pre><p>####GizWits_D2WConfigCmd(AirLink_Mode)<br>若KEY2长按，则控制RGB灯变绿灯，同时进入Airlink_Mode设置模式，函数如同GizWits_D2WConfigCmd(SoftAp_Mode)  </p>
+<p>###GizWits_MessageHandle(p0_control_buf, sizeof(WirteTypeDef_t))<br>消息处理函数  </p>
+<pre><code>u8 GizWits_MessageHandle(u8 * Message_Buf, u8 Length_buf)
+{
+uint8_t ret = 0;
+Pro_HeadPartTypeDef *Recv_HeadPart = NULL;
+/*抓取一包*/
+Pro_GetFrame();
+memset(&amp;Recv_HeadPart, 0, sizeof(Recv_HeadPart));
+/*重发机制*/
+GizWits_D2W_Resend_AckCmdHandle();
+if(packageFlag)
+{
+    /*验证校验码*/
+    if(CheckSum(UART_HandleStruct.Message_Buf, UART_HandleStruct.Message_Len) != UART_HandleStruct.Message_Buf[UART_HandleStruct.Message_Len - 1]) 
+    {
+        Pro_W2D_ErrorCmdHandle(Error_AckSum);
+        packageFlag = 0;
+        return 1;        
+    }
+    /*判断ACK*/
+    ret = GizWits_W2D_AckCmdHandle();
+#ifdef DEBUG
+   if(ret == 0)
+   {
+        printf(&quot;ACK: SUCCESS! ...\r\n&quot;);
+   }
+#endif
+    Recv_HeadPart = (Pro_HeadPartTypeDef *)UART_HandleStruct.Message_Buf;
+    switch (Recv_HeadPart-&gt;Cmd)
+    {
+        case Pro_W2D_GetDeviceInfo_Cmd:
+            Pro_W2D_GetMcuInfo();
+            break;
+        case Pro_W2D_P0_Cmd:
+        {
+            switch(UART_HandleStruct.Message_Buf[sizeof(Pro_HeadPartTypeDef)])
+            {
+                case P0_W2D_Control_Devce_Action:
+                {
+                    Pro_W2D_CommonCmdHandle();
+                    memcpy(Message_Buf, UART_HandleStruct.Message_Buf+sizeof(Pro_HeadPartP0CmdTypeDef), Length_buf);
+                    p0Flag = 1;
+                    break;
+                }
+                case P0_W2D_ReadDevStatus_Action:
+                    Pro_W2D_ReadDevStatusHandle();
+                    break;
+                default:
+                    break;
+            }
+        }
+        break;
+        case Pro_W2D_P0_Ack_Cmd:
+            break;
+        case Pro_W2D_Heartbeat_Cmd:
+            Pro_W2D_CommonCmdHandle();
+            break;
+        case Pro_W2D_ControlWifi_Config_Ack_Cmd:
+            break;
+        case Pro_W2D_ResetWifi_Ack_Cmd:
+            break;
+        case Pro_W2D_ReportWifiStatus_Cmd:
+            Pro_W2D_WifiStatusHandle();
+            break;
+        case Pro_W2D_ReportMCUReset_Cmd:
+            Pr0_W2D_RequestResetDeviceHandle();
+            break;
+        case Pro_W2D_ErrorPackage_Cmd:
+            //Pro_W2D_ErrorCmdHandle(Error_AckSum);//bug
+            break;
+        default:
+            Pro_W2D_ErrorCmdHandle(Error_Cmd);
+            break;
+    }
+        memset(&amp;UART_HandleStruct.Message_Buf, 0, UART_HandleStruct.Message_Len);
+        packageFlag = 0;
+}
+
+return 1;
+}  
+</code></pre><p>####Pro_GetFrame()<br>抓包函数  </p>
+<pre><code>static uint8_t Pro_GetFrame()
+{
+    if(rb_can_read(&amp;u_ring_buff) &gt;= 1)
+    {
+        if(packageFlag ==0)
+         {
+        rb_read(&amp;u_ring_buff, &amp;curValue, 1);
+               if((lastValue == 0xFF)&amp;&amp;(curValue == 0xFF))
+                {
+            tmp_buf[0] = 0xFF;
+            tmp_buf[1] = 0xFF;
+            count = 2;
+            return 1;
+                }
+               if((lastValue == 0xFF)&amp;&amp;(curValue == 0x55))
+            {
+            lastValue = curValue;
+            return 1;
+                }
+              tmp_buf[count] = curValue;
+            count ++ ;
+            lastValue = curValue;
+
+            if(count ==4)
+            {
+            dataLen = tmp_buf[2]*256+  tmp_buf[3];
+               }
+                if(count ==  (dataLen + 4))
+            {
+    //把rb的数据，拷贝到UART_HandleStruct
+            memcpy(UART_HandleStruct.Message_Buf, tmp_buf, dataLen + 4);
+            UART_HandleStruct.Message_Len = dataLen + 4;
+            #ifdef PROTOCOL_DEBUG
+            printf(&quot;GAgentToMCU: &quot;);
+            for(uint8_t i=0; i&lt;dataLen+4; i++)
+            {
+                printf(&quot;%2x &quot;, UART_HandleStruct.Message_Buf[i]);
+            }
+            printf(&quot;\r\n&quot;);
+            #endif
+                            memset(tmp_buf, 0, (dataLen + 4));
+            packageFlag = 1;
+            lastValue = curValue =0;
+            return 0;
+            }
+        } 
+    }
+        return 1;
+}
+</code></pre><p>#####环形缓冲区RingBuffer  </p>
+<pre><code>typedef struct {
+size_t rb_capacity;/缓冲区容量
+char  *rb_head;//用于读出的指针
+char  *rb_tail;//用于写入的指针
+char  rb_buff[256];//缓冲区实体  
+}RingBuffer;
+</code></pre><p>rb_new():创建环形缓冲区，head与tail指针都指向rb_buff的首地址</p>
+<pre><code>void rb_new(RingBuffer* rb)
+{
+//RingBuffer *rb = (RingBuffer *)buff;//malloc(sizeof(RingBuffer) + capacity);
+//if (rb == NULL) return NULL;
+rb-&gt;rb_capacity = MAX_RINGBUFFER_LEN;//-sizeof(RingBuffer);//capacity;
+//rb-&gt;rb_buff     = buff+sizeof(RingBuffer);//(char*)rb + sizeof(RingBuffer);
+rb-&gt;rb_head     = rb-&gt;rb_buff;
+rb-&gt;rb_tail     = rb-&gt;rb_buff;
+//return rb;};
+</code></pre><p>rb_capacity：缓冲区容量  </p>
+<pre><code>size_t     rb_capacity(RingBuffer *rb)
+{
+//assert(rb != NULL);
+return rb-&gt;rb_capacity;
+}
+</code></pre><p>获得缓冲区可读区域，返回可读区域大小：<br>三种情况：<br>1、head与tail都指向同一个地方时，可读区域大小为0。这种情况只会在缓冲区还未使用时出现，<br>开始使用之后，不会出现head/tail重合的现象，即tail永远不会等于head，否则head指向的数据还未读走就被覆盖了<br>2、head &lt; tail  ，说明tail没有写到缓冲区末尾，从缓冲区开头重新开始。可读的区域自然为(tail - head)<br>3、head &gt; tail  ，说明tail已经从缓冲区末尾写完，并从开头处重新准备写了。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-3-30/46477138-file_1490839645817_e9af.png" alt=""><br>获得可读区域：  </p>
+<pre><code>size_t rb_can_read(RingBuffer *rb)
+{ 
+if (rb-&gt;rb_head == rb-&gt;rb_tail) 
+    return 0;    
+if (rb-&gt;rb_head &lt; rb-&gt;rb_tail) 
+    return rb-&gt;rb_tail - rb-&gt;rb_head;    
+return rb_capacity(rb) - (rb-&gt;rb_head - rb-&gt;rb_tail);
+}
+</code></pre><p>获得可写区域：  </p>
+<pre><code>size_t rb_can_write(RingBuffer *rb)
+{    
+    return rb_capacity(rb) - rb_can_read(rb);
+}  
+</code></pre><p>读数据，从head指向的地址开始，读到data指向的地址处，读count个数据,返回读的个数<br>三种情况：  </p>
+<ol>
+<li>head &lt; tail  ，此时要从count 和”可读区域大小”中选一个较小的值，作为读操作的次数。避免了count 大于“可读区域”的错误。  </li>
+<li>head &gt; tail  且 count 的个数 小于“从head到缓冲区末尾的数据个数”图中蓝色。直接复制内存，再修改head 指针即可。  </li>
+<li>head &gt; tail  且 count 的个数 大于“从head到缓冲区末尾的数据个数”。<br>此时，先把从head到缓冲区末尾的值蓝色复制到data处，再把剩余的绿色复制过去。注意两个值：copy_sz 和*(data + copy_sz)<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-3-30/15628679-file_1490839969174_161cc.png" alt=""><br>写数据，把数据从data指向的地址，写到tail 指向的地址，写count个,返回写的个数。<br>这里进来直接判断，要写入的内容大小 要小于可写区域大小，防止造成数据覆盖。写入合法。<br>下面写入分了三种情况：  </li>
+<li>需要计算tail_avail_sz，这个值为tail 到缓冲区末尾的数据区域大小。  </li>
+<li>head &lt; tail  ，count &lt; tail_avail_sz  。直接复制内容。假如tail 到了缓冲区末尾，让tail 回到缓冲区首地址。  </li>
+<li>head &lt; tail  ，count &gt; tail_avail_sz  。先写入 tail_avail_sz 个数据，tail 回到缓冲区首地址，再写入剩余的部分。  </li>
+<li>head &gt; tail  ，这种情况最简单，由于已经做了写入合法判断，所以直接复制内容，修改tail 即可。</li>
+</ol>
+<p>读环形缓冲区：size_t rb_read(RingBuffer <em>rb, void </em>data, size_t count)  </p>
+<pre><code>size_t     rb_read(RingBuffer *rb, void *data, size_t count)
+{
+//assert(rb != NULL);
+//assert(data != NULL);
+if (rb-&gt;rb_head &lt; rb-&gt;rb_tail)
+{
+    int copy_sz = min(count, rb_can_read(rb));
+    memcpy(data, rb-&gt;rb_head, copy_sz);
+    rb-&gt;rb_head += copy_sz;
+    return copy_sz;
+}
+else
+{
+    if (count &lt; rb_capacity(rb)-(rb-&gt;rb_head - rb-&gt;rb_buff))
+    {
+        int copy_sz = count;
+        memcpy(data, rb-&gt;rb_head, copy_sz);
+        rb-&gt;rb_head += copy_sz;
+        return copy_sz;
+    }
+    else
+    {
+        int copy_sz = rb_capacity(rb) - (rb-&gt;rb_head - rb-&gt;rb_buff);
+        memcpy(data, rb-&gt;rb_head, copy_sz);
+        rb-&gt;rb_head = rb-&gt;rb_buff;
+        copy_sz += rb_read(rb, (char*)data+copy_sz, count-copy_sz);
+        return copy_sz;
+    }
+}
+}
+</code></pre><p>写环形缓冲区：size_t rb_write(RingBuffer <em>rb, const void </em>data, size_t count)  </p>
+<pre><code>size_t     rb_write(RingBuffer *rb, const void *data, size_t count)
+{
+//assert(rb != NULL);
+//assert(data != NULL);
+
+if (count &gt;= rb_can_write(rb)) 
+        return -1;
+
+if (rb-&gt;rb_head &lt;= rb-&gt;rb_tail)
+{
+    int tail_avail_sz = rb_capacity(rb) - (rb-&gt;rb_tail - rb-&gt;rb_buff);
+    if (count &lt;= tail_avail_sz)
+    {
+        memcpy(rb-&gt;rb_tail, data, count);
+        rb-&gt;rb_tail += count;
+        if (rb-&gt;rb_tail == rb-&gt;rb_buff+rb_capacity(rb))
+            rb-&gt;rb_tail = rb-&gt;rb_buff;
+        return count;
+    }
+    else
+    {
+        memcpy(rb-&gt;rb_tail, data, tail_avail_sz);
+        rb-&gt;rb_tail = rb-&gt;rb_buff;
+
+        return tail_avail_sz + rb_write(rb, (char*)data+tail_avail_sz, count-tail_avail_sz);
+    }
+}
+else
+{
+    memcpy(rb-&gt;rb_tail, data, count);
+    rb-&gt;rb_tail += count;
+    return count;
+}
+}
+</code></pre><p>####GizWits_D2W_Resend_AckCmdHandle()<br>重发机制，Wait_AckStruct.Flag == 1则重发  </p>
+<pre><code>static uint8_t GizWits_D2W_Resend_AckCmdHandle(void)
+{                                                                                    
+    if(Wait_AckStruct.Flag == 1)//在Pro_UART_SendBuf()中设置Flag
+    {
+
+    if(Wait_AckStruct.SendNum &lt; Send_MaxNum)
+    {
+        if((SystemTimeCount - Wait_AckStruct.SendTime) &gt; Send_MaxTime)
+        {
+            Pro_UART_SendBuf((uint8_t *)&amp;Wait_AckStruct.Cmd_Buff, Wait_AckStruct.ResendBufLen, 0);
+            printf(&quot;Send again\r\n&quot;);
+            Wait_AckStruct.SendTime = SystemTimeCount;
+            Wait_AckStruct.SendNum++;
+            return 2;
+        }
+    }
+       else
+    {
+        memset(&amp;Wait_AckStruct, 0, sizeof(Wait_AckStruct)); //Wait_AckStruct.Flag = 0;
+        return 1;
+    }
+    }
+    return 0;
+}
+</code></pre><p>在Pro_UART_SendBuf()中，单个参数tag代表是否等待ACK,里面会对Wait_AckStruct进行赋值 </p>
+<pre><code>//需要实现重发的报文
+if(Tag == 1)
+{
+    Wait_AckStruct.SendTime = SystemTimeCount;//重发时记录的时间戳
+    Wait_AckStruct.SendNum = 0;//重发次数
+    Wait_AckStruct.Flag = 1;//1,表示有需要等待的ACk,0表示无需等待的ACK
+    memcpy(Wait_AckStruct.Cmd_Buff, Buf, PackLen);重发数据缓冲区
+}
+</code></pre><p>####GizWits_W2D_AckCmdHandle()<br>判断ACK,但是函数返回值ret并没有利用起来，应该利用ret返回值来判断是否启动重发机制，返回值ret=0,则表示ACK成功  </p>
+<pre><code>/*判断ACK*/
+static uint8_t GizWits_W2D_AckCmdHandle(void)
+{
+Pro_HeadPartTypeDef * Wait_Ack_HeadPart = (Pro_HeadPartTypeDef *)Wait_AckStruct.Cmd_Buff;
+Pro_HeadPartTypeDef * Recv_HeadPart = (Pro_HeadPartTypeDef *)UART_HandleStruct.Message_Buf;
+
+if(Wait_AckStruct.Flag == 1)//在Pro_UART_SendBuf()中设置Flag
+{
+    /*判断收到的报文命令码和报文序号,是否是需要等到的ACK*/
+    if((Wait_Ack_HeadPart-&gt;Cmd == (Recv_HeadPart-&gt;Cmd - 1)) &amp;&amp; (Wait_Ack_HeadPart-&gt;SN == Recv_HeadPart-&gt;SN))
+    {
+        memset(&amp;Wait_AckStruct, 0, sizeof(Wait_AckStruct)); //Wait_AckStruct.Flag = 0;
+        return 0; //允许重新reprot
+    }
+}
+return 1;
+}
+</code></pre><p>####switch (Recv_HeadPart-&gt;Cmd)<br>根据对应的命令码进行对应操作  </p>
+<pre><code>switch (Recv_HeadPart-&gt;Cmd)
+    {
+        //wifi模组请求信息，获取MUC信息
+        case Pro_W2D_GetDeviceInfo_Cmd:
+            Pro_W2D_GetMcuInfo();
+            break;
+        case Pro_W2D_P0_Cmd:
+        {
+            switch(UART_HandleStruct.Message_Buf[sizeof(Pro_HeadPartTypeDef)])
+            {
+                case P0_W2D_Control_Devce_Action:
+                {
+                    Pro_W2D_CommonCmdHandle();
+                    memcpy(Message_Buf, UART_HandleStruct.Message_Buf+sizeof(Pro_HeadPartP0CmdTypeDef), Length_buf);
+                    p0Flag = 1;
+                    break;
+                }
+                case P0_W2D_ReadDevStatus_Action:
+                    Pro_W2D_ReadDevStatusHandle();
+                    break;
+                default:
+                    break;
+            }
+        }
+        break;
+        case Pro_W2D_P0_Ack_Cmd:
+            break;
+        case Pro_W2D_Heartbeat_Cmd:
+            Pro_W2D_CommonCmdHandle();
+            break;
+        case Pro_W2D_ControlWifi_Config_Ack_Cmd:
+            break;
+        case Pro_W2D_ResetWifi_Ack_Cmd:
+            break;
+        case Pro_W2D_ReportWifiStatus_Cmd:
+            Pro_W2D_WifiStatusHandle();
+            break;
+        case Pro_W2D_ReportMCUReset_Cmd:
+            Pr0_W2D_RequestResetDeviceHandle();
+            break;
+        case Pro_W2D_ErrorPackage_Cmd:
+            //Pro_W2D_ErrorCmdHandle(Error_AckSum);//bug
+            break;
+        default:
+            Pro_W2D_ErrorCmdHandle(Error_Cmd);
+            break;
+    }
+</code></pre><p>#####Pro_W2D_GetMcuInfo()<br>条件：case Pro_W2D_GetDeviceInfo_Cmd://0x01,设备信息命令码<br>WIFI模组请求设备信息，获取mcu信息  </p>
+<pre><code>static void Pro_W2D_GetMcuInfo(void)
+{
+memcpy(&amp;Pro_CommonCmdStruct, UART_HandleStruct.Message_Buf, sizeof(Pro_CommonCmdStruct));
+
+Pro_M2W_ReturnInfoStruct.Pro_HeadPart.SN = Pro_CommonCmdStruct.Pro_HeadPart.SN;
+Pro_M2W_ReturnInfoStruct.Sum = CheckSum((uint8_t *)&amp;Pro_M2W_ReturnInfoStruct, sizeof(Pro_M2W_ReturnInfoStruct));
+Pro_UART_SendBuf((uint8_t *)&amp;Pro_M2W_ReturnInfoStruct,sizeof(Pro_M2W_ReturnInfoStruct), 0);
+#ifdef PROTOCOL_DEBUG
+printf(&quot;[%d] MCU   : &quot;, SystemTimeCount);
+for(uint16_t i=0; i&lt;sizeof(Pro_M2W_ReturnInfoStruct); i++)
+{
+    printf(&quot;%2x &quot;, *((uint8_t *)&amp;Pro_M2W_ReturnInfoStruct + i));
+}
+printf(&quot;\r\n&quot;);
+#endif
+} 
+</code></pre><p>其中涉及的到结构体Pro_M2W_ReturnInfoTypeDef如下:  </p>
+<pre><code>__packed    typedef struct
+{
+Pro_HeadPartTypeDef                  Pro_HeadPart;//2B
+uint8_t                                Pro_ver[8];
+uint8_t                                P0_ver[8];
+uint8_t                                Hard_ver[8];
+uint8_t                                Soft_ver[8];
+uint8_t                                Product_Key[32];
+uint16_t                            Binable_Time;
+uint8_t                                Sum;
+} Pro_M2W_ReturnInfoTypeDef
+</code></pre><p>Pro_HeadPartTypeDef如下：</p>
+<pre><code>__packed    typedef struct
+{
+uint8_t                            Head[2];
+uint16_t                        Len;
+uint8_t                            Cmd;
+uint8_t                            SN;
+uint8_t                            Flags[2];
+
+} Pro_HeadPartTypeDef;
+</code></pre><p>#####Pro_W2D_CommonCmdHandle()<br>回复通用协议帧<br>条件：Pro_W2D_P0_Cmd &amp;&amp; P0_W2D_Control_Devce_Action  </p>
+<pre><code>static void Pro_W2D_CommonCmdHandle(void)
+{
+memcpy(&amp;Pro_CommonCmdStruct, UART_HandleStruct.Message_Buf, sizeof(Pro_CommonCmdStruct));
+Pro_CommonCmdStruct.Pro_HeadPart.Len = exchangeBytes(sizeof(Pro_CommonCmdTypeDef) - 4);
+Pro_CommonCmdStruct.Pro_HeadPart.Cmd = Pro_CommonCmdStruct.Pro_HeadPart.Cmd + 1;
+Pro_CommonCmdStruct.Sum = CheckSum((uint8_t *)&amp;Pro_CommonCmdStruct, sizeof(Pro_CommonCmdStruct));
+Pro_UART_SendBuf((uint8_t *)&amp;Pro_CommonCmdStruct, sizeof(Pro_CommonCmdStruct), 0);
+
+#ifdef PROTOCOL_DEBUG
+printf(&quot;[%d] MCU   : &quot;, SystemTimeCount);
+for(uint16_t i=0; i&lt;sizeof(Pro_CommonCmdStruct); i++)
+{
+    printf(&quot;%2x &quot;, *((uint8_t *)&amp;Pro_CommonCmdStruct + i));
+}
+printf(&quot;\r\n&quot;);
+#endif
+
+memset(&amp;Pro_CommonCmdStruct, 0, sizeof(Pro_CommonCmdStruct));
+}
+</code></pre><p>协议通用数据帧  </p>
+<pre><code>_packed    typedef struct
+{
+Pro_HeadPartTypeDef        Pro_HeadPart;
+uint8_t                    Sum;
+} Pro_CommonCmdTypeDef;
+</code></pre><p>#####Pro_W2D_ReadDevStatusHandle()<br>读取设备状态<br>条件：Pro_W2D_P0_Cmd &amp;&amp; P0_W2D_ReadDevStatus_Action<br>函数中调用Pro_D2W_ReportDevStatusHandle()</p>
+<pre><code>static void Pro_D2W_ReportDevStatusHandle(void)
+{
+Pro_HeadPartP0CmdTypeDef *Pro_HeadPartP0Cmd = (Pro_HeadPartP0CmdTypeDef *)g_DevStatus;
+memcpy(Pro_HeadPartP0Cmd, UART_HandleStruct.Message_Buf, sizeof(Pro_HeadPartTypeDef));
+Pro_HeadPartP0Cmd-&gt;Pro_HeadPart.Cmd = Pro_D2W_P0_Ack_Cmd;
+Pro_HeadPartP0Cmd-&gt;Pro_HeadPart.Len = exchangeBytes((sizeof(Pro_HeadPartP0CmdTypeDef)+g_P0DataLen+1) - 4);
+Pro_HeadPartP0Cmd-&gt;Action = P0_D2W_ReadDevStatus_Action_ACK;
+g_DevStatus[sizeof(Pro_HeadPartP0CmdTypeDef)+g_P0DataLen] = CheckSum(g_DevStatus, sizeof(Pro_HeadPartP0CmdTypeDef)+g_P0DataLen+1);
+Pro_UART_SendBuf((uint8_t *)Pro_HeadPartP0Cmd, sizeof(Pro_HeadPartP0CmdTypeDef)+g_P0DataLen+1, 0);
+
+#ifdef PROTOCOL_DEBUG
+printf(&quot;[%d] MCU   : &quot;, SystemTimeCount);
+for(uint16_t i=0; i&lt;(sizeof(Pro_HeadPartP0CmdTypeDef)+g_P0DataLen+1); i++)
+{
+    printf(&quot;%2x &quot;, *((uint8_t *)Pro_HeadPartP0Cmd + i));
+}
+printf(&quot;\r\n&quot;);
+#endif
+
+}
+</code></pre><p>其中P0报文标准头结构Pro_HeadPartP0Cmd  </p>
+<pre><code>__packed typedef struct
+{
+Pro_HeadPartTypeDef          Pro_HeadPart;
+P0_ActionTypeDef            Action;
+} Pro_HeadPartP0CmdTypeDef;
+</code></pre><p>#####Pro_W2D_WifiStatusHandle()<br>条件：case Pro_W2D_ReportWifiStatus_Cmd<br>wifi状态处理函数  </p>
+<pre><code>void (*callBackFunc)(uint16_t);
+static void Pro_W2D_WifiStatusHandle(void)
+{
+memcpy(&amp;Pro_W2D_WifiStatusStruct, UART_HandleStruct.Message_Buf, sizeof(Pro_W2D_WifiStatusStruct));
+Pro_W2D_CommonCmdHandle();
+callBackFunc  = GizWits_WiFiStatueHandle;
+(*callBackFunc)(exchangeBytes(Pro_W2D_WifiStatusStruct.Wifi_Status));
+
+}
+</code></pre><p>#####Pr0_W2D_RequestResetDeviceHandle()<br>请求复位设备<br>条件：case Pro_W2D_ReportMCUReset_Cmd  </p>
+<pre><code>void Pr0_W2D_RequestResetDeviceHandle(void)
+{
+Pro_W2D_CommonCmdHandle();
+uint32_t timeDelay = SystemTimeCount;
+/*Wait 600ms*/
+while((SystemTimeCount - timeDelay) &lt;= 600);
+printf(&quot;W2D_RequestResetDevice...\r\n&quot;);
+printf(&quot;MCU Restart...\r\n&quot;);
+
+/****************************MCU RESTART****************************/
+__set_FAULTMASK(1);
+NVIC_SystemReset();
+/******************************************************************************/
+}
+</code></pre><p>###GizWits_ControlDeviceHandle()<br>设备控制处理<br>在GizWits_MessageHandle()中的命令码解析中解析到P0_W2D_Control_Devce_Action，置P0标志p0Flag=1，执行设备控制处理函数  </p>
+<pre><code>void GizWits_ControlDeviceHandle()
+{
+if( (WirteTypeDef.Attr_Flags &amp; (1&lt;&lt;0)) == (1&lt;&lt;0))
+{
+    if(Set_LedStatus != 1)
+    {
+        //根据wifi写入命令执行相应动作
+        if(WirteTypeDef.LED_Cmd == LED_OnOff)//灯灭命令
+        {
+            LED_RGB_Control(0,0,0);//控制灯灭
+            ReadTypeDef.LED_Cmd = LED_OnOff;//将该命令赋值到wifi读取命令中
+            printf(&quot;SetLED_Off \r\n&quot;);
+        }
+        if(WirteTypeDef.LED_Cmd == LED_OnOn)
+        {
+            ReadTypeDef.LED_Cmd = LED_OnOn;//灯亮
+            LED_RGB_Control(254,0,0);
+            printf(&quot;SetLED_On \r\n&quot;);
+        }
+    }
+
+}
+if( (WirteTypeDef.Attr_Flags &amp; (1&lt;&lt;1)) == (1&lt;&lt;1))
+{
+        if(WirteTypeDef.LED_Cmd == LED_Costom)
+        {
+            ReadTypeDef.LED_Cmd = LED_Costom;
+            ReadTypeDef.LED_R = 0;
+            ReadTypeDef.LED_G = 0;
+            ReadTypeDef.LED_B = 0;
+            Set_LedStatus = 0;
+            LED_RGB_Control(0, 0, 0);
+            printf(&quot;SetLED LED_Costom \r\n&quot;);
+        }
+        if(WirteTypeDef.LED_Cmd == LED_Yellow)
+        {
+            Set_LedStatus = 1;
+            ReadTypeDef.LED_Cmd = LED_Yellow;
+            ReadTypeDef.LED_R = 254;
+            ReadTypeDef.LED_G = 254;
+            ReadTypeDef.LED_B = 0;
+
+            LED_RGB_Control(254, 254, 0);
+            printf(&quot;SetLED LED_Yellow \r\n&quot;);
+        }
+
+        if(WirteTypeDef.LED_Cmd == LED_Purple)
+        {
+            ReadTypeDef.LED_Cmd = LED_Purple;
+            ReadTypeDef.LED_R = 254;
+            ReadTypeDef.LED_G = 0;
+            ReadTypeDef.LED_B = 70;
+            Set_LedStatus = 1;
+            LED_RGB_Control(254, 0, 70);    
+            printf(&quot;SetLED LED_Purple \r\n&quot;);
+        }
+        if(WirteTypeDef.LED_Cmd == LED_Pink)
+        {
+            ReadTypeDef.LED_Cmd = LED_Pink;
+            ReadTypeDef.LED_R = 238;
+            ReadTypeDef.LED_G = 30;
+            ReadTypeDef.LED_B = 30;
+            Set_LedStatus = 1;
+            LED_RGB_Control(238 ,30 ,30);
+            printf(&quot;SetLED LED_Pink \r\n&quot;);
+        }
+}
+if( (WirteTypeDef.Attr_Flags &amp; (1&lt;&lt;2)) == (1&lt;&lt;2))
+{
+    if(Set_LedStatus != 1)
+    {
+        ReadTypeDef.LED_R = WirteTypeDef.LED_R;
+        printf(&quot;W2D Control LED_R = %d \r\n&quot;,WirteTypeDef.LED_R);
+        LED_RGB_Control(ReadTypeDef.LED_R,ReadTypeDef.LED_G,ReadTypeDef.LED_B);
+    }
+
+}
+if( (WirteTypeDef.Attr_Flags &amp; (1&lt;&lt;3)) == (1&lt;&lt;3))
+{
+    if(Set_LedStatus != 1)
+    {
+        ReadTypeDef.LED_G = WirteTypeDef.LED_G;
+        printf(&quot;W2D Control LED_G = %d \r\n&quot;,WirteTypeDef.LED_G);
+        LED_RGB_Control(ReadTypeDef.LED_R,ReadTypeDef.LED_G,ReadTypeDef.LED_B);
+    }
+
+}
+if( (WirteTypeDef.Attr_Flags &amp; (1&lt;&lt;4)) == (1&lt;&lt;4))
+{
+    if(Set_LedStatus != 1)
+    {
+        ReadTypeDef.LED_B = WirteTypeDef.LED_B;
+        printf(&quot;W2D Control LED_B = %d \r\n&quot;,WirteTypeDef.LED_B);
+        LED_RGB_Control(ReadTypeDef.LED_R,ReadTypeDef.LED_G,ReadTypeDef.LED_B);
+    }
+
+}
+if( (WirteTypeDef.Attr_Flags &amp; (1&lt;&lt;5)) == (1&lt;&lt;5))
+{
+    ReadTypeDef.Motor = WirteTypeDef.Motor;
+#ifdef MOTOR_16
+    printf(&quot;W2D Control Motor = %d \r\n&quot;,exchangeBytes(WirteTypeDef.Motor));
+    Motor_status(exchangeBytes(WirteTypeDef.Motor));
+#else
+    printf(&quot;W2D Control Motor = %d \r\n&quot;,WirteTypeDef.Motor);
+    Motor_status(WirteTypeDef.Motor);
+#endif
+}
+}
+</code></pre><p>其中wifi写入的数据结构WirteTypeDef_t,传入消息处理GizWits_MessageHandle()的形参p0_control_buf复制到WirteTypeDef  </p>
+<pre><code>__packed typedef struct    
+{
+uint8_t                            Attr_Flags;
+uint8_t                            LED_Cmd;
+uint8_t                            LED_R;
+uint8_t                            LED_G;  
+uint8_t                            LED_B;
+MOTOR_T                            Motor;        
+
+}WirteTypeDef_t;
+</code></pre><p>其中wifi写入的数据结构readTypeDef_t </p>
+<pre><code>__packed    typedef struct    
+{
+uint8_t                LED_Cmd;
+uint8_t                LED_R;
+uint8_t                LED_G;  
+uint8_t                LED_B;    
+MOTOR_T                Motor;
+uint8_t               Infrared;
+uint8_t               Temperature;
+uint8_t               Humidity;
+uint8_t                Alert;
+uint8_t                Fault;
+}ReadTypeDef_t; 
+</code></pre><p>###GizWits_DevStatusUpgrade（）<br>设备状态更新 </p>
+<pre><code>void GizWits_DevStatusUpgrade(uint8_t *P0_Buff, uint32_t Time, uint8_t flag)
+{
+    uint8_t Report_Flag = 0;
+    Pro_HeadPartP0CmdTypeDef *Pro_HeadPartP0Cmd = (Pro_HeadPartP0CmdTypeDef *)g_DevStatus;
+    if(Wait_AckStruct.Flag == 1)
+    {
+        return;
+    }
+    if(flag == 1)
+    {
+        Report_Flag = 1;
+        goto Report;
+    }
+    if((2 * 1000) &lt; (SystemTimeCount - Last_ReportTime))
+    {
+        if(memcmp(g_DevStatus + sizeof(Pro_HeadPartP0CmdTypeDef), P0_Buff, g_P0DataLen) != 0)
+        {
+            Report_Flag = 1;
+
+        }
+    }
+    if(Time &lt; (SystemTimeCount-Last_Report_10_Time))
+    {
+        Report_Flag = 1;
+        Last_Report_10_Time = SystemTimeCount;
+    }
+
+Report:
+    if(Report_Flag == 1)
+    {
+        memcpy(g_DevStatus + sizeof(Pro_HeadPartP0CmdTypeDef), P0_Buff, g_P0DataLen);
+
+        Pro_HeadPartP0Cmd-&gt;Pro_HeadPart.Len = exchangeBytes(sizeof(Pro_HeadPartP0CmdTypeDef) + 1 + g_P0DataLen - 4);
+        Pro_HeadPartP0Cmd-&gt;Pro_HeadPart.Cmd = Pro_D2W_P0_Cmd;
+        Pro_HeadPartP0Cmd-&gt;Pro_HeadPart.SN = SN++;
+        Pro_HeadPartP0Cmd-&gt;Action = P0_D2W_ReportDevStatus_Action;
+        g_DevStatus[sizeof(Pro_HeadPartP0CmdTypeDef) + g_P0DataLen] = CheckSum(g_DevStatus, sizeof(Pro_HeadPartP0CmdTypeDef) + g_P0DataLen + 1);
+
+        Pro_UART_SendBuf((uint8_t *)Pro_HeadPartP0Cmd, sizeof(Pro_HeadPartP0CmdTypeDef) + g_P0DataLen + 1, 1);//×¢£º×îºóÒ»ÏîÎªÖ÷¶¯ÉÏ±¨Ê±ÖÃÎª1 ÊÊÓÃÓÚÐ­Òé4.3¡¢4.4¡¢4.9
+
+        Last_ReportTime = SystemTimeCount;
+
+    #ifdef DEBUG
+        printf(&quot;Report Sensor Data \r\n&quot;);
+    #endif        
+
+    #ifdef PROTOCOL_DEBUG
+        printf(&quot;[%d] MCU   : &quot;, SystemTimeCount);
+        for(uint16_t i = 0; i &lt; (sizeof(Pro_HeadPartP0CmdTypeDef) + g_P0DataLen + 1); i++)
+        {
+            printf(&quot;%2x &quot;, g_DevStatus[i]);
+        }
+        printf(&quot;\r\n&quot;);
+    #endif
+    }
+    return;
+}
+</code></pre><p>###GizWits_GatherSensorData()<br>获取传感器数据  </p>
+<pre><code>void GizWits_GatherSensorData(void)
+{
+ReadTypeDef.Infrared = IR_Handle();
+DHT11_Read_Data(&amp;curTem, &amp;curHum);
+ReadTypeDef.Temperature = (curTem + lastTem) /2;
+ReadTypeDef.Humidity = (curHum + lastHum)/2;
+
+ReadTypeDef.Temperature = ReadTypeDef.Temperature + 13;//Temperature Data Correction
+lastTem = curTem;
+lastHum = curHum;
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/29/IOTKOT入手初体验/" rel="next" title="IOTKOT入手初体验">
+                <i class="fa fa-chevron-left"></i> IOTKOT入手初体验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">3</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#comments-false"><span class="nav-number">1.</span> <span class="nav-text">comments: false</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+   <!-- 页面点击小红心 -->
+  <!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+
+</body>
+</html>
