@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://BlueSky-chamo.github.io/about/index.html</loc>
+    
+    <lastmod>2017-03-30T08:53:22.383Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://BlueSky-chamo.github.io/home/index.html</loc>
     
-    <lastmod>2017-03-30T08:47:11.618Z</lastmod>
+    <lastmod>2017-03-30T08:51:14.049Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>http://BlueSky-chamo.github.io/2017/03/29/hexo-github-two/</loc>
     
     <lastmod>2017-03-30T08:39:05.057Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://BlueSky-chamo.github.io/about/index.html</loc>
-    
-    <lastmod>2017-03-30T07:58:00.772Z</lastmod>
     
   </url>
   
