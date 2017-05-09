@@ -1,0 +1,1088 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux命令," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="termios结构体简介
+为便于用户层统一管理终端属性，linux使用termios结构体来统一管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux终端设备-终端属性termios">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/30/linux终端设备学习—终端属性termios结构体/index.html">
+<meta property="og:site_name" content="BlueSky-chamo">
+<meta property="og:description" content="termios结构体简介
+为便于用户层统一管理终端属性，linux使用termios结构体来统一管理">
+<meta property="og:updated_time" content="2017-05-09T02:41:18.088Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux终端设备-终端属性termios">
+<meta name="twitter:description" content="termios结构体简介
+为便于用户层统一管理终端属性，linux使用termios结构体来统一管理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/30/linux终端设备学习—终端属性termios结构体/"/>
+
+
+
+
+
+  <title> linux终端设备-终端属性termios | BlueSky-chamo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BlueSky-chamo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/linux终端设备学习—终端属性termios结构体/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BlueSky-chamo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux终端设备-终端属性termios
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/30/linux终端设备学习—终端属性termios结构体/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/30/linux终端设备学习—终端属性termios结构体/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="termios结构体简介"><a href="#termios结构体简介" class="headerlink" title="termios结构体简介"></a><strong>termios结构体简介</strong></h1><hr>
+<p>为便于用户层统一管理终端属性，linux使用termios结构体来统一管理<br><a id="more"></a><br>struct termios<br>{<br> unsigned short c_iflag; /<em> 输入模式标志</em>/<br> unsigned short c_oflag; /<em> 输出模式标志</em>/<br> unsigned short c_cflag; /<em> 控制模式标志</em>/<br> unsigned short c_lflag; /<em>区域模式标志或本地模式标志或局部模式</em>/<br> unsigned char c_line; /<em>行控制line discipline </em>/<br> unsigned char c_cc[NCC]; /<em> 控制字符特性</em>/<br>};<br>可以调用函数tcgetattr来初始化一个终端对应的termios结构，该函数的原型如下：  </p>
+<pre><code>#include&lt;termios.h&gt;  
+int tcgetattr(int fd, struct termios *termios_p);   
+</code></pre><p>这个函数调用获取fd所指向的当前终端对象fd的相关属性，并写入termios_p参数指向的结构。</p>
+<p>通过调用函数tcsetattr来重新配置某个终端的属性，函数原型如下：  </p>
+<pre><code>#include&lt;termios.h&gt;  
+int tcsetattr(int fd , int actions , const struct termios *termios_h);  
+</code></pre><p>函数根据actions所指示的行为来设置与fp所指向的终端设备的属性<br>参数actions控制修改方式，共有三种修改方式，如下所示。<br>1.TCSANOW：立刻对值进行修改<br>2.TCSADRAIN：等当前的输出完成后再对值进行修改。<br>3.TCSAFLUSH：等当前的输出完成之后，再对值进行修改，但丢弃还未从read调用返回的当前的可用的任何输入。  </p>
+<hr>
+<h1 id="五种模式标志"><a href="#五种模式标志" class="headerlink" title="五种模式标志"></a><strong>五种模式标志</strong></h1><hr>
+<h2 id="输入模式标志c-iflag"><a href="#输入模式标志c-iflag" class="headerlink" title="输入模式标志c_iflag"></a><strong>输入模式标志c_iflag</strong></h2><p><strong>输入模式控制输入数据在传递给程序之前的处理方式。通过设置termios结构中的c_iflag成员的标志对它们进行控制。所有的标志都被定义为宏,并可通过按位或的方式结合起来。</strong><br><strong>可用于c_iflag成员的宏如下所示：</strong><br>BRKINT：当在输入行中检测到一个终止状态时，产生一个中断。<br>TGNBRK：忽略输入行中的终止状态。<br>TCRNL：将接受到的回车符转换为新行符。<br>TGNCR：忽略接受到的新行符。<br>INLCR：将接受到的新行符转换为回车符。<br>IGNPAR：忽略奇偶校检错误的字符。<br>INPCK：对接收到的字符执行奇偶校检。<br>PARMRK：对奇偶校检错误作出标记。<br>ISTRIP：将所有接收的字符裁减为7比特。<br>IXOFF：对输入启用软件流控。<br>IXON：对输出启用软件流控。  </p>
+<ul>
+<li>注意：<br>如果BRKINT和TGNBRK标志都未被设置，则输入行中的终止状态就被读取为NULL（0X00）字符。<br>对于PARKMRK如果没有设置IGNPAR,在有奇偶校验错误的字符前插入\337\0<br>如果没有设置IGNPAR也没有设置PARMRK，将有奇偶校验错误或帧错误的字符视为/0<br>对于BRKINT,如果设置了IGNBRK,将忽略BREAK,如果没有设置，但是设置了BRKINT,那么BREAK将使得输入和输出队列被刷新。<br>如果终端是一个前台进程组的控制终端，这个进程组所有进程将收到SIGINT信号。<br>如果既未设置IGNBRK也为设置BRKINT,BRKINT将视为与NUL字符同意。除非设置了PARMRK，这种情况下被视为序列/337/0/0  </li>
+</ul>
+<hr>
+<h2 id="输出模式标志c-oflag"><a href="#输出模式标志c-oflag" class="headerlink" title="输出模式标志c_oflag"></a><strong>输出模式标志c_oflag</strong></h2><p>输出模式控制输出字符的处理方式,即由程序发出的字符在传递到串行口或屏幕之前如何处理.通过设置c_oflag成员的标识对输出模式进行控制.<br><strong>可用于c_iflag成员的宏如下所示（部分）：</strong><br>OPSOT:打开输出处理功能<br>OLCUC:将输出的小写字母映射为大写字母<br>ONLCR:将输出中的换行符转换为回车符<br>OCRNL:将回车符转换为换行符<br>ONOCR:第０行不输出回车符<br>ONLRET:不输出回车符<br>NLDLY:换行符延时选择<br>CRDLY:回车符延时<br>TABDLY:制表符延时         </p>
+<hr>
+<h2 id="控制模式标志c-cflag"><a href="#控制模式标志c-cflag" class="headerlink" title="控制模式标志c_cflag"></a><strong>控制模式标志c_cflag</strong></h2><p>控制模式控制终端的硬件特性,通过c_cflag成员标识配置. 包括：波特率，数据位长度，停止位长度，奇偶校验位等<br>CBAUD ：(不属于 POSIX) 波特率掩码 (4+1 位)。<br>CSIZE：字符长度掩码（传送或接收字元时用的位数）。 取值为CS5（传送或接收字元时用5bits）, CS6, CS7, 或 CS8。<br>CSTOPB ：设置两个停止位，而不是一个。<br>CREAD ：打开接受者。<br>PARENB ：允许输出产生奇偶信息以及输入的奇偶校验（启用同位产生与侦测）。<br>PARODD ：输入和输出是奇校验（使用奇同位而非偶同位）。<br>HUPCL ：在最后一个进程关闭设备后，降低 modem 控制线 (挂断)。<br>CLOCAL ：忽略 modem 控制线。<br>LOBLK :(不属于 POSIX) 从非当前 shell 层阻塞输出。<br>CIBAUD :(不属于 POSIX) 输入速度的掩码。CIBAUD 各位的值与CBAUD 各位相同，左移了 IBSHIFT 位。<br>CRTSCTS :(不属于 POSIX) 启用 RTS/CTS (硬件) 流控制</p>
+<hr>
+<h3 id="设置波特率"><a href="#设置波特率" class="headerlink" title="设置波特率"></a><strong>设置波特率</strong></h3><p>波特率即调制速率，指信号被调制以后在单位时间内的变化。即单位时间内载波参数变化的次数。<br>为了减少用户编程负担，函数cfgetospeed()将获取存储于struct stermios结构中的输出波特率属性<br>函数cfgetispeed()将获取存储于struct stermios结构中的输入波特率属性，不需要自己进行位操作。<br>函数cfsetospeed()和cfsetispeed分别设置存储于termios结构的输出和输入波特率。<br>cfsetspeed()可以同时设置termios结构的输入和输出波特率。<br>例子：<br>struct termios options;<br>tcgetattr(fd,&amp;options);<br>cfsetispeed(&amp;options,B19200);  //输入波特率19200<br>cfsetospeed(&amp;options,B19200);  //输出波特率19200<br>options.c_cflag | =(CLOCAL | CREAD );  //允许接收，本地模式<br>tcsetattr(fd,TCSANOW,&amp;options);   //生效时间立即生效  </p>
+<h3 id="设置帧数据位宽度"><a href="#设置帧数据位宽度" class="headerlink" title="设置帧数据位宽度"></a><strong>设置帧数据位宽度</strong></h3><p>终端可以设置为每帧数据位为5，6，7,8bit。<br>修改数据位宽度如下：<br>options.c_cflag &amp;=~CSIZE;  //清除现在数据位宽度<br>options.c_cflag ｜＝CS8;   //设置为每帧8bit</p>
+<h3 id="设置奇偶校验"><a href="#设置奇偶校验" class="headerlink" title="设置奇偶校验"></a><strong>设置奇偶校验</strong></h3><p>奇偶校验是串行通信所采用的简单的差错检测方式。<br>例子：<br>设置为8N1，即每帧数据位8bit，无奇偶校验，一位停止位<br>options.c_cflag &amp; =~PARENG;<br>options.c_cflag &amp; =~CSTOPB;<br>options.c_cflag &amp; =~CSIZE;<br>options.c_cflag &amp; =~CS8；  </p>
+<hr>
+<h2 id="本地模式标志c-lflag"><a href="#本地模式标志c-lflag" class="headerlink" title="本地模式标志c_lflag"></a><strong>本地模式标志c_lflag</strong></h2><p>本地模式标志用来管理用何种方式输入字符，一般设置为标准模式或者原始模式。<br>标准模式：回显由客户端完成，用户输入的字符先缓存到一个缓存区，直到用户输入回车或者换行才发送到服务端<br>原始模式：又称为字符模式，回显由服务端完成。用户输入的一个字符立即发送到服务端，服务端然后将该字符回显到客户端。<br>ISIG   ： 当输入INTR、QUIT、SUSP或DSUSP时，产生相应的信号<br>ICANON ： 使用标准输入模式<br>XCASE  ： 在ICANON和XCASE同时设置的情况下，终端只使用大写。如果只设置了XCASE，则输入字符将被转换为小写字符，除非字符使用了转义字符（非POSIX，且Linux不支持该参数）<br>ECHO   ： 显示输入字符<br>ECHOE  ： 如果ICANON同时设置，ERASE将删除输入的字符，WERASE将删除输入的单词<br>ECHOK  ： 如果ICANON同时设置，KILL将删除当前行<br>ECHONL ： 如果ICANON同时设置，即使ECHO没有设置依然显示换行符<br>ECHOPRT： 如果ECHO和ICANON同时设置，将删除打印出的字符（非POSIX）<br>TOSTOP ： 向后台输出发送SIGTTOU信号  </p>
+<hr>
+<h2 id="控制字符标志c-cc-NCCS"><a href="#控制字符标志c-cc-NCCS" class="headerlink" title="控制字符标志c_cc[NCCS]"></a><strong>控制字符标志c_cc[NCCS]</strong></h2><p>标准模式和非标准模式下,c_cc数组的下标有不同的值:<br>标准模式:<br>VEOF:ＥＯＦ字符<br>VEOL:ＥＯＬ字符<br>VERASE:ERASE字符<br>VINTR:INTR字符<br>VKILL:KILL字符<br>VQUIT:QUIT字符<br>VSTART:START字符<br>VSTOP:STOP字符<br>非标准模式:<br>VINTR:INTR字符<br>VMIN:MIN值<br>VQUIT:QUIT字符<br>VSUSP:SUSP字符<br>VTIME:TIME值<br>VSTART:START字符<br>VSTOP:STOP字符  </p>
+<p><strong>字符</strong><br>INTR:该字符使终端驱动程序向与终端相连的进程以送SIGINT信号<br>QUIT:该字符使终端驱动程序向与终端相连的进程发送SIGQUIT信号<br>EOF;该字符使终端驱动程序将输入行中的全部字符传递给正在读取输入的应用程序.如果输入行为空,read调用将返回０,就好像在文件尾调用read一样  </p>
+<p><strong>TIME和MIN值</strong>  </p>
+<p>这两个值只用于非标准模式,两者结合共同控制对输入的读取方式,还能控制在一个程序试图与一个终端关联的文件描述符时将发生的情况<br>MIN = 0, TIME = 0时:read立即返回,如果有待处理的字符,它们就会被返回,如果没有,read调用返回0,且不读取任何字符<br>MIN = 0, TIME &gt; 0时:有字符处理或经过TIME个0.1秒后返回<br>MIN &gt; 0, TIME = 0时:read一直等待,直到有ＭＩＮ个字符可以读取,返回值是字符的数量.到达文件尾时返回0<br>MIN &gt; 0, TIME &gt; 0时:read调用时,它会等待接收一个字符.在接收到第一个字符及其后续的每个字符后,启用一个字符间隔定时器.当有ＭＩＮ个字符可读或两字符间的时间间隔超进TIME个0.1秒时,read返回<br>通过设置ＭＩＮ和ＴＩＭＥ值,我们可以逐个字符地对输入进行处理</p>
+<hr>
+<h1 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a><strong>其他函数</strong></h1><p>这些函数直接作用于文件描述符,不需要读写termios结构:<br><strong>#include <termios.h></termios.h></strong><br>int tcdrain(int fd);让调用程序一直等待,直到所有排队的输出都发送完毕<br>int tcflow(int, int flowtype);暂停或重新开始输出<br>int tcflush(int fd, int in_out_selector);清空输入,输出或两者都清空    </p>
+<hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux命令/" rel="tag"># linux命令</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/linux读写串口/" rel="next" title="linux读写串口">
+                <i class="fa fa-chevron-left"></i> linux读写串口
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/linux终端设备学习—基本类型/" rel="prev" title="linux终端设备-基本类型">
+                linux终端设备-基本类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">7</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#termios结构体简介"><span class="nav-number">1.</span> <span class="nav-text">termios结构体简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五种模式标志"><span class="nav-number">2.</span> <span class="nav-text">五种模式标志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入模式标志c-iflag"><span class="nav-number">2.1.</span> <span class="nav-text">输入模式标志c_iflag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出模式标志c-oflag"><span class="nav-number">2.2.</span> <span class="nav-text">输出模式标志c_oflag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制模式标志c-cflag"><span class="nav-number">2.3.</span> <span class="nav-text">控制模式标志c_cflag</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置波特率"><span class="nav-number">2.3.1.</span> <span class="nav-text">设置波特率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置帧数据位宽度"><span class="nav-number">2.3.2.</span> <span class="nav-text">设置帧数据位宽度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置奇偶校验"><span class="nav-number">2.3.3.</span> <span class="nav-text">设置奇偶校验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地模式标志c-lflag"><span class="nav-number">2.4.</span> <span class="nav-text">本地模式标志c_lflag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制字符标志c-cc-NCCS"><span class="nav-number">2.5.</span> <span class="nav-text">控制字符标志c_cc[NCCS]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他函数"><span class="nav-number">3.</span> <span class="nav-text">其他函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chamo.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/03/30/linux终端设备学习—终端属性termios结构体/';
+          this.page.identifier = '2017/03/30/linux终端设备学习—终端属性termios结构体/';
+          this.page.title = 'linux终端设备-终端属性termios';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chamo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+   <!-- 页面点击小红心 -->
+  <!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+
+</body>
+</html>

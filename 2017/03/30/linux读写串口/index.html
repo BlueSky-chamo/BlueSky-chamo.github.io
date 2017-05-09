@@ -1,0 +1,1068 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux终端设备," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="串口操作串口操作需要的头文件#include     #include     #include     #include     #include     #include     #include     #include">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux读写串口">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/30/linux读写串口/index.html">
+<meta property="og:site_name" content="BlueSky-chamo">
+<meta property="og:description" content="串口操作串口操作需要的头文件#include     #include     #include     #include     #include     #include     #include     #include">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/34320569.jpg">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/76170912.jpg">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/47803048.jpg">
+<meta property="og:updated_time" content="2017-05-09T02:46:10.447Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux读写串口">
+<meta name="twitter:description" content="串口操作串口操作需要的头文件#include     #include     #include     #include     #include     #include     #include     #include">
+<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/34320569.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/30/linux读写串口/"/>
+
+
+
+
+
+  <title> linux读写串口 | BlueSky-chamo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BlueSky-chamo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/linux读写串口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BlueSky-chamo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux读写串口
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/30/linux读写串口/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/30/linux读写串口/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="串口操作"><a href="#串口操作" class="headerlink" title="串口操作"></a><strong>串口操作</strong></h1><p>串口操作需要的头文件<br><strong>#include     <stdio.h></stdio.h></strong><br><strong>#include     <stdlib.h></stdlib.h></strong><br><strong>#include     <unistd.h></unistd.h></strong><br><strong>#include     <sys types.h=""></sys></strong><br><strong>#include     <sys stat.h=""></sys></strong><br><strong>#include     <fcntl.h></fcntl.h></strong><br><strong>#include     <termios.h></termios.h></strong><br><strong>#include     <errno.></errno.></strong><br><a id="more"></a> </p>
+<h1 id="打开串口"><a href="#打开串口" class="headerlink" title="打开串口"></a><strong>打开串口</strong></h1><p>在 Linux 下串口文件是位于 /dev 下的<br>串口一 为 /dev/ttyS0<br>串口二 为 /dev/ttyS1<br>打开串口是通过使用标准的文件打开函数操作：<br>int open_port(void)<br>{<br>int fd;<br>fd = open( “/dev/ttyS0”, O_RDWR | O_NOCTTY );<br>if(-1 == fd)<br>{<br>perror(“ 提示错误！”);<br>}<br>return (fd);<br>}<br>O_NOCTTY: 表示当前进程不期望与终端关联，从而避免控制端输入的信息影响当前进程   </p>
+<h1 id="设置串口"><a href="#设置串口" class="headerlink" title="设置串口"></a><strong>设置串口</strong></h1><p>最基本的设置串口包括波特率设置，效验位和停止位设置。<br>串口的设置主要是设置 struct termios 结构体的各成员值。<br>struct termio<br>{<br>unsigned short  c_iflag;    /<em> 输入模式标志 </em>/<br>unsigned short  c_oflag;    /<em> 输出模式标志 </em>/<br>unsigned short  c_cflag;    /<em> 控制模式标志</em>/<br>unsigned short  c_lflag;    /<em> local mode flags </em>/<br>unsigned char  c_line;         /<em> line discipline </em>/<br>unsigned char  c_cc[NCC];    /<em> control characters </em>/<br>};<br>下面是修改波特率的代码：<br>struct  termios Opt;<br>tcgetattr(fd, &amp;Opt);<br>cfsetispeed(&amp;Opt,B19200);     /<em>设置为19200Bps</em>/<br>cfsetospeed(&amp;Opt,B19200);<br>tcsetattr(fd,TCANOW,&amp;Opt);  </p>
+<h1 id="设置波特率的例子函数："><a href="#设置波特率的例子函数：" class="headerlink" title="设置波特率的例子函数："></a><strong>设置波特率的例子函数：</strong></h1><p>/<em>*
+</em>@brief  设置串口通信速率<br><em>@param  fd     类型 int  打开串口的文件句柄  
+</em>@param  speed  类型 int  串口速度<br><em>@return  void  
+</em>/<br>int speed_arr[] = { B38400, B19200, B9600, B4800, B2400, B1200, B300,<br>          B38400, B19200, B9600, B4800, B2400, B1200, B300, };<br>int name_arr[] = {38400,  19200,  9600,  4800,  2400,  1200,  300, 38400,<br>          19200,  9600, 4800, 2400, 1200,  300, };<br>void set_speed(int fd, int speed)<br>{<br>  int   i;<br>  int   status;<br>  struct termios   Opt;<br>  tcgetattr(fd, &amp;Opt);<br>  for ( i= 0;  i &lt; sizeof(speed_arr) / sizeof(int);  i++)<br>{<br>    if  (speed == name_arr[i])<br> {<br>      tcflush(fd, TCIOFLUSH);<br>      cfsetispeed(&amp;Opt, speed_arr[i]);<br>      cfsetospeed(&amp;Opt, speed_arr[i]);<br>      status = tcsetattr(fd1, TCSANOW, &amp;Opt);<br>      if  (status != 0)<br>      {<br>        perror(“tcsetattr fd1”);<br>        return;<br>      }<br>      tcflush(fd,TCIOFLUSH);<br>    }<br>  }<br>}   </p>
+<h1 id="效验位和停止位的设置："><a href="#效验位和停止位的设置：" class="headerlink" title="效验位和停止位的设置："></a><strong>效验位和停止位的设置：</strong></h1><p>无效验    8位    Option.c_cflag &amp;= ~PARENB;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= ~CSIZE;<br>Option.c_cflag |= ~CS8;<br>奇效验(Odd)    7位    Option.c_cflag |= ~PARENB;<br>Option.c_cflag &amp;= ~PARODD;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= ~CSIZE;<br>Option.c_cflag |= ~CS7;<br>偶效验(Even)    7位    Option.c_cflag &amp;= ~PARENB;<br>Option.c_cflag |= ~PARODD;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= ~CSIZE;<br>Option.c_cflag |= ~CS7;<br>Space效验    7位    Option.c_cflag &amp;= ~PARENB;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= &amp;~CSIZE;<br>Option.c_cflag |= CS8;  </p>
+<p>设置效验的函数：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/34320569.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/76170912.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/47803048.jpg" alt=""></p>
+<p>需要注意的是:<br>如果不是开发终端之类的，只是串口传输数据，而不需要串口来处理，那么使用原始模式(Raw Mode)方式来通讯。<br>设置方式如下：<br>options.c_lflag  &amp;= ~(ICANON | ECHO | ECHOE | ISIG);  /<em>Input</em>/<br>options.c_oflag  &amp;= ~OPOST;   /<em>Output</em>/  </p>
+<h1 id="读写串口"><a href="#读写串口" class="headerlink" title="读写串口"></a><strong>读写串口</strong></h1><p>设置好串口之后，把串口当作文件读写。<br>发送数据<br>char  buffer[1024];<br>int    Length;int    nByte;<br>nByte = write(fd, buffer ,Length)<br>读取串口数据<br>使用文件操作read函数读取，如果设置为原始模式(Raw Mode)传输数据，那么read函数返回的字符数是实际串口收到的字符数。<br>可以使用操作文件的函数来实现异步读取，如fcntl，或者select等来操作。<br>char  buff[1024];int    Len;int  readByte = read(fd,buff,Len);  </p>
+<h1 id="关闭串口"><a href="#关闭串口" class="headerlink" title="关闭串口"></a><strong>关闭串口</strong></h1><p>关闭串口就是关闭文件。<br>close(fd);  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux终端设备/" rel="tag"># linux终端设备</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/linu命令学习-find之exec命令/" rel="next" title="linux命令学习之exec命令">
+                <i class="fa fa-chevron-left"></i> linux命令学习之exec命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/linux终端设备学习—终端属性termios结构体/" rel="prev" title="linux终端设备-终端属性termios">
+                linux终端设备-终端属性termios <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">7</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#串口操作"><span class="nav-number">1.</span> <span class="nav-text">串口操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打开串口"><span class="nav-number">2.</span> <span class="nav-text">打开串口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置串口"><span class="nav-number">3.</span> <span class="nav-text">设置串口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置波特率的例子函数："><span class="nav-number">4.</span> <span class="nav-text">设置波特率的例子函数：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#效验位和停止位的设置："><span class="nav-number">5.</span> <span class="nav-text">效验位和停止位的设置：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写串口"><span class="nav-number">6.</span> <span class="nav-text">读写串口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关闭串口"><span class="nav-number">7.</span> <span class="nav-text">关闭串口</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chamo.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/03/30/linux读写串口/';
+          this.page.identifier = '2017/03/30/linux读写串口/';
+          this.page.title = 'linux读写串口';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chamo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+   <!-- 页面点击小红心 -->
+  <!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+
+</body>
+</html>
