@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo,Next," />
+  <meta name="keywords" content="单片机," />
 
 
 
@@ -98,28 +98,20 @@
 
 
 
-<meta name="description" content="简介Hexo 是一个快速、简洁且高效的静态站点生成框架，它基于 Node.js 。 它有以下特点：  
-
-超快速度：Node.js 所带来的超快生成速度，让上百个页面在几秒内瞬间完成渲染。   
-支持Markdown：Hexo 支持 GitHub Flavored Markdown 的所有功能，甚至可以整合 Octopress 的大多数插件。  
-一件部署：只需一条指令即可部署到Github Pa">
+<meta name="description" content="时钟周期单片机外接晶振的振荡周期就是时钟周期。80C51单片机外接了一个11.0592M的晶体振荡器，单片机系统的时钟周期是1/11.0592M，周期是频率的倒数。51单片机时钟频率范围是1.MHZ-12MHZ，把一个时钟周期定义为一个节拍（P）,二个节拍定义为一个状态周期（S）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo+github搭建个人博客（一）">
-<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/29/hexo-github-one/index.html">
+<meta property="og:title" content="回顾51单片机之定时器简介">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之定时器简介/index.html">
 <meta property="og:site_name" content="BlueSky-chamo">
-<meta property="og:description" content="简介Hexo 是一个快速、简洁且高效的静态站点生成框架，它基于 Node.js 。 它有以下特点：  
-
-超快速度：Node.js 所带来的超快生成速度，让上百个页面在几秒内瞬间完成渲染。   
-支持Markdown：Hexo 支持 GitHub Flavored Markdown 的所有功能，甚至可以整合 Octopress 的大多数插件。  
-一件部署：只需一条指令即可部署到Github Pa">
-<meta property="og:updated_time" content="2017-04-11T01:05:39.897Z">
+<meta property="og:description" content="时钟周期单片机外接晶振的振荡周期就是时钟周期。80C51单片机外接了一个11.0592M的晶体振荡器，单片机系统的时钟周期是1/11.0592M，周期是频率的倒数。51单片机时钟频率范围是1.MHZ-12MHZ，把一个时钟周期定义为一个节拍（P）,二个节拍定义为一个状态周期（S）。">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/62671924-file_1492996251417_b444.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/52992728-file_1492996982934_2ab7.jpg">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/60731089-file_1492997134291_7afd.jpg">
+<meta property="og:updated_time" content="2017-05-09T01:44:00.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo+github搭建个人博客（一）">
-<meta name="twitter:description" content="简介Hexo 是一个快速、简洁且高效的静态站点生成框架，它基于 Node.js 。 它有以下特点：  
-
-超快速度：Node.js 所带来的超快生成速度，让上百个页面在几秒内瞬间完成渲染。   
-支持Markdown：Hexo 支持 GitHub Flavored Markdown 的所有功能，甚至可以整合 Octopress 的大多数插件。  
-一件部署：只需一条指令即可部署到Github Pa">
+<meta name="twitter:title" content="回顾51单片机之定时器简介">
+<meta name="twitter:description" content="时钟周期单片机外接晶振的振荡周期就是时钟周期。80C51单片机外接了一个11.0592M的晶体振荡器，单片机系统的时钟周期是1/11.0592M，周期是频率的倒数。51单片机时钟频率范围是1.MHZ-12MHZ，把一个时钟周期定义为一个节拍（P）,二个节拍定义为一个状态周期（S）。">
+<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/62671924-file_1492996251417_b444.png">
 
 
 
@@ -147,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/29/hexo-github-one/"/>
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之定时器简介/"/>
 
 
 
 
 
-  <title> Hexo+github搭建个人博客（一） | BlueSky-chamo </title>
+  <title> 回顾51单片机之定时器简介 | BlueSky-chamo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -508,7 +500,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/29/hexo-github-one/">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之定时器简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chamo">
@@ -529,7 +521,7 @@
             
             
               
-                Hexo+github搭建个人博客（一）
+                回顾51单片机之定时器简介
               
             
           </h1>
@@ -544,8 +536,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T00:00:00+08:00">
-                2017-03-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-21T00:00:00+08:00">
+                2017-04-21
               </time>
             
 
@@ -567,8 +559,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/综合/" itemprop="url" rel="index">
-                    <span itemprop="name">综合</span>
+                  <a href="/categories/51单片机/" itemprop="url" rel="index">
+                    <span itemprop="name">51单片机</span>
                   </a>
                 </span>
 
@@ -585,9 +577,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/29/hexo-github-one/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/21/回顾单片机之定时器简介/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/29/hexo-github-one/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/21/回顾单片机之定时器简介/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -613,60 +605,43 @@
       
 
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a> 是一个快速、简洁且高效的静态站点生成框架，它基于 <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a> 。 它有以下特点：  </p>
-<ol>
-<li>超快速度：<br>Node.js 所带来的超快生成速度，让上百个页面在几秒内瞬间完成渲染。   </li>
-<li>支持Markdown：<br>Hexo 支持 GitHub Flavored Markdown 的所有功能，甚至可以整合 Octopress 的大多数插件。  </li>
-<li>一件部署：<br>只需一条指令即可部署到Github Pages，或其他网站  </li>
-<li>丰富的插件：<br>Hexo 拥有强大的插件系统，安装插件可以让 Hexo 支持 Jade,CoffeeScript。</li>
-</ol>
-<a id="more"></a>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序:</p>
-<blockquote>
-<p><a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a><br><a href="http://git-scm.com/" target="_blank" rel="external">Git</a></p>
-</blockquote>
-<h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><ul>
-<li><p>Windows： git<br>下载地址：<a id="download" href="https://git-scm.com/download/win" target="_blank" rel="external"><i class="fa fa-download"></i><span> 官网Download Now</span><br></a>  </p>
-</li>
-<li><p>安装：在Git Setup中选择Use Git from the windows Command Prompt,除此之外一路Next完成安装</p>
-<h2 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h2></li>
-<li>Windos:Node.js v0.12.5 x64 :<br>下载地址：<a id="download" href="http://pan.baidu.com/s/1o8qHd1K/" target="_blank" rel="external">  <i class="fa fa-download"></i><span> 百度云Download Now</span>  <a id="download" href="https://nodejs.org/download/" target="_blank" rel="external">  <i class="fa fa-download"></i><span> Node.js官网Download Now</span></a></a></li>
-<li>安装：一路NExt即可，等待完成安装  </li>
-</ul>
-<p>##软件验证<br><strong>运行窗口CMD,输入一下命令，会显示相应版本信息：</strong>  </p>
-<ul>
-<li><code>git --version</code>   </li>
-<li><code>node -v</code>  </li>
-<li><code>npm -v</code><h2 id="申请GITHUB"><a href="#申请GITHUB" class="headerlink" title="申请GITHUB"></a>申请GITHUB</h2>申请地址：<a href="https://github.com/" target="_blank" rel="external">Github</a><br>方法简述：  </li>
-</ul>
-<ol>
-<li>申请账号（用户名+密码),并进行邮箱验证 </li>
-<li>创建repository，名字与用户名一致。例如我的用户名BlueSky-chamo,Repository name为BlueSky-chamo.github.io  </li>
-<li>在创建的repository中settings中的Github pages中选择theme,启用Github page<br>## <h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2>hexo是基于node.js的静态博客，<a href="https://hexo.io/zh-cn/" target="_blank" rel="external">官网</a>也是搭建在GitHub上<br>安装方法：  </li>
-<li>新建文件夹blog,右键选择Git Bash  </li>
-<li>安装hexo为了避免出现被“墙”，使用<a href="http://npm.taobao.org/" target="_blank" rel="external">淘宝NPM镜像</a><br><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code>  </li>
-<li>安装hexo:<br><code>cnpm install -g hexo-cli</code><br><code>cnpm install hexo --save</code>   </li>
-<li>验证：<code>hexo -v</code>  </li>
-<li>本地运行：<br>初始化命令：<code>hexo init</code><br>安装生成器：<code>cnpm install</code><br>浏览器本地访问：<code>hexo s</code>,本地浏览器输入<a href="http://localhost:4000/即可本地访问" target="_blank" rel="external">http://localhost:4000/即可本地访问</a>  <h2 id="hexo基本管理"><a href="#hexo基本管理" class="headerlink" title="hexo基本管理"></a>hexo基本管理</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><span id="inline-green"><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml</div><div class="line">├── package.json</div><div class="line">├── scaffolds</div><div class="line">├── source</div><div class="line">|   ├── _drafts</div><div class="line">|   └── _posts</div><div class="line">└──</div></pre></td></tr></table></figure>
-</span></li>
-</ol>
-<p>_config.yml：站点配置文件，即博客基本设置<br>source:资源文件，即自定义的页面与推送的博客文件  </p>
-<p>###_config.yml文件<br>关键配置：  </p>
-<ol>
-<li>url: 博客地址，与github申请的repository一致  如：<code>http://BlueSky-chamo.github.io</code>  </li>
-<li>theme: 博客主题。默认下为landscape  </li>
-<li>deploy: 发布设置。两种方式如下，可自行选择<br><code>repository: https://github.com/BlueSky-chamo/BlueSky-chamo.github.io.git</code><br><code>repository: git@github.com:BlueSky-chamo/BlueSky-chamo.github.io.git</code>  <h3 id="source文件"><a href="#source文件" class="headerlink" title="source文件"></a>source文件</h3>资源文件 </li>
-<li>新建文章<br><code>hexo new &quot;hello&quot;</code><br>2.新建页面<br><code>hexo new page hello</code></li>
-</ol>
-<h2 id="Github与hexo创建联系"><a href="#Github与hexo创建联系" class="headerlink" title="Github与hexo创建联系"></a>Github与hexo创建联系</h2><h3 id="配置SSH-KEY"><a href="#配置SSH-KEY" class="headerlink" title="配置SSH KEY"></a>配置SSH KEY</h3><ol>
-<li>生成SSH KEY：<br><code>ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot;</code>  </li>
-<li>按提示输入密码后在C:\Documents and Settings\Administrator.ssh\id_rsa.pub文件的内容即为秘钥   </li>
-<li>登陆github系统，点击右上角的 Account Settings—&gt;SSH Public keys —&gt; add another public keys把你本地生成的密钥复制到里面（key文本框中）  <h3 id="设置git身份信息"><a href="#设置git身份信息" class="headerlink" title="设置git身份信息"></a>设置git身份信息</h3><code>git config --global user.name &quot;你的用户名&quot;</code><br><code>git config --global user.email &quot;你的邮箱&quot;</code>  <h3 id="验证git信息"><a href="#验证git信息" class="headerlink" title="验证git信息"></a>验证git信息</h3><code>SSH -T git@github.com</code>  </li>
-</ol>
-<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><h3 id="安装hexo-git插件"><a href="#安装hexo-git插件" class="headerlink" title="安装hexo git插件"></a>安装hexo git插件</h3><p><code>cnpm install hexo-deployer-git --save</code>  </p>
-<h3 id="发布更新博客"><a href="#发布更新博客" class="headerlink" title="发布更新博客"></a>发布更新博客</h3><p><code>hexo d -g</code>  </p>
-<p>##参考<br><a href="http://blog.csdn.net/jzooo/article/details/46781805" target="_blank" rel="external">零基础免费搭建个人博客</a></p>
-
+        <h1 id="时钟周期"><a href="#时钟周期" class="headerlink" title="时钟周期"></a>时钟周期</h1><p>单片机外接晶振的振荡周期就是时钟周期。80C51单片机外接了一个11.0592M的晶体振荡器，单片机系统的时钟周期是1/11.0592M，周期是频率的倒数。51单片机时钟频率范围是1.MHZ-12MHZ，把一个时钟周期定义为一个节拍（P）,二个节拍定义为一个状态周期（S）。<br><a id="more"></a></p>
+<h1 id="机器周期"><a href="#机器周期" class="headerlink" title="机器周期"></a>机器周期</h1><p>单片机执行指令所消耗的最小时间单位。51单片机采用的CISC(复杂指令指令集)，各条指令执行的时间可能不一样，但是它们执行的时间必须是机器周期的整数倍。51系列单片机将一个机器周期划分为6个状态周期，即S1-S6，每个状态周期又由两个节拍组成，P1和P2，而P1=P2=时钟周期。因此，51单片机的机器周期=6个状态周期=12个时钟周期。这也就是经常说的51单片机的的时钟频率是晶振频率的12分频，或者是1/12。</p>
+<h1 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h1><p>指令周期执行某一条指令所消耗的时间，它等于机器周期的整数倍。指令不同，所需的机器周期数也不同。简单的单字节指令。在取指令周期中，指令取出到指令寄存器后立即译码执行；复杂的指令如转移指令，乘法指令，则需要两个或以上的机器周期。  </p>
+<h1 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h1><p>C51单片机内部设有两个16位的可编程定时器/计数器，分别由两个8位专用寄存器组成，即：T0由TH0和TL0构成；T1由TH1和TL1构成，其访问地址依次为8AH-8DH。此外，其内部还有一个8位的定时器方式寄存器TMOD和一个8位的定时控制寄存器TCON，TMOD主要是用于选定定时器的工作方式；TCON主要是用于控制定时器的启动停止，此外TCON还可以保存T0、T1的溢出和中断标志。当定时器工作在计数方式时，外部事件通过引脚T0（P3.4）和T1（P3.5）输入。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/62671924-file_1492996251417_b444.png" alt=""></p>
+<h2 id="定时计数原理"><a href="#定时计数原理" class="headerlink" title="定时计数原理"></a>定时计数原理</h2><p>16位的定时器/计数器实质上就是一个加1计数器,当定时器/计数器为定时工作方式时，计数器的加1信号由振荡器的12分频信号产生，即每过一个机器周期，计数器加1，直至计满溢出为止。显然，定时器的定时时间与系统的振荡频率有关。因一个机器周期等于12个振荡周期，所以计数频率fcount=1/12osc。如果晶振为12MHz，则计数周期为：</p>
+<pre><code>T=1/（12×106）Hz×1/12=1μs
+</code></pre><p>当定时器/计数器为计数工作方式时，通过引脚T0和T1对外部信号计数，外部脉冲的下降沿将触发计数。计数器在每个机器周期的S5P2期间采样引脚输入电平。若一个机器周期采样值为1，下一个机器周期采样值为0，则计数器加1。此后的机器周期S3P1期间，新的计数值装入计数器。所以检测一个由1至0的跳变需要两个机器周期，故外部事件的最高计数频率为振荡频率的1/24。例如，如果选用12MHz晶振，则最高计数频率为0.5MHz。为了确保某给定电平在变化前至少被采样一次，外部计数脉冲的高电平与低电平保持时间均需在一个机器周期以上。</p>
+<h2 id="定时器-计数器方式寄存器TMOD"><a href="#定时器-计数器方式寄存器TMOD" class="headerlink" title="定时器/计数器方式寄存器TMOD"></a>定时器/计数器方式寄存器TMOD</h2><p>定时器方式控制寄存器TMOD在特殊功能寄存器中，字节地址为89H，无位地址。  </p>
+<p>C／T：定时器／计数器选择位。C/T＝1，为计数器方式；C／T＝0，为定时器方式。</p>
+<p>M1M0：工作方式选择位，定时器／计数器的4种工作方式由M1M0设定。</p>
+<p>0 0                  工作方式0          13位计数器</p>
+<p>0 1                  工作方式1          16位计数器</p>
+<p>1 0                  工作方式2           自动再装入8位计数器</p>
+<p>1 1                  工作方式3          定时器0：分成两个8位计数器，定时器1：停止计数<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/52992728-file_1492996982934_2ab7.jpg" alt=""></p>
+<h2 id="定时器-计数器控制寄存器TCON"><a href="#定时器-计数器控制寄存器TCON" class="headerlink" title="定时器/计数器控制寄存器TCON"></a>定时器/计数器控制寄存器TCON</h2><p> TCON在特殊功能寄存器中，字节地址为88H，位地址(由低位到高位)为88H一8FH<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/60731089-file_1492997134291_7afd.jpg" alt=""></p>
+<p>TF1：定时器1溢出标志位。当字时器1计满溢出时，由硬件使TF1置“1”，并且申请中断。进入中断服务程序后，由硬件自动清“0”，在查询方式下用软件清“0”。</p>
+<p>TR1：定时器1运行控制位。由软件清“0”关闭定时器1。当GATE=1，且INT1为高电平时，TR1置“1”启动定时器1；当GATE=0，TR1置“1”启动定时器1。</p>
+<p>TF0：定时器0溢出标志。其功能及操作情况同TF1。</p>
+<p>TR0：定时器0运行控制位。其功能及操作情况同TR1。</p>
+<p>IE1：外部中断1请求标志。</p>
+<p>IT1：外部中断1触发方式选择位。</p>
+<p>IE0：外部中断0请求标志。</p>
+<p>IT0：外部中断0触发方式选择位。</p>
+<h1 id="定时器初始化"><a href="#定时器初始化" class="headerlink" title="定时器初始化"></a>定时器初始化</h1><h2 id="确定工作方式"><a href="#确定工作方式" class="headerlink" title="确定工作方式"></a>确定工作方式</h2><p>方式0：13位定时计数方式，最大计数值为2^13=8192,定时8192个机器周期。</p>
+<p>方式1：16位定时计数方式，最大计数值为2^16=65536,定时65536个机器周期。此方式可实现最大的定时时间和最大计数次数。是最常用方式之一。</p>
+<p>方式2：8位自动重装计数方式，最大计数值为2^8=256,定时256个机器周期。此方式工作时定时或计数到了不用重装初值，精度较高。另外在串口通讯时常用此方式。是最常用方式之一。</p>
+<p>方式3：特殊工作方式。将定时器0分成两个8位功能不全的定时计数器，要占用T1部分功能。</p>
+<h2 id="定时器初值"><a href="#定时器初值" class="headerlink" title="定时器初值"></a>定时器初值</h2><p>定时时间=（最大计数值-初值）X 晶振周期 X 12<br>或 定时时间=（最大计数值-初值）X 机器周期    </p>
+<p>定时器寄存器为16为，分高8位TH0和低8位TL0,以8位为单位进行封装，将TH0装入初值N/256,低8位TL0装入初值N%256。即定时器初值计算公式为：<br>TH0=(最大计数值M-初值N)/256<br>TL0=(最大计数值M-初值N)%256  </p>
+<p>机器周期=12时钟周期，12MHZ晶振下，机器周期=1us,定时1s=1000000机器周期，初值=最大机器周期-初值机器周期</p>
+<p>例如：<br>10MS定时器初值的计算：<br>1.晶振12M<br>12MHz除12为1MHz，也就是说一秒=1000000次机器周期。10ms=10000次 机器周期。<br>65536-10000=55536(d8f0)<br>TH0=0xd8，TL0=0xf0  </p>
+<p>2.晶振11.0592M<br>11.0592MHz除12为921600Hz，就是一秒921600次机器周期，10ms=9216次机器周期。<br>65536-9216=56320(dc00)<br>TH0=0xdc，TL0=0x00  </p>
+<h2 id="启动定时器"><a href="#启动定时器" class="headerlink" title="启动定时器"></a>启动定时器</h2><p>根据需要打开定时器中断，启动定时器。</p>
+<pre><code>EA = 1;             //打开总中断
+ET0 = 1;         //定时器0中断
+TR0 = 1;         //打开定时器0
+</code></pre>
       
     </div>
 
@@ -711,9 +686,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-          
-            <a href="/tags/Next/" rel="tag"># Next</a>
+            <a href="/tags/单片机/" rel="tag"># 单片机</a>
           
         </div>
       
@@ -726,8 +699,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/29/hexo-github-two/" rel="next" title="Hexo+Github搭建个人博客（二）">
-                <i class="fa fa-chevron-left"></i> Hexo+Github搭建个人博客（二）
+              <a href="/2017/03/30/IOTKOT入手初体验/" rel="next" title="IOTKOT入手初体验">
+                <i class="fa fa-chevron-left"></i> IOTKOT入手初体验
               </a>
             
           </div>
@@ -736,8 +709,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/30/linu命令学习-find之exec命令/" rel="prev" title="linux命令学习之exec命令">
-                linux命令学习之exec命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/21/回顾单片机之enum用法/" rel="prev" title="回顾51单片机之enum用法">
+                回顾51单片机之enum用法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -889,7 +862,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Git"><span class="nav-number">2.2.</span> <span class="nav-text">安装 Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Node-js"><span class="nav-number">2.3.</span> <span class="nav-text">安装 Node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#申请GITHUB"><span class="nav-number">2.4.</span> <span class="nav-text">申请GITHUB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">2.5.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo基本管理"><span class="nav-number">2.6.</span> <span class="nav-text">hexo基本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">2.6.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#source文件"><span class="nav-number">2.6.2.</span> <span class="nav-text">source文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github与hexo创建联系"><span class="nav-number">2.7.</span> <span class="nav-text">Github与hexo创建联系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置SSH-KEY"><span class="nav-number">2.7.1.</span> <span class="nav-text">配置SSH KEY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置git身份信息"><span class="nav-number">2.7.2.</span> <span class="nav-text">设置git身份信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证git信息"><span class="nav-number">2.7.3.</span> <span class="nav-text">验证git信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布博客"><span class="nav-number">2.8.</span> <span class="nav-text">发布博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装hexo-git插件"><span class="nav-number">2.8.1.</span> <span class="nav-text">安装hexo git插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布更新博客"><span class="nav-number">2.8.2.</span> <span class="nav-text">发布更新博客</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#时钟周期"><span class="nav-number">1.</span> <span class="nav-text">时钟周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器周期"><span class="nav-number">2.</span> <span class="nav-text">机器周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令周期"><span class="nav-number">3.</span> <span class="nav-text">指令周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定时器"><span class="nav-number">4.</span> <span class="nav-text">定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定时计数原理"><span class="nav-number">4.1.</span> <span class="nav-text">定时计数原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器-计数器方式寄存器TMOD"><span class="nav-number">4.2.</span> <span class="nav-text">定时器/计数器方式寄存器TMOD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器-计数器控制寄存器TCON"><span class="nav-number">4.3.</span> <span class="nav-text">定时器/计数器控制寄存器TCON</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定时器初始化"><span class="nav-number">5.</span> <span class="nav-text">定时器初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定工作方式"><span class="nav-number">5.1.</span> <span class="nav-text">确定工作方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器初值"><span class="nav-number">5.2.</span> <span class="nav-text">定时器初值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动定时器"><span class="nav-number">5.3.</span> <span class="nav-text">启动定时器</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1033,9 +1006,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://BlueSky-chamo.github.io/2017/03/29/hexo-github-one/';
-          this.page.identifier = '2017/03/29/hexo-github-one/';
-          this.page.title = 'Hexo+github搭建个人博客（一）';
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之定时器简介/';
+          this.page.identifier = '2017/04/21/回顾单片机之定时器简介/';
+          this.page.title = '回顾51单片机之定时器简介';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://chamo.disqus.com/embed.js';
