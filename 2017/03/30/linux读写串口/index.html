@@ -98,19 +98,37 @@
 
 
 
-<meta name="description" content="串口操作串口操作需要的头文件#include     #include     #include     #include     #include     #include     #include     #include">
+<meta name="description" content="串口操作串口操作需要的头文件  
+#include     &amp;lt;stdio.h&amp;gt;      
+#include     &amp;lt;stdlib.h&amp;gt;   
+#include     &amp;lt;unistd.h&amp;gt;    
+#include     &amp;lt;sys/types.h&amp;gt;  
+#include     &amp;lt;sys/stat.h&amp;gt; 
+#include">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux读写串口">
 <meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/30/linux读写串口/index.html">
 <meta property="og:site_name" content="BlueSky-chamo">
-<meta property="og:description" content="串口操作串口操作需要的头文件#include     #include     #include     #include     #include     #include     #include     #include">
+<meta property="og:description" content="串口操作串口操作需要的头文件  
+#include     &amp;lt;stdio.h&amp;gt;      
+#include     &amp;lt;stdlib.h&amp;gt;   
+#include     &amp;lt;unistd.h&amp;gt;    
+#include     &amp;lt;sys/types.h&amp;gt;  
+#include     &amp;lt;sys/stat.h&amp;gt; 
+#include">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/34320569.jpg">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/76170912.jpg">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/47803048.jpg">
-<meta property="og:updated_time" content="2017-05-09T02:46:10.447Z">
+<meta property="og:updated_time" content="2017-05-11T07:52:40.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux读写串口">
-<meta name="twitter:description" content="串口操作串口操作需要的头文件#include     #include     #include     #include     #include     #include     #include     #include">
+<meta name="twitter:description" content="串口操作串口操作需要的头文件  
+#include     &amp;lt;stdio.h&amp;gt;      
+#include     &amp;lt;stdlib.h&amp;gt;   
+#include     &amp;lt;unistd.h&amp;gt;    
+#include     &amp;lt;sys/types.h&amp;gt;  
+#include     &amp;lt;sys/stat.h&amp;gt; 
+#include">
 <meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/34320569.jpg">
 
 
@@ -605,19 +623,108 @@
       
 
       
-        <h1 id="串口操作"><a href="#串口操作" class="headerlink" title="串口操作"></a><strong>串口操作</strong></h1><p>串口操作需要的头文件<br><strong>#include     <stdio.h></stdio.h></strong><br><strong>#include     <stdlib.h></stdlib.h></strong><br><strong>#include     <unistd.h></unistd.h></strong><br><strong>#include     <sys types.h=""></sys></strong><br><strong>#include     <sys stat.h=""></sys></strong><br><strong>#include     <fcntl.h></fcntl.h></strong><br><strong>#include     <termios.h></termios.h></strong><br><strong>#include     <errno.></errno.></strong><br><a id="more"></a> </p>
-<h1 id="打开串口"><a href="#打开串口" class="headerlink" title="打开串口"></a><strong>打开串口</strong></h1><p>在 Linux 下串口文件是位于 /dev 下的<br>串口一 为 /dev/ttyS0<br>串口二 为 /dev/ttyS1<br>打开串口是通过使用标准的文件打开函数操作：<br>int open_port(void)<br>{<br>int fd;<br>fd = open( “/dev/ttyS0”, O_RDWR | O_NOCTTY );<br>if(-1 == fd)<br>{<br>perror(“ 提示错误！”);<br>}<br>return (fd);<br>}<br>O_NOCTTY: 表示当前进程不期望与终端关联，从而避免控制端输入的信息影响当前进程   </p>
-<h1 id="设置串口"><a href="#设置串口" class="headerlink" title="设置串口"></a><strong>设置串口</strong></h1><p>最基本的设置串口包括波特率设置，效验位和停止位设置。<br>串口的设置主要是设置 struct termios 结构体的各成员值。<br>struct termio<br>{<br>unsigned short  c_iflag;    /<em> 输入模式标志 </em>/<br>unsigned short  c_oflag;    /<em> 输出模式标志 </em>/<br>unsigned short  c_cflag;    /<em> 控制模式标志</em>/<br>unsigned short  c_lflag;    /<em> local mode flags </em>/<br>unsigned char  c_line;         /<em> line discipline </em>/<br>unsigned char  c_cc[NCC];    /<em> control characters </em>/<br>};<br>下面是修改波特率的代码：<br>struct  termios Opt;<br>tcgetattr(fd, &amp;Opt);<br>cfsetispeed(&amp;Opt,B19200);     /<em>设置为19200Bps</em>/<br>cfsetospeed(&amp;Opt,B19200);<br>tcsetattr(fd,TCANOW,&amp;Opt);  </p>
-<h1 id="设置波特率的例子函数："><a href="#设置波特率的例子函数：" class="headerlink" title="设置波特率的例子函数："></a><strong>设置波特率的例子函数：</strong></h1><p>/<em>*
-</em>@brief  设置串口通信速率<br><em>@param  fd     类型 int  打开串口的文件句柄  
-</em>@param  speed  类型 int  串口速度<br><em>@return  void  
-</em>/<br>int speed_arr[] = { B38400, B19200, B9600, B4800, B2400, B1200, B300,<br>          B38400, B19200, B9600, B4800, B2400, B1200, B300, };<br>int name_arr[] = {38400,  19200,  9600,  4800,  2400,  1200,  300, 38400,<br>          19200,  9600, 4800, 2400, 1200,  300, };<br>void set_speed(int fd, int speed)<br>{<br>  int   i;<br>  int   status;<br>  struct termios   Opt;<br>  tcgetattr(fd, &amp;Opt);<br>  for ( i= 0;  i &lt; sizeof(speed_arr) / sizeof(int);  i++)<br>{<br>    if  (speed == name_arr[i])<br> {<br>      tcflush(fd, TCIOFLUSH);<br>      cfsetispeed(&amp;Opt, speed_arr[i]);<br>      cfsetospeed(&amp;Opt, speed_arr[i]);<br>      status = tcsetattr(fd1, TCSANOW, &amp;Opt);<br>      if  (status != 0)<br>      {<br>        perror(“tcsetattr fd1”);<br>        return;<br>      }<br>      tcflush(fd,TCIOFLUSH);<br>    }<br>  }<br>}   </p>
-<h1 id="效验位和停止位的设置："><a href="#效验位和停止位的设置：" class="headerlink" title="效验位和停止位的设置："></a><strong>效验位和停止位的设置：</strong></h1><p>无效验    8位    Option.c_cflag &amp;= ~PARENB;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= ~CSIZE;<br>Option.c_cflag |= ~CS8;<br>奇效验(Odd)    7位    Option.c_cflag |= ~PARENB;<br>Option.c_cflag &amp;= ~PARODD;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= ~CSIZE;<br>Option.c_cflag |= ~CS7;<br>偶效验(Even)    7位    Option.c_cflag &amp;= ~PARENB;<br>Option.c_cflag |= ~PARODD;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= ~CSIZE;<br>Option.c_cflag |= ~CS7;<br>Space效验    7位    Option.c_cflag &amp;= ~PARENB;<br>Option.c_cflag &amp;= ~CSTOPB;<br>Option.c_cflag &amp;= &amp;~CSIZE;<br>Option.c_cflag |= CS8;  </p>
-<p>设置效验的函数：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/34320569.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/76170912.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/47803048.jpg" alt=""></p>
-<p>需要注意的是:<br>如果不是开发终端之类的，只是串口传输数据，而不需要串口来处理，那么使用原始模式(Raw Mode)方式来通讯。<br>设置方式如下：<br>options.c_lflag  &amp;= ~(ICANON | ECHO | ECHOE | ISIG);  /<em>Input</em>/<br>options.c_oflag  &amp;= ~OPOST;   /<em>Output</em>/  </p>
-<h1 id="读写串口"><a href="#读写串口" class="headerlink" title="读写串口"></a><strong>读写串口</strong></h1><p>设置好串口之后，把串口当作文件读写。<br>发送数据<br>char  buffer[1024];<br>int    Length;int    nByte;<br>nByte = write(fd, buffer ,Length)<br>读取串口数据<br>使用文件操作read函数读取，如果设置为原始模式(Raw Mode)传输数据，那么read函数返回的字符数是实际串口收到的字符数。<br>可以使用操作文件的函数来实现异步读取，如fcntl，或者select等来操作。<br>char  buff[1024];int    Len;int  readByte = read(fd,buff,Len);  </p>
-<h1 id="关闭串口"><a href="#关闭串口" class="headerlink" title="关闭串口"></a><strong>关闭串口</strong></h1><p>关闭串口就是关闭文件。<br>close(fd);  </p>
-
+        <h1 id="串口操作"><a href="#串口操作" class="headerlink" title="串口操作"></a><strong>串口操作</strong></h1><p>串口操作需要的头文件  </p>
+<pre><code>#include     &lt;stdio.h&gt;      
+#include     &lt;stdlib.h&gt;   
+#include     &lt;unistd.h&gt;    
+#include     &lt;sys/types.h&gt;  
+#include     &lt;sys/stat.h&gt; 
+#include     &lt;fcntl.h&gt;     
+#include     &lt;termios.h&gt;
+#include     &lt;errno.&gt;
+</code></pre><a id="more"></a> 
+<h1 id="打开串口"><a href="#打开串口" class="headerlink" title="打开串口"></a><strong>打开串口</strong></h1><p>在 Linux 下串口文件是位于 /dev 下的<br>串口一 为 /dev/ttyS0<br>串口二 为 /dev/ttyS1<br>打开串口是通过使用标准的文件打开函数操作：   </p>
+<pre><code>int open_port(void)  
+{  
+    int fd;  
+    fd = open( &quot;/dev/ttyS0&quot;, O_RDWR | O_NOCTTY );  
+    if(-1 == fd)  
+    {  
+    perror(&quot; 提示错误！&quot;);  
+    }  
+    return (fd);  
+}   
+</code></pre><p>O_NOCTTY: 表示当前进程不期望与终端关联，从而避免控制端输入的信息影响当前进程   </p>
+<h1 id="设置串口"><a href="#设置串口" class="headerlink" title="设置串口"></a><strong>设置串口</strong></h1><p>最基本的设置串口包括波特率设置，效验位和停止位设置。<br>串口的设置主要是设置 struct termios 结构体的各成员值。</p>
+<pre><code>struct termio  
+{      
+unsigned short  c_iflag;    /* 输入模式标志 */      
+unsigned short  c_oflag;    /* 输出模式标志 */      
+unsigned short  c_cflag;    /* 控制模式标志*/      
+unsigned short  c_lflag;    /* local mode flags */      
+unsigned char  c_line;         /* line discipline */      
+unsigned char  c_cc[NCC];    /* control characters */  
+};  
+</code></pre><p>下面是修改波特率的代码：  </p>
+<pre><code>struct  termios Opt;  
+tcgetattr(fd, &amp;Opt);  
+cfsetispeed(&amp;Opt,B19200);     /*设置为19200Bps*/  
+cfsetospeed(&amp;Opt,B19200);  
+tcsetattr(fd,TCANOW,&amp;Opt);  
+</code></pre><h1 id="设置波特率的例子函数："><a href="#设置波特率的例子函数：" class="headerlink" title="设置波特率的例子函数："></a><strong>设置波特率的例子函数：</strong></h1><pre><code>/**
+*@brief  设置串口通信速率  
+*@param  fd     类型 int  打开串口的文件句柄  
+*@param  speed  类型 int  串口速度  
+*@return  void  
+*/  
+int speed_arr[] = { B38400, B19200, B9600, B4800, B2400, B1200, B300,  
+          B38400, B19200, B9600, B4800, B2400, B1200, B300, };  
+int name_arr[] = {38400,  19200,  9600,  4800,  2400,  1200,  300, 38400,    
+          19200,  9600, 4800, 2400, 1200,  300, };  
+void set_speed(int fd, int speed)  
+{  
+  int   i;   
+  int   status;   
+  struct termios   Opt;  
+  tcgetattr(fd, &amp;Opt);   
+  for ( i= 0;  i &lt; sizeof(speed_arr) / sizeof(int);  i++)   
+{  
+    if  (speed == name_arr[i])  
+ {       
+      tcflush(fd, TCIOFLUSH);       
+      cfsetispeed(&amp;Opt, speed_arr[i]);    
+      cfsetospeed(&amp;Opt, speed_arr[i]);     
+      status = tcsetattr(fd1, TCSANOW, &amp;Opt);    
+      if  (status != 0)   
+      {          
+        perror(&quot;tcsetattr fd1&quot;);    
+        return;       
+      }       
+      tcflush(fd,TCIOFLUSH);     
+    }    
+  }  
+}   
+</code></pre><h1 id="效验位和停止位的设置："><a href="#效验位和停止位的设置：" class="headerlink" title="效验位和停止位的设置："></a><strong>效验位和停止位的设置：</strong></h1><pre><code>无效验    8位    Option.c_cflag &amp;= ~PARENB;   
+Option.c_cflag &amp;= ~CSTOPB;   
+Option.c_cflag &amp;= ~CSIZE;   
+Option.c_cflag |= ~CS8;  
+奇效验(Odd)    7位    Option.c_cflag |= ~PARENB;   
+Option.c_cflag &amp;= ~PARODD;   
+Option.c_cflag &amp;= ~CSTOPB;   
+Option.c_cflag &amp;= ~CSIZE;    
+Option.c_cflag |= ~CS7;  
+偶效验(Even)    7位    Option.c_cflag &amp;= ~PARENB;   
+Option.c_cflag |= ~PARODD;   
+Option.c_cflag &amp;= ~CSTOPB;   
+Option.c_cflag &amp;= ~CSIZE;   
+Option.c_cflag |= ~CS7;  
+Space效验    7位    Option.c_cflag &amp;= ~PARENB;   
+Option.c_cflag &amp;= ~CSTOPB;   
+Option.c_cflag &amp;= &amp;~CSIZE;   
+Option.c_cflag |= CS8;  
+</code></pre><p>设置效验的函数：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/34320569.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/76170912.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/47803048.jpg" alt=""></p>
+<p>需要注意的是:<br>如果不是开发终端之类的，只是串口传输数据，而不需要串口来处理，那么使用原始模式(Raw Mode)方式来通讯。<br>设置方式如下：  </p>
+<pre><code>options.c_lflag  &amp;= ~(ICANON | ECHO | ECHOE | ISIG);  /*Input*/  
+options.c_oflag  &amp;= ~OPOST;   /*Output*/  
+</code></pre><h1 id="读写串口"><a href="#读写串口" class="headerlink" title="读写串口"></a><strong>读写串口</strong></h1><p>设置好串口之后，把串口当作文件读写。<br>发送数据  </p>
+<pre><code>char  buffer[1024];  
+int    Length;int    nByte;  
+nByte = write(fd, buffer ,Length)  
+</code></pre><p>读取串口数据<br>使用文件操作read函数读取，如果设置为原始模式(Raw Mode)传输数据，那么read函数返回的字符数是实际串口收到的字符数。<br>可以使用操作文件的函数来实现异步读取，如fcntl，或者select等来操作。  </p>
+<pre><code>char  buff[1024];int    Len;int  readByte = read(fd,buff,Len);  
+</code></pre><h1 id="关闭串口"><a href="#关闭串口" class="headerlink" title="关闭串口"></a><strong>关闭串口</strong></h1><p>关闭串口就是关闭文件。  </p>
+<pre><code>close(fd);  
+</code></pre>
       
     </div>
 
@@ -766,7 +873,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -777,7 +884,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -786,7 +893,7 @@
           
 			<div class="site-state-item site-state-tags">
 				<a href="/tags">
-					<span class="site-state-item-count">7</span>
+					<span class="site-state-item-count">9</span>
 					<span class="site-state-item-name">标签</span>
 				</a>
 			</div>
