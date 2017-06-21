@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo" />
+  <meta name="keywords" content="C指针," />
 
 
 
@@ -98,22 +98,16 @@
 
 
 
-<meta name="description" content="title: ｃ语言常用关键字date: 2017-03-30categories: C语言tags: [C关键字]  
-
-前言原文为C语言进阶之道中的关键字章节标准C程序一直由下列部分组成：1）正文段——CPU执行的机器指令部分，也就程序。一个程序只有一个副本；只读，这是为了防止程序由于意外事故而修改自身指令；2）初始化数据段（数据段）——在程序中所有赋了初值的全局变量，存放在这里。3）非初始">
+<meta name="description" content="#函数指针定义#函数指针是指向函数的指针变量，即本质是一个指针变量。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="茶末园">
-<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/06/21/static关键字/index.html">
+<meta property="og:title" content="函数指针总结">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/29/函数指针总结/index.html">
 <meta property="og:site_name" content="茶末园">
-<meta property="og:description" content="title: ｃ语言常用关键字date: 2017-03-30categories: C语言tags: [C关键字]  
-
-前言原文为C语言进阶之道中的关键字章节标准C程序一直由下列部分组成：1）正文段——CPU执行的机器指令部分，也就程序。一个程序只有一个副本；只读，这是为了防止程序由于意外事故而修改自身指令；2）初始化数据段（数据段）——在程序中所有赋了初值的全局变量，存放在这里。3）非初始">
-<meta property="og:updated_time" content="2017-06-21T07:24:02.985Z">
+<meta property="og:description" content="#函数指针定义#函数指针是指向函数的指针变量，即本质是一个指针变量。">
+<meta property="og:updated_time" content="2017-06-21T08:40:55.780Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="茶末园">
-<meta name="twitter:description" content="title: ｃ语言常用关键字date: 2017-03-30categories: C语言tags: [C关键字]  
-
-前言原文为C语言进阶之道中的关键字章节标准C程序一直由下列部分组成：1）正文段——CPU执行的机器指令部分，也就程序。一个程序只有一个副本；只读，这是为了防止程序由于意外事故而修改自身指令；2）初始化数据段（数据段）——在程序中所有赋了初值的全局变量，存放在这里。3）非初始">
+<meta name="twitter:title" content="函数指针总结">
+<meta name="twitter:description" content="#函数指针定义#函数指针是指向函数的指针变量，即本质是一个指针变量。">
 
 
 
@@ -141,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/06/21/static关键字/"/>
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/29/函数指针总结/"/>
 
 
 
 
 
-  <title>  | 茶末园 </title>
+  <title> 函数指针总结 | 茶末园 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -502,7 +496,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/06/21/static关键字/">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/29/函数指针总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chamo">
@@ -523,7 +517,7 @@
             
             
               
-                
+                函数指针总结
               
             
           </h1>
@@ -538,8 +532,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T15:01:38+08:00">
-                2017-06-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T00:00:00+08:00">
+                2017-03-29
               </time>
             
 
@@ -549,6 +543,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -557,9 +573,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/21/static关键字/#comments" itemprop="discussionUrl">
+                <a href="/2017/03/29/函数指针总结/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/21/static关键字/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/03/29/函数指针总结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -585,141 +601,301 @@
       
 
       
-        <hr>
-<p>title: ｃ语言常用关键字<br>date: 2017-03-30<br>categories: C语言<br>tags: [C关键字]  </p>
-<hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>原文为<a href="http://pan.baidu.com/s/1hsxFRZu" target="_blank" rel="external">C语言进阶之道</a>中的关键字章节<br>标准C程序一直由下列部分组成：<br>1）正文段——CPU执行的机器指令部分，也就程序。一个程序只有一个副本；只读，这是为了防止程序由于意外事故而修改自身指令；<br>2）初始化数据段（数据段）——在程序中所有赋了初值的全局变量，存放在这里。<br>3）非初始化数据段（bss段）——在程序中没有初始化的全局变量；内核将此段初始化为0。<br>注意：只有全局变量被分配到数据段中。<br>4）栈——增长方向：自顶向下增长；自动变量以及每次函数调用时所需要保存的信息（返回地址；环境信息）。<br>5）堆——动态存储分配。</p>
+        <p>#函数指针定义#<br>函数指针是指向函数的指针变量，即本质是一个指针变量。</p>
 <a id="more"></a>
-<h1 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h1><h2 id="作用1"><a href="#作用1" class="headerlink" title="作用1"></a>作用1</h2><p><strong>在函数体，一个被声明为静态的变量在这一函数被调用过程中维持其值不变。</strong><br>这样定义的变量称为局部静态变量：在局部变量之前加上关键字static，局部变量就被定义成为一个局部静态变量。也就是上面的作用一中提到的在函数体内定义的变量。除了类型符外，若不加其它关键字修饰，默认都是局部变量。比如以下代码：</p>
-<pre><code>void test1（void）
-{
-unsigned char a；
-static unsigned char b；
-…
-a++；
-b++；
-}
-</code></pre><p>变量a是局部变量，变量b为局部静态变量。在函数体，一个被声明为静态的变量（也就是局部静态变量）在这一函数被调用过程中维持其值不变。若是连续两次调用上面的函数test1(),读取a和b的值，a=1，b=2。每次调用test1函数，局部变量a都会重新初始化为0x00；然后执行a++；而局部静态变量在调用过程中却能维持其值不变。   </p>
-<p>局部静态变量的详细特性，注意它的作用域。<br>1）内存中的位置：静态存储区<br>2）初始化：未经初始化的全局静态变量会被程序自动初始化为0（自动对象的值是任意的，除非他被显示初始化）<br>3）作用域：作用域仍为局部作用域，当定义它的函数或者语句块结束的时候，作用域随之结束。<br>注：当static用来修饰局部变量的时候，它就改变了局部变量的存储位置，从原来的栈中存放改为静态存储区。但是局部静态变量在离开作用域之后，并没有被销毁，而是仍然驻留在内存当中，直到程序结束，只不过我们不能再对他进行访问。</p>
-<h2 id="作用2"><a href="#作用2" class="headerlink" title="作用2"></a>作用2</h2><p><strong>在模块内（但在函数体外），一个被声明为静态的变量可以被模块内所用函数访问，但不能被模块外其它函数访问。它是一个本地的全局变量。</strong><br>这样定义的变量也称为全局静态变量：在全局变量之前加上关键字static，全局变量就被定义成为一个全局静态变量。也就是模块内（但在函数体外）声明的静态变量。<br>例如在源文件中，定义全局静态变量n，该变量只能用与该源文件中的函数。 </p>
-<pre><code>static int n;
-void test();
-void main()
-{
-    test();
-}
-</code></pre><p>定义全局静态变量的好处：  </p>
-<p><1>不会被其他文件所访问，修改，是一个本地的局部变量。  </1></p>
-<p><2>其他文件中可以使用相同名字的变量，不会发生冲突。</2></p>
-<p>全局变量的详细特性，注意作用域，可以和局部静态变量相比较：<br>1）内存中的位置：静态存储区（静态存储区在整个程序运行期间都存在）<br>2）初始化：未经初始化的全局静态变量会被程序自动初始化为0（自动对象的值是任意的，除非他被显示初始化）<br>3）作用域：全局静态变量在声明他的文件之外是不可见的。准确地讲从定义之处开始到文件结尾。  </p>
-<p>当static用来修饰全局变量的时候，它就改变了全局变量的作用域（在声明他的文件之外是不可见的），但是没有改变它的存放位置，还是在静态存储区中。</p>
-<h2 id="作用3"><a href="#作用3" class="headerlink" title="作用3"></a>作用3</h2><p><strong>在模块内，一个被声明为静态的函数只可被这一模块内的其它函数调用。这个函数被限制在声明它的模块的本地范围内使用。</strong><br>这样定义的变量也称为全局静态变量：在全局变量之前加上关键字static，全局变量就被定义成为一个全局静态变量。也就是上述作用二中提到的在模块内（但在函数体外）声明的静态变量。  </p>
-<p>定义全局静态变量的好处：  </p>
-<p><1>不会被其他文件所访问，修改，是一个本地的局部变量。  </1></p>
-<p><2>其他文件中可以使用相同名字的变量，不会发生冲突。  </2></p>
-<p>全局变量的详细特性，注意作用域，可以和局部静态变量相比较：<br>1）内存中的位置：静态存储区（静态存储区在整个程序运行期间都存在）<br>2）初始化：未经初始化的全局静态变量会被程序自动初始化为0（自动对象的值是任意的，除非他被显示初始化）<br>3）作用域：全局静态变量在声明他的文件之外是不可见的。准确地讲从定义之处开始到文件结尾。</p>
-<p>当static用来修饰全局变量的时候，它就改变了全局变量的作用域（在声明他的文件之外是不可见的），但是没有改变它的存放位置，还是在静态存储区中。</p>
-<h1 id="const关键字"><a href="#const关键字" class="headerlink" title="const关键字"></a>const关键字</h1><p>（1）const关键字修饰的变量可以认为有只读属性，但它绝不与常量划等号。  </p>
-<pre><code>const int i=5;
-int j=0;
-i=j;   //非法，导致编译错误，因为只能被读
-j=i;   //合法
-</code></pre><p>（2）const关键字修饰的变量在声明时必须进行初始化。  </p>
-<pre><code>const int i=5;    //合法
-const int j;      //非法，导致编译错误
-</code></pre><p>（3）用const声明的变量虽然增加了分配空间，但是可以保证类型安全。const最初是从C++变化得来的，它可以替代define来定义常量。在旧版本(标准前)的c中，如果想建立一个常量，必须使用预处理器：  </p>
-<pre><code>#define PI 3.14159
-</code></pre><p>此后无论在何处使用PI，都会被预处理器以3.14159替代。编译器不对PI进行类型检查，如果使用不慎，很可能由预处理引入错误。而且，我们也不能得到PI的地址（即不能向PI传递指针和引用）。const的出现，比较好的解决了上述问题。  </p>
-<p>（4）C标准中，const定义的常量是全局的。  </p>
-<p>（5）指针定义，若是想定义一个只读属性的指针，那么关键字const要放到‘* ’后面。</p>
-<pre><code>char *const cp; //指针不可改变，但指向的内容可以改变
-char const *pc1; //指针可以改变，但指向的内容不能改变
-const char *pc2; //同上（后两个声明是等同的）
-</code></pre><p>（6）将函数传入参数声明为const，以指明使用这种参数仅仅是为了效率的原因，而不是想让调用函数能够修改对象的值。<br>参数const通常用于参数为指针或引用的情况，且只能修饰输入参数;若输入参数采用“值传递”方式，由于函数将自动产生临时变量用于复制该参数，该参数本就不需要保护，所以不用const修饰。</p>
-<pre><code>void fun0(const int * a );
-void fun1(const int &amp; a);
-</code></pre><p>调用函数的时候，用相应的变量初始化const常量，则在函数体中，按照const所修饰的部分进行常量化，如形参为const int * a，则不能对传递进来的指针所指向的内容进行改变，保护了原指针所指向的内容；如形参为const int &amp; a，则不能对传递进来的引用对象进行改变，保护了原对象的属性。  </p>
-<p>（7）修饰函数返回值，可以阻止用户修改返回值。（在嵌入式C中一般不用，主要用于C++）</p>
-<p>（8）const消除了预处理器的值替代的不良影响，并且提供了良好的类型检查形式和安全性</p>
-<p>两个常用的标准C库函数声明，它们都是使用const的典范：<br>1.字符串拷贝函数：  </p>
-<pre><code>char *strcpy（char *strDest，const char *strSrc）；
-</code></pre><p>2.返回字符串长度函数：  </p>
-<pre><code>int strlen（const char *str）；
-</code></pre><h1 id="volatile关键"><a href="#volatile关键" class="headerlink" title="volatile关键"></a>volatile关键</h1><p>定义为volatile 的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值，而不是使用保存在寄存器里的备份。　　<br>由于访问寄存器的速度要快过RAM，所以编译器一般都会作减少存取外部RAM的优化。比如：　　</p>
-<pre><code>static int i=0; 
-int main(void) 
-{ 
-    ... 
-    while (1) 
-    { 
-        if (i) 
-            dosomething(); 
-    } 
-} 
-/* Interrupt service routine. */ 
-void ISR_2(void) 
-{ 
-     i=1; 
-} 
-</code></pre><p>程序的本意是ISR_2中断产生时，在main当中调用dosomething函数，但是，由于编译器判断在main函数里面没有修改过i，因此可能只执行一次对从i到某寄存器的读操作，然后每次if判断都只使用这个寄存器里面的“i副本”，导致dosomething永远也不会被调用。如果将变量加上volatile修饰，则编译器保证对此变量的读写操作都不会被优化（肯定执行）。此例中i也应该如此说明。　　</p>
-<p>volatile用在如下的几个地方： </p>
-<p>1、中断服务程序中修改的供其它程序检测的变量需要加volatile； </p>
-<p>2、多任务环境下各任务间共享的标志应该加volatile； </p>
-<p>3、存储器映射的硬件寄存器通常也要加volatile说明，因为每次对它的读写都可能有不同意义；</p>
-<p><strong>举例分析</strong>：　　</p>
-<p>代码一:         </p>
-<pre><code>int a,b,c;                             
-//读取I/O空间0x100端口的内容    
-a= inword(0x100);                                                  
-b=a;                               
-a=inword(0x100)                            
-c=a;  
-</code></pre><p>代码二:   </p>
-<pre><code>volatile int a;   
-int a,b,c;                             
-//读取I/O空间0x100端口的内容    
-a= inword(0x100);                                               
-b=a;                               
-a=inword(0x100)                        
-c=a; 
-</code></pre><p>在上述例子中,代码一会被绝大多数编译器优化为如下代码:<br>     a=inword(0x100)<br>     b=a;<br>     c=a;<br>这显然与编写者的目的不相符,会出现I/O空间0x100端口漏读现象,若是增加volatile,像代码二所示的那样,优化器将不会优化掉任何代码　　</p>
-<h1 id="struct与typedef关键字"><a href="#struct与typedef关键字" class="headerlink" title="struct与typedef关键字"></a>struct与typedef关键字</h1><p>在网络协议、通信控制、嵌入式系统的C/C++编程中，经常要传送的不是简单的字节流（char型数组），而是多种数据组合起来的一个整体，其表现形式是一个结构体　　</p>
-<p>struct关键字的作用是它可以实现对数据的封装,有一点点类似与C++的对象,可以将一些分散的特性对象化,这在编写某些复杂程序时提供很大的方便性.<br>用法:<br>在C中定义一个结构体类型要用typedef:　　</p>
-<pre><code>typedef struct Student
-{
-       int a;
-}Stu;
-</code></pre><p>声明变量</p>
-<pre><code>Stu stu1;　　
-</code></pre><p>如果没有typedef声明变量　　</p>
-<pre><code>struct Student stu1;
-</code></pre><p>这里的Stu实际上就是struct Student的别名，另外这里也可以不写Student</p>
-<pre><code>typedef struct
-{
-       int a;
-}Stu;
-</code></pre><p>比如编写一个菜单程序,你要知道本级菜单的菜单索引号、焦点在屏上是第几项、显示第一项对应的菜单条目索引、菜单文本内容、子菜单索引、当前菜单执行的功能操作。若是对上述条目单独操作，那么程序的复杂程度将会大到不可想象，这时候结构体struct就开始显现它的威力了：　　</p>
-<pre><code>//结构体定义
-typedef struct
-{
-unsigned char CurrentPanel;//本级菜单的菜单索引号
-unsigned char ItemStartDisplay; //显示第一项对应的菜单条目索引
-unsigned char FocusLine;  //焦点在屏上是第几项
-}Menu_Statestruct;
+<p>##一般函数指针定义##<br>    int (<em>funcPtr)(char </em>, int);<br>(<em>funcPtr)表明funcPtr是一个指针，(char </em>, int)表明funcPtr是一个函数，函数参数为char *和int，返回值为in</p>
+<pre><code>int *(*funcPtr)(char *, int);
+</code></pre><p>funcPtr是函数指针，不同的是前面的int *，表明该函数的返回值为int指针。</p>
+<p>##函数指针数组##<br>    int (<em>funcPtr[])(char </em>, int);<br>[]的优先级较高，所以funcPtr是数组，里面的元素为函数指针，所指向的函数原型为int funcPtr(char *, int)。</p>
+<p>#函数指针传参#<br>函数指针作为一种类型同样可以作为函数的输入与输出。</p>
+<pre><code>//作为输入参数
+void func(int x, int (*funcPtr)(char *, int));
+//作为返回值
+void (*func(int x, int y))(int);
+</code></pre><p>这里括号的优先级最高，func(int x, int y)表面func是一个函数，前面的*表明返回值为一个指针，(int)说明该指针为一个参数为int的函数，void表示该函数指针的返回值为void。<br> 上面定义了一个返回值为函数指针的函数，那怎么定义一个函数指针指向该函数呢，看下面：</p>
+<pre><code>//一步一步来写，首先他是一个函数指针
+(*funcPtr)()
+//指向的函数的参数为int x, int y
+(*funcPtr)(int x, int y)
+//指向的函数的返回值为一个指针
+(*(*funcPtr)(int x, int y))
+//指向的函数的返回值为一个指针，该指针是参数为int的函数指针
+(*(*funcPtr)(int x, int y))(int)
+//指向的函数的返回值为一个指针，该指针是返回值为void的函数指针
+void (*(*funcPtr)(int x, int y))(int)
+</code></pre><p>函数指针和函数原型就差一个(*)，如果知道函数原型的话将函数名改成指针就行了。</p>
+<pre><code>void (*func(int x, int y))(int);
+void (*(*funcPtr)(int x, int y))(int);
+</code></pre><p>##typedef定义##<br>另一种简单的方法是使用typedef，将函数指针定义成一种类型后，可以方便的在函数中使用。</p>
+<pre><code>typedef void (*funcPtr1)(int);//定义返回值的函数指针
+funcPtr1 (*funcPtr)(int x, int y);
+</code></pre><p>#函数指针应用#</p>
+<p>##普通函数指针应用##<br>一个函数总是占用一段连续的内存区，而函数名就是该函数所占内存区的首地址（入口地址），所以函数名跟数组名很类似，都是指针常量。函数指针就是指向这个入口地址的指针变量，注意函数指针是一个变量。</p>
+<pre><code>void f(int);  
 
-typedef struct
-{
-unsigned char *MenuTxt; //菜单文本内容
-unsigned char MenuChildID;//子菜单索引
-void    (*CurrentOperate)();//当前菜单执行的功能操作
-}MenuItemStruct;
+int main()  
+{  
+    //定义函数指针pf并给pf赋值使其指向函数f的入口地址  
+    //pf先跟*结合，说明pf是一个指针，然后与括号结合，说明这个指针指向函数  
+    void (*pf)(int)=f;  //等价于void (*pf)(int)=&amp;f;  
+    pf(1);  
+    (*pf)(2);//把函数指针转换成函数名，这个转换并不需要  
+    f(3);  
+    return 0;  
+}  
 
-typedef struct
-{
-MenuItemStruct  *MenuPanelItem;
-unsigned char    MenuItemCount;
-}MenuPanelStruct;　　
-</code></pre>
+void f(int a)  
+{  
+    printf(&quot;%d\n&quot;,a);  
+}  
+</code></pre><p>void (*pf)(int)=&f;函数名被使用时总是由编译器把它转换为函数指针，&amp;操作符只是显示地说明了编译器将隐式执行的任务 。</p>
+<p>##函数指针数组应用##</p>
+<pre><code>void Touch();  
+void DuanJiong();  
+void MeiKai();  
+void YinJun();  
+void JiangHaiLong();  
+
+void main()  
+{  
+    int i;  
+    scanf(&quot;%d&quot;,&amp;i);  
+    switch(i){  
+    case 0:  
+        Touch();  
+        break;  
+    case 1:  
+        DuanJiong();  
+        break;  
+    case 2:  
+        MeiKai();  
+        break;  
+    case 3:  
+        YinJun();  
+        break;  
+    case 4:  
+        JiangHaiLong();  
+        break;  
+    }  
+}  
+
+void Touch()  
+{  
+    puts(&quot;我是Touch&quot;);  
+}  
+
+void DuanJiong()  
+{  
+    puts(&quot;我是段炯&quot;);  
+}  
+
+void MeiKai()  
+{  
+    puts(&quot;我是梅凯&quot;);  
+}  
+
+void YinJun()  
+{  
+    puts(&quot;我是殷俊&quot;);  
+}  
+
+void JiangHaiLong()  
+{  
+    puts(&quot;我是木子&quot;);  
+}
+</code></pre><p>这里只列出了5种情况，如果总共有很多种情况呢，那么就要写一大堆的case语句。而且每次都是从case 1 开始判断。那么是否可以简化代码并且能让程序不做这么多判断呢？这就引出了函数指针数组，顾名思义，就是存放函数指针的数组。现主函数修改如下所示：</p>
+<pre><code>void main()  
+{  
+    int i;  
+    void (*p[])()={Touch,DuanJiong,MeiKai,YinJun,JiangHaiLong};  
+    scanf(&quot;%d&quot;,&amp;i);  
+    p[i]();  
+}  
+</code></pre><p>void (*p[])()={Touch,DuanJiong,MeiKai,YinJun,JiangHaiLong};声明了一个函数指针数组并赋值。把每个函数的入口地址存入这个数组，这样就不需要用switch语句了，根据下标i直接找到函数入口，省去了判断的时间。</p>
+<p>##回调函数##<br>回调函数就是一个通过函数指针调用的函数。如果你把函数的指针(地址)作为参数传递给另一个函数，当这个指针被用为调用它所指向的函数时，我们就说这是回调函数。这里函数指针是作为参数传递给另一个函数。<br>冒泡排序，其代码如下：</p>
+<pre><code>void bubbleSort(int *a,int n)  
+{  
+    int i,j;  
+    for(i=1;i&lt;n;i++)  
+        for(j=1;j&lt;n-i+1;j++){  
+            if(a[j+1]&lt;a[j]){  
+                a[j]=a[j]+a[j+1];  
+                a[j+1]=a[j]-a[j+1];  
+                a[j]=a[j]-a[j+1];  
+            }  
+        }  
+}
+</code></pre><p>这个冒泡排序只能对int型数组进行排序。如果我们想写这样一个函数，能同时对int型、float型、double型、char型、结构体类型…数组进行排序，该怎么写呢？也许你会想到函数重载，但是C语言没有这个概念。这里可以用函数指针来实现，其代码比重载更简洁，更高效这也是函数指针的最大用处，参考代码：</p>
+<pre><code>//回调函数对多种数据类型数组进行冒泡排序  
+//a表示待排序数组  
+//n表示数组长度  
+//size表示数组元素大小(即每个数组元素占用的字节数)  
+//int (*compare)(void *,void *) 声明了一个函数指针，在此作为参数  
+//void *类型的指针表示指向未知类型的指针,编译器并不会给void类型的指针分配空间,但我们可以把它进行强制类型转换  
+void bubbleSort(void *a,int n,int size,int (*compare)(void *,void *))  
+{  
+    int i,j,k;  
+    char *p,*q;  
+    char temp;//交换时暂存一个字节的数据  
+    for(i=0;i&lt;n;i++)  
+        for(j=0;j&lt;n-i-1;j++){  
+            //注意p,q都是字符类型的指针，加一都只移动一个字节  
+            p=(char*)a+j*size;  
+            q=(char*)a+(j+1)*size;  
+            if(compare(p,q)&gt;0)
+                {  
+                //一个一个字节的交换,从而实现了一个数据类型数据的交换  
+                for(k=0;k&lt;size;k++){  
+                    temp=*p;  
+                    *p=*q;  
+                    *q=temp;  
+                    p++;  
+                    q++;  
+                }  
+            }  
+        }  
+}
+</code></pre><p>（1）void<em>类型的指针未分配空间的，我们可以把它进行强制类型转换成char</em>。<br>（2）对数组元素进行交换时，并不是一次就把两个数交换了，因为我们并不知道数据的确切类型。但知道数组元素的大小，这样就可以逐个字节进行交换。比如对int类型（占用四个字节）的值a、b进行交换，先交换a、b的第一个字节，然后第二个字节…<br>理解了这个代码，该怎么用呢？参数要传入一个函数指针，于是必须要写一个比较两个数大小的函数，且函数原型必须与int (<em>compare)(void </em>,void *)相匹配。下面是测试各种类型数组排序的代码：</p>
+<pre><code>#include&lt;stdio.h&gt;  
+typedef struct{  
+    int data;  
+}Node;  
+
+//函数声明  
+int charCompare(void *a,void *b);  
+int intCompare(void *a,void *b);  
+int floatCompare(void *a,void *b);  
+int doubleCompare(void *a,void *b);  
+int nodeCompare(void *a,void *b);  
+void bubbleSort(void *a,int n,int size,int (*compare)(void *,void *));  
+
+//比较两个char类型的数据的大小，a&gt;b返回1，a&lt;b返回-1，a==b返回0  
+int charCompare(void *a,void *b)  
+{  
+    if(*(char*)a==*(char*)b)  
+        return 0;  
+    return *(char*)a&gt;*(char*)b?1:-1;  
+}  
+//比较两个int类型的数据的大小  
+int intCompare(void *a,void *b)  
+{  
+    if(*(int*)a==*(int*)b)  
+        return 0;  
+    return *(int*)a&gt;*(int*)b?1:-1;  
+}  
+//比较两个float类型的数据的大小  
+int floatCompare(void *a,void *b)  
+{  
+    if(*(float*)a==*(float*)b)  
+        return 0;  
+    return *(float*)a&gt;*(float*)b?1:-1;  
+}  
+//比较两个double类型的数据的大小  
+int doubleCompare(void *a,void *b)  
+{  
+    if(*(double*)a==*(double*)b)  
+        return 0;  
+    return *(double*)a&gt;*(double*)b?1:-1;  
+}  
+//比较两个结构体类型（Node）的数据的大小  
+int nodeCompare(void *a,void *b)  
+{  
+    if(((Node*)a)-&gt;data == ((Node*)b)-&gt;data)  
+        return 0;  
+    return ((Node*)a)-&gt;data &gt; ((Node*)b)-&gt;data ? 1 : -1;  
+}  
+
+void main()  
+{  
+    int i=0;  
+    //用于测试的各种类型数组  
+    char c[]={&apos;d&apos;,&apos;a&apos;,&apos;c&apos;,&apos;e&apos;,&apos;b&apos;};  
+    int a[]={3,2,4,0,1};  
+    float f[]={4.4,5.5,3.3,0,1};  
+    double b[]={4.4,5.5,3.3,0,1};  
+    Node n[]={{2},{0},{1},{4},{3}};  
+
+    //对各种数组进行排序  
+    puts(&quot;对char类型数组进行排序：&quot;);  
+    bubbleSort(c,5,sizeof(char),charCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%c &quot;,c[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对int类型数组进行排序：&quot;);  
+    bubbleSort(a,5,sizeof(int),intCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%d &quot;,a[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对float类型数组进行排序：&quot;);  
+    bubbleSort(f,5,sizeof(float),floatCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%.2f &quot;,f[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对double类型数组进行排序：&quot;);  
+    bubbleSort(b,5,sizeof(double),doubleCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%.2lf &quot;,b[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对结构体（Node）类型数组进行排序：&quot;);  
+    bubbleSort(n,5,sizeof(Node),nodeCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%d &quot;,n[i].data);  
+    puts(&quot;&quot;);  
+}  
+
+
+//回调函数对多种数据类型数组进行冒泡排序  
+//a表示待排序数组  
+//n表示数组长度  
+//size表示数组元素大小(即每个数组元素占用的字节数)  
+//int (*compare)(void *,void *) 声明了一个函数指针，在此作为参数  
+//void *类型的指针表示指向未知类型的指针,编译器并不会给void类型的指针分配空间,但我们可以把它进行强制类型转换  
+void bubbleSort(void *a,int n,int size,int (*compare)(void *,void *))  
+{  
+    int i,j,k;  
+    char *p,*q;  
+    char temp;//交换时暂存一个字节的数据  
+    for(i=0;i&lt;n;i++)  
+        for(j=0;j&lt;n-i-1;j++){  
+            //注意p,q都是字符类型的指针，加一都只移动一个字节  
+            p=(char*)a+j*size;  
+            q=(char*)a+(j+1)*size;  
+            if(compare(p,q)&gt;0){  
+                //一个一个字节的交换,从而实现了一个数据类型数据的交换  
+                for(k=0;k&lt;size;k++){  
+                    temp=*p;  
+                    *p=*q;  
+                    *q=temp;  
+                    p++;  
+                    q++;  
+                }  
+            }  
+        }  
+}
+</code></pre><p>#指针函数#<br>指针函数是指带指针的函数，即本质是一个函数。函数返回类型是某一类型的指针<br>    int <em>f(int a, int b);<br>此函数有返回值，返回值为int </em>，即返回值是指针类型的。<br>上面的函数声明又可以写成如下形式：<br>int<em> f(int a, int b);<br>让指针标志 </em> 与int紧贴在一起，而与函数名f间隔开，这样看起来就明了些了，f是函数名，返回值类型是一个int类型的指针。  </p>
+<p>#指针函数应用#<br>返回指针的函数，确切的说是返回指针类型的函数</p>
+<pre><code>#include&lt;stdio.h&gt;  
+//创建长度为n的动态数组  
+//这是一个指针函数  
+int* array(int n)  
+{  
+    int *a=(int*)malloc(sizeof(int)*n);  
+    return a;  
+}  
+void main()  
+{   
+    int i,n=3;  
+    int *a=array(n);  
+    for(i=0;i&lt;n;i++)  
+        a[i]=i;  
+    free(a);//注意a不用时要free掉，否则内存泄露  
+}
+</code></pre><p>参考文章<br><a href="https://wuyuans.com/2013/09/function-pointer" target="_blank" rel="external">函数指针总结</a><br><a href="函数指针与指针函数">http://blog.csdn.net/touch_2011/article/details/6984029</a></p>
+
       
     </div>
 
@@ -762,6 +938,12 @@ unsigned char    MenuItemCount;
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/C指针/" rel="tag"># C指针</a>
+          
+        </div>
+      
 
       
         
@@ -771,8 +953,8 @@ unsigned char    MenuItemCount;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/21/Notepad++使用教程/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/03/29/github创建本地仓库/" rel="next" title="Github创建本地库">
+                <i class="fa fa-chevron-left"></i> Github创建本地库
               </a>
             
           </div>
@@ -781,8 +963,8 @@ unsigned char    MenuItemCount;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/21/函数指针总结/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/29/单片机寄存器总结/" rel="prev" title="单片机寄存器总结">
+                单片机寄存器总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -837,17 +1019,8 @@ unsigned char    MenuItemCount;
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/avatar/avatar.png"
@@ -882,7 +1055,7 @@ unsigned char    MenuItemCount;
           
 			<div class="site-state-item site-state-tags">
 				<a href="/tags">
-					<span class="site-state-item-count">16</span>
+					<span class="site-state-item-count">18</span>
 					<span class="site-state-item-name">标签</span>
 				</a>
 			</div>
@@ -924,22 +1097,6 @@ unsigned char    MenuItemCount;
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static关键字"><span class="nav-number">2.</span> <span class="nav-text">static关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用1"><span class="nav-number">2.1.</span> <span class="nav-text">作用1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用2"><span class="nav-number">2.2.</span> <span class="nav-text">作用2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用3"><span class="nav-number">2.3.</span> <span class="nav-text">作用3</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#const关键字"><span class="nav-number">3.</span> <span class="nav-text">const关键字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile关键"><span class="nav-number">4.</span> <span class="nav-text">volatile关键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#struct与typedef关键字"><span class="nav-number">5.</span> <span class="nav-text">struct与typedef关键字</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -1078,9 +1235,9 @@ unsigned char    MenuItemCount;
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://BlueSky-chamo.github.io/2017/06/21/static关键字/';
-          this.page.identifier = '2017/06/21/static关键字/';
-          this.page.title = '';
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/03/29/函数指针总结/';
+          this.page.identifier = '2017/03/29/函数指针总结/';
+          this.page.title = '函数指针总结';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://chamo.disqus.com/embed.js';

@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="c位域," />
+  <meta name="keywords" content="寄存器," />
 
 
 
@@ -98,19 +98,25 @@
 
 
 
-<meta name="description" content="前言有些信息在存储时，并不需要占用一个完整的字节， 而只需占几个或一个二进制位。例如在存放一个开关量时，只有0和1 两种状态，用一位二进位即可。为了节省存储空间，并使处理简便，Ｃ语言提供了一种数据结构，称为“位域”或“位段”。所谓“位域”是把一个字节中的二进位划分为几个不同的区域，并说明每个区域的位数。每个域有一个域名，允许在程序中按域名进行操作。 这样就可以把几个不同的对象用一个字节的二进制位域">
+<meta name="description" content="#前言#51单片机内部有一个CPU用来运算、控制，四个并行I/O口，分别是P0、P1、P2、P3，ROM存放程序，RAM存放中间结果，此外包括定时/计数器，串行I/O口，中断系统，以及一个内部的时钟电路。在单片机中有一些独立的存储单元是用来控制这些器件的，被称之为特殊功能寄存器（SFR）。这样的特殊功能寄存器在51单片机中共有21个并且都是可位寻址的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言位域">
-<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/30/C语言位域/index.html">
+<meta property="og:title" content="单片机寄存器总结">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/29/单片机寄存器总结/index.html">
 <meta property="og:site_name" content="茶末园">
-<meta property="og:description" content="前言有些信息在存储时，并不需要占用一个完整的字节， 而只需占几个或一个二进制位。例如在存放一个开关量时，只有0和1 两种状态，用一位二进位即可。为了节省存储空间，并使处理简便，Ｃ语言提供了一种数据结构，称为“位域”或“位段”。所谓“位域”是把一个字节中的二进位划分为几个不同的区域，并说明每个区域的位数。每个域有一个域名，允许在程序中按域名进行操作。 这样就可以把几个不同的对象用一个字节的二进制位域">
-<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-3/41960539-file_1491182809783_8fa1.png">
-<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-3/45740257-file_1491182813000_14b41.png">
-<meta property="og:updated_time" content="2017-06-21T07:24:32.795Z">
+<meta property="og:description" content="#前言#51单片机内部有一个CPU用来运算、控制，四个并行I/O口，分别是P0、P1、P2、P3，ROM存放程序，RAM存放中间结果，此外包括定时/计数器，串行I/O口，中断系统，以及一个内部的时钟电路。在单片机中有一些独立的存储单元是用来控制这些器件的，被称之为特殊功能寄存器（SFR）。这样的特殊功能寄存器在51单片机中共有21个并且都是可位寻址的。">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/81635553-file_1493899850639_63e5.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/30955010-file_1493899865138_eb35.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/17654953-file_1493899867880_18d8.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/7673607-file_1493900122170_1ed2.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/33287705-file_1493900153625_7e58.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/87784798-file_1493900438517_f754.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/78057943-file_1493900767028_96f.jpg">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/63809272-file_1493900927623_5701.png">
+<meta property="og:updated_time" content="2017-06-21T08:41:25.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言位域">
-<meta name="twitter:description" content="前言有些信息在存储时，并不需要占用一个完整的字节， 而只需占几个或一个二进制位。例如在存放一个开关量时，只有0和1 两种状态，用一位二进位即可。为了节省存储空间，并使处理简便，Ｃ语言提供了一种数据结构，称为“位域”或“位段”。所谓“位域”是把一个字节中的二进位划分为几个不同的区域，并说明每个区域的位数。每个域有一个域名，允许在程序中按域名进行操作。 这样就可以把几个不同的对象用一个字节的二进制位域">
-<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-3/41960539-file_1491182809783_8fa1.png">
+<meta name="twitter:title" content="单片机寄存器总结">
+<meta name="twitter:description" content="#前言#51单片机内部有一个CPU用来运算、控制，四个并行I/O口，分别是P0、P1、P2、P3，ROM存放程序，RAM存放中间结果，此外包括定时/计数器，串行I/O口，中断系统，以及一个内部的时钟电路。在单片机中有一些独立的存储单元是用来控制这些器件的，被称之为特殊功能寄存器（SFR）。这样的特殊功能寄存器在51单片机中共有21个并且都是可位寻址的。">
+<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/81635553-file_1493899850639_63e5.png">
 
 
 
@@ -138,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/30/C语言位域/"/>
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/29/单片机寄存器总结/"/>
 
 
 
 
 
-  <title> C语言位域 | 茶末园 </title>
+  <title> 单片机寄存器总结 | 茶末园 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -499,7 +505,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/C语言位域/">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/29/单片机寄存器总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chamo">
@@ -520,7 +526,7 @@
             
             
               
-                C语言位域
+                单片机寄存器总结
               
             
           </h1>
@@ -535,8 +541,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
-                2017-03-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T00:00:00+08:00">
+                2017-03-29
               </time>
             
 
@@ -558,8 +564,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C语言/" itemprop="url" rel="index">
-                    <span itemprop="name">C语言</span>
+                  <a href="/categories/单片机/" itemprop="url" rel="index">
+                    <span itemprop="name">单片机</span>
                   </a>
                 </span>
 
@@ -576,9 +582,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/30/C语言位域/#comments" itemprop="discussionUrl">
+                <a href="/2017/03/29/单片机寄存器总结/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/30/C语言位域/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/03/29/单片机寄存器总结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -604,136 +610,34 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有些信息在存储时，并不需要占用一个完整的字节， 而只需占几个或一个二进制位。例如在存放一个开关量时，只有0和1 两种状态，用一位二进位即可。<br>为了节省存储空间，并使处理简便，Ｃ语言提供了一种数据结构，称为“位域”或“位段”。所谓“位域”是把一个字节中的二进位划分为几个不同的区域，并说明每个区域的位数。每个域有一个域名，允许在程序中按域名进行操作。 这样就可以把几个不同的对象用一个字节的二进制位域来表示。<br><a id="more"></a></p>
-<h1 id="位域的定义和位域变量的说明"><a href="#位域的定义和位域变量的说明" class="headerlink" title="位域的定义和位域变量的说明"></a>位域的定义和位域变量的说明</h1><p>位域定义与结构定义相仿，其形式为：<br>struct 位域结构名<br>{ 位域列表 };<br>其中位域列表的形式为： 类型说明符 位域名：位域长度<br>例如：</p>
-<pre><code>struct bs
-{
-    int a:8;
-    int b:2;
-    int c:6;
-};  
-</code></pre><p>位域变量的说明与结构变量说明的方式相同。 可采用先定义后说明，同时定义说明或者直接说明这三种方式。<br>例如：</p>
-<pre><code>struct bs
-{
-    int a:8;
-    int b:2;
-    int c:6;
-}data;
-</code></pre><p>说明data为bs变量，共占两个字节。其中位域a占8位，位域b占2位，位域c占6位。<br><strong>备注：</strong>  </p>
-<ol>
-<li><p>一个位域必须存储在同一个字节中，不能跨两个字节。如一个字节所剩空间不够存放另一位域时，应从下一单元起存放该位域。也可以有意使某位域从下一单元开始。<br>例如：<br>struct bs<br>{<br> unsigned a:4;<br> unsigned :0;<br> unsigned b:4;<br> unsigned c:4;<br>}<br>在这个位域定义中，a占第一字节的4位，后4位填0表示不使用，b从第二字节开始，占用4位，c占用4位。  </p>
-</li>
-<li><p>由于位域不允许跨两个字节，因此位域的长度不能大于一个字节的长度，也就是说不能超过8位二进位。<br>位域可以无位域名，这时它只用来作填充或调整位置。无名的位域是不能使用的。<br>例如： </p>
-<p> struct k</p>
-<pre><code>{
-    int a:1;
-    int :2;
-    int b:3;
-    int c:2;
-};
-</code></pre></li>
-</ol>
-<h1 id="位域的使用"><a href="#位域的使用" class="headerlink" title="位域的使用"></a>位域的使用</h1><p>位域的使用和结构成员的使用相同，其一般形式为：<br>位域变量名·位域名<br>位域允许用各种格式输出。</p>
-<pre><code>main(){
-    struct bs
-        {
-             unsigned a:1;
-             unsigned b:3;
-             unsigned c:4;
-        } bit,*pbit;
-    bit.a=1;
-    bit.b=7;
-    bit.c=15;
-    printf(&quot;%d,%d,%d\n&quot;,bit.a,bit.b,bit.c);
-    pbit=&amp;bit;
-    pbit-&gt;a=0;
-    pbit-&gt;b&amp;=3;
-    pbit-&gt;c|=1;
-    printf(&quot;%d,%d,%d\n&quot;,pbit-&gt;a,pbit-&gt;b,pbit-&gt;c);
-}
-</code></pre><p>上例程序中定义了位域结构bs，三个位域为a,b,c。说明了bs类型的变量bit和指向bs类型的指针变量pbit。<br>这表示位域也是可以使用指针的。程序的9、10、11三行分别给三个位域赋值。( 赋值不能超过该位域的允许范围)程序第12行以整型量格式输出三个域的内容。第13行把位域变量bit的地址送给指针变量pbit。第14行用指针方式给位域a重新赋值，赋为0。第15行使用了复合的位运算符”&amp;=”，该行相当于：pbit-&gt;b=pbit-&gt;b&amp;3位域b中原有值为7，与3作按位与运算的结果为3(111&amp;011=011,十进制值为3)。同样，程序第16行中使用了复合位运算”|=”  </p>
-<h1 id="位域规则"><a href="#位域规则" class="headerlink" title="位域规则"></a>位域规则</h1><p>C99规定int、unsigned int和bool可以作为位域类型，但编译器几乎都对此作了扩展，允许其它类型类型的存在。<br>使用位域的主要目的是压缩存储，其大致规则为：<br>1) 如果相邻位域字段的类型相同，且其位宽之和小于类型的sizeof大小，则后面的字<br>段将紧邻前一个字段存储，直到不能容纳为止；<br>2) 如果相邻位域字段的类型相同，但其位宽之和大于类型的sizeof大小，则后面的字<br>段将从新的存储单元开始，其偏移量为其类型大小的整数倍；<br>3) 如果相邻的位域字段的类型不同，则各编译器的具体实现有差异，VC6采取不压缩方<br>式，Dev-C++采取压缩方式；<br>4) 如果位域字段之间穿插着非位域字段，则不进行压缩；<br>5) 整个结构体的总大小为最宽基本类型成员大小的整数倍。  </p>
-<h1 id="位域实例"><a href="#位域实例" class="headerlink" title="位域实例"></a>位域实例</h1><pre><code>typedef struct  AA
-{
-       unsigned char b1:5;
-       unsigned char b2:5;
-       unsigned char b3:5;
-       unsigned char b4:5;
-       unsigned char b5:5;
-}AA;
-</code></pre><p>sizeof(AA) = 5;　但实际上只用了25位，即4个字节  </p>
-<pre><code>（1）typedef struct  AA
-{
-       unsigned int b1:5;
-       unsigned int b2:5;
-       unsigned int b3:5;
-       unsigned int b4:5;
-       unsigned int b5:5;
-}AA;
-
-（2）typedef struct  AA
-{
-       unsigned int b1:5;
-       unsigned int b2:5;
-       unsigned int b3:5;
-       unsigned int b4:5;
-       unsigned int b5:5;
-       unsigned int b6:5;
-       unsigned int b7:5;
-}AA;
-</code></pre><p>（1）是5个成员,按第一条规则,共占25位,按第五条规则,即sizeof(AA)=4<br>现把成员加到7个，参考（2）,按第一条规则,共占35位,按第五条规则,即sizeof(AA)=8,</p>
-<pre><code> struct test1
-{
-char a:1;
-char :2;
-long b:3;
-char c:2;
-};
-</code></pre><p>int len = sizeof(test1);<br>对于上述例子，len的值应该是12.<br>  　<br>首先以最长的类型位宽做为偏移量，最长的是long型，占4位，所以不同类型之间应该是4个字节的偏移，即test1应该是4字节的整数倍。<br> 　<br>char a：1；　//用一个字节去存储<br>char ：2；　 //空域。因为与前面的a的类型相同，而两个位域的位宽相加仍然少于8位，所以依然用1个字节表示<br>long b：3； //long类型的位宽是4个字节，与前面的char类型不同，所以b与a之间偏移4个字节，它们之间自动补充3个字节  　<br>char c：2； //因为c与b又不同型，以test1中的最长的long类型的位宽进行偏移，所以虽然char只用1个字节就够了<br>//但依然要占4个字节。<br>总共是12字节。  </p>
-<pre><code>struct s1
-　　{
-　　int i: 8;
-　　int j: 4;
-　　int a: 3;
-　　double b;
-　　};
-　　struct s2
-　　{
-　　int i: 8;
-　　int j: 4;
-　　double b;
-　　int a:3;
-　　};
-　　printf(&quot;sizeof(s1)= %d\n&quot;, sizeof(s1));
-　　printf(&quot;sizeof(s2)= %d\n&quot;, sizeof(s2));
-　　result: 16, 24
-　　第一个struct s1
-　　{
-　　int i: 8;
-　　int j: 4;
-　　int a: 3;
-　　double b;
-　　};
-</code></pre><p>　　理论上是这样的，首先是i在相对0的位置，占8位一个字节，然后，j就在相对一个字节的位置，由于一个位置的字节数是4位的倍数，因此不用对齐，就放 在那里了，然后是a，要在3位的倍数关系的位置上，因此要移一位，在15位的位置上放下，目前总共是18位，折算过来是2字节2位的样子，由于 double是8 字节的，因此要在相对0要是8个字节的位置上放下，因此从18位开始到8个字节之间的位置被忽略，直接放在8字节的位置了，因此，总共是16字节。</p>
-<h1 id="位域应用"><a href="#位域应用" class="headerlink" title="位域应用"></a>位域应用</h1><p>但是当我们编写网络程序的时候，要注意网络字节序和位序都是大端序的，而主机很多都是小端序。所以在网络中的第一个位字段通常放在一个字节的末尾，而在网络中的最后一个字节的位字段，则放在一个字节的前面。 </p>
-<pre><code>struct{
-uint8_t type: 4;  
-uint8_t flag: 1;  //1: control, 0:data  
-uint8_t extension: 1;  
-uint8_t R: 2;  
-} __attribute__((__packed__)) MacCtlHdr_t;    
-</code></pre><p>这个是小端序主机上的定义，对应于下图中的帧格式<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-3/41960539-file_1491182809783_8fa1.png" alt=""> </p>
-<pre><code> struct{
- uint8_t RN_M4: 4;  
-uint8_t cause: 3;  
-uint8_t type: 1;  
-uint8_t RN_M8: 8;  
-uint8_t RN_L8: 8;  
-uint8_t R: 4;  
-uint8_t bsr: 4;  
-}__attribute__((__packed__)) RA_HEADER;   
-</code></pre><p>对应于这样的帧格式：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-3/45740257-file_1491182813000_14b41.png" alt=""><br>本地存储的是小端序，但是机器发送的时候是大端序。对已从每个字节的高位先行发送。所以顺序是第一字节的type，cause，RN4，之后是第二字节RNM8和第三字节RNL8，之后是第三字节的bsr和R。   </p>
-<p>#参考<br><a href="http://blog.sina.com.cn/s/blog_3d8529400100istl.html" target="_blank" rel="external">C语言位域精解</a><br><a href="http://blog.csdn.net/yang_chen_shi_wo/article/details/46793205" target="_blank" rel="external">C语言位域，字节序，帧格式</a></p>
+        <p>#前言#<br>51单片机内部有一个CPU用来运算、控制，<br>四个并行I/O口，分别是P0、P1、P2、P3，<br>ROM存放程序，<br>RAM存放中间结果，<br>此外包括定时/计数器，串行I/O口，中断系统，以及一个内部的时钟电路。<br>在单片机中有一些独立的存储单元是用来控制这些器件的，被称之为特殊功能寄存器（SFR）。这样的特殊功能寄存器在51单片机中共有21个并且都是可位寻址的。<br><a id="more"></a></p>
+<p>#单片机寄存器#<br>21个特殊功能寄存器（52系列是26个）不连续地分布在128个字节的SFR存储空间中，地址空间为80H-FFH，在这片SFR空间中，包含有128个位地址空间，地址也是80H-FFH，但只有83个有效位地址，可对11个特殊功能寄存器的某些位作位寻址操作（其地址能被8整除的都可以位寻址）。<br>列表如下(其中带*号的为52系列所增加的特殊功能寄存器）：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/81635553-file_1493899850639_63e5.png" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/30955010-file_1493899865138_eb35.png" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/17654953-file_1493899867880_18d8.png" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/7673607-file_1493900122170_1ed2.png" alt=""></p>
+<p>##B寄存器##<br>在做乘、除法时放乘数或除数，不做乘除法时，可以随便使用。</p>
+<p>##ACC累加器##<br>自身带有全零标志Z，若A＝0则Z＝1；若A≠0则z＝0。该标志常用作程序分枝转移的判断条件。  </p>
+<p>##PSW程序状态字##<br>里面放了CPU工作时的很多状态，可以了解CPU的当前状态，并作出相应的处理<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/33287705-file_1493900153625_7e58.png" alt=""><br><strong>CY进位标志：</strong><br>8051中的运算器是一种8位的运算器，8位运算器只能表示到0-255，如果做加法的话，两数相加可能会超过255，这样最高位就会丢失，造成运算的错误。最高位就进到CY中来。有进、借位，CY＝1；无进、借位，CY＝0  </p>
+<p><strong>AC辅助进、借位(高半字节与低半字节间的进、借位)：</strong>  </p>
+<p>　　例：57H+3AH（01010111+00111010）  </p>
+<p><strong>F0用户标志位：</strong><br>由用户（编程人员）决定什么时候用，什么时候不用。  </p>
+<p><strong>RS1、RS0工作寄存器组选择位：</strong><br>通过修改PSW中的RS1、RS0两位的状态，就能任选一个工作寄存器区。这个特点提高了MCS-51现场保护和现场恢复的速度。对于提高CPU的工作效率和响应中断的速度是很有利的。若在一个实际的应用系统中，不需要四组工作寄存器，那么这个区域中多余单元可以作为一般的数据缓冲器使用。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/87784798-file_1493900438517_f754.png" alt="">  </p>
+<p><strong>0V溢出标志位：</strong><br>　　运算结果按补码运算理解。有溢出，OV=1；无溢出，OV＝0。 </p>
+<p><strong>P奇偶校验位：</strong><br>它用来表示运算结果中二进制数位“1”的个数的奇偶性。若为奇数，则P=1，否则为0。运算结果有奇数个1，P＝1；运算结果有偶数个1，P＝0。<br>　　例：某运算结果是78H（01111000），显然1的个数为偶数，所以P=0。</p>
+<p>##IP中断优先级控制寄存器##<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/78057943-file_1493900767028_96f.jpg" alt=""><br>可按位寻址，地址位B8H  </p>
+<ul>
+<li>（IP.7）：保留  </li>
+<li>（IP.6）：保留<br>PT2（IP.5）：定时2中断优先（8052用）<br>PS （IP.4）：串行口中断优先<br>PT1（IP.3）：定时1中断优先<br>PX1（IP.2）：外中断INT1中断优先<br>PT0（IP.1）：定时器0中断优先<br>PX0（IP.0）：外部中断INT0的中断优先<br>##P0,P1,P2,P3寄存器##<br>四个并行输入/输出口（I/O）的寄存器，对应着管脚的输出。<br>##IE中断充许寄存器##<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-5-4/63809272-file_1493900927623_5701.png" alt=""><br>可按位寻址，地址：A8H<br>EA （IE.7）：EA=0时，所有中断禁止（即不产生中断）；EA=1时，各中断的产生由个别的允许位决定  </li>
+<li>（IE.6）：保留<br>ET2（IE.5）：定时2溢出中断充许（8052用）<br>ES （IE.4）：串行口中断充许（ES=1充许，ES=0禁止）<br>ET1（IE.3）：定时1中断充许<br>EX1（IE.2）：外中断INT1中断充许<br>ET0（IE.1）：定时器0中断充许<br>EX0（IE.0）：外部中断INT0的中断允许  </li>
+</ul>
+<p>##TMOD定时器方式控制寄存器##<br>不按位寻址，地址89H<br><strong>GATE</strong> ：定时操作开关控制位，当GATE=1时，INT0或INT1引脚为高电平，同时TCON中的TR0或TR1控制位为1时，计时/计数器0或1才开始工作。若GATE=0，则只要将TR0或TR1控制位设为1，计时/计数器0或1就开始工作。<br><strong>C/T</strong> ：定时器或计数器功能的选择位。C/T=1为计数器，通过外部引脚T0或T1输入计数脉冲。C/T=0时为定时器，由内部系统时钟提供计时工作脉冲。<br><strong>M1 、M0：T0、T1工作模式选择位</strong> </p>
+<p>##TCON定时器控制寄存器##<br>可按位寻址，地址位88H<br>TF1：定时器T1溢出标志，可由程序查询和清零，TF1也是中断请求源，当CPU响应T1中断时由硬件清零。<br>TF0：定时器T0溢出标志，可由程序查询和清零，TF0也是中断请求源，当CPU响应T0中断时由硬件清零。<br>TR1：T1充许计数控制位，为1时充许T1计数。<br>TR0：T0充许计数控制位，为1时充许T0计数。<br>IE1：外部中断1请示源（INT1，P3.3）标志。IE1＝1，外部中断1正在向CPU请求中断，当CPU响应该中断时由硬件清“0”IE1（边沿触发方式）。<br>IT1：外部中断源1触发方式控制位。IT1＝0，外部中断1程控为电平触发方式，当INT1（P3.3）输入低电平时，置位IE1。<br>IE0：外部中断0请示源（INT0，P3.2）标志。IE0＝1，外部中断1正在向CPU请求中断，当CPU响应该中断时由硬件清“0”IE0（边沿触发方式）。<br>IT0：外部中断源0触发方式控制位。IT0＝0，外部中断1程控为电平触发方式，当INT0（P3.2）输入低电平时，置位IE0。  </p>
+<p>##SCON—-串行通信控制寄存器##<br>可寻址的专用寄存器，用于串行数据的通信控制，单元地址是98H<br>(1)SM0、SM1：串行口工作方式控制位。<br>　　SM0，SM1    工作方式<br>　　　　　00      方式0－波特率由振荡器频率所定：振荡器频率/12<br>　　　　　01      方式1－波特率由定时器T1或T2的溢出率和SMOD所定：2SMOD ×(T1溢出率)/32<br>　　　　　10      方式2－波特率由振荡器频率和SMOD所定：2SMOD ×振荡器频率/64<br>　　　　　11      方式3－波特率由定时器T1或T2的溢出率和SMOD所定：2SMOD ×(T1溢出率)/32  </p>
+<p>(2)SM2：多机通信控制位。&lt; br&gt;    多机通信是工作于方式2和方式3，SM2位主要用于方式2和方式3。接收状态，当串行口工作于方式2或3，以及SM2=1时，只有当接收到第9位数据（RB8）为1时，才把接收到的前8位数据送入SBUF，且置位RI发出中断申请，否则会将接受到的数据放弃。当SM2=0时，就不管第位数据是0还是1，都难得数据送入SBUF，并发出中断申请。<br>工作于方式0时，SM2必须为0。 </p>
+<p>(3)REN：允许接收位。&lt; br&gt;    REN用于控制数据接收的允许和禁止，REN=1时，允许接收，REN=0时，禁止接收。  </p>
+<p>(4)TB8：发送接收数据位8。&lt; br&gt;    在方式2和方式3中，TB8是要发送的——即第9位数据位。在多机通信中同样亦要传输这一位，并且它代表传输的地址还是数据，TB8=0为数据，TB8=1时为地址。  </p>
+<p>(5)RB8：接收数据位8。<br>在方式2和方式3中，RB8存放接收到的第9位数据，用以识别接收到的数据特征。 </p>
+<p>(6)TI：发送中断标志位。<br>可寻址标志位。方式0时，发送完第8位数据后，由硬件置位，其它方式下，在发送或停止位之前由硬件置位，因此，TI=1表示帧发送结束，TI可由软件清“0”。  </p>
+<p>(7)RI：接收中断标志位。<br>可寻址标志位。接收完第8位数据后，该位由硬件置位，在其他工作方式下，该位由硬件置位，RI=1表示帧接收完成。  </p>
+<p>##PCON电源管理寄存器##<br>PCON主要是为CHMOS型单片机的电源控制而设置的专用寄存器，单元地址是87H<br>在CHMOS型单片机中，除SMOD位外，其他位均为虚设的，SMOD是串行口波特率倍增位，当SMOD=1时，串行口波特率加倍。系统复位默认为SMOD=0。   </p>
+<p>#文章来源#<br><a href="http://blog.sina.com.cn/s/blog_a05b986d0101545c.html" target="_blank" rel="external">单片机寄存器</a></p>
 
       
     </div>
@@ -779,7 +683,7 @@ uint8_t bsr: 4;
       
         <div class="post-tags">
           
-            <a href="/tags/c位域/" rel="tag"># c位域</a>
+            <a href="/tags/寄存器/" rel="tag"># 寄存器</a>
           
         </div>
       
@@ -792,8 +696,8 @@ uint8_t bsr: 4;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/30/linux下ftp配置/" rel="next" title="linux下FTP配置">
-                <i class="fa fa-chevron-left"></i> linux下FTP配置
+              <a href="/2017/03/29/函数指针总结/" rel="next" title="函数指针总结">
+                <i class="fa fa-chevron-left"></i> 函数指针总结
               </a>
             
           </div>
@@ -802,8 +706,8 @@ uint8_t bsr: 4;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/30/linu命令学习-文件查找之find-exec命令/" rel="prev" title="linux命令学习之文件查找命令——find-exec命令">
-                linux命令学习之文件查找命令——find-exec命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/29/static关键字/" rel="prev" title="C常见关键字">
+                C常见关键字 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -858,17 +762,8 @@ uint8_t bsr: 4;
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/avatar/avatar.png"
@@ -903,7 +798,7 @@ uint8_t bsr: 4;
           
 			<div class="site-state-item site-state-tags">
 				<a href="/tags">
-					<span class="site-state-item-count">16</span>
+					<span class="site-state-item-count">18</span>
 					<span class="site-state-item-name">标签</span>
 				</a>
 			</div>
@@ -945,22 +840,6 @@ uint8_t bsr: 4;
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位域的定义和位域变量的说明"><span class="nav-number">2.</span> <span class="nav-text">位域的定义和位域变量的说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位域的使用"><span class="nav-number">3.</span> <span class="nav-text">位域的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位域规则"><span class="nav-number">4.</span> <span class="nav-text">位域规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位域实例"><span class="nav-number">5.</span> <span class="nav-text">位域实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位域应用"><span class="nav-number">6.</span> <span class="nav-text">位域应用</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -1099,9 +978,9 @@ uint8_t bsr: 4;
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://BlueSky-chamo.github.io/2017/03/30/C语言位域/';
-          this.page.identifier = '2017/03/30/C语言位域/';
-          this.page.title = 'C语言位域';
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/03/29/单片机寄存器总结/';
+          this.page.identifier = '2017/03/29/单片机寄存器总结/';
+          this.page.title = '单片机寄存器总结';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://chamo.disqus.com/embed.js';
