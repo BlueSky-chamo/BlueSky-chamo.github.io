@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo" />
+  <meta name="keywords" content="C排序," />
 
 
 
@@ -98,25 +98,19 @@
 
 
 
-<meta name="description" content="title: 排序算法之快速排序date: 2017-03-30categories: C语言tags: [C排序]  
-
-快速排序快速排序是对冒泡排序的改进，主要思想是分治与递归。分治即通过一次排序将序列分成两部分，左边的部分全部小于基准值，右边的部分大于基准值递归即对分治区间继续采取快速排序">
+<meta name="description" content="插入排序基本思想：通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应的位置并插入。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="茶末园">
-<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/06/21/排序算法之快速排序/index.html">
+<meta property="og:title" content="排序算法之插入排序">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/03/29/排序算法之插入排序/index.html">
 <meta property="og:site_name" content="茶末园">
-<meta property="og:description" content="title: 排序算法之快速排序date: 2017-03-30categories: C语言tags: [C排序]  
-
-快速排序快速排序是对冒泡排序的改进，主要思想是分治与递归。分治即通过一次排序将序列分成两部分，左边的部分全部小于基准值，右边的部分大于基准值递归即对分治区间继续采取快速排序">
-<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-20/84340123-file_1492651387931_8d12.png">
-<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-20/48173040-file_1492651989449_1433f.jpg">
-<meta property="og:updated_time" content="2017-06-21T08:31:14.612Z">
+<meta property="og:description" content="插入排序基本思想：通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应的位置并插入。">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-18/56688248-file_1492479978213_1207e.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-18/46492612-file_1492482886672_15a82.jpg">
+<meta property="og:updated_time" content="2017-06-21T08:36:35.524Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="茶末园">
-<meta name="twitter:description" content="title: 排序算法之快速排序date: 2017-03-30categories: C语言tags: [C排序]  
-
-快速排序快速排序是对冒泡排序的改进，主要思想是分治与递归。分治即通过一次排序将序列分成两部分，左边的部分全部小于基准值，右边的部分大于基准值递归即对分治区间继续采取快速排序">
-<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-20/84340123-file_1492651387931_8d12.png">
+<meta name="twitter:title" content="排序算法之插入排序">
+<meta name="twitter:description" content="插入排序基本思想：通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应的位置并插入。">
+<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-18/56688248-file_1492479978213_1207e.png">
 
 
 
@@ -144,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/06/21/排序算法之快速排序/"/>
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/03/29/排序算法之插入排序/"/>
 
 
 
 
 
-  <title>  | 茶末园 </title>
+  <title> 排序算法之插入排序 | 茶末园 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -505,7 +499,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/06/21/排序算法之快速排序/">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/29/排序算法之插入排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chamo">
@@ -526,7 +520,7 @@
             
             
               
-                
+                排序算法之插入排序
               
             
           </h1>
@@ -541,8 +535,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T15:04:57+08:00">
-                2017-06-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T00:00:00+08:00">
+                2017-03-29
               </time>
             
 
@@ -552,6 +546,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -560,9 +576,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/21/排序算法之快速排序/#comments" itemprop="discussionUrl">
+                <a href="/2017/03/29/排序算法之插入排序/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/21/排序算法之快速排序/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/03/29/排序算法之插入排序/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -588,260 +604,116 @@
       
 
       
-        <hr>
-<p>title: 排序算法之快速排序<br>date: 2017-03-30<br>categories: C语言<br>tags: [C排序]  </p>
-<hr>
-<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>快速排序是对冒泡排序的改进，主要思想是分治与递归。<br>分治即通过一次排序将序列分成两部分，左边的部分全部小于基准值，右边的部分大于基准值<br>递归即对分治区间继续采取快速排序<br><a id="more"></a><br>主要步骤：  </p>
-<p>1．先从数列中取出一个数作为基准数。</p>
-<p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
-<p>3．再对左右区间递归排序，直到各区间只有一个数。</p>
-<h1 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h1><p>假设要排序的数组是A[0]……A[N-1]，首先任意选取一个数据（通常选用第一个数据）作为关键数据(key)，然后将所有比它小的数都放到它前面，所有比它大的数都放到它后面，这个过程称为一趟快速排序。一趟快速排序的算法是：<br>1）定义两个变量low和high，将low、high分别设置为要进行排序的序列的起始元素和最后一个元素的下标。第一次，low和high的取值分别为0和n-1，接下来的每次取值由划分得到的序列起始元素和最后一个元素的下标来决定。 </p>
-<p>2）定义一个变量key，接下来以key的取值为基准将数组A划分为左右两个部分，通 常，key值为要进行排序序列的第一个元素值。第一次的取值为A[0]，以后毎次取值由要划 分序列的起始元素决定。  </p>
-<p>3）从high所指向的数组元素开始向左扫描，扫描的同时将下标为high的数组元素依次与划分基准值key进行比较操作，直到high不大于low或找到第一个小于基准值key的数组元素，然后将该值赋值给low所指向的数组元素，同时将low右移一个位置。   </p>
-<p>4）如果low依然小于high，那么由low所指向的数组元素开始向右扫描，扫描的同时将下标为low的数组元素值依次与划分的基准值key进行比较操作，直到low不小于high或找到第一个大于基准值key的数组元素，然后将该值赋给high所指向的数组元素，同时将high左移一个位置。  </p>
-<p>5）重复步骤(3) (4)，直到low的植不小于high为止，这时成功划分后得到的左右两部分分别为A[low……pos-1]和A[pos+1……high]，其中，pos下标所对应的数组元素的值就是进行划分的基准值key，所以在划分结束时还要将下标为pos的数组元素赋值 为 key。</p>
-<p><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-20/84340123-file_1492651387931_8d12.png" alt=""></p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#define N 6
-int partition(int arr[], int low, int high){
-    int key;
-    key = arr[low];//关键数据
-    //low==high停止
-    while(low&lt;high){
-        //从后向前查找比关键数据key小的数据，否则high减1继续查找
-        while(low &lt;high &amp;&amp; arr[high]&gt;= key )
-            high--;
-        if(low&lt;high)
-            //若找到第一个比关键数据key小的数据，进行交换，同时low+1开始从前向后查找比key大的数据
-            arr[low++] = arr[high];
-        //从前向后查找比关键数据key大的数据，否则low加1继续查找
-        while( low&lt;high &amp;&amp; arr[low]&lt;=key )
-            low++;
-        if(low&lt;high)
-            //若找到第一个比关键数据key大的数据，继续交换，同时high-1继续从后向前查找，直到循环结束
-            arr[high--] = arr[low];
-    }
-    //low==high时循环结束，此时将关键数据放在此时位置，实现分治
-    arr[low] = key;
-    return low;
-}
-void quick_sort(int arr[], int start, int end){
-    int pos;
-    if (start&lt;end){
-        pos = partition(arr, start, end);
-        quick_sort(arr,start,pos-1);
-        quick_sort(arr,pos+1,end);
-    }
-    return;
-}
-int main(void){
-    int i;
-    int arr[N]={32,12,7, 78, 23,45};
-    printf(&quot;排序前 \n&quot;);
-    for(i=0;i&lt;N;i++)
-        printf(&quot;%d\t&quot;,arr[i]);
-    quick_sort(arr,0,N-1);
-    printf(&quot;\n 排序后 \n&quot;);
-    for(i=0; i&lt;N; i++)
-        printf(&quot;%d\t&quot;, arr[i]);
-    printf (&quot;\n&quot;);
-    system(&quot;pause&quot;);
-    return 0;
-}
-</code></pre><h1 id="算法实现2"><a href="#算法实现2" class="headerlink" title="算法实现2"></a>算法实现2</h1><pre><code>#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-#include &lt;stdlib.h&gt;
-#define MAX 10
-#define SWAP(x, y) {int t=x; x=y; y=t;}
-
-void quickSort(int *a, int left, int right);
-
+        <h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>基本思想：通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应的位置并插入。  </p>
+<a id="more"></a>
+<p>插入排序有N-1趟排序组成，对于P=1趟到p=N-1趟排序，插入排序保证从位置0到位置P的元素为已排序状态。每次遍历的任务是：通过扫描前面已排序的子列表，将位置P处的元素定位到从0到P的子列表之内的正确的位置上。<br>如下图所示，P=1时，位置1上的元素3与子列表4进行比较；P=2时，位置2上的元素1与子列表[3,4]比较；P=3时，位置3上的元素2与子列表[1,3,4]比较。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-18/56688248-file_1492479978213_1207e.png" alt=""></p>
+<h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><p>假定n是数组的长度，第一个元素被放置在正确的位置上，这样仅需从1-n-1范围内对剩余元素进行排序。对于每次遍历，从0-i-1范围内的元素已经被排好序，</p>
+<p>每次遍历的任务是：通过扫描前面已排序的子列表，将位置i处的元素定位到从0到i的子列表之内的正确的位置上。</p>
+<p>将arr[i]复制为一个名为key的临时元素。</p>
+<p>采用向下扫描列表方式（从后向前方式），key依次与子列表arr[i-1]、arr[i-2]的大小比较</p>
+<p>当key小于子列表的某一项时，a[j-1]&gt;key，该项向右移动一个位置，供key使用。a[j] = a[j-1]<br>当key大于子列表某一项时，a[j-1]&lt;key,该项后一位即为key的位置。a[j] = key; </p>
+<p>与选择排序不同的是，插入排序将数据向右滑动，并且不会执行交换。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code>#include&lt;stdio.h&gt;
+#define MAX 8
 int main(void)
 {
-    int a[MAX] = {0};
-    int i;
-
-    printf(&quot;排序前:\n&quot;);
-    for (i=0; i&lt;MAX; i++)
+    int a[MAX]={8,7,6,5,4,3,2,1};
+    void insert(int*a,int n);//函数声明
+    int i=0;
+    insert(a,MAX);
+    printf(&quot;after:\n&quot;);
+    for(i=0;i&lt;8;i++)
     {
-        a[i] = rand()%100;
-        printf(&quot;%d &quot;, a[i]);
-    }
-
-    quickSort(a, 0, MAX-1);
-
-    printf(&quot;\n排序后:\n&quot;);
-    for (i=0; i&lt;MAX; i++)
-    {
-        printf(&quot;%d &quot;, a[i]);
+        printf(&quot;%d &quot;,a[i]);
     }
     printf(&quot;\n&quot;);
-
     return 0;
 }
 
-void quickSort(int *a, int left, int right)
+void insert(int *a,int n)
 {
-    if (left &lt; right)
+    int i,j,key;
+    for(i=1;i&lt;n;i++)//控制需要插入的元素
     {
-        int i = left;
-        int j = right+1;
-
-        while (1)
+        key=a[i]; //key为要插入的元素
+        for(j=i;j&gt;0 &amp;&amp; a[j-1]&gt;key;j--) //查找要插入的位置,循环结束,则找到插入位置
         {
-            //从前向后查找第一个比关键数据a[left]大的数据，否则i+1继续查找
-            while (i+1&lt;MAX &amp;&amp; a[++i]&lt;a[left]);
-            //从后向前查找第一个比关键数据a[left]小的数据，否则j-1继续查找
-            while (j-1&gt;-1 &amp;&amp; a[--j]&gt;a[left]);
-            //知道i==j跳出循环，第一次分治结束
-            if (i &gt;= j)
-            {
-                break;
-            }
-            //将两个数据进行交换，即小的数据到前面去，大数据到后面去
-            SWAP(a[i], a[j]);
+            a[j] = a[j-1]; //移动元素的位置.供要插入元素使用
         }
-        //i==j时吗，将关键数据a[left]放在中间位置,实现分治
-        SWAP(a[left], a[j]);
-        //分治区间递归排序
-        quickSort(a, left, j-1);
-        quickSort(a, j+1, right);
+        a[j] = key; //插入需要插入的元素
+
     }
 }
-</code></pre><h2 id="算法优化"><a href="#算法优化" class="headerlink" title="算法优化"></a>算法优化</h2><p>将基准值设定为序列中间的数，从中间向两边寻找</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-#include &lt;stdlib.h&gt;
-#define MAX 10
-#define SWAP(x, y) {int t=x; x=y; y=t;}
+</code></pre><h2 id="效率分析"><a href="#效率分析" class="headerlink" title="效率分析"></a>效率分析</h2><p>空间复杂度O(1)<br>时间复杂度O(n2)：嵌套循环的每一个都花费N次迭代<br>最差情况：反序，需要移动n*(n-1)/2个元素<br>最好情况：正序，不需要移动元素  </p>
+<p>数组在已排序或者是“近似排序”时，插入排序效率的最好情况运行时间为O(n)<br>（因为内层的for检测总是判定不成立的）</p>
+<p>插入排序最坏情况运行时间和平均情况运行时间都为O(n2)。</p>
+<p>在列表已被排序时，插入排序是线性算法O(n)。</p>
+<p>在列表“近似排序”时，插入排序仍然是线性算法。</p>
+<p>在列表的许多元素已位于正确的位置上时，就会出现“近似排序”的条件。</p>
+<p>通过使用O(nlog2n)效率的算法（如快速排序）对数组进行部分排序，</p>
+<p>然后再进行选择排序，某些高级的排序算法就是这样实现的。</p>
+<h2 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h2><p><strong>环境：VC6.0</strong><br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-18/46492612-file_1492482886672_15a82.jpg" alt=""></p>
+<h1 id="二分法插入排序"><a href="#二分法插入排序" class="headerlink" title="二分法插入排序"></a>二分法插入排序</h1><p>插入排序中，总是先寻找插入位置，然后在实行挪动和插入过程；寻找插入位置采用顺序查找的方式（从前向后或者从后向前），既然需要插入的数组已经是有序的，那么可以采用二分查找方法来寻找插入位置，提高算法效率，但算法的时间复杂度仍为O(n2)。  </p>
+<p>二分法插入排序过程：<br>1.首先，原数组是一个有序序列，iBegin=0 iEnd=count-1。<br>2.将要插入的数与数组中间位置的元素进行比较，<br>如果比中间元素大，则iBegin=mid+1作为下一次判断的数组开头。<br>如果比中间元素小，则iEnd=mid-1作为下一次判断的数组结尾。<br>3.直到iBegin&gt;iEnd结束，iBegin就是新元素插入的位置。<br>4.将数组中从iBegin开始的元素全部向后移动一位，之后在iBegin位置插入新元素。   </p>
+<pre><code>#include&lt;stdio.h&gt;
+#define MAX 8
+//查找数值iData在长度为iLen的pDataArray数组中的插入位置  
+int FindInsertIndex(int *pDataArray, int iLen, int iData)  
+{  
+    int iBegin = 0;  
+    int iEnd = iLen - 1;  
+    int index = -1;    //记录插入位置  
+    while (iBegin &lt;= iEnd)  
+    {  
+        index = (iBegin + iEnd) / 2;  
+        if (pDataArray[index] &gt; iData)  
+            iEnd = index - 1;  
+        else  
+            iBegin = index + 1;   
+    }  
+    if (pDataArray[index] &lt;= iData)  
+        index++;  
+    return index;  
+}  
+    /*函数名称：BinaryInsertSort 
+    *参数说明：pDataArray 无序数组； 
+    *          iDataNum为无序数据个数 
+    *说明：    二分查找插入排序 
+    *********************************************************/  
+void BinaryInsertSort(int* pDataArray, int iDataNum)  
+{  
+    int i;
+    for (i = 1; i &lt; iDataNum; i++)    //从第2个数据开始插入  
+    {  
+        int index = FindInsertIndex(pDataArray, i, pDataArray[i]);    //二分寻找插入的位置  
 
-void quickSort(int *a, int left, int right);
-
+        if (i != index)    //插入位置不为i，才挪动、插入  
+        {  
+            int j = i;  
+            int temp = pDataArray[i];  
+            while (j &gt; index)    //挪动位置  
+            {  
+                pDataArray[j] = pDataArray[j-1];  
+                j--;  
+            }  
+            pDataArray[j] = temp;    //插入  
+        }  
+    }  
+}  
 int main(void)
 {
-    int a[MAX] = {0};
-    int i;
-
-    printf(&quot;排序前:\n&quot;);
-    for (i=0; i&lt;MAX; i++)
+    int a[MAX]={8,7,6,5,4,3,2,1};
+    int i=0;
+    BinaryInsertSort(a,MAX);
+    printf(&quot;after:\n&quot;);
+    for(i=0;i&lt;8;i++)
     {
-        a[i] = rand()%100;
-        printf(&quot;%d &quot;, a[i]);
-    }
-
-    quickSort(a, 0, MAX-1);
-
-    printf(&quot;\n排序后:\n&quot;);
-    for (i=0; i&lt;MAX; i++)
-    {
-        printf(&quot;%d &quot;, a[i]);
+        printf(&quot;%d &quot;,a[i]);
     }
     printf(&quot;\n&quot;);
-
     return 0;
 }
-
-void quickSort(int *a, int left, int right)
-{
-    if (left &lt; right)
-    {
-        //中间元素
-        int t = a[(left+right)/2];
-        int i = left - 1;
-        int j = right + 1;
-
-        while (1)
-        {
-            //从前向后查找比中间元素大的数据
-            while (a[++i] &lt; t);
-            //从后向前查找比中间元素小的数据
-            while (a[--j] &gt; t);
-
-            if (i &gt;= j)
-            {
-                break;
-            }
-            SWAP(a[i], a[j]);
-
-        }
-
-        quickSort(a, left, i-1);
-        quickSort(a, j+1, right);
-    }
-}
-</code></pre><h2 id="算法优化2"><a href="#算法优化2" class="headerlink" title="算法优化2"></a>算法优化2</h2><p>有指针left和right，对于right，如果其所指的元素的值大于或者等于基准值，那么指针往左移一位，如果小于基准值，则和基准值交换；同理，对于left，如果left所指元素的值小于或者等于基准值，那么指针往右移一位，如果大于基准值，则和基准值交换。从right开始执行，重复这两步骤，直至left == right为止。</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-#include &lt;stdlib.h&gt;
-#define MAX 10
-#define SWAP(x, y) {int t=x; x=y; y=t;}
-
-void quickSort(int *a, int left, int right);
-int Partition(int *a, int left, int right);
-
-int main(void)
-{
-    int a[MAX] = {0};
-    int i;
-
-    printf(&quot;排序前:\n&quot;);
-    for (i=0; i&lt;MAX; i++)
-    {
-        a[i] = rand()%100;
-        printf(&quot;%d &quot;, a[i]);
-    }
-
-    quickSort(a, 0, MAX-1);
-
-    printf(&quot;\n排序后:\n&quot;);
-    for (i=0; i&lt;MAX; i++)
-    {
-        printf(&quot;%d &quot;, a[i]);
-    }
-    printf(&quot;\n&quot;);
-
-    return 0;
-}
-
-int Partition(int *a, int left, int right)
-{
-    int pivot = a[left];
-    while (left &lt; right)
-    {
-        while (left &lt; right &amp;&amp; a[right] &gt;= pivot)
-        {
-            --right;
-        }
-        a[left] = a[right];
-        while (left &lt; right &amp;&amp; a[left] &lt;= pivot)
-        {
-            ++left;
-        }
-        a[right] = a[left];
-    }
-
-    return left;
-}
-
-void quickSort(int *a, int left, int right)
-{
-    int pivot;
-
-    if (left &lt; right)
-    {
-        pivot = Partition(a, left, right);
-        quickSort(a, left, pivot-1);
-        quickSort(a, pivot+1, right);
-    }
-
-}
-</code></pre><h1 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h1><p>平均时间复杂度：O(nlog2n)</p>
-<p>空间复杂度：O(n) </p>
-<p>稳定性：不稳定</p>
-<h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><p><strong>环境：vc6.0</strong><br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-20/48173040-file_1492651989449_1433f.jpg" alt=""></p>
-<h1 id="参考学习"><a href="#参考学习" class="headerlink" title="参考学习"></a>参考学习</h1><p><a href="http://www.cnblogs.com/RootJie/archive/2012/02/13/2349649.html" target="_blank" rel="external">几种快速排序的实现</a><br><a href="http://c.biancheng.net/cpp/html/2741.html" target="_blank" rel="external">c语言快速排序及代码</a></p>
-
+</code></pre>
       
     </div>
 
@@ -884,6 +756,12 @@ void quickSort(int *a, int left, int right)
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/C排序/" rel="tag"># C排序</a>
+          
+        </div>
+      
 
       
         
@@ -893,8 +771,8 @@ void quickSort(int *a, int left, int right)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/21/排序算法之插入排序/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/03/29/排序算法之选择排序/" rel="next" title="排序算法之选择排序">
+                <i class="fa fa-chevron-left"></i> 排序算法之选择排序
               </a>
             
           </div>
@@ -903,8 +781,8 @@ void quickSort(int *a, int left, int right)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/21/排序算法之冒泡排序/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/29/排序算法之快速排序/" rel="prev" title="排序算法之快速排序">
+                排序算法之快速排序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -995,7 +873,7 @@ void quickSort(int *a, int left, int right)
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1004,7 +882,7 @@ void quickSort(int *a, int left, int right)
           
 			<div class="site-state-item site-state-tags">
 				<a href="/tags">
-					<span class="site-state-item-count">14</span>
+					<span class="site-state-item-count">16</span>
 					<span class="site-state-item-name">标签</span>
 				</a>
 			</div>
@@ -1056,7 +934,7 @@ void quickSort(int *a, int left, int right)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速排序"><span class="nav-number">1.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法描述"><span class="nav-number">2.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现2"><span class="nav-number">4.</span> <span class="nav-text">算法实现2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法优化"><span class="nav-number">4.1.</span> <span class="nav-text">算法优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法优化2"><span class="nav-number">4.2.</span> <span class="nav-text">算法优化2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能分析"><span class="nav-number">5.</span> <span class="nav-text">性能分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验验证"><span class="nav-number">6.</span> <span class="nav-text">实验验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考学习"><span class="nav-number">7.</span> <span class="nav-text">参考学习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#插入排序"><span class="nav-number">1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法描述"><span class="nav-number">1.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">1.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效率分析"><span class="nav-number">1.3.</span> <span class="nav-text">效率分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验验证"><span class="nav-number">1.4.</span> <span class="nav-text">实验验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二分法插入排序"><span class="nav-number">2.</span> <span class="nav-text">二分法插入排序</span></a></li></ol></div>
             
 
           </div>
@@ -1200,9 +1078,9 @@ void quickSort(int *a, int left, int right)
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://BlueSky-chamo.github.io/2017/06/21/排序算法之快速排序/';
-          this.page.identifier = '2017/06/21/排序算法之快速排序/';
-          this.page.title = '';
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/03/29/排序算法之插入排序/';
+          this.page.identifier = '2017/03/29/排序算法之插入排序/';
+          this.page.title = '排序算法之插入排序';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://chamo.disqus.com/embed.js';
