@@ -1,0 +1,1776 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="title: 数据结构之链表date: 2017-03-30categories: C语言
+tags: [C链表]前言链表由多个结点离散分配，彼此通过指针相连，每个结点只有一个前驱结点和后继结点。首节点无前驱结点，尾结点无后继结点的一种存储结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="茶末园">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/06/21/数据结构之单链表/index.html">
+<meta property="og:site_name" content="茶末园">
+<meta property="og:description" content="title: 数据结构之链表date: 2017-03-30categories: C语言
+tags: [C链表]前言链表由多个结点离散分配，彼此通过指针相连，每个结点只有一个前驱结点和后继结点。首节点无前驱结点，尾结点无后继结点的一种存储结构">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-13/54746715-file_1492049893870_6b7f.png">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-13/57040703-file_1492091453045_9a8e.jpg">
+<meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-17/7006612-file_1492436284752_164d6.jpg">
+<meta property="og:updated_time" content="2017-06-21T07:08:56.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="茶末园">
+<meta name="twitter:description" content="title: 数据结构之链表date: 2017-03-30categories: C语言
+tags: [C链表]前言链表由多个结点离散分配，彼此通过指针相连，每个结点只有一个前驱结点和后继结点。首节点无前驱结点，尾结点无后继结点的一种存储结构">
+<meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-13/54746715-file_1492049893870_6b7f.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/06/21/数据结构之单链表/"/>
+
+
+
+
+
+  <title>  | 茶末园 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">茶末园</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/06/21/数据结构之单链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="茶末园">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T15:09:05+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/21/数据结构之单链表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/21/数据结构之单链表/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>title: 数据结构之链表<br>date: 2017-03-30<br>categories: C语言</p>
+<h2 id="tags-C链表"><a href="#tags-C链表" class="headerlink" title="tags: [C链表]"></a>tags: [C链表]</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>链表由多个结点离散分配，彼此通过指针相连，每个结点只有一个前驱结点和后继结点。首节点无前驱结点，尾结点无后继结点的一种存储结构<br><a id="more"></a></p>
+<h1 id="链表结构"><a href="#链表结构" class="headerlink" title="链表结构"></a>链表结构</h1><p><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-13/54746715-file_1492049893870_6b7f.png" alt=""><br>头结点：链表的第一个有效结点前面的结点，头结点并不存放有效数据，也就是数据域为空，加头结点的主要目的是为了方便链表的操作。<br>首节点：链表的第一个有效结点，结点包含数据域和指针域。<br>尾结点：尾结点的指针域为空。<br>头指针：指向头结点的指针变量，它存放了头结点的地址(头指针存放的是头结点的地址)。    </p>
+<h1 id="定义链表结点"><a href="#定义链表结点" class="headerlink" title="定义链表结点"></a>定义链表结点</h1><pre><code>/* 定义单链表结点类型 */
+typedef struct Node{    
+    int element;//数据域
+    struct Node *next;//指针域
+}Node;
+</code></pre><h1 id="单链表初始化"><a href="#单链表初始化" class="headerlink" title="单链表初始化"></a>单链表初始化</h1><h2 id="无头结点链表"><a href="#无头结点链表" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>/* 初始化线性表，即置单链表的表头指针为空 */
+void initList(Node **pNode)
+{
+    *pNode=(Node *)malloc( sizeof(Node));
+    *pNode = NULL;
+    printf(&quot;initList函数执行，初始化成功\n&quot;);
+}
+</code></pre><h2 id="带头结点链表"><a href="#带头结点链表" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>/* 初始化线性表，即置单链表的首节点指针为空 */
+void initHeadList(Node **pNode)
+{
+    *pNode=(Node *)malloc( sizeof(Node));
+    (*pNode)-&gt;next= NULL;
+    printf(&quot;initHeadList函数执行，初始化成功\n&quot;);
+}
+</code></pre><h1 id="单链表创建"><a href="#单链表创建" class="headerlink" title="单链表创建"></a>单链表创建</h1><h2 id="无头结点链表-1"><a href="#无头结点链表-1" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>Node *creatList(Node *pHead)
+{
+    Node *new_node;//新建结点
+    Node *cur_node;//当前结点
+    int data;
+    printf(&quot;输入节点：\n&quot;);
+    scanf(&quot;%d&quot;,&amp;data);  
+
+    while(data &gt; 0)        //输入的值大于0则继续，直到输入的值为负
+    {
+        new_node=(Node *)malloc(sizeof(Node)); //申请新节点
+        if(NULL==new_node)
+        {
+            printf(&quot;新节点内存分配失败\n&quot;);
+            exit(0);
+
+        }
+
+        memset(new_node,0,sizeof(Node));
+
+        new_node-&gt;element=data;//输入data存入结点的数据域
+
+        if (pHead==NULL)      //首结点若为空，新节点为首结点
+        {
+            pHead=new_node;
+        }
+        else                  //首结点不为空，已插入结点
+        {
+            cur_node-&gt;next=new_node;//当前结点的指针指向新节点
+        }
+        cur_node=new_node;          //将当前结点移向新节点
+        scanf(&quot;%d&quot;,&amp;data);
+        new_node-&gt;next = NULL;        //新节点指针域为空
+
+    }
+    printf(&quot;creatList函数执行，链表创建成功\n&quot;);
+    return pHead;           //返回链表的头指针
+}
+</code></pre><h2 id="带头结点链表-1"><a href="#带头结点链表-1" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>    /*头节点创建*/
+Node *creatHeadList(Node *pHead)
+{
+    Node *new_node;
+    Node *cur_node;
+    int data;
+    printf(&quot;输入节点：\n&quot;);
+    scanf(&quot;%d&quot;,&amp;data);  
+
+    while(data &gt; 0)        //输入的值大于0则继续，直到输入的值为负
+    {
+        new_node=(Node *)malloc(sizeof(Node)); //申请新节点
+        if(NULL==new_node)
+        {
+            printf(&quot;新节点内存分配失败\n&quot;);
+            exit(0);
+
+        }
+        memset(new_node,0,sizeof(Node));
+        new_node-&gt;element=data;
+
+        if (pHead-&gt;next==NULL)
+        {
+            pHead-&gt;next=new_node;
+        }
+        else
+        {
+            cur_node-&gt;next=new_node;
+        }
+        cur_node=new_node;
+        scanf(&quot;%d&quot;,&amp;data);
+        new_node-&gt;next = NULL;
+
+    }
+    printf(&quot;creatHeadList函数执行，链表创建成功\n&quot;);
+    return pHead;           //返回链表的头指针
+}
+</code></pre><h1 id="打印链表"><a href="#打印链表" class="headerlink" title="打印链表"></a>打印链表</h1><h2 id="无头结点链表-2"><a href="#无头结点链表-2" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>/* 3.打印链表，链表的遍历*/
+void printList(Node *pHead)
+{
+    if(NULL == pHead)   //链表为空
+    {
+        printf(&quot;PrintList函数执行，链表为空\n&quot;);
+    }
+    else
+    {
+        while(NULL != pHead)
+        {
+            printf(&quot;%d &quot;,pHead-&gt;element);
+            pHead = pHead-&gt;next;
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+</code></pre><h2 id="带头结点链表-2"><a href="#带头结点链表-2" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>    /* 3.打印链表，链表的遍历*/
+void printHeadList(Node *pHead)
+{
+    if(NULL == pHead-&gt;next)   //链表为空
+    {
+        printf(&quot;PrintList函数执行，链表为空\n&quot;);
+    }
+    else
+    {
+        while(NULL != pHead-&gt;next)
+        {
+            printf(&quot;%d &quot;,pHead-&gt;next-&gt;element);
+            pHead = pHead-&gt;next;
+        }
+        printf(&quot;\n&quot;);
+ }
+</code></pre><h1 id="链表长度"><a href="#链表长度" class="headerlink" title="链表长度"></a>链表长度</h1><h2 id="无头结点链表-3"><a href="#无头结点链表-3" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>int lengthList(Node *pHead)
+{
+    int length = 0;
+
+    while(pHead != NULL)
+    {
+        length++;         //遍历链表size大小比链表的实际长度小1
+        pHead = pHead-&gt;next;
+    }
+    printf(&quot;lengthList函数执行，链表长度 %d \n&quot;,length);
+    return length;    //链表的实际长度
+}
+</code></pre><h2 id="带头结点链表-3"><a href="#带头结点链表-3" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>    /* 返回单链表的长度 */
+int lengthHeadList(Node *pHead)
+{
+    int length = 0;
+
+    while(NULL != pHead-&gt;next)
+    {
+        length++;         //遍历链表size大小比链表的实际长度小1
+        pHead = pHead-&gt;next;
+    }
+    printf(&quot;lengthList函数执行，链表长度 %d \n&quot;,length);
+    return length;    //链表的实际长度
+}
+</code></pre><h1 id="链表非空判断"><a href="#链表非空判断" class="headerlink" title="链表非空判断"></a>链表非空判断</h1><h2 id="无头结点链表-4"><a href="#无头结点链表-4" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>/* 检查单链表是否为空，若为空则返回0，否则返回1 */
+int isEmptyList(Node *pHead)
+{
+    int emptyFlag=0;
+    if(pHead == NULL)  //链表为空
+    {
+        printf(&quot;isEmptyList函数执行，链表为空\n&quot;);
+        emptyFlag=0;
+
+    }
+    else              //链表非空
+    {
+        printf(&quot;isEmptyList函数执行，链表非空\n&quot;);
+        emptyFlag=1;
+    }
+
+    return emptyFlag;
+}
+</code></pre><h2 id="带头结点链表-4"><a href="#带头结点链表-4" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>    /* 检查单链表是否为空，若为空则返回0，否则返回1 */
+int isEmptyHeadList(Node *pHead)
+{
+    int emptyFlag=0;
+    if(pHead-&gt;next == NULL)
+    {
+        printf(&quot;isEmptyList函数执行，链表为空\n&quot;);
+        emptyFlag=0;
+
+    }
+    else
+    {
+        printf(&quot;isEmptyList函数执行，链表非空\n&quot;);
+        emptyFlag=1;
+    }
+
+    return emptyFlag;
+}
+</code></pre><h1 id="取出链表结点元素"><a href="#取出链表结点元素" class="headerlink" title="取出链表结点元素"></a>取出链表结点元素</h1><h2 id="无头结点链表-5"><a href="#无头结点链表-5" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>/* 返回单链表中第pos个结点中的元素，若pos超出范围，则停止程序运行 */
+int getElement(Node *pHead, int pos)
+{
+    int i=0;
+
+    if(pos &lt; 1)
+    {
+        printf(&quot;getElement函数执行，pos值非法\n&quot;);
+        return 0;
+    }
+    if(pHead == NULL)
+    {
+        printf(&quot;getElement函数执行，链表为空\n&quot;);
+        return 0;
+        //exit(1);
+    }
+    while(pHead !=NULL)
+    {
+        ++i;
+        if(i == pos) //到达节点。退出
+        {
+            break;
+        }
+        pHead = pHead-&gt;next; //头结点移到下一结点
+    }
+    if(i &lt; pos)                  //链表长度不足则退出
+    {
+        printf(&quot;getElement函数执行，pos值超出链表长度\n&quot;);
+        return 0;
+    }
+
+    return pHead-&gt;element;
+}
+</code></pre><h2 id="带头结点链表-5"><a href="#带头结点链表-5" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>    /* 返回单链表中第pos个结点中的元素，若pos超出范围，则停止程序运行 */
+int getElementHeadList(Node *pHead, int pos)
+{
+    int i=0;
+
+    if(pos &lt; 1)
+    {
+        printf(&quot;getElement函数执行，pos值非法\n&quot;);
+        return 0;
+    }
+    if(pHead-&gt;next == NULL)
+    {
+        printf(&quot;getElement函数执行，链表为空\n&quot;);
+        return 0;
+        //exit(1);
+    }
+    while(pHead-&gt;next !=NULL)
+    {
+        ++i;
+        if(i == pos) //到达节点。退出
+        {
+            break;
+        }
+        pHead = pHead-&gt;next; //头结点移到下一结点
+    }
+    if(i &lt; pos)                  //链表长度不足则退出
+    {
+        printf(&quot;getElement函数执行，pos值超出链表长度\n&quot;);
+        return 0;
+    }
+
+    return pHead-&gt;next-&gt;element;
+}
+</code></pre><h1 id="查找链表元素"><a href="#查找链表元素" class="headerlink" title="查找链表元素"></a>查找链表元素</h1><h2 id="无头结点链表-6"><a href="#无头结点链表-6" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>/*从单链表中查找具有给定值x的第一个元素，若查找成功则返回该结点data域的存储地址，否则返回NULL */
+int *getElemAddr(Node *pHead, int x)
+{
+    if(NULL == pHead)
+    {
+        printf(&quot;getElemAddr函数执行，链表为空\n&quot;);
+        return NULL;
+    }
+    if(x &lt; 0)
+    {
+        printf(&quot;getElemAddr函数执行，给定值X不合法\n&quot;);
+        return NULL;
+    }
+    while((pHead-&gt;element != x) &amp;&amp; (NULL != pHead-&gt;next)) //判断是否到链表末尾，以及是否存在所要找的元素
+    {
+        pHead = pHead-&gt;next;
+    }
+    if((pHead-&gt;element != x) &amp;&amp; (pHead != NULL))
+    {
+        printf(&quot;getElemAddr函数执行，在链表中未找到x值\n&quot;);
+        return NULL;
+    }
+    if(pHead-&gt;element == x)
+    {
+        printf(&quot;getElemAddr函数执行，元素 %d 的地址为 0x%x\n&quot;,x,&amp;(pHead-&gt;element));
+    }
+
+    return &amp;(pHead-&gt;element);//返回元素的地址
+}
+</code></pre><h2 id="带头结点链表-6"><a href="#带头结点链表-6" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>/*从单链表中查找具有给定值x的第一个元素，若查找成功则返回该结点data域的存储地址，否则返回NULL */
+int *getElemAddrHeadList(Node *pHead, int x)
+{
+    if(NULL == pHead-&gt;next)
+    {
+        printf(&quot;getElemAddr函数执行，链表为空\n&quot;);
+        return NULL;
+    }
+    if(x &lt; 0)
+    {
+        printf(&quot;getElemAddr函数执行，给定值X不合法\n&quot;);
+        return NULL;
+    }
+    while((pHead-&gt;next-&gt;element != x) &amp;&amp; (NULL != pHead-&gt;next)) //判断是否到链表末尾，以及是否存在所要找的元素
+    {
+        pHead = pHead-&gt;next;
+    }
+    if((pHead-&gt;next-&gt;element != x) &amp;&amp; (pHead-&gt;next != NULL))
+    {
+        printf(&quot;getElemAddr函数执行，在链表中未找到x值\n&quot;);
+        return NULL;
+    }
+    if(pHead-&gt;next-&gt;element == x)
+    {
+        printf(&quot;getElemAddr函数执行，元素 %d 的地址为 0x%x\n&quot;,x,&amp;(pHead-&gt;next-&gt;element));
+    }
+
+    return &amp;(pHead-&gt;next-&gt;element);//返回元素的地址
+}
+</code></pre><h1 id="修改链表元素"><a href="#修改链表元素" class="headerlink" title="修改链表元素"></a>修改链表元素</h1><h2 id="无头结点链表-7"><a href="#无头结点链表-7" class="headerlink" title="无头结点链表"></a>无头结点链表</h2><pre><code>/* 9.把单链表中第pos个结点的值修改为x的值，若修改成功返回１，否则返回０ */
+int modifyElem(Node *pNode,int pos,int x)
+{
+    int i=0;
+    Node *pHead;
+    pHead = pNode;
+    if(NULL == pHead)
+    {
+        printf(&quot;modifyElem函数执行，链表为空\n&quot;);
+    }
+    if(pos &lt; 1)
+    {
+        printf(&quot;modifyElem函数执行，pos值非法\n&quot;);
+        return 0;
+    }
+    while(pHead !=NULL)
+    {
+        ++i;
+        if(i == pos)
+        {
+            break;
+        }
+        pHead = pHead-&gt;next; //移到下一结点
+    }
+    if(i &lt; pos)                  //链表长度不足则退出
+    {
+        printf(&quot;modifyElem函数执行，pos值超出链表长度\n&quot;);
+        return 0;
+    }
+    pNode = pHead;//要修改结点
+    pNode-&gt;element = x;  //修改为要修改值
+    printf(&quot;modifyElem函数执行\n&quot;);
+
+    return 1;
+}
+</code></pre><h2 id="带头结点链表-7"><a href="#带头结点链表-7" class="headerlink" title="带头结点链表"></a>带头结点链表</h2><pre><code>    /* 把单链表中第pos个结点的值修改为x的值，若修改成功返回１，否则返回０ */
+int modifyElemHeadList(Node *pNode,int pos,int x)
+{
+    int i=0;
+    Node *pHead;
+    pHead = pNode;
+    if(NULL == pHead-&gt;next)
+    {
+        printf(&quot;modifyElemHeadList函数执行，链表为空\n&quot;);
+    }
+    if(pos &lt; 1)
+    {
+        printf(&quot;modifyElemHeadList函数执行，pos值非法\n&quot;);
+        return 0;
+    }
+    while(pHead-&gt;next !=NULL)
+    {
+        ++i;
+        if(i == pos)
+        {
+            break;
+        }
+        pHead = pHead-&gt;next; //移到下一结点
+    }
+    if(i &lt; pos)                  //链表长度不足则退出
+    {
+        printf(&quot;modifyElemHeadList函数执行，pos值超出链表长度\n&quot;);
+        return 0;
+    }
+    pNode = pHead;
+    pNode-&gt;next-&gt;element = x;
+    printf(&quot;modifyElemHeadList函数执行\n&quot;);
+
+    return 1;
+}
+</code></pre><h1 id="链表插入"><a href="#链表插入" class="headerlink" title="链表插入"></a>链表插入</h1><h2 id="表头插入元素"><a href="#表头插入元素" class="headerlink" title="表头插入元素"></a>表头插入元素</h2><h3 id="无头节点链表"><a href="#无头节点链表" class="headerlink" title="无头节点链表"></a>无头节点链表</h3><pre><code>/* 10.向单链表的表头插入一个元素 */
+int insertHeadList(Node **pNode,int insertElem)
+{
+    Node *pInsert;
+    pInsert = (Node *)malloc(sizeof(Node));
+    memset(pInsert,0,sizeof(Node));
+    pInsert-&gt;element = insertElem;
+    pInsert-&gt;next = *pNode;
+    *pNode = pInsert;
+    printf(&quot;insertHeadList函数执行，向表头插入元素成功\n&quot;);
+
+    return 1;
+}
+</code></pre><h3 id="带头结点链表-8"><a href="#带头结点链表-8" class="headerlink" title="带头结点链表"></a>带头结点链表</h3><pre><code>/* 向单链表的表头插入一个元素 */
+Node *inserFirsttHeadList(Node *pHead,int insertElem)
+{
+    Node *pInsert;
+    pInsert = (Node *)malloc(sizeof(Node));
+    memset(pInsert,0,sizeof(Node));
+    pInsert-&gt;element = insertElem;
+    pInsert-&gt;next = pHead-&gt;next;
+    pHead-&gt;next = pInsert;
+    printf(&quot;inserFirsttHeadList函数执行，向表头插入元素成功\n&quot;);
+
+    return pHead;
+}
+</code></pre><h2 id="表尾插入元素"><a href="#表尾插入元素" class="headerlink" title="表尾插入元素"></a>表尾插入元素</h2><h3 id="无头节点链表-1"><a href="#无头节点链表-1" class="headerlink" title="无头节点链表"></a>无头节点链表</h3><pre><code>int insertLastList(Node **pNode,elemType insertElem)
+{
+    Node *pInsert;
+    Node *pHead;
+    Node *pTmp; //定义一个临时链表用来存放第一个节点
+
+    pHead = *pNode;
+    pTmp = pHead;
+    pInsert = (Node *)malloc(sizeof(Node)); //申请一个新节点
+    memset(pInsert,0,sizeof(Node));
+    pInsert-&gt;element = insertElem;
+
+    while(pHead-&gt;next != NULL)
+    {
+        pHead = pHead-&gt;next;
+    }
+    pHead-&gt;next = pInsert;   //将链表末尾节点的下一结点指向新添加的节点
+    *pNode = pTmp;
+    printf(&quot;insertLastList函数执行，向表尾插入元素成功\n&quot;);
+
+    return 1;
+}
+</code></pre><h3 id="带头结点链表-9"><a href="#带头结点链表-9" class="headerlink" title="带头结点链表"></a>带头结点链表</h3><pre><code>    /* 向单链表的末尾添加一个元素 */
+int insertLasHeadtList(Node *pNode,int insertElem)
+{
+    Node *pInsert;
+    Node *pHead;
+    Node *pTmp; //定义一个临时链表用来存放第一个节点
+
+    pHead = pNode;
+    pTmp = pHead;
+    pInsert = (Node *)malloc(sizeof(Node)); //申请一个新节点
+    memset(pInsert,0,sizeof(Node));
+    pInsert-&gt;element = insertElem;
+
+    while(pHead-&gt;next != NULL)
+    {
+        pHead = pHead-&gt;next;
+    }
+    pHead-&gt;next = pInsert;   //将链表末尾节点的下一结点指向新添加的节点
+    pNode = pTmp;
+    printf(&quot;insertLastList函数执行，向表尾插入元素成功\n&quot;);
+
+    return 1;
+}
+</code></pre><h1 id="链表删除"><a href="#链表删除" class="headerlink" title="链表删除"></a>链表删除</h1><h2 id="删除链表指定数据"><a href="#删除链表指定数据" class="headerlink" title="删除链表指定数据"></a>删除链表指定数据</h2><h3 id="无头节点链表-2"><a href="#无头节点链表-2" class="headerlink" title="无头节点链表"></a>无头节点链表</h3><pre><code>    /* 删除单链表单个元素 */
+Node *delElementList(Node *pHead,int delElem)
+{
+    Node *pre_node;//要删除节点的前一节点
+    Node *del_node;//删除节点
+    Node *Head;
+    if(NULL == pHead)
+    {
+        printf(&quot;delElementList函数执行，链表为空\n&quot;);
+        return pHead;
+    }
+    if(delElem &lt; 0)
+    {
+        printf(&quot;delElementList函数执行，给定值X不合法\n&quot;);
+        return pHead;
+    }
+    del_node=pHead;  //删除节点从头结点开始
+
+    while((del_node-&gt;element != delElem) &amp;&amp; (NULL != del_node-&gt;next)) //判断是否到链表末尾，以及是否存在所要找的元素
+    {    
+        pre_node=del_node; //该节点不是要找节点，设置为前一节点
+
+        del_node = del_node-&gt;next;//节点下移
+
+    }
+    //到链表尾依然没有要找元素
+    if((del_node-&gt;element != delElem) &amp;&amp; (del_node != NULL))
+    {
+        printf(&quot;getElemAddr函数执行，在链表中未找到x值\n&quot;);
+        return NULL;
+    }
+    //找到要删除元素
+    if(del_node-&gt;element == delElem)
+    {
+        if (del_node==pHead)  //若为头结点
+        {
+            pHead=del_node-&gt;next;
+        }
+        else                 //不是头结点
+        {
+            pre_node-&gt;next=del_node-&gt;next;    //前一节点的指针指向要删除节点的指针域，即后一节点
+        }
+        free(del_node);                      //释放删除节点
+        printf(&quot;delElementList函数执行，删除元素为 %d \n&quot;,delElem);
+    }
+    Head=pHead;
+    return Head;
+}
+</code></pre><h3 id="带头结点链表-10"><a href="#带头结点链表-10" class="headerlink" title="带头结点链表"></a>带头结点链表</h3><pre><code>    /* 删除单链表单个元素 */
+Node *delElementHeadList(Node *pHead,int delElem)
+{
+    Node *pre_node;//要删除节点的前一节点
+    Node *del_node;//删除节点
+    Node *Head;
+    if(NULL == pHead-&gt;next)
+    {
+        printf(&quot;delElementHeadList函数执行，链表为空\n&quot;);
+        return pHead;
+    }
+    if(delElem &lt; 0)
+    {
+        printf(&quot;delElementHeadList函数执行，给定值X不合法\n&quot;);
+        return pHead;
+    }
+    del_node=pHead-&gt;next;  //删除节点从第一个节点开始
+
+    while((del_node-&gt;element != delElem) &amp;&amp; (NULL != del_node-&gt;next)) //判断是否到链表末尾，以及是否存在所要找的元素
+    {    
+        pre_node=del_node; //该节点不是要找节点，设置为前一节点
+
+        del_node = del_node-&gt;next;//节点下移
+
+    }
+    //到链表尾依然没有要找元素
+    if((del_node-&gt;element != delElem) &amp;&amp; (del_node!= NULL))
+    {
+        printf(&quot;delElementHeadList函数执行，在链表中未找到x值\n&quot;);
+        return NULL;
+    }
+    //找到要删除元素
+    if(del_node-&gt;element == delElem)
+    {
+        if (del_node==pHead-&gt;next)  //若为第一个结点
+        {
+            pHead-&gt;next=del_node-&gt;next;
+        }
+        else                 //不是第一个结点
+        {
+            pre_node-&gt;next=del_node-&gt;next;    //前一节点的指针指向要删除节点的指针域，即后一节点
+        }
+        free(del_node);                      //释放删除节点
+        printf(&quot;delElementList函数执行，删除元素为 %d \n&quot;,delElem);
+    }
+    Head=pHead;
+    return Head;
+}
+</code></pre><h2 id="删除链表指定结点"><a href="#删除链表指定结点" class="headerlink" title="删除链表指定结点"></a>删除链表指定结点</h2><h3 id="无头节点链表-3"><a href="#无头节点链表-3" class="headerlink" title="无头节点链表"></a>无头节点链表</h3><pre><code>/* 删除单链表指定节点 */
+Node *delPosList(Node *pHead,int pos)
+{
+    int i=0;
+    Node *pre_node;//要删除节点的前一节点
+    Node *del_node;//删除节点
+
+    if(NULL == pHead)
+    {
+        printf(&quot;delPosLis函数执行，链表为空\n&quot;);
+        return pHead;
+    }
+    if(pos &lt; 0)
+    {
+        printf(&quot;delPosLis函数执行，给定位置pos不合法\n&quot;);
+        return pHead;
+    }
+    del_node=pHead;     //删除节点从头结点开始匹配
+    while(del_node !=NULL)
+    {
+        ++i;
+        if(i == pos)
+        {
+            if (pos==1)   //若删除的是头结点
+            {
+                pHead=del_node-&gt;next;  
+            }
+            else          //若删除的不是头结点
+            {
+                pre_node-&gt;next=del_node-&gt;next;
+            }
+            printf(&quot;delPosList函数执行，删除第 %d个元素\n&quot;,pos);
+            break;
+        }
+        pre_node=del_node;        //设置前一节点
+
+        del_node= del_node-&gt;next; //移到下一结点
+    }
+    free(del_node);            //释放删除节点
+
+    return pHead;
+}
+</code></pre><h3 id="带头结点链表-11"><a href="#带头结点链表-11" class="headerlink" title="带头结点链表"></a>带头结点链表</h3><pre><code>/* 删除单链表指定节点 */
+Node *delPosHeadList(Node *pHead,int pos)
+{
+    int i=0;
+    Node *pre_node;//要删除节点的前一节点
+    Node *del_node;//删除节点
+    Node *Head;
+    if(NULL == pHead-&gt;next)
+    {
+        printf(&quot;delPosLis函数执行，链表为空\n&quot;);
+        return pHead;
+    }
+    if(pos &lt; 0)
+    {
+        printf(&quot;delPosLis函数执行，给定位置pos不合法\n&quot;);
+        return pHead;
+    }
+    del_node=pHead-&gt;next;     //删除节点从第一个结点开始匹配
+    while(del_node !=NULL)
+    {
+        ++i;
+        if(i == pos)
+        {
+            if (pos==1)   //若删除的是头结点
+            {
+                pHead-&gt;next=del_node-&gt;next;  
+            }
+            else          //若删除的不是头结点
+            {
+                pre_node-&gt;next=del_node-&gt;next;
+            }
+            printf(&quot;delPosList函数执行，删除第 %d个元素\n&quot;,pos);
+            break;
+        }
+        pre_node=del_node;        //设置前一节点
+
+        del_node= del_node-&gt;next; //移到下一结点
+    }
+    free(del_node);            //释放删除节点
+    Head=pHead;
+    return Head;
+}
+</code></pre><h1 id="清除链表"><a href="#清除链表" class="headerlink" title="清除链表"></a>清除链表</h1><h2 id="无头节点链表-4"><a href="#无头节点链表-4" class="headerlink" title="无头节点链表"></a>无头节点链表</h2><pre><code>    /* 释放单链表L中所有的结点，使之成为一个空表 */
+void clearList(Node *pHead)
+{
+    Node *pNext;            //定义一个与pHead相邻节点
+
+    if(pHead == NULL)
+    {
+        printf(&quot;clearList函数执行，链表为空\n&quot;);
+        return;
+    }
+    while(pHead-&gt;next != NULL)
+    {
+        pNext = pHead-&gt;next;//保存下一结点的指针
+        free(pHead);
+        pHead = pNext;      //表头下移
+
+    }
+    printf(&quot;clearList函数执行，链表已经清除\n&quot;);
+}
+</code></pre><h2 id="带头节点链表"><a href="#带头节点链表" class="headerlink" title="带头节点链表"></a>带头节点链表</h2><pre><code>    /* 4.清除线性表L中的所有元素，即释放单链表L中所有的结点，使之成为一个空表 */
+void clearHeadList(Node *pHead)
+{
+    Node *pNext;            //定义一个与pHead相邻节点
+
+    if(pHead-&gt;next== NULL)
+    {
+        printf(&quot;clearList函数执行，链表为空\n&quot;);
+        return;
+    }
+    while(pHead-&gt;next != NULL)
+    {
+        pNext = pHead-&gt;next;//保存下一结点的指针
+        free(pHead);
+        pHead = pNext;      //表头下移
+
+    }
+    printf(&quot;clearList函数执行，链表已经清除\n&quot;);
+}
+</code></pre><h1 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h1><h2 id="无头节点链表-5"><a href="#无头节点链表-5" class="headerlink" title="无头节点链表"></a>无头节点链表</h2><pre><code>int main()
+{
+    Node *pList=NULL;
+    Node *newHead=NULL;
+    Node *new2Head=NULL;
+    Node *new3Head=NULL;
+    int length = 0;
+    int emptyFlag=0;
+    int posElement=0;
+    initList(&amp;pList);
+    pList=creatList(pList); 
+    printList(pList);
+    length=lengthList(pList);
+    emptyFlag=isEmptyList(pList);     //判断链表是否为空链表
+    posElement=getElement(pList,3);
+    printf(&quot;getElement函数执行，位置 3 中的元素为 %d\n&quot;,posElement);   
+    getElemAddr(pList,5);   //获得元素5的地址
+
+    modifyElem(pList,4,1);  //将链表中位置4上的元素修改为1
+    printList(pList);
+
+
+    newHead=insertHeadList(pList,5);   //表头插入元素5
+    printList(newHead);
+
+    insertLastList(newHead,10);  //表尾插入元素10
+    printList(newHead);
+
+    new2Head=delElementList(newHead,5);    //删除第一个元素5
+    printList(new2Head);
+
+    new3Head=delPosList(new2Head,2);
+    printList(new3Head);
+
+    clearList(new3Head);       //清空链表
+    //printList(new3Head);
+}
+</code></pre><h2 id="带头节点链表-1"><a href="#带头节点链表-1" class="headerlink" title="带头节点链表"></a>带头节点链表</h2><pre><code>    int main()
+{
+    Node *pList=NULL;
+    Node *newHead=NULL;
+    Node *new2Head=NULL;
+    Node *new3Head=NULL;
+    int length = 0;
+    int emptyFlag=0;
+    int posElement=0;
+    initHeadList(&amp;pList);
+    pList=creatHeadList(pList); 
+    printHeadList(pList);
+     length=lengthHeadList(pList);
+     emptyFlag=isEmptyHeadList(pList);     //判断链表是否为空链表
+     posElement=getElementHeadList(pList,3);
+     printf(&quot;getElement函数执行，位置 3 中的元素为 %d\n&quot;,posElement);   
+     getElemAddrHeadList(pList,3);   //获得元素3的地址
+
+     modifyElemHeadList(pList,3,1);  //将链表中位置4上的元素修改为1
+    printHeadList(pList);
+
+     newHead=inserFirsttHeadList(pList,5);   //表头插入元素5
+     printHeadList(newHead);
+
+     insertLasHeadtList(newHead,10);  //表尾插入元素10
+    printHeadList(newHead);
+     new2Head=delElementHeadList(newHead,5);    //删除第一个元素5
+     printHeadList(new2Head);
+
+     new3Head=delPosHeadList(new2Head,2);
+     printHeadList(new3Head);
+
+     clearHeadList(new3Head);       //清空链表
+}
+</code></pre><h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><p><strong>环境：VC6.0</strong></p>
+<h2 id="无头节点链表-6"><a href="#无头节点链表-6" class="headerlink" title="无头节点链表"></a>无头节点链表</h2><p><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-13/57040703-file_1492091453045_9a8e.jpg" alt=""></p>
+<h2 id="带头节点链表-2"><a href="#带头节点链表-2" class="headerlink" title="带头节点链表"></a>带头节点链表</h2><p><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-17/7006612-file_1492436284752_164d6.jpg" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/嵌入式c编程风格/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">13</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-C链表"><span class="nav-number">1.</span> <span class="nav-text">tags: [C链表]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number"></span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表结构"><span class="nav-number"></span> <span class="nav-text">链表结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义链表结点"><span class="nav-number"></span> <span class="nav-text">定义链表结点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单链表初始化"><span class="nav-number"></span> <span class="nav-text">单链表初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单链表创建"><span class="nav-number"></span> <span class="nav-text">单链表创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表-1"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表-1"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打印链表"><span class="nav-number"></span> <span class="nav-text">打印链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表-2"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表-2"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表长度"><span class="nav-number"></span> <span class="nav-text">链表长度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表-3"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表-3"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表非空判断"><span class="nav-number"></span> <span class="nav-text">链表非空判断</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表-4"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表-4"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取出链表结点元素"><span class="nav-number"></span> <span class="nav-text">取出链表结点元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表-5"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表-5"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查找链表元素"><span class="nav-number"></span> <span class="nav-text">查找链表元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表-6"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表-6"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改链表元素"><span class="nav-number"></span> <span class="nav-text">修改链表元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头结点链表-7"><span class="nav-number">1.</span> <span class="nav-text">无头结点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头结点链表-7"><span class="nav-number">2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表插入"><span class="nav-number"></span> <span class="nav-text">链表插入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表头插入元素"><span class="nav-number">1.</span> <span class="nav-text">表头插入元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无头节点链表"><span class="nav-number">1.1.</span> <span class="nav-text">无头节点链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带头结点链表-8"><span class="nav-number">1.2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表尾插入元素"><span class="nav-number">2.</span> <span class="nav-text">表尾插入元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无头节点链表-1"><span class="nav-number">2.1.</span> <span class="nav-text">无头节点链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带头结点链表-9"><span class="nav-number">2.2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表删除"><span class="nav-number"></span> <span class="nav-text">链表删除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除链表指定数据"><span class="nav-number">1.</span> <span class="nav-text">删除链表指定数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无头节点链表-2"><span class="nav-number">1.1.</span> <span class="nav-text">无头节点链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带头结点链表-10"><span class="nav-number">1.2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除链表指定结点"><span class="nav-number">2.</span> <span class="nav-text">删除链表指定结点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无头节点链表-3"><span class="nav-number">2.1.</span> <span class="nav-text">无头节点链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带头结点链表-11"><span class="nav-number">2.2.</span> <span class="nav-text">带头结点链表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#清除链表"><span class="nav-number"></span> <span class="nav-text">清除链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头节点链表-4"><span class="nav-number">1.</span> <span class="nav-text">无头节点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头节点链表"><span class="nav-number">2.</span> <span class="nav-text">带头节点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主函数"><span class="nav-number"></span> <span class="nav-text">主函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头节点链表-5"><span class="nav-number">1.</span> <span class="nav-text">无头节点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头节点链表-1"><span class="nav-number">2.</span> <span class="nav-text">带头节点链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验验证"><span class="nav-number"></span> <span class="nav-text">实验验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无头节点链表-6"><span class="nav-number">1.</span> <span class="nav-text">无头节点链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带头节点链表-2"><span class="nav-number">2.</span> <span class="nav-text">带头节点链表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chamo.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/06/21/数据结构之单链表/';
+          this.page.identifier = '2017/06/21/数据结构之单链表/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chamo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+   <!-- 页面点击小红心 -->
+  <!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+
+</body>
+</html>

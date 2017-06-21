@@ -1,0 +1,1180 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="title: 嵌入式编程风格date: 2017-03-30categories: 嵌入式c
+tags: [编程风格]前言编程的总则: 编程首要是要考虑程序的可行性，然后是可读性、可移植性、健壮性以及可测试性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="茶末园">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/06/21/嵌入式c编程风格/index.html">
+<meta property="og:site_name" content="茶末园">
+<meta property="og:description" content="title: 嵌入式编程风格date: 2017-03-30categories: 嵌入式c
+tags: [编程风格]前言编程的总则: 编程首要是要考虑程序的可行性，然后是可读性、可移植性、健壮性以及可测试性。">
+<meta property="og:updated_time" content="2017-06-21T07:08:14.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="茶末园">
+<meta name="twitter:description" content="title: 嵌入式编程风格date: 2017-03-30categories: 嵌入式c
+tags: [编程风格]前言编程的总则: 编程首要是要考虑程序的可行性，然后是可读性、可移植性、健壮性以及可测试性。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/06/21/嵌入式c编程风格/"/>
+
+
+
+
+
+  <title>  | 茶末园 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">茶末园</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/06/21/嵌入式c编程风格/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="茶末园">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T15:08:24+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/21/嵌入式c编程风格/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/21/嵌入式c编程风格/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>title: 嵌入式编程风格<br>date: 2017-03-30<br>categories: 嵌入式c</p>
+<h2 id="tags-编程风格"><a href="#tags-编程风格" class="headerlink" title="tags: [编程风格]"></a>tags: [编程风格]</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>编程的总则: 编程首要是要考虑程序的可行性，然后是可读性、可移植性、健壮性以及可测试性。　　<br><a id="more"></a><br>原文为<a href="http://pan.baidu.com/s/1hsxFRZu" target="_blank" rel="external">C语言进阶之道</a>中的编程风格章节 </p>
+<h1 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h1><p>（1）代码缩进空格数为4个。若是可能，尽量用空格来代替Tab键，因为有些编译器不支持Tab键</p>
+<pre><code>BOOL BufClr(UINT8 * dest,UINT32 size)  
+{  
+    if(NULL ==dest || NULL==size)  
+    {  
+        return FALSE;  
+    }  
+}  
+</code></pre><p>（2）较长的语句要分2行来书写，并用‘\’符号隔开。</p>
+<pre><code>if((UINT8) uncrc != Packet.down_ser.mCrc[0] \  
+                 ||(UINT8)(uncrc&gt;&gt;8)!= Packet.down_ser.mCrc[1])  
+{  
+    BELL(ON);  
+}  
+</code></pre><p>（3）函数代码的参数过长，分多行来书写。  </p>
+<pre><code>void UARTSendAndRecv(UINT8 *ucSendBuf,  
+    UINT8 ucSendLength,  
+    UINT8 *ucRecvBuf,  
+    UINT8 ucRecvLength)  
+{  
+    …  
+}  
+</code></pre><p>（4）if、do、while、switch、for、case、default等关键字，必须加上大括号{}。</p>
+<pre><code>    if(bSendEnd)  
+{  
+    BELL(ON);  
+}  
+else  
+{  
+    BELL(OFF);  
+}  
+
+switch(ucintStatus)  
+{  
+    case USB_INT_EP2_OUT:  
+    {  
+        USBCiEP2Send(USBMainBuf,ucrecvLen);  
+        USBCiEP1Send(USBMainBuf,ucrecvLen);  
+    }  
+    break;  
+    case USB_INT_EP2_IN:  
+    {  
+        USBCiWriteSingleCmd (CMD_UNLOCK_USB);  
+    }  
+    break;  
+    …  
+}  
+</code></pre><h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>（1）边写代码边注释，修改代码同时修改相应的注释，以保证注释与代码的一致性。不再有用的注释要删除。  注释应当准确、易懂，防止注释有二义性。错误的注释不但无益反而有害。  尽量避免在注释中使用缩写，特别是不常用缩写。注释的位置应与被描述的代码相邻，可以放在代码的上方或右方，不可放在下方。  </p>
+<p>（2）说明性文件必选在文件头着重说明，例如<em>.c、</em>.h文件  </p>
+<p>（3）函数头应该进行注释，例如函数名称、输入参数、返回值、功能说明。  </p>
+<pre><code>******将所有参数写入AT24C64,共4字节********************* 
+*说明:将表号和用户电量共四字节数据写入AT24C64中 
+*入口参数: 
+*    1.数据间接寻址地址-buf 
+*    2.写入到AT24C64的地址字-addh,addrl 
+*    3.写入字节数-count 
+*出口参数:1表示写成功,0表示写失败 
+***************************************************************/  
+bit write_byte( unsigned charchar * buf,        
+            unsigned char addrh,  
+            unsigned char addrl,  
+            unsigned char count)  
+{  
+……  
+}  
+</code></pre><p>（4）全局变量要注释其功能，若为关键的局部变量同样需要注释其功能。</p>
+<pre><code>volatile UINT8 __ucSysMsg=SYS_IDLE;  
+void SYSSetMsgPriority(void)  
+{  
+    SYSMSG Msgt;//临时存储消息  
+    UINT8 i;  
+}  
+</code></pre><p>（5）复杂的宏定义同样要加上注释。</p>
+<pre><code>/* SYS_MSG_MAP 建立一个消息映射 
+   宏参数NAME：消息映射表的名字 
+   宏参数NUM_OF_MSG:消息映射的个数 
+*/  
+#define SYS_MSG_MAP(NAME,NUM_OF_MSG) do/  
+{  /  
+    DEFINE_MSG_NAME((NAME));/  
+    UINT8 i;/  
+    for(i=0;i&lt; NUM_OF_MSG;i++)/  
+    {/  
+        ININ_CUR_MSG(i)/  
+    }/  
+}while(0)  
+</code></pre><p>（6）复杂的结构体同样要加上注释。  </p>
+<pre><code>奇偶校验结构体*/  
+typedef struct _ PKT_PARITY  
+{  
+    UINT8 m_ucHead1;      //首部1  
+    UINT8 m_ucHead2;      //首部2  
+    UINT8 m_ucOptCode;    //操作码  
+    UINT8 m_ucDataLength; //数据长度  
+    UINT8 m_szDataBuf[16];//数据  
+    UINT8 m_ucParity;     //奇偶校验值  
+}PKT_PARITY;  
+</code></pre><p> （7）相对独立的语句组注释。对这一组语句做特别说明，写在语句组上侧，和此语句组之间不留空行，与当前语句组的缩进一致。注意，说明语句组的注释一定要写在语句组上面，不能写在语句组下面。</p>
+<h1 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h1><p>（1）变量命名<br>局部变量以小写字母命名；<br>全局变量以首字母大写方式命名（骆驼式）；<br>定义类型和宏定义常数以大写字母命名；<br>变量的作用域越大，它的名字所带有的信息就应该越多。<br>局部变量：   int  student_age;<br>全局变量：   int  StudentAge;<br>宏定义常数：#define STUDENT_NUM  10<br>类型定义：   typedef  INT16S  int;  </p>
+<p>（2） 变量命名要注意缩写而且让人简单易懂，若是特别缩写要详细说明。<br>经常用到的缩写如：<br>Count 可缩写为Cnt<br>Message 可缩写为Msg<br>Packet 可缩写为Pkt<br>Temp 可缩写为Tmp<br>平时不经常用到的缩写，要注释：<br>SerialCommunication 可缩写为SrlComm //串口通信变量<br>SerialCommunicationStatus 可缩写为SrlCommStat //串口通信状态变量  </p>
+<p>（3）全局变量和全局函数的命名一定要详细，不惜多用几个单词，例如函数UARTPrintfStringForLCD<br>因为它们在整个项目的许多源文件中都会用到，必须让使用者明确这个变量或函数是干什么用的。局部变量和只在一个源文件中调用的内部函数的命名可以。简略一些，但不能太短，不要使用单个字母做变量名，只有一个例外：用i、j 、k 做循环变量是可以的。  </p>
+<p>（4）用于编译开关的文件头，必须加上当前文件名称，防止编译时产生冲突。<br>例如在UARTInterface.h 头文件中，必须加上以下内容</p>
+<pre><code>#ifndef __UARTINTERFACE_H__
+#define __UARTINTERFACE_H__
+extern void UARTPrintfString(CONST INT8* str);
+extern void UARTSendNBytes(UINT8 *ucSendBytes,UINT8 ucLen);
+…… //其他外部声明的代码
+#endif
+</code></pre><p>（5）禁止用汉语拼音作为标识符名称，可读性极差  </p>
+<p>（6）建议名称间的区别要显而易见。使用标识符名称要注意的一个相关问题是发生在名称之间只有一个字符或少数字符不同的情况，特别是名称比较长时，当名称间的区别很容易被误读时问题就比较显著，比如1（数字1）和l（L 的小写）、0 和O、2 和Z、5 和S，或者n 和h。  </p>
+<h1 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h1><p>（1）不要编写太复杂的复合表达式；  </p>
+<pre><code>i = a &gt;= b &amp;&amp; c &lt; d &amp;&amp; c + f &lt;= g + h;  //复合表达式过于复杂
+</code></pre><p>（2）不要有多用途的复合表达式  </p>
+<pre><code>d = (a = b + c) + r ;                   //应拆分为两个语句：
+a = b + c;
+d = a + r;
+</code></pre><p>（3）如果代码行中的运算符比较多，用括号确定表达式的操作顺序，避免使用默认的优先级。  </p>
+<pre><code>if(a | b &amp;&amp; a &amp; c)                      //不良的风格
+if((a | b) &amp;&amp; (a &amp; c))                  //良好的风格
+</code></pre><h1 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h1><h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><p>（1）布尔变量与零值比较<br>不可将布尔变量直接与TRUE、FALSE 或者1、0 进行比较。<br>根据布尔类型的语义，零值为“假”（记为FALSE），任何非零值都是“真”（记为TRUE）。TRUE的值究竟是什么并没有统一的标准。例如Visual C++ 将TRUE 定义为1，而Visual Basic 则将TRUE 定义为-1。<br>例：假设布尔变量名字为flag，它与零值比较的标准if 语句如下：  </p>
+<pre><code>if (flag)                // 表示flag为真时满足条件
+if (!flag)               // 表示flag为假时满足条件 
+</code></pre><p>其它的用法都属于不良风格，例如：</p>
+<pre><code>if (flag == TRUE)
+if (flag == 1 )
+if (flag == FALSE)
+if (flag == 0)
+</code></pre><p>（2）整型变量与零值比较<br>应当将整型变量用“==”或“！=”直接与0比较。<br>例：假设整型变量为value，它与零值比较的标准if 语句如下： </p>
+<pre><code>if (value == 0)
+if (value != 0)  
+</code></pre><p>不可模仿布尔变量的风格而写成 </p>
+<pre><code>if (value)                       // 会让人误解 value 是布尔变量
+if (!value)
+</code></pre><p>（3）浮点变量与零值比较<br>不可将浮点变量用“==”或“！=”与任何数字比较。<br>千万要留意，无论float 还是double 类型变量，都有精度限制。所以一定要避免将浮点变量用“==”或“！=”与数字比较，应该设法转化成“&gt;=”或“&lt;=”形式。<br>假设浮点变量的名字为x，应当将  </p>
+<pre><code>if (x == 0.0)                       // 隐含错误的比较
+</code></pre><p>转化为</p>
+<pre><code>if ((x&gt;=-EPSINON) &amp;&amp; (x&lt;=EPSINON))  //EPSINON 是精度
+</code></pre><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>（1）一些常量(如圆周率PI)或者常需要在调试时修改的参数最好用#define定义，但要注意宏定义只是简单的替换，因此有些括号不可少。  </p>
+<p>（2）不要轻易调用某些库函数，因为有些库函数代码很长(我是反对使用printf之类的库函数的，但是是一家之言，并不勉强各位)。 </p>
+<p>（3）对各运算符的优先级有所了解，记不得没关系，加括号就是，千万不要自作聪明说自己记得很牢。 </p>
+<p>（4）不管有没有无效分支，switch函数一定要defaut这个分支。一来让阅读者知道程序员并没有遗忘<br>default,并且防止程序运行过程中出现的意外(健壮性)。  </p>
+<p>（5）函数的参数和返回值没有的话最好使用void。 </p>
+<p>（6）一些常数和表格之类的应该放到code中去以节省RAM。  </p>
+<p>（7）程序编完编译看有多少code多少data，注意不要使堆栈为难。  </p>
+<p>（8）减少函数本身或函数间的递归调用  </p>
+<p>（9）编写可重入函数时，若使用全局变量，则应通过关中断、信号量（即P、V操作）等手段对其加以保护。</p>
+<p>（10）在多重循环中，应将最忙的循环放在最内层  </p>
+<p>（11）避免循环体内含判断语句，应将循环语句置于判断语句的代码块之中。  </p>
+<p>（12）系统运行之初，要初始化有关变量及运行环境，防止未经初始化的变量被引用。  </p>
+<p>（13）编写代码时要注意随时保存，并定期备份，防止由于断电、硬盘损坏等原因造成代码丢失。  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/排序算法之选择排序/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/21/数据结构之单链表/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">13</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-编程风格"><span class="nav-number">1.</span> <span class="nav-text">tags: [编程风格]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number"></span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排版"><span class="nav-number"></span> <span class="nav-text">排版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注释"><span class="nav-number"></span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标识符"><span class="nav-number"></span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表达式"><span class="nav-number"></span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本语句"><span class="nav-number"></span> <span class="nav-text">基本语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#if语句"><span class="nav-number">1.</span> <span class="nav-text">if语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number"></span> <span class="nav-text">其他</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chamo.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/06/21/嵌入式c编程风格/';
+          this.page.identifier = '2017/06/21/嵌入式c编程风格/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chamo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+   <!-- 页面点击小红心 -->
+  <!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+
+</body>
+</html>

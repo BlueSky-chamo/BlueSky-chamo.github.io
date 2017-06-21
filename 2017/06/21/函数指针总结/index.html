@@ -1,0 +1,1323 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="title: 函数指针与指针函数总结date: 2017-04-30categories: C语言
+tags: [C指针]#函数指针定义#函数指针是指向函数的指针变量，即本质是一个指针变量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="茶末园">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/2017/06/21/函数指针总结/index.html">
+<meta property="og:site_name" content="茶末园">
+<meta property="og:description" content="title: 函数指针与指针函数总结date: 2017-04-30categories: C语言
+tags: [C指针]#函数指针定义#函数指针是指向函数的指针变量，即本质是一个指针变量。">
+<meta property="og:updated_time" content="2017-06-21T07:02:55.652Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="茶末园">
+<meta name="twitter:description" content="title: 函数指针与指针函数总结date: 2017-04-30categories: C语言
+tags: [C指针]#函数指针定义#函数指针是指向函数的指针变量，即本质是一个指针变量。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/2017/06/21/函数指针总结/"/>
+
+
+
+
+
+  <title>  | 茶末园 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">茶末园</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/06/21/函数指针总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="茶末园">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T15:03:13+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/21/函数指针总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/21/函数指针总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>title: 函数指针与指针函数总结<br>date: 2017-04-30<br>categories: C语言</p>
+<h2 id="tags-C指针"><a href="#tags-C指针" class="headerlink" title="tags: [C指针]"></a>tags: [C指针]</h2><p>#函数指针定义#<br>函数指针是指向函数的指针变量，即本质是一个指针变量。</p>
+<a id="more"></a>
+<p>##一般函数指针定义##<br>    int (<em>funcPtr)(char </em>, int);<br>(<em>funcPtr)表明funcPtr是一个指针，(char </em>, int)表明funcPtr是一个函数，函数参数为char *和int，返回值为in</p>
+<pre><code>int *(*funcPtr)(char *, int);
+</code></pre><p>funcPtr是函数指针，不同的是前面的int *，表明该函数的返回值为int指针。</p>
+<p>##函数指针数组##<br>    int (<em>funcPtr[])(char </em>, int);<br>[]的优先级较高，所以funcPtr是数组，里面的元素为函数指针，所指向的函数原型为int funcPtr(char *, int)。</p>
+<p>#函数指针传参#<br>函数指针作为一种类型同样可以作为函数的输入与输出。</p>
+<pre><code>//作为输入参数
+void func(int x, int (*funcPtr)(char *, int));
+//作为返回值
+void (*func(int x, int y))(int);
+</code></pre><p>这里括号的优先级最高，func(int x, int y)表面func是一个函数，前面的*表明返回值为一个指针，(int)说明该指针为一个参数为int的函数，void表示该函数指针的返回值为void。<br> 上面定义了一个返回值为函数指针的函数，那怎么定义一个函数指针指向该函数呢，看下面：</p>
+<pre><code>//一步一步来写，首先他是一个函数指针
+(*funcPtr)()
+//指向的函数的参数为int x, int y
+(*funcPtr)(int x, int y)
+//指向的函数的返回值为一个指针
+(*(*funcPtr)(int x, int y))
+//指向的函数的返回值为一个指针，该指针是参数为int的函数指针
+(*(*funcPtr)(int x, int y))(int)
+//指向的函数的返回值为一个指针，该指针是返回值为void的函数指针
+void (*(*funcPtr)(int x, int y))(int)
+</code></pre><p>函数指针和函数原型就差一个(*)，如果知道函数原型的话将函数名改成指针就行了。</p>
+<pre><code>void (*func(int x, int y))(int);
+void (*(*funcPtr)(int x, int y))(int);
+</code></pre><p>##typedef定义##<br>另一种简单的方法是使用typedef，将函数指针定义成一种类型后，可以方便的在函数中使用。</p>
+<pre><code>typedef void (*funcPtr1)(int);//定义返回值的函数指针
+funcPtr1 (*funcPtr)(int x, int y);
+</code></pre><p>#函数指针应用#</p>
+<p>##普通函数指针应用##<br>一个函数总是占用一段连续的内存区，而函数名就是该函数所占内存区的首地址（入口地址），所以函数名跟数组名很类似，都是指针常量。函数指针就是指向这个入口地址的指针变量，注意函数指针是一个变量。</p>
+<pre><code>void f(int);  
+
+int main()  
+{  
+    //定义函数指针pf并给pf赋值使其指向函数f的入口地址  
+    //pf先跟*结合，说明pf是一个指针，然后与括号结合，说明这个指针指向函数  
+    void (*pf)(int)=f;  //等价于void (*pf)(int)=&amp;f;  
+    pf(1);  
+    (*pf)(2);//把函数指针转换成函数名，这个转换并不需要  
+    f(3);  
+    return 0;  
+}  
+
+void f(int a)  
+{  
+    printf(&quot;%d\n&quot;,a);  
+}  
+</code></pre><p>void (*pf)(int)=&f;函数名被使用时总是由编译器把它转换为函数指针，&amp;操作符只是显示地说明了编译器将隐式执行的任务 。</p>
+<p>##函数指针数组应用##</p>
+<pre><code>void Touch();  
+void DuanJiong();  
+void MeiKai();  
+void YinJun();  
+void JiangHaiLong();  
+
+void main()  
+{  
+    int i;  
+    scanf(&quot;%d&quot;,&amp;i);  
+    switch(i){  
+    case 0:  
+        Touch();  
+        break;  
+    case 1:  
+        DuanJiong();  
+        break;  
+    case 2:  
+        MeiKai();  
+        break;  
+    case 3:  
+        YinJun();  
+        break;  
+    case 4:  
+        JiangHaiLong();  
+        break;  
+    }  
+}  
+
+void Touch()  
+{  
+    puts(&quot;我是Touch&quot;);  
+}  
+
+void DuanJiong()  
+{  
+    puts(&quot;我是段炯&quot;);  
+}  
+
+void MeiKai()  
+{  
+    puts(&quot;我是梅凯&quot;);  
+}  
+
+void YinJun()  
+{  
+    puts(&quot;我是殷俊&quot;);  
+}  
+
+void JiangHaiLong()  
+{  
+    puts(&quot;我是木子&quot;);  
+}
+</code></pre><p>这里只列出了5种情况，如果总共有很多种情况呢，那么就要写一大堆的case语句。而且每次都是从case 1 开始判断。那么是否可以简化代码并且能让程序不做这么多判断呢？这就引出了函数指针数组，顾名思义，就是存放函数指针的数组。现主函数修改如下所示：</p>
+<pre><code>void main()  
+{  
+    int i;  
+    void (*p[])()={Touch,DuanJiong,MeiKai,YinJun,JiangHaiLong};  
+    scanf(&quot;%d&quot;,&amp;i);  
+    p[i]();  
+}  
+</code></pre><p>void (*p[])()={Touch,DuanJiong,MeiKai,YinJun,JiangHaiLong};声明了一个函数指针数组并赋值。把每个函数的入口地址存入这个数组，这样就不需要用switch语句了，根据下标i直接找到函数入口，省去了判断的时间。</p>
+<p>##回调函数##<br>回调函数就是一个通过函数指针调用的函数。如果你把函数的指针(地址)作为参数传递给另一个函数，当这个指针被用为调用它所指向的函数时，我们就说这是回调函数。这里函数指针是作为参数传递给另一个函数。<br>冒泡排序，其代码如下：</p>
+<pre><code>void bubbleSort(int *a,int n)  
+{  
+    int i,j;  
+    for(i=1;i&lt;n;i++)  
+        for(j=1;j&lt;n-i+1;j++){  
+            if(a[j+1]&lt;a[j]){  
+                a[j]=a[j]+a[j+1];  
+                a[j+1]=a[j]-a[j+1];  
+                a[j]=a[j]-a[j+1];  
+            }  
+        }  
+}
+</code></pre><p>这个冒泡排序只能对int型数组进行排序。如果我们想写这样一个函数，能同时对int型、float型、double型、char型、结构体类型…数组进行排序，该怎么写呢？也许你会想到函数重载，但是C语言没有这个概念。这里可以用函数指针来实现，其代码比重载更简洁，更高效这也是函数指针的最大用处，参考代码：</p>
+<pre><code>//回调函数对多种数据类型数组进行冒泡排序  
+//a表示待排序数组  
+//n表示数组长度  
+//size表示数组元素大小(即每个数组元素占用的字节数)  
+//int (*compare)(void *,void *) 声明了一个函数指针，在此作为参数  
+//void *类型的指针表示指向未知类型的指针,编译器并不会给void类型的指针分配空间,但我们可以把它进行强制类型转换  
+void bubbleSort(void *a,int n,int size,int (*compare)(void *,void *))  
+{  
+    int i,j,k;  
+    char *p,*q;  
+    char temp;//交换时暂存一个字节的数据  
+    for(i=0;i&lt;n;i++)  
+        for(j=0;j&lt;n-i-1;j++){  
+            //注意p,q都是字符类型的指针，加一都只移动一个字节  
+            p=(char*)a+j*size;  
+            q=(char*)a+(j+1)*size;  
+            if(compare(p,q)&gt;0)
+                {  
+                //一个一个字节的交换,从而实现了一个数据类型数据的交换  
+                for(k=0;k&lt;size;k++){  
+                    temp=*p;  
+                    *p=*q;  
+                    *q=temp;  
+                    p++;  
+                    q++;  
+                }  
+            }  
+        }  
+}
+</code></pre><p>（1）void<em>类型的指针未分配空间的，我们可以把它进行强制类型转换成char</em>。<br>（2）对数组元素进行交换时，并不是一次就把两个数交换了，因为我们并不知道数据的确切类型。但知道数组元素的大小，这样就可以逐个字节进行交换。比如对int类型（占用四个字节）的值a、b进行交换，先交换a、b的第一个字节，然后第二个字节…<br>理解了这个代码，该怎么用呢？参数要传入一个函数指针，于是必须要写一个比较两个数大小的函数，且函数原型必须与int (<em>compare)(void </em>,void *)相匹配。下面是测试各种类型数组排序的代码：</p>
+<pre><code>#include&lt;stdio.h&gt;  
+typedef struct{  
+    int data;  
+}Node;  
+
+//函数声明  
+int charCompare(void *a,void *b);  
+int intCompare(void *a,void *b);  
+int floatCompare(void *a,void *b);  
+int doubleCompare(void *a,void *b);  
+int nodeCompare(void *a,void *b);  
+void bubbleSort(void *a,int n,int size,int (*compare)(void *,void *));  
+
+//比较两个char类型的数据的大小，a&gt;b返回1，a&lt;b返回-1，a==b返回0  
+int charCompare(void *a,void *b)  
+{  
+    if(*(char*)a==*(char*)b)  
+        return 0;  
+    return *(char*)a&gt;*(char*)b?1:-1;  
+}  
+//比较两个int类型的数据的大小  
+int intCompare(void *a,void *b)  
+{  
+    if(*(int*)a==*(int*)b)  
+        return 0;  
+    return *(int*)a&gt;*(int*)b?1:-1;  
+}  
+//比较两个float类型的数据的大小  
+int floatCompare(void *a,void *b)  
+{  
+    if(*(float*)a==*(float*)b)  
+        return 0;  
+    return *(float*)a&gt;*(float*)b?1:-1;  
+}  
+//比较两个double类型的数据的大小  
+int doubleCompare(void *a,void *b)  
+{  
+    if(*(double*)a==*(double*)b)  
+        return 0;  
+    return *(double*)a&gt;*(double*)b?1:-1;  
+}  
+//比较两个结构体类型（Node）的数据的大小  
+int nodeCompare(void *a,void *b)  
+{  
+    if(((Node*)a)-&gt;data == ((Node*)b)-&gt;data)  
+        return 0;  
+    return ((Node*)a)-&gt;data &gt; ((Node*)b)-&gt;data ? 1 : -1;  
+}  
+
+void main()  
+{  
+    int i=0;  
+    //用于测试的各种类型数组  
+    char c[]={&apos;d&apos;,&apos;a&apos;,&apos;c&apos;,&apos;e&apos;,&apos;b&apos;};  
+    int a[]={3,2,4,0,1};  
+    float f[]={4.4,5.5,3.3,0,1};  
+    double b[]={4.4,5.5,3.3,0,1};  
+    Node n[]={{2},{0},{1},{4},{3}};  
+
+    //对各种数组进行排序  
+    puts(&quot;对char类型数组进行排序：&quot;);  
+    bubbleSort(c,5,sizeof(char),charCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%c &quot;,c[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对int类型数组进行排序：&quot;);  
+    bubbleSort(a,5,sizeof(int),intCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%d &quot;,a[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对float类型数组进行排序：&quot;);  
+    bubbleSort(f,5,sizeof(float),floatCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%.2f &quot;,f[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对double类型数组进行排序：&quot;);  
+    bubbleSort(b,5,sizeof(double),doubleCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%.2lf &quot;,b[i]);  
+    puts(&quot;&quot;);  
+
+    puts(&quot;对结构体（Node）类型数组进行排序：&quot;);  
+    bubbleSort(n,5,sizeof(Node),nodeCompare);  
+    for(i=0;i&lt;5;i++)  
+        printf(&quot;%d &quot;,n[i].data);  
+    puts(&quot;&quot;);  
+}  
+
+
+//回调函数对多种数据类型数组进行冒泡排序  
+//a表示待排序数组  
+//n表示数组长度  
+//size表示数组元素大小(即每个数组元素占用的字节数)  
+//int (*compare)(void *,void *) 声明了一个函数指针，在此作为参数  
+//void *类型的指针表示指向未知类型的指针,编译器并不会给void类型的指针分配空间,但我们可以把它进行强制类型转换  
+void bubbleSort(void *a,int n,int size,int (*compare)(void *,void *))  
+{  
+    int i,j,k;  
+    char *p,*q;  
+    char temp;//交换时暂存一个字节的数据  
+    for(i=0;i&lt;n;i++)  
+        for(j=0;j&lt;n-i-1;j++){  
+            //注意p,q都是字符类型的指针，加一都只移动一个字节  
+            p=(char*)a+j*size;  
+            q=(char*)a+(j+1)*size;  
+            if(compare(p,q)&gt;0){  
+                //一个一个字节的交换,从而实现了一个数据类型数据的交换  
+                for(k=0;k&lt;size;k++){  
+                    temp=*p;  
+                    *p=*q;  
+                    *q=temp;  
+                    p++;  
+                    q++;  
+                }  
+            }  
+        }  
+}
+</code></pre><p>#指针函数#<br>指针函数是指带指针的函数，即本质是一个函数。函数返回类型是某一类型的指针<br>    int <em>f(int a, int b);<br>此函数有返回值，返回值为int </em>，即返回值是指针类型的。<br>上面的函数声明又可以写成如下形式：<br>int<em> f(int a, int b);<br>让指针标志 </em> 与int紧贴在一起，而与函数名f间隔开，这样看起来就明了些了，f是函数名，返回值类型是一个int类型的指针。  </p>
+<p>#指针函数应用#<br>返回指针的函数，确切的说是返回指针类型的函数</p>
+<pre><code>#include&lt;stdio.h&gt;  
+//创建长度为n的动态数组  
+//这是一个指针函数  
+int* array(int n)  
+{  
+    int *a=(int*)malloc(sizeof(int)*n);  
+    return a;  
+}  
+void main()  
+{   
+    int i,n=3;  
+    int *a=array(n);  
+    for(i=0;i&lt;n;i++)  
+        a[i]=i;  
+    free(a);//注意a不用时要free掉，否则内存泄露  
+}
+</code></pre><p>参考文章<br><a href="https://wuyuans.com/2013/09/function-pointer" target="_blank" rel="external">函数指针总结</a><br><a href="函数指针与指针函数">http://blog.csdn.net/touch_2011/article/details/6984029</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/static关键字/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/21/排序算法之插入排序/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">13</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-C指针"><span class="nav-number">1.</span> <span class="nav-text">tags: [C指针]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chamo.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://BlueSky-chamo.github.io/2017/06/21/函数指针总结/';
+          this.page.identifier = '2017/06/21/函数指针总结/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chamo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+   <!-- 页面点击小红心 -->
+  <!-- <script type="text/javascript" src="/js/src/love.js"></script> -->
+
+</body>
+</html>
