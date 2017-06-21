@@ -98,24 +98,24 @@
 
 
 
-<meta name="description" content="title: 排序算法之冒泡排序date: 2017-03-30categories: C语言tags: [排序算法]  
+<meta name="description" content="title: 排序算法之冒泡排序date: 2017-03-30categories: C语言tags: [C排序]  
 
-冒泡排序冒泡排序：依次比较相邻的数据，将小数据放在前，大数据放在后；即第一趟先比较第1个和第2个数，大数在后，小数在前，再比较第2个数与第3个数，大数在后，小数在前，以此类推则将最大的数”滚动”到最后一个位置；第二趟则将次大的数滚动到倒数第二个位置……第n-1(n为无序数">
+冒泡排序冒泡排序：依次比较相邻的数据，将小数据放在前，大数据放在后；即第一趟先比较第1个和第2个数，大数在后，小数在前，再比较第2个数与第3个数，大数在后，小数在前，以此类推则将最大的数”滚动”到最后一个位置；第二趟则将次大的数滚动到倒数第二个位置……第n-1(n为无序数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="茶末园">
 <meta property="og:url" content="http://BlueSky-chamo.github.io/2017/06/21/排序算法之冒泡排序/index.html">
 <meta property="og:site_name" content="茶末园">
-<meta property="og:description" content="title: 排序算法之冒泡排序date: 2017-03-30categories: C语言tags: [排序算法]  
+<meta property="og:description" content="title: 排序算法之冒泡排序date: 2017-03-30categories: C语言tags: [C排序]  
 
-冒泡排序冒泡排序：依次比较相邻的数据，将小数据放在前，大数据放在后；即第一趟先比较第1个和第2个数，大数在后，小数在前，再比较第2个数与第3个数，大数在后，小数在前，以此类推则将最大的数”滚动”到最后一个位置；第二趟则将次大的数滚动到倒数第二个位置……第n-1(n为无序数">
+冒泡排序冒泡排序：依次比较相邻的数据，将小数据放在前，大数据放在后；即第一趟先比较第1个和第2个数，大数在后，小数在前，再比较第2个数与第3个数，大数在后，小数在前，以此类推则将最大的数”滚动”到最后一个位置；第二趟则将次大的数滚动到倒数第二个位置……第n-1(n为无序数据">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-19/39857098-file_1492562250926_200e.jpg">
 <meta property="og:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-19/63589360-file_1492563233604_b127.jpg">
-<meta property="og:updated_time" content="2017-06-21T07:22:40.393Z">
+<meta property="og:updated_time" content="2017-06-21T08:30:57.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="茶末园">
-<meta name="twitter:description" content="title: 排序算法之冒泡排序date: 2017-03-30categories: C语言tags: [排序算法]  
+<meta name="twitter:description" content="title: 排序算法之冒泡排序date: 2017-03-30categories: C语言tags: [C排序]  
 
-冒泡排序冒泡排序：依次比较相邻的数据，将小数据放在前，大数据放在后；即第一趟先比较第1个和第2个数，大数在后，小数在前，再比较第2个数与第3个数，大数在后，小数在前，以此类推则将最大的数”滚动”到最后一个位置；第二趟则将次大的数滚动到倒数第二个位置……第n-1(n为无序数">
+冒泡排序冒泡排序：依次比较相邻的数据，将小数据放在前，大数据放在后；即第一趟先比较第1个和第2个数，大数在后，小数在前，再比较第2个数与第3个数，大数在后，小数在前，以此类推则将最大的数”滚动”到最后一个位置；第二趟则将次大的数滚动到倒数第二个位置……第n-1(n为无序数据">
 <meta name="twitter:image" content="http://ogdiq8qnd.bkt.clouddn.com/17-4-19/39857098-file_1492562250926_200e.jpg">
 
 
@@ -589,7 +589,7 @@
 
       
         <hr>
-<p>title: 排序算法之冒泡排序<br>date: 2017-03-30<br>categories: C语言<br>tags: [排序算法]  </p>
+<p>title: 排序算法之冒泡排序<br>date: 2017-03-30<br>categories: C语言<br>tags: [C排序]  </p>
 <hr>
 <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>冒泡排序：<br>依次比较相邻的数据，将小数据放在前，大数据放在后；即第一趟先比较第1个和第2个数，大数在后，小数在前，再比较第2个数与第3个数，大数在后，小数在前，以此类推则将最大的数”滚动”到最后一个位置；第二趟则将次大的数滚动到倒数第二个位置……第n-1(n为无序数据的个数)趟即能完成排序。<br><a id="more"></a><br>如下图中的第一趟比较过程，元素40被移动到最后位置，依次类推，第二趟比较过程将元素14移动到倒数第二位位置，需要N-1趟即可排序完成，实现元素从小到大排序。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-19/39857098-file_1492562250926_200e.jpg" alt=""></p>
 <h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><p>设数组长度为N。</p>
