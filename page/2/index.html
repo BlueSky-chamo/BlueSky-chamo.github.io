@@ -497,7 +497,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件权限之chown命令/">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件查找之locate命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chamo">
@@ -519,8 +519,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/30/linux命令学习-文件权限之chown命令/" itemprop="url">
-                  linux命令学习之文件目录命令-chown命令
+                <a class="post-title-link" href="/2017/03/30/linux命令学习-文件查找之locate命令/" itemprop="url">
+                  linux命令学习之文件查找命令-locate命令
                 </a>
               
             
@@ -577,9 +577,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/30/linux命令学习-文件权限之chown命令/#comments" itemprop="discussionUrl">
+                <a href="/2017/03/30/linux命令学习-文件查找之locate命令/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/30/linux命令学习-文件权限之chown命令/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/03/30/linux命令学习-文件查找之locate命令/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -606,11 +606,10 @@
 
       
         
-          <h1 id="chown简介"><a href="#chown简介" class="headerlink" title="chown简介"></a><strong>chown简介</strong></h1><hr>
-<p>chown将指定文件的拥有者改为指定的用户或组，用户可以是用户名或者用户ID；组可以是组名或者组ID；  文件是以空格分开的要改变权限的文件列表，支持通配符。系统管理员经常使用chown命令，在将文件拷贝到另一个用户的名录下之后，让用户拥有使用该文件的权限。<br>
+          <h1 id="locate简介"><a href="#locate简介" class="headerlink" title="locate简介"></a><strong>locate简介</strong></h1><p>locate让使用者可以很快速的搜寻档案系统内是否有指定的档案。其方法是先建立一个包括系统内所有档案名称及路径的数据库，之后当寻找时就只需查询这个数据库，而不必实际深入档案系统之中了。在一般的 distribution 之中，数据库的建立都被放在 crontab 中自动执行。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/30/linux命令学习-文件权限之chown命令/#more" rel="contents">
+            <a class="btn" href="/2017/03/30/linux命令学习-文件查找之locate命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1921,7 +1920,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之mkdir命令/">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之ls命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chamo">
@@ -1943,8 +1942,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/30/linux命令学习-文件目录之mkdir命令/" itemprop="url">
-                  linux命令学习之文件目录命令-mkdir命令
+                <a class="post-title-link" href="/2017/03/30/linux命令学习-文件目录之ls命令/" itemprop="url">
+                  linux命令学习之文件目录命令-ls命令
                 </a>
               
             
@@ -2001,9 +2000,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/30/linux命令学习-文件目录之mkdir命令/#comments" itemprop="discussionUrl">
+                <a href="/2017/03/30/linux命令学习-文件目录之ls命令/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/30/linux命令学习-文件目录之mkdir命令/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/03/30/linux命令学习-文件目录之ls命令/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2030,10 +2029,10 @@
 
       
         
-          <h1 id="mkdir简介"><a href="#mkdir简介" class="headerlink" title="mkdir简介"></a><strong>mkdir简介</strong></h1><p>mkdir命令用来创建指定的名称的目录，要求创建目录的用户在当前目录中具有写权限，并且指定的目录名不能是当前目录中已有的目录。<br>
+          <h1 id="ls简介"><a href="#ls简介" class="headerlink" title="ls简介"></a>ls简介</h1><p>&nbsp;ls用来打印出当前目录的清单，如果ls指定目录那么就会显示指定目录里的文件及文件夹清单。 通过ls 命令不仅可以查看linux文件夹包含的文件，而且可以查看文件权限(包括目录、文件夹、文件权限)，目录信息等等。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/30/linux命令学习-文件目录之mkdir命令/#more" rel="contents">
+            <a class="btn" href="/2017/03/30/linux命令学习-文件目录之ls命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

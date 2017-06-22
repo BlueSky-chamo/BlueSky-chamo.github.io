@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://BlueSky-chamo.github.io/download/index.html</loc>
+    
+    <lastmod>2017-06-22T02:48:59.849Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://BlueSky-chamo.github.io/about/index.html</loc>
+    
+    <lastmod>2017-06-21T09:13:49.909Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://BlueSky-chamo.github.io/2017/03/29/Notepad++%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
     
     <lastmod>2017-06-21T09:01:19.569Z</lastmod>
@@ -443,23 +457,9 @@
   </url>
   
   <url>
-    <loc>http://BlueSky-chamo.github.io/download/index.html</loc>
-    
-    <lastmod>2017-05-09T01:23:02.550Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://BlueSky-chamo.github.io/404.html</loc>
     
     <lastmod>2017-03-30T09:34:20.283Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://BlueSky-chamo.github.io/about/index.html</loc>
-    
-    <lastmod>2017-03-30T08:53:22.383Z</lastmod>
     
   </url>
   
