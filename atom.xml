@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>茶末园</title>
+  <subtitle>Different every day</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://BlueSky-chamo.github.io/"/>
+  <updated>2017-06-21T06:21:46.131Z</updated>
+  <id>http://BlueSky-chamo.github.io/</id>
+  
+  <author>
+    <name>Chamo</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>回顾51单片机之定时器简介</title>
+    <link href="http://BlueSky-chamo.github.io/2017/04/21/%E5%9B%9E%E9%A1%BE%E5%8D%95%E7%89%87%E6%9C%BA%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E7%AE%80%E4%BB%8B/"/>
+    <id>http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之定时器简介/</id>
+    <published>2017-04-20T16:00:00.000Z</published>
+    <updated>2017-06-21T06:21:46.131Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="时钟周期"><a href="#时钟周期" class="headerlink" title="时钟周期"></a>时钟周期</h1><p>单片机外接晶振的振荡周期就是时钟周期。80C51单片机外接了一个11.0592M的晶体振荡器，单片机系统的时钟周期是1/11.0592M，周期是频率的倒数。51单片机时钟频率范围是1.MHZ-12MHZ，把一个时钟周期定义为一个节拍（P）,二个节拍定义为一个状态周期（S）。<br><a id="more"></a></p>
+<h1 id="机器周期"><a href="#机器周期" class="headerlink" title="机器周期"></a>机器周期</h1><p>单片机执行指令所消耗的最小时间单位。51单片机采用的CISC(复杂指令指令集)，各条指令执行的时间可能不一样，但是它们执行的时间必须是机器周期的整数倍。51系列单片机将一个机器周期划分为6个状态周期，即S1-S6，每个状态周期又由两个节拍组成，P1和P2，而P1=P2=时钟周期。因此，51单片机的机器周期=6个状态周期=12个时钟周期。这也就是经常说的51单片机的的时钟频率是晶振频率的12分频，或者是1/12。</p>
+<h1 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h1><p>指令周期执行某一条指令所消耗的时间，它等于机器周期的整数倍。指令不同，所需的机器周期数也不同。简单的单字节指令。在取指令周期中，指令取出到指令寄存器后立即译码执行；复杂的指令如转移指令，乘法指令，则需要两个或以上的机器周期。  </p>
+<h1 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h1><p>C51单片机内部设有两个16位的可编程定时器/计数器，分别由两个8位专用寄存器组成，即：T0由TH0和TL0构成；T1由TH1和TL1构成，其访问地址依次为8AH-8DH。此外，其内部还有一个8位的定时器方式寄存器TMOD和一个8位的定时控制寄存器TCON，TMOD主要是用于选定定时器的工作方式；TCON主要是用于控制定时器的启动停止，此外TCON还可以保存T0、T1的溢出和中断标志。当定时器工作在计数方式时，外部事件通过引脚T0（P3.4）和T1（P3.5）输入。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/62671924-file_1492996251417_b444.png" alt=""></p>
+<h2 id="定时计数原理"><a href="#定时计数原理" class="headerlink" title="定时计数原理"></a>定时计数原理</h2><p>16位的定时器/计数器实质上就是一个加1计数器,当定时器/计数器为定时工作方式时，计数器的加1信号由振荡器的12分频信号产生，即每过一个机器周期，计数器加1，直至计满溢出为止。显然，定时器的定时时间与系统的振荡频率有关。因一个机器周期等于12个振荡周期，所以计数频率fcount=1/12osc。如果晶振为12MHz，则计数周期为：</p>
+<pre><code>T=1/（12×106）Hz×1/12=1μs
+</code></pre><p>当定时器/计数器为计数工作方式时，通过引脚T0和T1对外部信号计数，外部脉冲的下降沿将触发计数。计数器在每个机器周期的S5P2期间采样引脚输入电平。若一个机器周期采样值为1，下一个机器周期采样值为0，则计数器加1。此后的机器周期S3P1期间，新的计数值装入计数器。所以检测一个由1至0的跳变需要两个机器周期，故外部事件的最高计数频率为振荡频率的1/24。例如，如果选用12MHz晶振，则最高计数频率为0.5MHz。为了确保某给定电平在变化前至少被采样一次，外部计数脉冲的高电平与低电平保持时间均需在一个机器周期以上。</p>
+<h2 id="定时器-计数器方式寄存器TMOD"><a href="#定时器-计数器方式寄存器TMOD" class="headerlink" title="定时器/计数器方式寄存器TMOD"></a>定时器/计数器方式寄存器TMOD</h2><p>定时器方式控制寄存器TMOD在特殊功能寄存器中，字节地址为89H，无位地址。  </p>
+<p>C／T：定时器／计数器选择位。C/T＝1，为计数器方式；C／T＝0，为定时器方式。</p>
+<p>M1M0：工作方式选择位，定时器／计数器的4种工作方式由M1M0设定。</p>
+<p>0 0                  工作方式0          13位计数器</p>
+<p>0 1                  工作方式1          16位计数器</p>
+<p>1 0                  工作方式2           自动再装入8位计数器</p>
+<p>1 1                  工作方式3          定时器0：分成两个8位计数器，定时器1：停止计数<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/52992728-file_1492996982934_2ab7.jpg" alt=""></p>
+<h2 id="定时器-计数器控制寄存器TCON"><a href="#定时器-计数器控制寄存器TCON" class="headerlink" title="定时器/计数器控制寄存器TCON"></a>定时器/计数器控制寄存器TCON</h2><p> TCON在特殊功能寄存器中，字节地址为88H，位地址(由低位到高位)为88H一8FH<br><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-24/60731089-file_1492997134291_7afd.jpg" alt=""></p>
+<p>TF1：定时器1溢出标志位。当字时器1计满溢出时，由硬件使TF1置“1”，并且申请中断。进入中断服务程序后，由硬件自动清“0”，在查询方式下用软件清“0”。</p>
+<p>TR1：定时器1运行控制位。由软件清“0”关闭定时器1。当GATE=1，且INT1为高电平时，TR1置“1”启动定时器1；当GATE=0，TR1置“1”启动定时器1。</p>
+<p>TF0：定时器0溢出标志。其功能及操作情况同TF1。</p>
+<p>TR0：定时器0运行控制位。其功能及操作情况同TR1。</p>
+<p>IE1：外部中断1请求标志。</p>
+<p>IT1：外部中断1触发方式选择位。</p>
+<p>IE0：外部中断0请求标志。</p>
+<p>IT0：外部中断0触发方式选择位。</p>
+<h1 id="定时器初始化"><a href="#定时器初始化" class="headerlink" title="定时器初始化"></a>定时器初始化</h1><h2 id="确定工作方式"><a href="#确定工作方式" class="headerlink" title="确定工作方式"></a>确定工作方式</h2><p>方式0：13位定时计数方式，最大计数值为2^13=8192,定时8192个机器周期。</p>
+<p>方式1：16位定时计数方式，最大计数值为2^16=65536,定时65536个机器周期。此方式可实现最大的定时时间和最大计数次数。是最常用方式之一。</p>
+<p>方式2：8位自动重装计数方式，最大计数值为2^8=256,定时256个机器周期。此方式工作时定时或计数到了不用重装初值，精度较高。另外在串口通讯时常用此方式。是最常用方式之一。</p>
+<p>方式3：特殊工作方式。将定时器0分成两个8位功能不全的定时计数器，要占用T1部分功能。</p>
+<h2 id="定时器初值"><a href="#定时器初值" class="headerlink" title="定时器初值"></a>定时器初值</h2><p>定时时间=（最大计数值-初值）X 晶振周期 X 12<br>或 定时时间=（最大计数值-初值）X 机器周期    </p>
+<p>定时器寄存器为16为，分高8位TH0和低8位TL0,以8位为单位进行封装，将TH0装入初值N/256,低8位TL0装入初值N%256。即定时器初值计算公式为：<br>TH0=(最大计数值M-初值N)/256<br>TL0=(最大计数值M-初值N)%256  </p>
+<p>机器周期=12时钟周期，12MHZ晶振下，机器周期=1us,定时1s=1000000机器周期，初值=最大机器周期-初值机器周期</p>
+<p>例如：<br>10MS定时器初值的计算：<br>1.晶振12M<br>12MHz除12为1MHz，也就是说一秒=1000000次机器周期。10ms=10000次 机器周期。<br>65536-10000=55536(d8f0)<br>TH0=0xd8，TL0=0xf0  </p>
+<p>2.晶振11.0592M<br>11.0592MHz除12为921600Hz，就是一秒921600次机器周期，10ms=9216次机器周期。<br>65536-9216=56320(dc00)<br>TH0=0xdc，TL0=0x00  </p>
+<h2 id="启动定时器"><a href="#启动定时器" class="headerlink" title="启动定时器"></a>启动定时器</h2><p>根据需要打开定时器中断，启动定时器。</p>
+<pre><code>EA = 1;             //打开总中断
+ET0 = 1;         //定时器0中断
+TR0 = 1;         //打开定时器0
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;时钟周期&quot;&gt;&lt;a href=&quot;#时钟周期&quot; class=&quot;headerlink&quot; title=&quot;时钟周期&quot;&gt;&lt;/a&gt;时钟周期&lt;/h1&gt;&lt;p&gt;单片机外接晶振的振荡周期就是时钟周期。80C51单片机外接了一个11.0592M的晶体振荡器，单片机系统的时钟周期是1/11.0592M，周期是频率的倒数。51单片机时钟频率范围是1.MHZ-12MHZ，把一个时钟周期定义为一个节拍（P）,二个节拍定义为一个状态周期（S）。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+    
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+      <category term="定时器" scheme="http://BlueSky-chamo.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>回顾51单片机之enum用法</title>
+    <link href="http://BlueSky-chamo.github.io/2017/04/21/%E5%9B%9E%E9%A1%BE%E5%8D%95%E7%89%87%E6%9C%BA%E4%B9%8Benum%E7%94%A8%E6%B3%95/"/>
+    <id>http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之enum用法/</id>
+    <published>2017-04-20T16:00:00.000Z</published>
+    <updated>2017-06-21T06:21:33.253Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在单片机工程中使用enum来替代define，增加代码的可读性<br><a id="more"></a></p>
+<h1 id="enum简介"><a href="#enum简介" class="headerlink" title="enum简介"></a>enum简介</h1><h2 id="enum定义"><a href="#enum定义" class="headerlink" title="enum定义"></a>enum定义</h2><pre><code>enum DAY
+{
+      MON=1, TUE, WED, THU, FRI, SAT, SUN
+};
+</code></pre><p>(1) 枚举型是一个集合，集合中的元素(枚举成员)是一些命名的整型常量，元素之间用逗号隔开。<br>(2) DAY是一个标识符，可以看成这个集合的名字，是一个可选项，即是可有可无的项。<br>(3) 第一个枚举成员的默认值为整型的0，后续枚举成员的值在前一个成员上加1。<br>(4) 可以人为设定枚举成员的值，从而自定义某个范围内的整数。<br>(5) 枚举型是预处理指令#define的替代。<br>(6) 类型定义以分号结束。<br>在实际使用中，更倾向于利用Typedef进行定义，定以后Day=enum DAY，方便枚举对象的声明与赋值</p>
+<pre><code>typedef enum DAY
+    {
+          MON=1, TUE, WED, THU, FRI, SAT, SUN
+    }Day;
+</code></pre><h2 id="enum变量声明与赋值"><a href="#enum变量声明与赋值" class="headerlink" title="enum变量声明与赋值"></a>enum变量声明与赋值</h2><p>以typedef为例:</p>
+<pre><code>Day day=MON;
+</code></pre><h1 id="单片机应用实例"><a href="#单片机应用实例" class="headerlink" title="单片机应用实例"></a>单片机应用实例</h1><p>在单片机工程中的Led.h头文件中，定义以下结构体表面led灯号</p>
+<pre><code>/************************************************************
+***结构体名称：Led_Num
+***简述：led灯号结构体，表面属于哪个led
+*************************************************************/
+typedef enum LedNum
+{
+    LED_ALL=0,
+    LED1=1,
+    LED2=2,
+    LED3=3,
+    LED4=4,
+    LED5=5,
+    LED6=6,
+    LED7=7,
+    LED8=8
+}Led_Num;
+/************************************************************
+***结构体名称：Led_Status
+***简述：led灯状态，亮或熄灭
+*************************************************************/
+typedef enum LedStatus
+{
+    OFF=0,
+    ON=1
+}Led_Status;
+</code></pre><p>在Led.c源文件中，Led_ON_OFF()用来点亮或熄灭指定led灯，如下：</p>
+<pre><code>/**************************************************************
+//  作者:chamo
+//  日期:2017-4-20
+//  函数名:Led_ON_OFF
+//  功能:指定led灯亮熄
+//  输入参数      
+//  参数1:led等号LedNum
+//  参数2:led状态
+//  参数3:LedStatus，ON or OFF
+//  参数4:
+//  返回值:无
+**************************************************************/
+void Led_ON_OFF(int LedNum,int LedStatus)
+{
+    switch(LedNum)
+    {
+        case LED_ALL:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0x00;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0xFF;
+                }
+        break;
+        case LED1:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0xFE;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x01;
+                }
+        break;
+        case LED2:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0xFD;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x02;
+                }
+        break;
+        case LED3:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0xFB;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x04;
+                }
+        break;
+        case LED4:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0xF7;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x08;
+                }
+        break;
+        case LED5:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0xEF;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x10;
+                }
+        break;
+        case LED6:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0xDF;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x20;
+                }
+        break;
+        case LED7:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0xBF;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x40;
+                }
+        break;
+        case LED8:
+            if(LedStatus)
+                {
+                    GPIO_LED=GPIO_LED&amp;0x7F;
+                }
+            else
+                {
+                    GPIO_LED=GPIO_LED|0x80;
+                }
+        break;
+
+    }
+</code></pre><p>在main.c中，调用led接口函数即可实现指定led的亮熄  </p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &quot;common.h&quot;
+#include &quot;Led.h&quot;
+int main()
+{ 
+    Led_Num LedNum=LED1;//1号灯
+    Led_Status LedStatus=ON;//亮
+
+    Initial_Peripheral();//初始化外设
+    while(1)
+    {
+        Led_ON_OFF(LedNum,LedStatus);
+    }
+    return 0;
+}
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="enum与define比较"><a href="#enum与define比较" class="headerlink" title="enum与define比较"></a>enum与define比较</h2><p>enum:<br>缺点：只能为整型值，不仅占用空间，还消耗cpu资源<br>优点：多个相关值一组，程序更容易维护，代码更加清晰，范围内有效，不会和其他定义冲突  </p>
+<p>define:<br>缺点：没有范围限制，全局有效，容易产生冲突<br>优点：可为多种类型之，如字符串，整型，浮点型</p>
+<p>在一般情况下尽量选择enum,增加代码的可读性和维护性。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在单片机工程中使用enum来替代define，增加代码的可读性&lt;br&gt;
+    
+    </summary>
+    
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+    
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+      <category term="enum" scheme="http://BlueSky-chamo.github.io/tags/enum/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux下FTP配置</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E4%B8%8Bftp%E9%85%8D%E7%BD%AE/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux下ftp配置/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:19:30.095Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="FTP原理"><a href="#FTP原理" class="headerlink" title="FTP原理"></a><strong>FTP原理</strong></h1><p>文件传输协议（FTP）是一种传统的网络协议，主要功能是实现服务器端与客户端直接的文件传送。FTP以TCP封装包的模式进行服务器与客户的连接，当连接建立后，使用者可以通过客户端程序连接服务器端，并进行文件的下载和上传。此外，还可以直接管理用户在服务器上的文件。<br><a id="more"></a></p>
+<h1 id="FTP功能"><a href="#FTP功能" class="headerlink" title="FTP功能"></a><strong>FTP功能</strong></h1><p>1）不同等级的使用者。<br>FTP预设情况下提供三种主要的身份：<br>实体账号（real user）<br>访客（guest）<br>匿名登入者（anonymous）<br>分成三种身份可以提高主机管理的便利性。例如，实体用户可以进行的动作比较多，而匿名登入者仅提供一个下载功能。</p>
+<p>2）命令记录与登入文件记录。<br>FTP可以利用系统的syslogd进行数据的记录。记录的数据包括了使用者曾经下达的命令与使用者传输的数据的记录</p>
+<p>3）限制或解除使用者所在的根目录。<br>为了避免使用者进入到linux系统的其他目录。这有利于提高系统的安全性。</p>
+<h1 id="FTP的用户类型"><a href="#FTP的用户类型" class="headerlink" title="FTP的用户类型"></a><strong>FTP的用户类型</strong></h1><p><strong>匿名用户（anonymous）</strong>：<br>常说的匿名登录，ftp服务器支持匿名登录时通常当用户匿名访问可以使用ftp/anoymous这两个用户匿名登录。<br><strong>本地用户(Real user)</strong>：<br>这类用户是指在FTP服务上拥有帐号，账号名称，密码信息存放在passwd,shadow文件中。当这类用户登录FTP服务器的时候，其默认的主目录就是其帐号命名的目录。但是，其还可以变更到其他目录中去。<br><strong>虚拟用户(Guest)</strong>：<br>使用独立的账号/密码数据文件，只能够访问自己的主目录。服务器通过这种方式来保障FTP服务上其他文件的安全性。</p>
+<h1 id="安装VSFTPD"><a href="#安装VSFTPD" class="headerlink" title="安装VSFTPD"></a><strong>安装VSFTPD</strong></h1><p>sudo apt-get install vsftpd  </p>
+<h1 id="配置VSFTPD"><a href="#配置VSFTPD" class="headerlink" title="配置VSFTPD"></a><strong>配置VSFTPD</strong></h1><p><strong>/etc/vsftpd.conf:主要配置文件：</strong><br><strong>关于主机的设置：</strong><br>connect_from_port_20=YES   ftp-data启动主动联机的port 20<br>listen_port=20   ftp访问端口<br>dirmessage_enable=YES   当使用者进入某个目录时，会显示该目录需要注意的内容。显示的文件预设是.message<br>write_enable=YES  是否允许使用者具有写入的权限<br>idle_session_timeout=600  空闲会话的超时限制。默认600s.空闲600s后自动断开连接<br>data_connection_timeout=120  数据超时限制，默认120s。    </p>
+<p><strong>实体用户登入者的配置</strong>：<br>local_enable=YES  实体用户允许登入<br>local_umask=022   用户的权限（把本该是777权限的文件夹改为了755）如果注释了该参数，该参数会启用默认权限掩码077，那么上传的文件权限将会变为600，文件夹权限变为700<br>chroot_local_user=YES   是否将使用者限制在自己的主目录中<br>chroot_list_enable=YES   是否启用将某些实体用户限制在主目录<br>chroot_list_fiel=/etc/vsftpd.chroot_list   被限制的实体用户主目录路径  </p>
+<p><strong>匿名用户登入的配置</strong><br>anonymous_enable=YES    允许匿名用户登入<br>anon_upload_enable=YES  允许匿名用户上传<br>anon_mkdir_write_enable=YES   允许匿名用户创建文件夹<br>deny_email_file=/etc/vsftpd.banned_emails  被拒绝的email地址<br>async_abor_enable=YES      是否认可异步的ABOR命令<br>xferlog_enable=YES        是否记录上传及下载日志<br>xferlog_fiel=/ver/log/vsftpd.log   上传和下载日志路径<br>xferlog_std_format=YES      是否设定为wu ftp相同的登入格式<br>nopriv_user=ftpsecure       以nobody作为此一服务执行者的权限，安全性较高<br>pam_service_name=vsftpd     pam模块的名称  </p>
+<p>/etc/pam.d/vsftpd:pam模块进行身份确认<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/56981093.jpg" alt=""><br>/etc/ftpusers:限制使用的ftp用户列表<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/28917045.jpg" alt=""><br>/usr/shin/vsftpd:vsftpd的主要执行文件  </p>
+<h1 id="重启VSFTPD"><a href="#重启VSFTPD" class="headerlink" title="重启VSFTPD"></a><strong>重启VSFTPD</strong></h1><p>udo service vsftpd restart  </p>
+<h1 id="匿名用户登入"><a href="#匿名用户登入" class="headerlink" title="匿名用户登入"></a><strong>匿名用户登入</strong></h1><p>在/etc/vsftpd.conf中配置允许匿名用户登入 （一般不允许）<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/64837639.jpg" alt="">  </p>
+<h1 id="实体用户登入"><a href="#实体用户登入" class="headerlink" title="实体用户登入"></a><strong>实体用户登入</strong></h1><p>在/etc/vsftpd.conf中配置运行实体用户登入<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/85348349.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;FTP原理&quot;&gt;&lt;a href=&quot;#FTP原理&quot; class=&quot;headerlink&quot; title=&quot;FTP原理&quot;&gt;&lt;/a&gt;&lt;strong&gt;FTP原理&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;文件传输协议（FTP）是一种传统的网络协议，主要功能是实现服务器端与客户端直接的文件传送。FTP以TCP封装包的模式进行服务器与客户的连接，当连接建立后，使用者可以通过客户端程序连接服务器端，并进行文件的下载和上传。此外，还可以直接管理用户在服务器上的文件。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux下telnet远程登入</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E4%B8%8Btelnet%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%85%A5/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux下telnet远程登入/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:19:48.757Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="telnet原理"><a href="#telnet原理" class="headerlink" title="telnet原理"></a><strong>telnet原理</strong></h1><p>当用Telnet登录进入远程计算机系统时，事实上启动了两个程序，一个 叫Telnet客户程序，它运行在你的本地机上；另一个叫Telnet服务器程序，它运行在你要登录的远程计算机上。<br><a id="more"></a><br><strong>本地机上的客户程序要完成如下功能：</strong><br>1 、建立与服务器的TCP 联接；<br>2 、从键盘上接收你输入的字符；<br>3 、把你输入的字符串变成标准格式并送给远程服务器；<br>4 、从远程服务器接收输出的信息；<br>5 、把该信息显示在你的屏幕上。   </p>
+<p><strong>远程计算机的“服务”程序通常被称为“精灵”，它平时不声不响地候在远程计算机上，一接到你的请求，就马上活跃起来，并完成如下功能：</strong><br>1 、通知你的计算机，远程计算机已经准备好了；<br>2 、等候你输入命令；<br>3 、对你的命令作出反应（如显示目录内容，或执行某个程序等）；<br>4 、把执行命令的结果送回给你的计算机；<br>5 、重新等候你的命令。   </p>
+<p>客户机上装一个telnet的客户端，服务器上装一个telnet的监听程序（精灵），一般这个监听程序监听的是23号端口。把这个过程简单抽象一下，就是客户端使用telnet工具发送一个命令到服务器端，服务器端监听到了之后就调用系统相关API来执行这些命令，从而达到了客户机远程操作服务器主机的目的。 </p>
+<p>这里需要注意一点，“把你输入的字符串变成标准格式并送给远程服务器”，指的是接受的字符，要按照一定的协议格式传送到服务器端，而这些字符是通过TCP连接传输的，跟Http有点像。Http是通过TCP连接传输字符，但是数据格式是HTTP协议规定的格式。简单来说，所谓的HTTP协议，FTP协议，SMTP协议，就是各自规定了以什么样的数据包方式在网络上通过TCP管道传输数据。  </p>
+<p>其实，telnet是以TCP为基础与服务器进行通信，所以它的功能远不止远程登录服务器（远程操纵服务器）。不管是什么协议，如果它基于 tcp/ip，那么你使用 TcpClient（或者 Socket）连接它，然后发点信息，依然能连通。Telnet可以看作是一种TCP的连接工具。</p>
+<h1 id="安装telnet"><a href="#安装telnet" class="headerlink" title="安装telnet"></a><strong>安装telnet</strong></h1><p>在Ubuntu下的telnet服务需要安装xinetd服务和telnetd服务  </p>
+<ol>
+<li>apt-get install xinetd  </li>
+<li>apt-get install telnetd  </li>
+</ol>
+<h1 id="配置telnet"><a href="#配置telnet" class="headerlink" title="配置telnet"></a><strong>配置telnet</strong></h1><p><strong>1.gedit /etc/inetd.conf</strong><br>没有则添加如下<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/10668144.jpg" alt=""><br>注释依次为：<br>服务名称。和xinetd一样，inetd通过查询/etc/service获得该服务的相关信息。<br>套接口类型。TCP用stream，UDP用dgram。<br>该服务使用的通信日志相关参数协议。<br>inetd是否等到守护进程结束才继续接管端口。wait表示等待（相当于xinetd的wait = yes），nowait表示不等待，inetd每次接到一个请求就启动守护进程的新副本（相当于xinetd的wait = no）。<br>运行该守护进程的用户身份。<br>守护进程二进制文件的完整路径及其命令行参数  </p>
+<p><strong>2.gedit /etc/xinetd.conf</strong><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/96571354.jpg" alt=""><br>注释：<br>instances = 60：表示最大连接进程数为60个。<br>log_type = SYSLOG daemon info：表示使用syslog进行服务登记。<br>log_on_success= HOST PID：表示设置成功后记录客户机的IP地址的进程ID。<br>log_on_failure = HOST：表示设置失败后记录客户机的IP地址。<br>cps = 25 30：表示每秒25个入站连接，如果超过限制，则等待30秒。主要用于对付拒绝服务攻击。 </p>
+<p><strong>3.gedit /etc/xinetd.d/telnet</strong><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/48135854.jpg" alt=""><br>注释：<br>disable = no：表示启用这个服务。<br>socket_type = stream：表示服务的数据包类型为stream。<br>wait = no：表示不需等待，即服务将以多线程的方式运行。<br>user = root：表示执行此服务进程的用户是root。<br>server = /usr/bin/in.telnetd：启动程序的位置。<br>log_on_failure += USERID：表示设置失败时，在/etc/xinetd.conf中设置的default值基础之上还把UID添加到系统登记表  </p>
+<h1 id="重启xinetd"><a href="#重启xinetd" class="headerlink" title="重启xinetd"></a><strong>重启xinetd</strong></h1><p><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/52936964.jpg" alt=""></p>
+<h1 id="查看telnet状态"><a href="#查看telnet状态" class="headerlink" title="查看telnet状态"></a><strong>查看telnet状态</strong></h1><p><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/90971824.jpg" alt=""></p>
+<h1 id="telnet端口"><a href="#telnet端口" class="headerlink" title="telnet端口"></a><strong>telnet端口</strong></h1><p>telnet端口默认23，一般不做修改，在/etc/services中查看，如果需要从其他端口启动该服务，则可收到配置<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/64674208.jpg" alt=""></p>
+<h1 id="telnet远程登入"><a href="#telnet远程登入" class="headerlink" title="telnet远程登入"></a><strong>telnet远程登入</strong></h1><p>使用putty进行telnet远程登入，默认端口是23，主机IP是linux下的IP地址，通过ifconfig查看。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/30473762.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/37847806.jpg" alt=""></p>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a><strong>备注</strong></h1><p><strong>xinetd 配置参数</strong><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/34724025.jpg" alt="">  </p>
+<p><strong>日志相关参数</strong><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/91161286.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;telnet原理&quot;&gt;&lt;a href=&quot;#telnet原理&quot; class=&quot;headerlink&quot; title=&quot;telnet原理&quot;&gt;&lt;/a&gt;&lt;strong&gt;telnet原理&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;当用Telnet登录进入远程计算机系统时，事实上启动了两个程序，一个 叫Telnet客户程序，它运行在你的本地机上；另一个叫Telnet服务器程序，它运行在你要登录的远程计算机上。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux下VNC远程访问</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E4%B8%8Bvnc%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%AE%BF%E9%97%AE/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux下vnc远程桌面访问/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:19:58.516Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="VNC远程桌面原理"><a href="#VNC远程桌面原理" class="headerlink" title="VNC远程桌面原理"></a><strong>VNC远程桌面原理</strong></h1><p><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/98023522.jpg" alt=""><br> vnc访问流程如下：<br>1，vnc客户端通过浏览器或者vnc viewer 连接至vnc server<br>2,vnc server 传送一个对话框至客户端，要求输入连接密码，以及存取的vnc server显示装置<br>3，在客户端输入联机密码后，vnc server验证客户端是否具有存取权限。<br>4，若是客户端通过vnc server的验证，客户端即要求vnc server显示桌面环境<br>5，vnc server通过x xprotocol协议要求x server将画面显示控制权交给vnc server<br>6，vnc server将来自x server的桌面环境利用vnc通信协议送至客户端，并且允许客户端控制vnc server的桌面环境及输入装置。<br><a id="more"></a></p>
+<h1 id="安装vnc"><a href="#安装vnc" class="headerlink" title="安装vnc"></a><strong>安装vnc</strong></h1><p>sudo apt-get install vnc4server</p>
+<h1 id="启动vnc"><a href="#启动vnc" class="headerlink" title="启动vnc"></a><strong>启动vnc</strong></h1><p>vncserver<br>第一次启动时会提示输入密码<br>注：创建一个指定会话号的vnc桌面<br>vncserver :2  创建一个指定会话号为2的桌面 </p>
+<h1 id="编辑启动脚本"><a href="#编辑启动脚本" class="headerlink" title="编辑启动脚本"></a><strong>编辑启动脚本</strong></h1><p>sudo gedit ~/.vnc/xstartup<br>若有twm,则注释掉，添加如下<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/83130259.jpg" alt=""> </p>
+<h1 id="重启vnc"><a href="#重启vnc" class="headerlink" title="重启vnc"></a><strong>重启vnc</strong></h1><p>结束之前的vnc线程<br>vncserver -kill :1<br>然后再启动vnc服务输入<br>vncserver</p>
+<h1 id="vnc-viewer登入"><a href="#vnc-viewer登入" class="headerlink" title="vnc viewer登入"></a><strong>vnc viewer登入</strong></h1><p>ifconfig查询linux的ip地址，ok后填入vncserver启动时设置的密码<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/33094218.jpg" alt=""><br>登入后发现只出现控制台界面，无法显示桌面<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/76906898.jpg" alt=""><br>将脚本中改为如下，关闭vncserver<br>vncserver -kill :1<br>再重启vncserver<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/14069850.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/92597568.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;VNC远程桌面原理&quot;&gt;&lt;a href=&quot;#VNC远程桌面原理&quot; class=&quot;headerlink&quot; title=&quot;VNC远程桌面原理&quot;&gt;&lt;/a&gt;&lt;strong&gt;VNC远程桌面原理&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/98023522.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt; vnc访问流程如下：&lt;br&gt;1，vnc客户端通过浏览器或者vnc viewer 连接至vnc server&lt;br&gt;2,vnc server 传送一个对话框至客户端，要求输入连接密码，以及存取的vnc server显示装置&lt;br&gt;3，在客户端输入联机密码后，vnc server验证客户端是否具有存取权限。&lt;br&gt;4，若是客户端通过vnc server的验证，客户端即要求vnc server显示桌面环境&lt;br&gt;5，vnc server通过x xprotocol协议要求x server将画面显示控制权交给vnc server&lt;br&gt;6，vnc server将来自x server的桌面环境利用vnc通信协议送至客户端，并且允许客户端控制vnc server的桌面环境及输入装置。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件压缩命令-gzip命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E4%B9%8Bgzip%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件压缩之gzip命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:19:01.532Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="gzip简介"><a href="#gzip简介" class="headerlink" title="gzip简介"></a><strong>gzip简介</strong></h1><hr>
+<p>减少文件大小有两个明显的好处，一是可以减少存储空间，二是通过网络传输文件时，可以减少传输的时间。gzip是在Linux系统中经常使用的一个对文件进行压缩和解压缩的命令，既方便又好用。gzip不仅可以用来压缩大的、较少使用的文件以节省磁盘空间，还可以和tar命令一起构成Linux操作系统中比较流行的压缩文件格式。据统计，gzip命令对文本文件有60%～70%的压缩率。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式：</strong><br>gzip[参数][文件或者目录]<br><strong>命令参数：</strong><br>-a或–ascii 　使用ASCII文字模式。<br>-c或–stdout或–to-stdout 　把压缩后的文件输出到标准输出设备，不去更动原始文件。<br>-d或–decompress或—-uncompress 　解开压缩文件。<br>-f或–force 　强行压缩文件。不理会文件名称或硬连接是否存在以及该文件是否为符号连接。<br>-h或–help 　在线帮助。<br>-l或–list 　列出压缩文件的相关信息。<br>-L或–license 　显示版本与版权信息。<br>-n或–no-name 　压缩文件时，不保存原来的文件名称及时间戳记。<br>-N或–name 　压缩文件时，保存原来的文件名称及时间戳记。<br>-q或–quiet 　不显示警告信息。<br>-r或–recursive 　递归处理，将指定目录下的所有文件及子目录一并处理。<br>-S&lt;压缩字尾字符串&gt;或—-suffix&lt;压缩字尾字符串&gt; 　更改压缩字尾字符串。<br>-t或–test 　测试压缩文件是否正确无误。<br>-v或–verbose 　显示指令执行过程。<br>-V或–version 　显示版本信息。<br>-num 用指定的数字num调整压缩的速度，-1或–fast表示最快压缩方法（低压缩比），-9或–best表示最慢压缩方法（高压缩比）。系统缺省值为6。   </p>
+<p><strong>命令功能：</strong><br>gzip是个使用广泛的压缩程序，文件经它压缩过后，名称后面会多出”.gz”的扩展名。</p>
+<hr>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1：把test1目录下的每个文件压缩成.gz文件<br>gzip *<br>原文件会被打包，tar下-c选型会新建打包文件，原文件存在<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/42699368.jpg" alt=""></p>
+<p>例2：把每个压缩的文件解压，并列出详细的信息<br>gzip -dv *<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/39078451.jpg" alt=""></p>
+<p>例3：详细显示每个压缩的文件的信息，并不解压<br>gzip -l *<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/79187696.jpg" alt=""></p>
+<p>例4：压缩一个tar文件，此时压缩文件的扩展名为.tar.gz<br>gzip -r log.tar<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/69244540.jpg" alt=""></p>
+<p>例5：递归的压缩目录<br>gzip -rv test1<br>test1下面的文件都变成了<em>.gz，目录依然存在只是目录里面的文件相应变成了</em>.gz.<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/70593706.jpg" alt=""></p>
+<p>例6：递归地解压目录<br>gzip -dr test1<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/93537882.jpg" alt=""></p>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;gzip简介&quot;&gt;&lt;a href=&quot;#gzip简介&quot; class=&quot;headerlink&quot; title=&quot;gzip简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;gzip简介&lt;/strong&gt;&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;减少文件大小有两个明显的好处，一是可以减少存储空间，二是通过网络传输文件时，可以减少传输的时间。gzip是在Linux系统中经常使用的一个对文件进行压缩和解压缩的命令，既方便又好用。gzip不仅可以用来压缩大的、较少使用的文件以节省磁盘空间，还可以和tar命令一起构成Linux操作系统中比较流行的压缩文件格式。据统计，gzip命令对文本文件有60%～70%的压缩率。&lt;/p&gt;
+&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件打包解压命令-tar命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E8%A7%A3%E5%8E%8B%E4%B9%8Btar%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件打包解压之tar命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:15:27.559Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="tar简介"><a href="#tar简介" class="headerlink" title="tar简介"></a><strong>tar简介</strong></h1><p>tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。<br><a id="more"></a><br><strong>两个概念：打包和压缩。</strong><br>打包是指将一大堆文件或目录变成一个总的文件；<br>压缩则是将一个大的文件通过一些压缩算法变成一个小文件。  </p>
+<p>Linux中很多压缩程序只能针对一个文件进行压缩，当你想要压缩一大堆文件时，得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。<br>linux下最常用的打包程序就是tar了，使用tar程序打出来的包我们常称为tar包，tar包文件的命令通常都是以.tar结尾的。生成tar包后，就可以用其它的程序来进行压缩。</p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式：</strong><br>tar[必要参数][选择参数][文件]<br>命令参数：<br>必要参数有如下：<br>-A 新增压缩文件到已存在的压缩<br>-B 设置区块大小<br><strong>-c 建立新的压缩文件 </strong><br>-d 记录文件的差别<br>-r 添加文件到已经压缩的文件<br>-u 添加改变了和现有的文件到已经存在的压缩文件<br><strong>-x 从压缩的文件中提取文件 </strong><br>-t 显示压缩文件的内容<br>-z 支持gzip解压文件<br>-j 支持bzip2解压文件<br>-Z 支持compress解压文件<br><strong>-v 显示操作过程</strong><br>-l 文件系统边界设置<br>-k 保留原有文件不覆盖<br>-m 保留文件不被覆盖<br>-W 确认压缩文件的正确性  </p>
+<p><strong>可选参数如下：</strong><br>-b 设置区块数目<br>-C 切换到指定目录<br><strong>-f 指定压缩文件</strong><br>–help 显示帮助信息<br>–version 显示版本信息  </p>
+<p><strong>命令功能：</strong><br>用来压缩和解压文件。tar本身不具有压缩功能。他是调用压缩功能实现的 </p>
+<h1 id="常见解压-压缩命令"><a href="#常见解压-压缩命令" class="headerlink" title="常见解压/压缩命令"></a><strong>常见解压/压缩命令</strong></h1><p><strong>tar</strong><br>解包：tar xvf FileName.tar<br>打包：tar cvf FileName.tar DirName<br>（注：tar是打包，不是压缩！）  </p>
+<p><strong>.gz </strong><br>解压1：gunzip FileName.gz<br>解压2：gzip -d FileName.gz<br>压缩：gzip FileName  </p>
+<p><strong>.tar.gz 和 .tgz</strong><br>解压：tar zxvf FileName.tar.gz<br>压缩：tar zcvf FileName.tar.gz DirName  </p>
+<p><strong>.bz2</strong><br>解压1：bzip2 -d FileName.bz2<br>解压2：bunzip2 FileName.bz2<br>压缩： bzip2 -z FileName  </p>
+<p><strong>.tar.bz2</strong><br>解压：tar jxvf FileName.tar.bz2<br>压缩：tar jcvf FileName.tar.bz2 DirName  </p>
+<p><strong>.bz</strong><br>解压1：bzip2 -d FileName.bz<br>解压2：bunzip2 FileName.bz<br>压缩：未知  </p>
+<p><strong>.tar.bz</strong><br>解压：tar jxvf FileName.tar.bz<br>压缩：未知  </p>
+<p><strong>.Z</strong><br>解压：uncompress FileName.Z<br>压缩：compress FileName  </p>
+<p><strong>.tar.Z</strong><br>解压：tar Zxvf FileName.tar.Z<br>压缩：tar Zcvf FileName.tar.Z DirName  </p>
+<p><strong>.zip</strong><br>解压：unzip FileName.zip<br>压缩：zip FileName.zip DirName  </p>
+<p><strong>.rar</strong><br>解压：rar x FileName.rar<br>压缩：rar a FileName.rar DirName  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1：将文件全部打包成tar包<br>tar -cvf log.tar log2012.log<br>tar -zcvf log.tar.gz log2012.log<br>tar -jcvf log.tar.bz2 log2012.log<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/88220381.jpg" alt=""><br>tar -cvf log.tar log2012.log    仅打包，不压缩！<br>tar -zcvf log.tar.gz log2012.log   打包后，以 gzip 压缩<br>tar -zcvf log.tar.bz2 log2012.log  打包后，以 bzip2 压缩<br>在参数 f 之后的文件档名是自己取的，习惯上都用 .tar 来作为辨识。 如果加 z 参数，则  以 .tar.gz 或 .tgz 来代表 gzip 压缩过的 tar包； 如果加 j 参数，则以 .tar.bz2 来作为tar包名。</p>
+<p>例2：查阅上述 tar包内有哪些文件<br>tar -ztvf log.tar.gz<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/60780119.jpg" alt=""><br>由于使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得加上 z 这个参数。</p>
+<p>例3：将tar 包解压缩<br>tar -zxvf log.tar.gz<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/20594320.jpg" alt=""></p>
+<p>例4：只将 /tar 内的 部分文件解压出来<br>tar -zxvf log.tar.gz 1.log<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/58004986.jpg" alt=""></p>
+<p>例5：文件备份下来，并且保存其权限(-p 的属性)<br>tar -zcvpf log.tar.gz 1.log 2.log 3.log<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/94148095.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/85703889.jpg" alt=""></p>
+<p>例6：在 文件夹当中，比某个日期新的文件才备份<br>tar -N “2012/11/13” -zcvf log.tar.gz test1  </p>
+<p>例7：备份文件夹内容是排除部分文件<br>tar –exclude test1 -zcvf Test.tar.gz *<br>除了test1外，其他都打包<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/53586720.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/86435790.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;tar简介&quot;&gt;&lt;a href=&quot;#tar简介&quot; class=&quot;headerlink&quot; title=&quot;tar简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;tar简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件权限命令-chgrp命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchgrp%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件权限之chgrp命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:17:57.421Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="chgrp简介"><a href="#chgrp简介" class="headerlink" title="chgrp简介"></a><strong>chgrp简介</strong></h1><hr>
+<p>在lunix系统里，文件或目录的权限的掌控以拥有者及所属群组来管理。可以使用chgrp指令取变更文件与目录所属群组，这种方式采用群组名称或群组识别码都可以。Chgrp命令就是change group的缩写！要被改变的组名必须要在/etc/group文件内存在才行。<br><a id="more"></a></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><hr>
+<p><strong>命令格式：</strong><br>chgrp [选项] [组] [文件]<br><strong>命令功能：</strong><br>chgrp命令可采用群组名称或群组识别码的方式改变文件或目录的所属群组。使用权限是超级用户。<br><strong>命令参数：</strong><br><strong>必要参数:</strong><br>-c 当发生改变时输出调试信息<br>-f 不显示错误信息<br>-R 处理指定目录以及其子目录下的所有文件<br>-v 运行时显示详细的处理信息<br>–dereference 作用于符号链接的指向，而不是符号链接本身<br>–no-dereference 作用于符号链接本身<br><strong>选择参数:</strong><br>–reference=&lt;文件或者目录&gt;<br>–help 显示帮助信息<br>–version 显示版本信息  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><hr>
+<p>例1：改变文件的群组属性<br>chgrp -v test 1.log<br>先建立test工作组，将1.log文件群组改为test群组<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/5335985.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/38906738.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/52128739.jpg" alt=""><br>例2：根据指定文件改变文件的群组属性<br>chgrp –reference=1.log 2.log<br>改变文件2.log 的群组属性，使得文件2.log的群组属性和参考文件1.log的群组属性相同<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/99742721.jpg" alt=""><br>例3：改变指定目录以及其子目录下的所有文件的群组属性<br>chgrp -R test test1<br>改变指定目录以及其子目录下的所有文件的群组属性<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/97422495.jpg" alt=""></p>
+<p>例4：通过群组识别码改变文件群组属性<br>chgrp -R 1001 1.log<br>通过群组识别码改变文件群组属性，1001为test群组的识别码，具体群组和群组识别码可以<br>cat /etc/group查看<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/18259959.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;chgrp简介&quot;&gt;&lt;a href=&quot;#chgrp简介&quot; class=&quot;headerlink&quot; title=&quot;chgrp简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;chgrp简介&lt;/strong&gt;&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;在lunix系统里，文件或目录的权限的掌控以拥有者及所属群组来管理。可以使用chgrp指令取变更文件与目录所属群组，这种方式采用群组名称或群组识别码都可以。Chgrp命令就是change group的缩写！要被改变的组名必须要在/etc/group文件内存在才行。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-chown命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchown%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件权限之chown命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:18:36.340Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="chown简介"><a href="#chown简介" class="headerlink" title="chown简介"></a><strong>chown简介</strong></h1><hr>
+<p>chown将指定文件的拥有者改为指定的用户或组，用户可以是用户名或者用户ID；组可以是组名或者组ID；  文件是以空格分开的要改变权限的文件列表，支持通配符。系统管理员经常使用chown命令，在将文件拷贝到另一个用户的名录下之后，让用户拥有使用该文件的权限。<br><a id="more"></a></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><hr>
+<p><strong>命令格式：</strong></p>
+<p>chown [选项] [所有者][:[组]] 文件…</p>
+<p><strong>命令功能：</strong><br>通过chown改变文件的拥有者和群组。在更改文件的所有者或所属群组时，可以使用用户名称和用户识别码设置。普通用户不能将自己的文件改变成其他的拥有者。其操作权限一般为管理员。  </p>
+<p><strong>命令参数：</strong><br><strong>必要参数:</strong><br>-c 显示更改的部分的信息<br>-f 忽略错误信息<br>-h 修复符号链接<br>-R 处理指定目录以及其子目录下的所有文件<br>-v 显示详细的处理信息<br>-deference 作用于符号链接的指向，而不是链接文件本身  </p>
+<p><strong>选择参数:</strong><br>–reference=&lt;目录或文件&gt; 把指定的目录/文件作为参考，把操作的文件/目录设置成参考文件/目录相同拥有者和群组<br>–from=&lt;当前用户：当前群组&gt; 只有当前用户和群组跟指定的用户和群组相同时才进行改变<br>–help 显示帮助信息<br>–version 显示版本信息  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><hr>
+<p>例1：改变拥有者和群组<br>　chown root:jiangbiao 1.log<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/71486373.jpg" alt=""><br>当为root: 以及jiangbiao: 形式时，工作组默认与拥有者一样<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/69251199.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/69251199.jpg" alt=""><br>例3：改变文件群组<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/25890988.jpg" alt=""></p>
+<p>例4：改变指定目录以及其子目录下的所有文件的拥有者和群组<br>chown -R -v root:test test1<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/96742714.jpg" alt="">  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;chown简介&quot;&gt;&lt;a href=&quot;#chown简介&quot; class=&quot;headerlink&quot; title=&quot;chown简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;chown简介&lt;/strong&gt;&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;chown将指定文件的拥有者改为指定的用户或组，用户可以是用户名或者用户ID；组可以是组名或者组ID；  文件是以空格分开的要改变权限的文件列表，支持通配符。系统管理员经常使用chown命令，在将文件拷贝到另一个用户的名录下之后，让用户拥有使用该文件的权限。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-chmod命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchmod%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件权限之chmod命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:18:26.165Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="chmod简介"><a href="#chmod简介" class="headerlink" title="chmod简介"></a><strong>chmod简介</strong></h1><p>chmod命令用于改变linux系统文件或目录的访问权限。用它控制文件或目录的访问权限。<br><a id="more"></a><br>该命令有两种用法。一种是包含字母和操作符表达式的文字设定法；另一种是包含数字的数字设定法。<br>Linux系统中的每个文件和目录都有访问许可权限，用它来确定谁可以通过何种方式对文件和目录进行访问和操作。 </p>
+<p>文件或目录的访问权限分为只读，只写和可执行三种。以文件为例，只读权限表示只允许读其内容，而禁止对其做任何的更改操作。可执行权限表示允许将该文件作为一个程序执行。文件被创建时，文件所有者自动拥有对该文件的读、写和可执行权限，以便于对文件的阅读和修改。用户也可根据需要把访问权限设置为需要的任何组合。  </p>
+<p>有三种不同类型的用户可对文件或目录进行访问：文件所有者，同组用户、其他用户。<br>所有者一般是文件的创建者。所有者可以允许同组用户有权访问文件，还可以将文件的访问权限赋予系统中的其他用户。在这种情况下，系统中每一位用户都能访问该用户拥有的文件或目录。  </p>
+<p>每一文件或目录的访问权限都有三组，每组用三位表示，分别为文件属主的读、写和执行权限；与属主同组的用户的读、写和执行权限；系统中其他用户的读、写和执行权限。当用ls -l命令显示文件或目录的详细信息时，最左边的一列为文件的访问权限<br>列表的列定义如下：<br>[权限属性信息] [连接数] [拥有者] [拥有者所属用户组] [大小] [最后修改时间] [文件名]  </p>
+<p>权限属性列表为10个字符：<br>第一个字符表示文件类型，d为目录 -为普通文件 l为连接 b为可存储的接口设备 c为键盘鼠标等输入设备<br>2、3、4个字符表示所有者权限，5、6、7个字符表示所有者同组用户权限，8、9、10为其他用户权限<br>第二个字符表示所有者读权限，如果有权限则为r，没有权限则为-<br>第三个字符表示所有者写权限，如果有权限则为w，没有权限则为-<br>第四个字符表示所有者执行权限，如果有权限则为x，没有权限则为-<br>第五个字符表示所有者同组用户读权限，如果有权限则为r，没有权限则为-<br>第六个字符表示所有者同组用户写权限，如果有权限则为w，没有权限则为-<br>第七个字符表示所有者同组用户执行权限，如果有权限则为x，没有权限则为-<br>第八个字符表示其他非同组读权限，如果有权限则为r，没有权限则为-<br>第九个字符表示其他非同组写权限，如果有权限则为w，没有权限则为-<br>第十个字符表示其他非同组执行权限，如果有权限则为x，没有权限则为-  </p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式:</strong><br>chmod [-cfvR] [–help] [–version] mode file<br><strong>命令功能：</strong><br>用于改变文件或目录的访问权限，用它控制文件或目录的访问权限。<br><strong>命令参数：</strong><br><strong>必要参数：</strong><br>-c 当发生改变时，报告处理信息<br>-f 错误信息不输出<br>-R 处理指定目录以及其子目录下的所有文件<br>-v 运行时显示详细处理信息  </p>
+<p><strong>选择参数：</strong><br>–reference=&lt;目录或者文件&gt; 设置成具有指定目录或者文件具有相同的权限<br>–version 显示版本信息  </p>
+<p><strong>&lt;权限范围&gt;+&lt;权限设置&gt; 使权限范围内的目录或者文件具有指定的权限</strong><br><strong>&lt;权限范围&gt;-&lt;权限设置&gt; 删除权限范围的目录或者文件的指定权限 </strong><br><strong>&lt;权限范围&gt;=&lt;权限设置&gt; 设置权限范围内的目录或者文件的权限为指定的值</strong>  </p>
+<p><strong>权限范围：</strong><br><strong>u ：目录或者文件的当前的用户</strong><br><strong>g ：目录或者文件的当前的群组</strong><br><strong>o ：除了目录或者文件的当前用户或群组之外的用户或者群组</strong><br><strong>a ：所有的用户及群组</strong></p>
+<p><strong>权限设置：</strong><br><strong>r ：读权限，用数字4表示</strong><br><strong>w ：写权限，用数字2表示</strong><br><strong>x ：执行权限，用数字1表示</strong><br><strong>- ：删除权限，用数字0表示</strong><br><strong>s ：特殊权限</strong>   </p>
+<p>Linux 文件的基本属性有9个，分别是 owner/group/others组别的read/write/excute属性。<br>该命令有两种用法。一种是包含字母和操作符表达式的文字设定法；另一种是包含数字的数字设定法。<br><strong>1）文字设定法:</strong><br>如果想把一个文件属性设置为 -rwxr-xr–，可以这样： chmod u=rwx,g=rx,o=r filename<br>如果不知道文件的原先属性，但想增加其的每人均可写入的权限，可以这样：<br>chmod a+w filename<br>去掉所有人的x属性：<br>chmod a-x filename<br><strong>2）数字设定法 </strong><br>数字表示：r:4 w:2 x:1<br>例子：<br>将同一组(owner/group/others)的3个属性(r/w/x)累加，如当前属性为[-rwxrwx—]，则是：<br>owner=rwx=4+2+1=7<br>group=rwx=4+2+1=7<br>others= — =0+0+0=0<br>该属性为770.chmod 777 filename  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1：增加文件所有用户组可执行权限<br>chmod a+x 1.log<br>a ：所有的用户及群组<br>即：文件属主（u） 增加执行权限；与文件属主同组用户（g） 增加执行权限；其他用户（o） 增加执行权限<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/90049192.jpg" alt=""></p>
+<p>例2：同时修改不同用户权限<br>chmod ug+r,o-w 2.log<br>文件属主（u） 增加读权限;与文件属主同组用户（g） 增加读权限;其他用户（o） 删除写权限<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/12272667.jpg" alt="">  </p>
+<p>例3：删除文件权限<br>chmod a-r 2.log<br>删除所有用户的读权限<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/20792055.jpg" alt="">  </p>
+<p>例4：使用“=”设置权限<br>chmod u=rwx,g=rwx,o=rwz 2.log<br>撤销原来所有的权限，然后使其具有新的权限<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/27758925.jpg" alt=""></p>
+<p>例5：对一个目录及其子目录所有文件添加权限<br>chmod -R u+x test1<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-21/36112017.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;chmod简介&quot;&gt;&lt;a href=&quot;#chmod简介&quot; class=&quot;headerlink&quot; title=&quot;chmod简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;chmod简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;chmod命令用于改变linux系统文件或目录的访问权限。用它控制文件或目录的访问权限。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件查找命令-locate命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Blocate%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件查找之locate命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:14:58.673Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="locate简介"><a href="#locate简介" class="headerlink" title="locate简介"></a><strong>locate简介</strong></h1><p>locate让使用者可以很快速的搜寻档案系统内是否有指定的档案。其方法是先建立一个包括系统内所有档案名称及路径的数据库，之后当寻找时就只需查询这个数据库，而不必实际深入档案系统之中了。在一般的 distribution 之中，数据库的建立都被放在 crontab 中自动执行。<br><a id="more"></a> </p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式</strong>：Locate [选择参数] [样式]  </p>
+<p><strong>命令功能</strong>：locate命令可以在搜寻数据库时快速找到档案，数据库由updatedb程序来更新，updatedb是由cron daemon周期性建立的，locate命令在搜寻数据库时比由整个由硬盘资料来搜寻资料来得快，但较差劲的是locate所找到的档案若是最近才建立或 刚更名的，可能会找不到，在内定值中，updatedb每天会跑一次，可以由修改crontab来更新设定值。(etc/crontab)<br>locate指定用在搜寻符合条件的档案，它会去储存档案与目录名称的数据库内，寻找合乎范本样式条件的档案或目录录，可以使用特殊字元（如”<em>” 或”?”等）来指定范本样式，如指定范本为kcpa</em>ner, locate会找出所有起始字串为kcpa且结尾为ner的档案或目录<br>locate指令和find找寻档案的功能类似，但locate是透过update程序将硬盘中的所有档案和目录资料先建立一个索引数据库，在 执行loacte时直接找该索引，查询速度会较快，索引数据库一般是由操作系统管理，但也可以直接下达update强迫系统立即修改索引数据库。</p>
+<p><strong>命令参数</strong>：<br>-e   将排除在寻找的范围之外。<br>-1  如果是 1．则启动安全模式。在安全模式下，使用者不会看到权限无法看到的档案。这会使速度减慢，因为 locate 必须至实际的档案系统中取得档案的    权限资料。<br>-f   将特定的档案系统排除在外，例如我们没有到理要把 proc 档案系统中的档案    放在资料库中。<br>-q  安静模式，不会显示任何错误讯息。<br>-n 至多显示 n个输出。<br>-r 使用正规运算式 做寻找的条件。<br>-o 指定资料库存的名称。<br>-d 指定资料库的路径<br>-h 显示辅助讯息<br>-V 显示程式的版本讯息  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1:查找和pwd相关的所有文件<br>locate pwd<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/71221509.jpg" alt=""></p>
+<p>例2： 搜索etc目录下所有以sh开头的文件<br>locate /etc/sh<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/17023346.jpg" alt=""></p>
+<p>例3：搜索etc目录下，所有以m开头的文件<br>locate /etc/m<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/12951198.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;locate简介&quot;&gt;&lt;a href=&quot;#locate简介&quot; class=&quot;headerlink&quot; title=&quot;locate简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;locate简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;locate让使用者可以很快速的搜寻档案系统内是否有指定的档案。其方法是先建立一个包括系统内所有档案名称及路径的数据库，之后当寻找时就只需查询这个数据库，而不必实际深入档案系统之中了。在一般的 distribution 之中，数据库的建立都被放在 crontab 中自动执行。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件查找命令-whereis命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Bwhereis%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件查找之whereis命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:15:06.294Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="whereis简介"><a href="#whereis简介" class="headerlink" title="whereis简介"></a><strong>whereis简介</strong></h1><p>whereis命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。<br><a id="more"></a><br>和find相比，whereis查找的速度非常快，这是因为linux系统会将 系统内的所有文件都记录在一个数据库文件中，当使用whereis和locate时，会从数据库中查找数据，而不是像find命令那样，通过遍历硬盘来查找，效率自然会很高。<br>但是该数据库文件并不是实时更新，默认情况下时一星期更新一次，因此，我们在用whereis和locate 查找文件时，有时会找到已经被删除的数据，或者刚刚建立文件，却无法查找到，原因就是因为数据库文件没有被更新。</p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式</strong>：whereis [-bmsu] [BMS 目录名 -f ] 文件名<br><strong>命令功能</strong>：whereis命令是定位可执行文件、源代码文件、帮助文件在文件系统中的位置。这些文件的属性应属于原始代码，二进制文件，或是帮助文件。whereis 程序还具有搜索源代码、指定备用搜索路径和搜索不寻常项的能力。<br><strong>命令参数</strong>：<br>-b  定位可执行文件。<br>-m  定位帮助文件。<br>-s  定位源代码文件。<br>-u  搜索默认路径下除可执行文件、源代码文件、帮助文件以外的其它文件<br>-B  指定搜索可执行文件的路径。<br>-M  指定搜索帮助文件的路径。<br>-S  指定搜索源代码文件的路径。</p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1:指令”whereis”查看指令”bash”的位置<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/5409719.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;whereis简介&quot;&gt;&lt;a href=&quot;#whereis简介&quot; class=&quot;headerlink&quot; title=&quot;whereis简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;whereis简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;whereis命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件查找命令-which命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Bwhich%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件查找之which命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:15:15.598Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="which简介"><a href="#which简介" class="headerlink" title="which简介"></a><strong>which简介</strong></h1><p>经常在linux要查找某个文件，但不知道放在哪里了，可以使用下面的一些命令来搜索：<br>       which  查看可执行文件的位置。<br>       whereis 查看文件的位置。<br>       locate   配合数据库查看文件位置。<br>       find   实际搜寻硬盘查询文件名称。<br>which命令在PATH变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。也就是说，使用which命令，就可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。<br><a id="more"></a> </p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式</strong>：which 可执行文件名称<br><strong>命令功能</strong>：which指令会在PATH变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。<br><strong>命令参数</strong>：<br>-n 指定文件名长度，指定的长度必须大于或等于所有文件中最长的文件名。<br>-p 与-n参数相同，但此处的包括了文件的路径。<br>-w 指定输出时栏位的宽度。<br>-V 显示版本信息  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1：查找文件、显示命令路径<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/25756362.jpg" alt=""><br>cd 是bash 内建的命令，但是 which 默认是找 PATH 内所规范的目录，所以找不到  </p>
+<p>查找有别名的命令时会列出具体的别名信息</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;which简介&quot;&gt;&lt;a href=&quot;#which简介&quot; class=&quot;headerlink&quot; title=&quot;which简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;which简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;经常在linux要查找某个文件，但不知道放在哪里了，可以使用下面的一些命令来搜索：&lt;br&gt;       which  查看可执行文件的位置。&lt;br&gt;       whereis 查看文件的位置。&lt;br&gt;       locate   配合数据库查看文件位置。&lt;br&gt;       find   实际搜寻硬盘查询文件名称。&lt;br&gt;which命令在PATH变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。也就是说，使用which命令，就可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-cat命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcat%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之cat命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:15:34.774Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="cat简介"><a href="#cat简介" class="headerlink" title="cat简介"></a><strong>cat简介</strong></h1><p>cat命令的用途是连接文件或标准输入并打印。常用来显示文件内容，或者将几个文件连接起来显示，或者从标准输入读取内容并显示，它常与重定向符号配合使用。<br><a id="more"></a></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式</strong>：cat [选项] [文件]<br><strong>命令功能</strong>：<br>1.一次显示整个文件:cat filename<br>2.从键盘创建一个文件:cat &gt; filename 只能创建新文件,不能编辑已有文件.<br>3.将几个文件合并为一个文件:cat file1 file2 &gt; file<br><strong>命令参数</strong>：<br>-b, –number-nonblank    对非空输出行编号<br>-E, –show-ends          在每行结束处显示 $<br>-n, –number     对输出的所有行编号,由1开始对所有输出的行数编号<br>-s, –squeeze-blank  有连续两行以上的空白行，就代换为一行的空白行<br>-T, –show-tabs          将跳格字符显示为 ^I<br>-v, –show-nonprinting   显示非打印字符</p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p><strong>例一：把 1.log 的文件内容加上行号后附加到2.log 文件里</strong><br>cat -n 1.log 2.log<br><img src="http://yotuku.cn/link?url=N1IhikTgM&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111012" alt=""></p>
+<p><strong>例二：把1.log 的文件内容加上行号后覆盖2.log 文件（2.log存在）</strong><br><strong>cat -n 1.log &gt; 2.log </strong><br><img src="http://yotuku.cn/link?url=Eyhch1TlM&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111012" alt=""><br>2.log不存在时会先创建2.log<br>这里&gt;与》的区别：》是追加，不会覆盖<br><img src="http://yotuku.cn/link?url=EkOeze6lG&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111013" alt=""></p>
+<p><strong>例三：使用标准输入来创建文件 </strong><br><strong>cat &gt;log.txt &lt;&lt;EOF</strong><br><img src="http://yotuku.cn/link?url=Ny85R1alM&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111013" alt=""><br>tac (反向列示)<br>tac log.txt<br><img src="http://yotuku.cn/link?url=E1Rkke6lf&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111013" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;cat简介&quot;&gt;&lt;a href=&quot;#cat简介&quot; class=&quot;headerlink&quot; title=&quot;cat简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;cat简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;cat命令的用途是连接文件或标准输入并打印。常用来显示文件内容，或者将几个文件连接起来显示，或者从标准输入读取内容并显示，它常与重定向符号配合使用。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-cd命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcd%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之cd命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:15:41.521Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="cd-命令学习"><a href="#cd-命令学习" class="headerlink" title="cd 命令学习"></a>cd 命令学习</h1><p>命令格式：cd [dirname]</p>
+<p>命令功能：切换当前目录至dirName<br><a id="more"></a></p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a>常用范例</h1><p>例一：进入系统根目录<br>cd / </p>
+<p>例一：进入用户主目录<br>cd 或 cd ~  </p>
+<p>例三：返回上层目录<br>cd ..<br>cd ../.. （返回上两级目录）  </p>
+<p>例四：返回进入此目录之前所在的目录<br>cd -  </p>
+<p>例五：把上个命令的参数作为cd参数使用<br>cd !$<br><img src="http://yotuku.cn/link?url=NyM0pW3eM&amp;tk_plan=free&amp;tk_storage=qiniu,weibo,tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016110921" alt=""><br>（相当于仍然执行上次操作，如果上次cd -,这次也cd -）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;cd-命令学习&quot;&gt;&lt;a href=&quot;#cd-命令学习&quot; class=&quot;headerlink&quot; title=&quot;cd 命令学习&quot;&gt;&lt;/a&gt;cd 命令学习&lt;/h1&gt;&lt;p&gt;命令格式：cd [dirname]&lt;/p&gt;
+&lt;p&gt;命令功能：切换当前目录至dirName&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-cp命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcp%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之cp命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:15:50.893Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="cp简介"><a href="#cp简介" class="headerlink" title="cp简介"></a><strong>cp简介</strong></h1><p>cp命令用来复制文件或者目录，一般情况下，shell会设置一个别名，在命令行下复制文件时，如果目标文件已经存在，就会询问是否覆盖，不管你是否使用-i参数。但是如果是在shell脚本中执行cp时，没有-i参数时不会询问是否覆盖。这说明命令行和shell脚本的执行方式有些不同。<br><a id="more"></a></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式</strong>：<br>cp [选项] [-T] 源 目的<br>或：cp [选项] 源 目录<br>cp [选项]… -t 目录 源<br><strong>命令功能</strong>：将源文件复制至目标文件，或将多个源文件复制至目标目录。<br><strong>命令参数</strong>：<br>-a, 为每个已存在的目标文件创建备份<br>-b，类似–backup 但不接受参数，在递归处理是复制特殊文件内容<br>-f, 如果目标文件无法打开则将其移除并重试(当-n选项存在时则不需再选此项)<br>-i, 覆盖前询问(使前面的 -n 选项失效)<br>-H，跟随源文件中的命令行符号链接<br>-l, 链接文件而不复制<br>-L, 总是跟随符号链接<br>-n, 不要覆盖已存在的文件(使前面的 -i 选项失效)<br>-P, 跟随源文件中的符号链接<br>-p，等于–preserve=模式,所有权,时间戳，保持指定的属性(默认：模式,所有权,时间  戳)，如果可能保持附加属性：环境、链接、xattr 等<br>-R, -r, 复制目录及目录内的所有项目</p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例一：复制单个文件到目标目录，文件在目标文件中不存在<br>cp l.log test</p>
+<p>例二：目标文件存在时，会询问是否覆盖<br>cp 1.log test</p>
+<p>例三：复制整个目录<br>目标目录存在时： 整个源目录被复制到目标目录里面<br>cp -a test3 test5<br>目标目录不存在： 类似改名<br>cp -a test3 test4<br><img src="http://yotuku.cn/link?url=V1Ch66hef&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111010" alt=""></p>
+<p>例四：复制的 log.log 建立一个连结档 log_link.log<br>cp -s log.log log_link.log</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;cp简介&quot;&gt;&lt;a href=&quot;#cp简介&quot; class=&quot;headerlink&quot; title=&quot;cp简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;cp简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;cp命令用来复制文件或者目录，一般情况下，shell会设置一个别名，在命令行下复制文件时，如果目标文件已经存在，就会询问是否覆盖，不管你是否使用-i参数。但是如果是在shell脚本中执行cp时，没有-i参数时不会询问是否覆盖。这说明命令行和shell脚本的执行方式有些不同。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-find命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bfind%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之find命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:16:04.357Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="find简介"><a href="#find简介" class="headerlink" title="find简介"></a><strong>find简介</strong></h1><p>Linux下find命令在目录结构中搜索文件，并执行指定的操作。find命令提供了相当多的查找条件，功能很强大。即使系统中含有网络文件系统( NFS)，find命令在该文件系统中同样有效，只你具有相应的权限。 在运行一个非常消耗资源的find命令时，很多人都倾向于把它放在后台执行，因为遍历一个大的文件系统可能会花费很长的时间(这里是指30G字节以上的文件系统)。<br><a id="more"></a></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式</strong>：find pathname -options [-print -exec -ok …]  </p>
+<p><strong>命令功能</strong>：用于在文件树种查找文件，并作出相应的处理   </p>
+<p><strong>命令参数</strong>：<br>pathname: find命令所查找的目录路径。例如用.来表示当前目录，用/来表示系统根目录。<br>-print： find命令将匹配的文件输出到标准输出。<br>-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ {  } \;，注意{   }和\；之间的空格。<br>-ok： 和-exec的作用相同，只不过以一种更为安全的模式来执行该参数所给出的shell命令，在执行每一个命令之前，都会给出提示，让用户来确定是否执行。  </p>
+<p><strong>命令选项</strong>：<br>-name   按照文件名查找文件。<br>-perm   按照文件权限来查找文件。<br>-prune  使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被find命令忽略。<br>-user   按照文件属主来查找文件。<br>-group  按照文件所属的组来查找文件。<br>-mtime -n +n  按照文件的更改时间来查找文件， - n表示文件更改时间距现在n天以内，+ n表示文件更改时间距现在n天以前。find命令还有-atime和-ctime 选项，但它们都和-m time选项。<br>-nogroup  查找无有效所属组的文件，即该文件所属的组在/etc/groups中不存在。<br>-nouser   查找无有效属主的文件，即该文件的属主在/etc/passwd中不存在。<br>-newer file1 ! file2  查找更改时间比文件file1新但比文件file2旧的文件。<br>-type  查找某一类型的文件，诸如：<br>b - 块设备文件。<br>d - 目录。<br>c - 字符设备文件。<br>p - 管道文件。<br>l - 符号链接文件。<br>f - 普通文件。<br>-size n：[c] 查找文件长度为n块的文件，带有c时表示文件长度以字节计。-depth：在查找文件时，首先查找当前目录中的文件，然后再在其子目录中查找。<br>-fstype：查找位于某一类型文件系统中的文件，这些文件系统类型通常可以在配置文件/etc/fstab中找到，该配置文件中包含了本系统中有关文件系统的信息。<br>-mount：在查找文件时不跨越文件系统mount点。<br>-follow：如果find命令遇到符号链接文件，就跟踪至链接所指向的文件。<br>-cpio：对匹配的文件使用cpio命令，将这些文件备份到磁带设备中。<br>另外,下面三个的区别:<br>-amin n   查找系统中最后N分钟访问的文件<br>-atime n  查找系统中最后n<em>24小时访问的文件<br>-cmin n   查找系统中最后N分钟被改变文件状态的文件<br>-ctime n  查找系统中最后n</em>24小时被改变文件状态的文件<br>-mmin n   查找系统中最后N分钟被改变文件数据的文件<br>-mtime n  查找系统中最后n*24小时被改变文件数据的文件  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1：查找指定时间内修改过的文件<br>find -atime -2<br>查找48小时内修改过的文件 </p>
+<p>例2：根据关键字查找<br>find . -name “*.log”<br>当前目录查找 以.log结尾的文件。 “. “代表当前目录<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/87036376.jpg" alt=""></p>
+<p>例3：按照目录或文件的权限来查找文件<br>find ~/Test/ -perm 777<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/39199686.jpg" alt=""></p>
+<p>例4：按类型查找<br>find . -type f -name “*.log”<br>查找当前目录，以.log结尾的普通文件<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/30162959.jpg" alt=""></p>
+<p>例5：查找当前所有目录并排序<br>find . -type d | sort<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/27384963.jpg" alt=""></p>
+<p>例6：按大小查找文件<br>find . -size +1000c -print<br>查找当前目录大于1K的文件<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-17/93422289.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;find简介&quot;&gt;&lt;a href=&quot;#find简介&quot; class=&quot;headerlink&quot; title=&quot;find简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;find简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;Linux下find命令在目录结构中搜索文件，并执行指定的操作。find命令提供了相当多的查找条件，功能很强大。即使系统中含有网络文件系统( NFS)，find命令在该文件系统中同样有效，只你具有相应的权限。 在运行一个非常消耗资源的find命令时，很多人都倾向于把它放在后台执行，因为遍历一个大的文件系统可能会花费很长的时间(这里是指30G字节以上的文件系统)。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-head命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bhead%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之head命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:16:14.253Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="head简介"><a href="#head简介" class="headerlink" title="head简介"></a><strong>head简介</strong></h1><p>head是用来显示开头某个数量的文字区块，显示档案的开头至标准输出中，与tai是查看档案的结尾<br><a id="more"></a></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a><strong>命令学习</strong></h1><p><strong>命令格式</strong>：head [参数] [文件]<br><strong>命令功能</strong>：显示档案的开头至标准输出中，默认head命令打印其相应文件的开头10行。<br><strong>命令参数</strong>：<br>-q 隐藏文件名<br>-v 显示文件名<br>-c&lt;字节&gt; 显示字节数<br>-n&lt;行数&gt; 显示的行数  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1：显示文件的前n行<br>head -n 5 1.log<br><img src="http://yotuku.cn/link?url=V1cxUb6xG&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111014" alt=""></p>
+<p>例2：显示文件前n个字节<br>head -c 20 1.log<br><img src="http://yotuku.cn/link?url=4kVWIbTxG&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111014" alt=""></p>
+<p>例3：文件的除了最后n个字节以外的内容<br>head -c -32 1.log<br><img src="http://yotuku.cn/link?url=NkJGI-6lG&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111014" alt=""></p>
+<p>例4：输出文件除了最后n行的全部内容<br>head -n -6 log2014.log<br><img src="http://yotuku.cn/link?url=EJ2MLWTgf&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111014" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;head简介&quot;&gt;&lt;a href=&quot;#head简介&quot; class=&quot;headerlink&quot; title=&quot;head简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;head简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;head是用来显示开头某个数量的文字区块，显示档案的开头至标准输出中，与tai是查看档案的结尾&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-less命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bless%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之less命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:16:23.757Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="less简介"><a href="#less简介" class="headerlink" title="less简介"></a><strong>less简介</strong></h1><p>less工具也是对文件或其它输出进行分页显示的工具，功能极其强大。less 的用法比起 more 更加的有弹性。在more的时候，没有办法向前面翻，只能往后面看，但若使用了 less 时，就可以使用 [pageup] [pagedown] 等按键的功能来往前往后翻看文件，更容易用来查看一个文件的内容！除此之外，在 less 里头可以拥有更多的搜索功能，不止可以向下搜，也可以向上搜。<br><a id="more"></a></p>
+<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a><strong>命令简介</strong></h1><p><strong>命令格式</strong>：less [参数]  文件<br><strong>命令功能</strong>：less 与 more 类似，但使用 less 可以随意浏览文件，而 more 仅能向前移动，却不能向后移动，less在查看之前不会加载整个文件<br><strong>命令参数</strong>：<br>-b &lt;缓冲区大小&gt; 设置缓冲区的大小<br>-e  当文件显示结束后，自动离开<br>-f  强迫打开特殊文件，例如外围设备代号、目录和二进制文件<br>-g  只标志最后搜索的关键词<br>-i  忽略搜索时的大小写<br>-m  显示类似more命令的百分比<br>-N  显示每行的行号<br>-o &lt;文件名&gt; 将less 输出的内容在指定文件中保存起来<br>-Q  不使用警告音<br>-s  显示连续空行为一行<br>-S  行过长时间将超出部分舍弃<br>-x &lt;数字&gt; 将“tab”键显示为规定的数字空格<br>/字符串：向下搜索“字符串”的功能<br>?字符串：向上搜索“字符串”的功能<br>n：重复前一个搜索（与 / 或 ? 有关）<br>N：反向重复前一个搜索（与 / 或 ? 有关）<br>b  向后翻一页<br>d  向后翻半页<br>h  显示帮助界面<br>Q  退出less 命令<br>u  向前滚动半页<br>y  向前滚动一行<br>空格键 滚动一行<br>回车键 滚动一页<br>[pagedown]： 向下翻动一页<br>[pageup]：   向上翻动一页  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a><strong>常用范例</strong></h1><p>例1：查看文件<br>less 1.log<br><img src="http://yotuku.cn/link?url=4kv0lW6xG&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111014" alt=""></p>
+<p>例2：ps查看进程信息并通过less分页显示<br>ps -ef |less<br><img src="http://yotuku.cn/link?url=EkSJb-Tlf&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111014" alt=""></p>
+<p>例3：查看命令历史使用记录并通过less分页显示<br>history | less<br><img src="http://yotuku.cn/link?url=Vk4eWWplf&amp;tk_plan=free&amp;tk_storage=tietuku&amp;tk_vuid=4845b80b-ca9e-424d-912c-aad34515f3fa&amp;tk_time=2016111014" alt=""></p>
+<p>例4：浏览多个文件<br>Less 1.log 2.log<br>输入 ：n后，切换到 2.log<br>输入 ：p后, 切换到 1.log</p>
+<h1 id="附加备注"><a href="#附加备注" class="headerlink" title="附加备注"></a><strong>附加备注</strong></h1><p><strong>全屏导航</strong><br>ctrl + F - 向前移动一屏<br>ctrl + B - 向后移动一屏<br>ctrl + D - 向前移动半屏<br>ctrl + U - 向后移动半屏  </p>
+<p><strong>单行导航</strong><br>j - 向前移动一行<br>k - 向后移动一行  </p>
+<p><strong>其它导航</strong><br>G - 移动到最后一行<br>g - 移动到第一行<br>q / ZZ - 退出 less 命令  </p>
+<p><strong>其它有用的命令</strong><br>v - 使用配置的编辑器编辑当前文件<br>h - 显示 less 的帮助文档<br>&amp;pattern - 仅显示匹配模式的行，而不是整个文件  </p>
+<p><strong>标记导航</strong><br>当使用 less 查看大文件时，可以在任何一个位置作标记，可以通过命令导航到标有特定标记的文本位置：<br>ma - 使用 a 标记文本的当前位置<br>‘a - 导航到标记 a 处  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;less简介&quot;&gt;&lt;a href=&quot;#less简介&quot; class=&quot;headerlink&quot; title=&quot;less简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;less简介&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;less工具也是对文件或其它输出进行分页显示的工具，功能极其强大。less 的用法比起 more 更加的有弹性。在more的时候，没有办法向前面翻，只能往后面看，但若使用了 less 时，就可以使用 [pageup] [pagedown] 等按键的功能来往前往后翻看文件，更容易用来查看一个文件的内容！除此之外，在 less 里头可以拥有更多的搜索功能，不止可以向下搜，也可以向上搜。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习之文件目录命令-ls命令</title>
+    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bls%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之ls命令/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:16:33.037Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ls简介"><a href="#ls简介" class="headerlink" title="ls简介"></a>ls简介</h1><p>&nbsp;ls用来打印出当前目录的清单，如果ls指定目录那么就会显示指定目录里的文件及文件夹清单。 通过ls 命令不仅可以查看linux文件夹包含的文件，而且可以查看文件权限(包括目录、文件夹、文件权限)，目录信息等等。<br><a id="more"></a></p>
+<h1 id="命令学习"><a href="#命令学习" class="headerlink" title="命令学习"></a>命令学习</h1><p>命令格式：ls [选项] [目录名]<br>命令功能：列出目标目录中所有的子目录和文件<br>常用参数：<br><strong>-a 列出目录下的所有文件，包括以 . 开头的隐含文件</strong><br>-b 把文件名中不可输出的字符用反斜杠加字符编号的形式列出。<br>-c 输出文件的 i 节点的修改时间，并以此排序。<br>-d 将目录象文件一样显示，而不是显示其下的文件。<br>-e 输出时间的全部信息，而不是输出简略信息。<br>-i 输出文件的 i 节点的索引信息。<br>-k 以 k 字节的形式表示文件的大小。<br><strong>-l 列出文件的详细信息</strong>。<br>-m 横向输出文件名，并以“，”作分格符。<br>-n 用数字的 UID,GID 代替名称。<br>-o 显示文件的除组信息外的详细信息。<br>-p -F 在每个文件名后附上一个字符以说明该文件的类型，“<em>”表示可执行的普通文件；“/”表示目录；“@”表示符号链接；“|”表示FIFOs；“=”表示套<br>接字(sockets)<br>-q 用?代替不可输出的字符。<br>-r 对目录反向排序。<br>-s 在每个文件名后输出该文件的大小。<br><strong>-t 以时间排序。</strong><br>-u 以文件上次被访问的时间排序。<br>-x 按列输出，横向排序。<br><strong>-A 显示除 “.”和“..”外的所有文件。</strong><br>-B 不输出以 “~”结尾的备份文件。<br>-C 按列输出，纵向排序。<br>-G 输出文件的组的信息。<br>-L 列出链接文件名而不是链接到的文件。<br>-N 不限制文件长度。<br>-Q 把输出的文件名用双引号括起来。<br>-R 列出所有子目录下的文件。<br><em>*-S 以文件大小排序。</em></em><br>-X 以文件的扩展名(最后一个 . 后的字符)排序。<br>-1 一行只输出一个文件。<br>–color=no 不显示彩色文件名<br>–help 在标准输出上显示帮助信息。<br>–version 在标准输出上输出版本信息并退出。  </p>
+<h1 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a>常用范例</h1><p>例一：列出/home/文件夹下的所有文件和目录的详细资料<br>ls -l -R /home/Test<br>ls -lR /home/peidachang<br>(参数可以一起)</p>
+<p>例二：列出当前目录中所有以“t”开头的目录的详细内容<br>ls -l t*   </p>
+<p>例三：只列出文件下的子目录<br>ls -F /opt/soft |grep /$  列出 /opt/soft 文件下面的子目录<br>ls -l /opt/soft | grep “^d”  列出 /opt/soft 文件下面的子目录详细情况<br>例四：列出目前工作目录下所有名称是s 开头的档案，愈新的排愈后面<br>命令：ls -ltr s<em><br>例五：计算当前目录下的文件数和目录数<br>ls -l </em> |grep “^-“|wc -l —文件个数<br>ls -l * |grep “^d”|wc -l    —目录个数<br>例七: 在ls中列出文件的绝对路径<br>ls | sed “s:^:<code>pwd</code>/:”<br>例九：列出当前目录下的所有文件（包括隐藏文件）的绝对路径， 对目录不做递归<br>命令：find $PWD -maxdepth 1 | xargs ls -ld<br>例十：递归列出当前目录下的所有文件（包括隐藏文件）的绝对路径<br>find $PWD | xargs ls -ld<br>例十一：指定文件时间输出格式<br>ls -tl –time-style=full-iso<br>扩展：  </p>
+<ol>
+<li>显示彩色目录列表<br> 打开/etc/bashrc, 加入如下一行:<br> alias ls=”ls –color”<br>下次启动bash时就可以像在Slackware里那样显示彩色的目录列表了, 其中颜色的含义如下:  <ol>
+<li>蓝色–&gt;目录  </li>
+<li>绿色–&gt;可执行文件  </li>
+<li>红色–&gt;压缩文件  </li>
+<li>浅蓝色–&gt;链接文件  </li>
+<li>灰色–&gt;其他文件  </li>
+</ol>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;ls简介&quot;&gt;&lt;a href=&quot;#ls简介&quot; class=&quot;headerlink&quot; title=&quot;ls简介&quot;&gt;&lt;/a&gt;ls简介&lt;/h1&gt;&lt;p&gt;&amp;nbsp;ls用来打印出当前目录的清单，如果ls指定目录那么就会显示指定目录里的文件及文件夹清单。 通过ls 命令不仅可以查看linux文件夹包含的文件，而且可以查看文件权限(包括目录、文件夹、文件权限)，目录信息等等。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+</feed>
