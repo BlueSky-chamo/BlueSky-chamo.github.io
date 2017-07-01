@@ -4,9 +4,9 @@
   <subtitle>Different every day</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://BlueSky-chamo.github.io/"/>
+  <link href="http://BlueSky-chamo.github.io/home/"/>
   <updated>2017-06-21T06:21:46.131Z</updated>
-  <id>http://BlueSky-chamo.github.io/</id>
+  <id>http://BlueSky-chamo.github.io/home/</id>
   
   <author>
     <name>Chamo</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>回顾51单片机之定时器简介</title>
-    <link href="http://BlueSky-chamo.github.io/2017/04/21/%E5%9B%9E%E9%A1%BE%E5%8D%95%E7%89%87%E6%9C%BA%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E7%AE%80%E4%BB%8B/"/>
-    <id>http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之定时器简介/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/04/21/%E5%9B%9E%E9%A1%BE%E5%8D%95%E7%89%87%E6%9C%BA%E4%B9%8B%E5%AE%9A%E6%97%B6%E5%99%A8%E7%AE%80%E4%BB%8B/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/04/21/回顾单片机之定时器简介/</id>
     <published>2017-04-20T16:00:00.000Z</published>
     <updated>2017-06-21T06:21:46.131Z</updated>
     
@@ -66,19 +66,19 @@ TR0 = 1;         //打开定时器0
     
     </summary>
     
-      <category term="单片机" scheme="http://BlueSky-chamo.github.io/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/home/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
     
     
-      <category term="单片机" scheme="http://BlueSky-chamo.github.io/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/home/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
     
-      <category term="定时器" scheme="http://BlueSky-chamo.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/"/>
+      <category term="定时器" scheme="http://BlueSky-chamo.github.io/home/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>回顾51单片机之enum用法</title>
-    <link href="http://BlueSky-chamo.github.io/2017/04/21/%E5%9B%9E%E9%A1%BE%E5%8D%95%E7%89%87%E6%9C%BA%E4%B9%8Benum%E7%94%A8%E6%B3%95/"/>
-    <id>http://BlueSky-chamo.github.io/2017/04/21/回顾单片机之enum用法/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/04/21/%E5%9B%9E%E9%A1%BE%E5%8D%95%E7%89%87%E6%9C%BA%E4%B9%8Benum%E7%94%A8%E6%B3%95/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/04/21/回顾单片机之enum用法/</id>
     <published>2017-04-20T16:00:00.000Z</published>
     <updated>2017-06-21T06:21:33.253Z</updated>
     
@@ -256,19 +256,19 @@ int main()
     
     </summary>
     
-      <category term="单片机" scheme="http://BlueSky-chamo.github.io/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/home/categories/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
     
     
-      <category term="单片机" scheme="http://BlueSky-chamo.github.io/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+      <category term="单片机" scheme="http://BlueSky-chamo.github.io/home/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
     
-      <category term="enum" scheme="http://BlueSky-chamo.github.io/tags/enum/"/>
+      <category term="enum" scheme="http://BlueSky-chamo.github.io/home/tags/enum/"/>
     
   </entry>
   
   <entry>
     <title>linux下FTP配置</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E4%B8%8Bftp%E9%85%8D%E7%BD%AE/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux下ftp配置/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E4%B8%8Bftp%E9%85%8D%E7%BD%AE/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux下ftp配置/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:19:30.095Z</updated>
     
@@ -293,17 +293,17 @@ int main()
     
     </summary>
     
-      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>linux下telnet远程登入</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E4%B8%8Btelnet%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%85%A5/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux下telnet远程登入/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E4%B8%8Btelnet%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%85%A5/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux下telnet远程登入/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:19:48.757Z</updated>
     
@@ -334,17 +334,17 @@ int main()
     
     </summary>
     
-      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>linux下VNC远程访问</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E4%B8%8Bvnc%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%AE%BF%E9%97%AE/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux下vnc远程桌面访问/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E4%B8%8Bvnc%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%AE%BF%E9%97%AE/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux下vnc远程桌面访问/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:19:58.516Z</updated>
     
@@ -362,17 +362,17 @@ int main()
     
     </summary>
     
-      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件压缩命令-gzip命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E4%B9%8Bgzip%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件压缩之gzip命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E4%B9%8Bgzip%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件压缩之gzip命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:19:01.532Z</updated>
     
@@ -398,17 +398,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件打包解压命令-tar命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E8%A7%A3%E5%8E%8B%E4%B9%8Btar%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件打包解压之tar命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E8%A7%A3%E5%8E%8B%E4%B9%8Btar%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件打包解压之tar命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:15:27.559Z</updated>
     
@@ -443,17 +443,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件权限命令-chgrp命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchgrp%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件权限之chgrp命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchgrp%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件权限之chgrp命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:17:57.421Z</updated>
     
@@ -473,17 +473,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-chown命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchown%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件权限之chown命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchown%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件权限之chown命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:18:36.340Z</updated>
     
@@ -507,17 +507,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-chmod命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchmod%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件权限之chmod命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B9%8Bchmod%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件权限之chmod命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:18:26.165Z</updated>
     
@@ -545,17 +545,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件查找命令-locate命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Blocate%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件查找之locate命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Blocate%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件查找之locate命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:14:58.673Z</updated>
     
@@ -574,17 +574,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件查找命令-whereis命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Bwhereis%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件查找之whereis命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Bwhereis%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件查找之whereis命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:15:06.294Z</updated>
     
@@ -599,17 +599,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件查找命令-which命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Bwhich%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件查找之which命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B9%8Bwhich%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件查找之which命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:15:15.598Z</updated>
     
@@ -625,17 +625,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-cat命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcat%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之cat命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcat%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件目录之cat命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:15:34.774Z</updated>
     
@@ -652,17 +652,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-cd命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcd%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之cd命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcd%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件目录之cd命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:15:41.521Z</updated>
     
@@ -682,17 +682,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-cp命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcp%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之cp命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bcp%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件目录之cp命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:15:50.893Z</updated>
     
@@ -710,17 +710,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-find命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bfind%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之find命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bfind%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件目录之find命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:16:04.357Z</updated>
     
@@ -743,17 +743,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-head命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bhead%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之head命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bhead%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件目录之head命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:16:14.253Z</updated>
     
@@ -771,17 +771,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-less命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bless%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之less命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bless%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件目录之less命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:16:23.757Z</updated>
     
@@ -804,17 +804,17 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习之文件目录命令-ls命令</title>
-    <link href="http://BlueSky-chamo.github.io/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bls%E5%91%BD%E4%BB%A4/"/>
-    <id>http://BlueSky-chamo.github.io/2017/03/30/linux命令学习-文件目录之ls命令/</id>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B9%8Bls%E5%91%BD%E4%BB%A4/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux命令学习-文件目录之ls命令/</id>
     <published>2017-03-29T16:00:00.000Z</published>
     <updated>2017-06-21T06:16:33.037Z</updated>
     
@@ -841,10 +841,10 @@ int main()
     
     </summary>
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/tags/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
