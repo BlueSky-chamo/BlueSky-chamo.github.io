@@ -1,0 +1,1708 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="茶末园" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="变量Python 中的变量不需要声明。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。变量就是变量，它没有类型，所说的”类型”是变量所指的内存中对象的类型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python3变量与数据类型">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/home/2017/03/30/python变量与数据类型/index.html">
+<meta property="og:site_name" content="茶末园">
+<meta property="og:description" content="变量Python 中的变量不需要声明。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。变量就是变量，它没有类型，所说的”类型”是变量所指的内存中对象的类型。">
+<meta property="og:updated_time" content="2017-07-22T08:45:26.761Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python3变量与数据类型">
+<meta name="twitter:description" content="变量Python 中的变量不需要声明。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。变量就是变量，它没有类型，所说的”类型”是变量所指的内存中对象的类型。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/home/2017/03/30/python变量与数据类型/"/>
+
+
+
+
+
+  <title> python3变量与数据类型 | 茶末园 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/BlueSky-chamo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">茶末园</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/home/2017/03/30/python变量与数据类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="茶末园">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python3变量与数据类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/30/python变量与数据类型/" class="leancloud_visitors" data-flag-title="python3变量与数据类型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>Python 中的变量不需要声明。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。<br>变量就是变量，它没有类型，所说的”类型”是变量所指的内存中对象的类型。<br><a id="more"></a><br>变量在计算机内存中的表示也非常重要。当我们写：</p>
+<pre><code>a = &apos;ABC&apos;
+b = a
+a = &apos;XYZ&apos;
+print(b)
+</code></pre><p>Python解释器：</p>
+<p>执行a = ‘ABC’，解释器创建了字符串’ABC’和变量a，并把a指向’ABC’：</p>
+<p>执行b = a，解释器创建了变量b，并把b指向a指向的字符串’ABC’：</p>
+<p>执行a = ‘XYZ’，解释器创建了字符串’XYZ’，并把a的指向改为’XYZ’，但b并没有更改：</p>
+<p>最后打印变量b的结果自然是’ABC’</p>
+<h1 id="Number（数字）"><a href="#Number（数字）" class="headerlink" title="Number（数字）"></a>Number（数字）</h1><p>Python 数字数据类型用于存储数值。数据类型是不允许改变的,如果改变数字数据类型的值，将重新分配内存空间。</p>
+<p>Python 支持三种不同的数值类型：  </p>
+<ol>
+<li><p>整型(Int) - 通常被称为是整型或整数，是正或负整数，不带小数点。Python3 整型是没有限制大小的，可以当作 Long 类型使用，所以 Python3 没有 Python2 的 Long 类型</p>
+</li>
+<li><p>浮点型(float) - 浮点型由整数部分与小数部分组成，浮点型也可以使用科学计数法表示（2.5e2 = 2.5 x 102 = 250）</p>
+</li>
+<li><p>复数( (complex)) - 复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型。</p>
+</li>
+</ol>
+<h2 id="Python-数字类型转换"><a href="#Python-数字类型转换" class="headerlink" title="Python 数字类型转换"></a>Python 数字类型转换</h2><ol>
+<li>int(x) 将x转换为一个整数。</li>
+<li>float(x) 将x转换到一个浮点数。</li>
+<li>complex(x) 将x转换到一个复数，实数部分为 x，虚数部分为 0。</li>
+<li>complex(x, y) 将 x 和 y 转换到一个复数，实数部分为 x，虚数部分为 y。x 和 y 是数字表达式。</li>
+</ol>
+<h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><p><a href="http://www.runoob.com/python3/python3-func-number-abs.html" target="_blank" rel="external">abs(x)</a>:返回数字的绝对值，如abs(-10) 返回 10</p>
+<p><a href="http://www.runoob.com/python3/python3-func-number-ceil.html" target="_blank" rel="external">ceil(x)</a>:返回数字的上入整数，如math.ceil(4.1) 返回 5</p>
+<p><a href="">cmp(x, y)</a>:如果 x &lt; y 返回 -1, 如果 x == y 返回 0, 如果 x &gt; y 返回 1。 Python 3 已废弃 。使用 使用 (x&gt;y)-(x&lt;y) 替换。</p>
+<p><a href="http://www.runoob.com/python3/python3-func-number-exp.html" target="_blank" rel="external">exp(x)</a>:返回e的x次幂(ex),如math.exp(1) 返回2.718281828459045</p>
+<p>fabs(x):返回数字的绝对值，如math.fabs(-10) 返回10.0</p>
+<p>floor(x):返回数字的下舍整数，如math.floor(4.9)返回 4</p>
+<p>log(x):如math.log(math.e)返回1.0,math.log(100,10)返回2.0</p>
+<p>log10(x):返回以10为基数的x的对数，如math.log10(100)返回 2.0</p>
+<p>max(x1, x2,…)    :返回给定参数的最大值，参数可以为序列。</p>
+<p>min(x1, x2,…):返回给定参数的最小值，参数可以为序列。</p>
+<p>modf(x)    :返回x的整数部分与小数部分，两部分的数值符号与x相同，整数部分以浮点型表示。</p>
+<p>pow(x, y):x**y 运算后的值。</p>
+<p>round(x [,n]):返回浮点数x的四舍五入值，如给出n值，则代表舍入到小数点后的位数。</p>
+<p>sqrt(x):返回数字x的平方根，数字可以为负数，返回类型为实数，如math.sqrt(4)返回 2+0j</p>
+<h2 id="随机数函数"><a href="#随机数函数" class="headerlink" title="随机数函数"></a>随机数函数</h2><p>choice(seq):从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数。  </p>
+<p>randrange ([start,] stop [,step]):从指定范围内，按指定基数递增的集合中获取一个随机数，基数缺省值为1  </p>
+<p>random():随机生成下一个实数，它在[0,1)范围内。  </p>
+<p>seed([x]):改变随机数生成器的种子seed。如果你不了解其原理，你不必特别去设定seed，Python会帮你选择seed。  </p>
+<p>shuffle(lst):将序列的所有元素随机排序  </p>
+<p>uniform(x, y):随机生成下一个实数，它在[x,y]范围内。  </p>
+<h2 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h2><p>acos(x)    :返回x的反余弦弧度值。</p>
+<p>asin(x)    :返回x的反正弦弧度值。    </p>
+<p>atan(x)    :返回x的反正切弧度值。</p>
+<p>atan2(y, x)    :返回给定的 X 及 Y 坐标值的反正切值。</p>
+<p>cos(x)    :返回x的弧度的余弦值。</p>
+<p>hypot(x, y)    :返回欧几里德范数 sqrt(x<em>x + y</em>y)。</p>
+<p>sin(x)    :返回的x弧度的正弦值。</p>
+<p>tan(x)    :返回x弧度的正切值。</p>
+<p>degrees(x)    :将弧度转换为角度,如degrees(math.pi/2) ， 返回90.0</p>
+<p>radians(x)    :将角度转换为弧度</p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>字符串是 Python 中最常用的数据类型，可以使用引号(‘或”)来创建字符串。</p>
+<h2 id="访问字符串中的值"><a href="#访问字符串中的值" class="headerlink" title="访问字符串中的值"></a>访问字符串中的值</h2><p>Python 访问子字符串，可以使用方括号来截取字符串  </p>
+<pre><code>var1 = &apos;Hello World!&apos;
+var2 = &quot;Runoob&quot;
+
+print (&quot;var1[0]: &quot;, var1[0])
+print (&quot;var2[1:5]: &quot;, var2[1:5])
+</code></pre><h2 id="字符串更新"><a href="#字符串更新" class="headerlink" title="字符串更新"></a>字符串更新</h2><p>对已存在的字符串进行修改，并赋值给另一个变量：</p>
+<pre><code>var1 = &apos;Hello World!&apos;
+print (&quot;已更新字符串 : &quot;, var1[:6] + &apos;Runoob!&apos;)
+
+结果：已更新字符串 :  Hello Runoob!
+</code></pre><h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><pre><code>\(在行尾时)    续行符  
+\\    反斜杠符号  
+\&apos;    单引号  
+\&quot;    双引号  
+\a    响铃  
+\b    退格(Backspace)   
+\e    转义  
+\000    空  
+\n    换行  
+\v    纵向制表符  
+\t    横向制表符  
+\r    回车  
+\f    换页  
+\oyy    八进制数，yy代表的字符，例如：\o12代表换行  
+\xyy    十六进制数，yy代表的字符，例如：\x0a代表换行  
+\other    其它的字符以普通格式输出  
+</code></pre><h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><pre><code>+  字符串连接
+
+*  重复输出字符串    
+
+[]    通过索引获取字符串中字符    
+
+[ : ]    截取字符串中的一部分    
+
+in    成员运算符 - 如果字符串中包含给定的字符返回 True    H in a 输出结果 1
+
+not in    成员运算符 - 如果字符串中不包含给定的字符返回 True    M not in a 输出结果 1
+
+r/R    原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打
+印的字符。 原始字符串除在字符串的第一个引号前加上字母&quot;r&quot;（可以大小写）以外，与普通字符串有着几乎完全相同的语法。    
+
+%    格式字符串    
+</code></pre><h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>%c     格式化字符及其ASCII码
+%s     格式化字符串
+%d     格式化整数
+%u     格式化无符号整型
+%o     格式化无符号八进制数
+%x     格式化无符号十六进制数
+%X     格式化无符号十六进制数（大写）
+%f     格式化浮点数字，可指定小数点后的精度
+%e     用科学计数法格式化浮点数
+%E     作用同%e，用科学计数法格式化浮点数
+%g     %f和%e的简写
+%G     %f 和 %E 的简写
+%p     用十六进制数格式化变量的地址
+</code></pre><h2 id="字符串内建函数"><a href="#字符串内建函数" class="headerlink" title="字符串内建函数"></a>字符串内建函数</h2><p>capitalize()：将字符串的第一个字符转换为大写</p>
+<p>center(width, fillchar)：返回一个指定的宽度 width 居中的字符串，fillchar 为填充的字符，默认为空格。</p>
+<p>count(str, beg= 0,end=len(string))：返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数</p>
+<p>bytes.decode(encoding=”utf-8”, errors=”strict”)：Python3 中没有 decode 方法，但我们可以使用 bytes 对象的 decode() 方法来解码给定的 bytes 对象，这个 bytes 对象可以由 str.encode() 来编码返回。</p>
+<p>encode(encoding=’UTF-8’,errors=’strict’)：以 encoding 指定的编码格式编码字符串，如果出错默认报一个ValueError 的异常，除非 errors 指定的是’ignore’或者’replace’</p>
+<p>endswith(suffix, beg=0, end=len(string))：检查字符串是否以 obj 结束，如果beg 或者 end 指定则检查指定的范围内是否以 obj 结束，如果是，返回 True,否则返回 False.</p>
+<p>expandtabs(tabsize=8)：把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8 。</p>
+<p>find(str, beg=0 end=len(string))：检测 str 是否包含在字符串中 中，如果 beg 和 end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1</p>
+<p>index(str, beg=0, end=len(string))：跟find()方法一样，只不过如果str不在字符串中会报一个异常.</p>
+<p>isalnum()：如果字符串至少有一个字符并且所有字符都是字母或数字则返 回 True,否则返回 False</p>
+<p>isalpha()：如果字符串至少有一个字符并且所有字符都是字母则返回 True, 否则返回 False</p>
+<p>isdigit()：如果字符串只包含数字则返回 True 否则返回 False..</p>
+<p>islower()：如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False</p>
+<p>isnumeric()：如果字符串中只包含数字字符，则返回 True，否则返回 False</p>
+<p>isspace()：如果字符串中只包含空格，则返回 True，否则返回 False.</p>
+<p>istitle():如果字符串是标题化的(见 title())则返回 True，否则返回 False</p>
+<p>isupper():如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False</p>
+<p>join(seq):以指定字符串作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串</p>
+<p>len(string):返回字符串长度</p>
+<p>ljust(width[, fillchar]):返回一个原字符串左对齐,并使用 fillchar 填充至长度 width 的新字符串，fillchar 默认为空格。</p>
+<p>lower():转换字符串中所有大写字符为小写.</p>
+<p>lstrip():截掉字符串左边的空格</p>
+<p>maketrans():创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。</p>
+<p>max(str):返回字符串 str 中最大的字母。</p>
+<p>min(str):返回字符串 str 中最小的字母。</p>
+<p>replace(old, new [, max]):把 将字符串中的 str1 替换成 str2,如果 max 指定，则替换不超过 max 次。</p>
+<p>rfind(str, beg=0,end=len(string)):类似于 find()函数，不过是从右边开始查找.</p>
+<p>rindex( str, beg=0, end=len(string)):类似于 index()，不过是从右边开始.</p>
+<p>rjust(width,[, fillchar]):返回一个原字符串右对齐,并使用fillchar(默认空格）填充至长度 width 的新字符串</p>
+<p>rstrip():删除字符串字符串末尾的空格.</p>
+<p>split(str=””, num=string.count(str)):num=string.count(str)) 以 str 为分隔符截取字符串，如果 num 有指定值，则仅截取 num 个子字符串</p>
+<p>splitlines([keepends]):按照行(‘\r’, ‘\r\n’, \n’)分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符。</p>
+<p>startswith(str, beg=0,end=len(string)):检查字符串是否是以 obj 开头，是则返回 True，否则返回 False。如果beg 和 end 指定值，则在指定范围内检查。</p>
+<p>strip([chars]):在字符串上执行 lstrip()和 rstrip()</p>
+<p>swapcase():将字符串中大写转换为小写，小写转换为大写</p>
+<p>title():返回”标题化”的字符串,就是说所有单词都是以大写开始，其余字母均为小写(见 istitle())</p>
+<p>translate(table, deletechars=””):根据 str 给出的表(包含 256 个字符)转换 string 的字符, 要过滤掉的字符放到 deletechars 参数中</p>
+<p>upper()”转换字符串中的小写字母为大写</p>
+<p>zfill (width):返回长度为 width 的字符串，原字符串右对齐，前面填充0</p>
+<p>isdecimal():检查字符串是否只包含十进制字符，如果是返回 true，否则返回 false。</p>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0<br>序列都可以进行的操作包括索引，切片，加，乘，检查成员。它可以作为一个方括号内的逗号分隔值出现。列表的数据项不需要具有相同的类型</p>
+<h2 id="创建列表"><a href="#创建列表" class="headerlink" title="创建列表"></a>创建列表</h2><p>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可：</p>
+<pre><code>list1=[&apos;Google&apos;,&apos;Runnoob&apos;,1997,20001];
+list2=[1,2,3,4,5,6,7];
+list3=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;];
+</code></pre><h2 id="访问列表中的值"><a href="#访问列表中的值" class="headerlink" title="访问列表中的值"></a>访问列表中的值</h2><p>使用下标索引来访问列表中的值，也可以使用方括号的形式截取字符：</p>
+<pre><code>print (&quot;list1[0]: &quot;, list1[0])
+print (&quot;list2[1:5]: &quot;, list2[1:5])
+</code></pre><h2 id="列表遍历"><a href="#列表遍历" class="headerlink" title="列表遍历"></a>列表遍历</h2><pre><code>l[start:end:span]
+</code></pre><p>遍历 [start,end)，间隔为 span，当 span&gt;0 时顺序遍历, 当 span&lt;0 时，逆着遍历。<br>start 不输入则默认为 0，end 不输入默认为长度。</p>
+<pre><code>&gt;&gt;&gt; l = [i for i in range(0,15)]
+&gt;&gt;&gt; print(l[::2])
+[0, 2, 4, 6, 8, 10, 12, 14]
+</code></pre><h2 id="更新列表"><a href="#更新列表" class="headerlink" title="更新列表"></a>更新列表</h2><p>对列表的数据项进行修改或更新，也可以使用append()方法来添加列表项:</p>
+<pre><code>list =[&apos;google&apos;,&apos;runnoob&apos;,1997,2001]
+print(&quot;第三个元素为:&quot;,list[2])
+list[2]=2001
+print(&quot;更新后的第三个元素：&quot;,list[2])
+结果：
+第三个元素为: 1997
+更新后的第三个元素： 2001
+</code></pre><h2 id="删除列表元素"><a href="#删除列表元素" class="headerlink" title="删除列表元素"></a>删除列表元素</h2><p>可以使用 del 语句来删除列表的的元素：</p>
+<pre><code>del list[2]
+</code></pre><h2 id="列表脚本操作符"><a href="#列表脚本操作符" class="headerlink" title="列表脚本操作符"></a>列表脚本操作符</h2><p>列表对 + 和 <em> 的操作符与字符串相似。+ 号用于组合列表，</em> 号用于重复列表。</p>
+<pre><code>#长度
+len([1,2,3])
+3
+#组合
+[1,2,3]+[4,5,6]
+[1, 2, 3, 4, 5, 6]
+#重复
+[&apos;Hi!&apos;] *4
+[&apos;Hi!&apos;, &apos;Hi!&apos;, &apos;Hi!&apos;, &apos;Hi!&apos;]
+</code></pre><h2 id="列表截取"><a href="#列表截取" class="headerlink" title="列表截取"></a>列表截取</h2><pre><code>&gt;&gt;&gt; L=[&apos;Google&apos;, &apos;Runoob&apos;, &apos;Taobao&apos;]
+#读取第三个元素
+&gt;&gt;&gt; L[2]
+&apos;Taobao&apos;
+#从右侧开始读取倒数第二个元素
+&gt;&gt;&gt; L[-2]
+&apos;Runoob&apos;
+#输出从第二个元素开始后的所有元素
+&gt;&gt;&gt; L[1:]
+[&apos;Runoob&apos;, &apos;Taobao&apos;]
+</code></pre><h2 id="嵌套列表"><a href="#嵌套列表" class="headerlink" title="嵌套列表"></a>嵌套列表</h2><p>使用嵌套列表即在列表里创建其它列表，嵌套后可看做多维数组</p>
+<pre><code>&gt;&gt;&gt; a=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]
+&gt;&gt;&gt; n=[1,2,3]
+&gt;&gt;&gt; x=[a,n]
+&gt;&gt;&gt; x
+[[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;], [1, 2, 3]]
+&gt;&gt;&gt; x[0]
+[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]
+&gt;&gt;&gt; x[0][1]
+&apos;b&apos;
+&gt;&gt;&gt; 
+</code></pre><p>创建二维列表，将需要的参数写入 cols 和 rows 即可：</p>
+<pre><code>list_2d = [[0 for col in range(cols)] for row in range(rows)]
+
+&gt;&gt;&gt; list_2d = [ [0 for i in range(5)] for i in range(5)]
+&gt;&gt;&gt; list_2d
+[[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+&gt;&gt;&gt; 
+</code></pre><h2 id="列表函数-amp-方法"><a href="#列表函数-amp-方法" class="headerlink" title="列表函数&amp;方法"></a>列表函数&amp;方法</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>len(list)：列表元素个数</p>
+<p>max(list)：返回列表元素最大值</p>
+<p>min(list)：返回列表元素最小值</p>
+<p>list(seq)：将元组转换为列表</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>list.append(obj)：在列表末尾添加新的对象</p>
+<p>list.count(obj)：统计某个元素在列表中出现的次数</p>
+<p>list.extend(seq)：在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</p>
+<p>list.index(obj)：从列表中找出某个值第一个匹配项的索引位置</p>
+<p>list.insert(index, obj)：将对象插入列表</p>
+<p>list.pop(obj=list[-1])：移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</p>
+<p>list.remove(obj)：移除列表中某个值的第一个匹配项</p>
+<p>list.reverse()：反向列表中元素</p>
+<p>list.sort([func])：对原列表进行排序</p>
+<p>list.clear()：清空列表</p>
+<p>list.copy()：复制列表</p>
+<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>Python 的元组与列表类似，不同之处在于元组的元素不能修改。<br>元组使用小括号，列表使用方括号。  </p>
+<h2 id="创建元祖"><a href="#创建元祖" class="headerlink" title="创建元祖"></a>创建元祖</h2><p>元组创建只需要在括号()中添加元素，并使用逗号隔开即可。</p>
+<pre><code>&gt;&gt;&gt; tuple1=(&apos;google&apos;,&apos;runoob&apos;,1997,2000) 
+&gt;&gt;&gt; tuple2=&quot;a&quot;,&quot;b&quot;,&quot;c&quot;
+#空元祖
+&gt;&gt;&gt; tuple3=()
+#只包含一个元素时，需要在元素后面添加逗号
+&gt;&gt;&gt; tuple4 = (50,)
+</code></pre><h2 id="访问元组"><a href="#访问元组" class="headerlink" title="访问元组"></a>访问元组</h2><p>元组可以使用下标索引来访问元组中的值，下标索引从0开始，与列表类似</p>
+<pre><code>print(&quot;tuple1[0]：&quot;,tuple1[0])
+</code></pre><h2 id="修改元组"><a href="#修改元组" class="headerlink" title="修改元组"></a>修改元组</h2><p>元组中的元素值是不允许修改的，但可以对元组进行连接组合</p>
+<pre><code>&gt;&gt;&gt; tup1=(12,34)
+&gt;&gt;&gt; tup2=(&apos;abc&apos;,&apos;xyz&apos;)
+#修改元组元素操作是非法的
+&gt;&gt;&gt; tup1[0]=100
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: &apos;tuple&apos; object does not support item assignment
+# 创建一个新的元组
+&gt;&gt;&gt; tup3=tup1+tup2
+&gt;&gt;&gt; print(tup3)
+(12, 34, &apos;abc&apos;, &apos;xyz&apos;)
+&gt;&gt;&gt; 
+</code></pre><h2 id="删除元组"><a href="#删除元组" class="headerlink" title="删除元组"></a>删除元组</h2><p>元组中的元素值是不允许删除的，但可以使用del语句来删除整个元组。元组被删除后，输出变量会有异常信息</p>
+<pre><code>&gt;&gt;&gt; tup = (&apos;Google&apos;, &apos;Runoob&apos;, 1997, 2000)
+&gt;&gt;&gt; print (tup)
+(&apos;Google&apos;, &apos;Runoob&apos;, 1997, 2000)
+&gt;&gt;&gt; del tup;
+&gt;&gt;&gt; print (&quot;删除后的元组 tup : &quot;,tup)
+Traceback (most recent call last):
+      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+NameError: name &apos;tup&apos; is not defined
+&gt;&gt;&gt; &gt;&gt;&gt; 
+</code></pre><h2 id="元组运算符"><a href="#元组运算符" class="headerlink" title="元组运算符"></a>元组运算符</h2><p>与字符串一样，元组之间可以使用 + 号和 * 号进行运算。运算后会生成一个新的元组。</p>
+<pre><code>#计算元素个数
+&gt;&gt;&gt; len((1,2,3))
+3
+#连接
+&gt;&gt;&gt; (1,2,3)+(4,5,6)
+(1, 2, 3, 4, 5, 6)
+#复制
+&gt;&gt;&gt; (&apos;Hi&apos;)*4
+&apos;HiHiHiHi&apos;
+</code></pre><h2 id="元组截取"><a href="#元组截取" class="headerlink" title="元组截取"></a>元组截取</h2><p>元组也是一个序列，所以可以访问元组中的指定位置的元素，也可以截取索引中的一段元素</p>
+<pre><code>&gt;&gt;&gt; L=(&apos;Google&apos;, &apos;Taobao&apos;, &apos;Runoob&apos;)
+#读取第三个元素
+&gt;&gt;&gt; L[2]
+&apos;Runoob&apos;
+#反向读取；读取倒数第二个元素
+&gt;&gt;&gt; L[-2]
+&apos;Taobao&apos;
+#截取元素，从第二个开始后的所有元素。
+&gt;&gt;&gt; L[1:]
+(&apos;Taobao&apos;, &apos;Runoob&apos;)
+&gt;&gt;&gt; 
+</code></pre><h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><p>len(tuple)：计算元组元素个数。</p>
+<p>max(tuple)：返回元组中元素最大值。</p>
+<p>min(tuple)：返回元组中元素最小值。</p>
+<p>tuple(seq)：将列表转换为元组。</p>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><p>字典是另一种可变容器模型，且可存储任意类型对象。在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。。 </p>
+<h2 id="创建字典"><a href="#创建字典" class="headerlink" title="创建字典"></a>创建字典</h2><p>字典的每个键值(key=&gt;value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 </p>
+<p>键必须是唯一的，但值则不必。值可以取任何数据类型，<strong>但键必须是不可变的，如字符串，数字或元组。</strong><br>字典键的特性：</p>
+<p>1）不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住</p>
+<p>2）键必须不可变，可以用数字，字符串或元组充当，而用列表就不行</p>
+<pre><code>d = {key1 : value1, key2 : value2 }
+例如：
+dict1={&quot;abc:123,98.6:37&quot;}
+</code></pre><h2 id="访问字典"><a href="#访问字典" class="headerlink" title="访问字典"></a>访问字典</h2><p>把相应的键放入方括弧（如果用字典里没有的键访问数据，会输出错误）</p>
+<pre><code>&gt;&gt;&gt; dict ={&apos;name&apos;:&apos;runnoob&apos;,&apos;age&apos;:7,&apos;class&apos;:&apos;first class&apos;}
+&gt;&gt;&gt; print(&quot;dict[name]:&quot;,dict[&apos;name&apos;])
+dict[name]: runnoob
+&gt;&gt;&gt; 
+</code></pre><h2 id="修改字典"><a href="#修改字典" class="headerlink" title="修改字典"></a>修改字典</h2><p>向字典添加新内容的方法是增加新的键/值对，修改或删除已有键/值对:</p>
+<pre><code>&gt;&gt;&gt; dict[&apos;age&apos;]=&apos;8&apos;
+&gt;&gt;&gt; dict[&apos;school&apos;]=&apos;hub&apos;
+&gt;&gt;&gt; print(dict[&apos;age&apos;])
+8
+&gt;&gt;&gt; print(dict[&apos;school&apos;])
+hub
+&gt;&gt;&gt; 
+</code></pre><p>删除字典元素<br>能删单一的元素也能清空字典，清空只需一项操作。显示删除一个字典用del命令，</p>
+<pre><code>&gt;&gt;&gt; del dict[&apos;name&apos;] # 删除键 &apos;Name&apos;
+&gt;&gt;&gt; dict.clear()     #删除字典
+&gt;&gt;&gt; del dict         #删除字典
+</code></pre><h2 id="内置函数-amp-方法"><a href="#内置函数-amp-方法" class="headerlink" title="内置函数&amp;方法"></a>内置函数&amp;方法</h2><h3 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h3><p>len(dict)：计算字典元素个数，即键的总数。</p>
+<p>str(dict)：输出字典，以可打印的字符串表示。</p>
+<p>type(variable)：返回输入的变量类型，如果变量是字典就返回字典类型。</p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>clear()：删除字典内所有元素</p>
+<p>copy()：返回一个字典的浅复制</p>
+<p>fromkeys()：创建一个新字典，以序列seq中元素做字典的键，val为字典所有键对应的初始值</p>
+<p>get(key, default=None)：返回指定键的值，如果值不在字典中返回default值</p>
+<p>items()：以列表返回可遍历的(键, 值) 元组数组</p>
+<p>keys()：以列表返回一个字典所有的键</p>
+<p>setdefault(key, default=None)：和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</p>
+<p>update(dict2)：把字典dict2的键/值对更新到dict里</p>
+<p>values()：以列表返回字典中的所有值</p>
+<p>pop(key[,default])：删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</p>
+<p>popitem()：随机返回并删除字典中的一对键和值。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+	  
+	</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" <i class="fa fa-tag"></i> python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/PyQt5入门学习/" rel="next" title="PyQt5入门学习">
+                <i class="fa fa-chevron-left"></i> PyQt5入门学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/python函数/" rel="prev" title="python3函数">
+                python3函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTI2OC81ODM2"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">23</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Number（数字）"><span class="nav-number">2.</span> <span class="nav-text">Number（数字）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-数字类型转换"><span class="nav-number">2.1.</span> <span class="nav-text">Python 数字类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学函数"><span class="nav-number">2.2.</span> <span class="nav-text">数学函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机数函数"><span class="nav-number">2.3.</span> <span class="nav-text">随机数函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三角函数"><span class="nav-number">2.4.</span> <span class="nav-text">三角函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#访问字符串中的值"><span class="nav-number">3.1.</span> <span class="nav-text">访问字符串中的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串更新"><span class="nav-number">3.2.</span> <span class="nav-text">字符串更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转义字符"><span class="nav-number">3.3.</span> <span class="nav-text">转义字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串运算符"><span class="nav-number">3.4.</span> <span class="nav-text">字符串运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串格式化"><span class="nav-number">3.5.</span> <span class="nav-text">字符串格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串内建函数"><span class="nav-number">3.6.</span> <span class="nav-text">字符串内建函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表"><span class="nav-number">4.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建列表"><span class="nav-number">4.1.</span> <span class="nav-text">创建列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问列表中的值"><span class="nav-number">4.2.</span> <span class="nav-text">访问列表中的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表遍历"><span class="nav-number">4.3.</span> <span class="nav-text">列表遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新列表"><span class="nav-number">4.4.</span> <span class="nav-text">更新列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除列表元素"><span class="nav-number">4.5.</span> <span class="nav-text">删除列表元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表脚本操作符"><span class="nav-number">4.6.</span> <span class="nav-text">列表脚本操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表截取"><span class="nav-number">4.7.</span> <span class="nav-text">列表截取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套列表"><span class="nav-number">4.8.</span> <span class="nav-text">嵌套列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表函数-amp-方法"><span class="nav-number">4.9.</span> <span class="nav-text">列表函数&方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">4.9.1.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">4.9.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元组"><span class="nav-number">5.</span> <span class="nav-text">元组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建元祖"><span class="nav-number">5.1.</span> <span class="nav-text">创建元祖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问元组"><span class="nav-number">5.2.</span> <span class="nav-text">访问元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改元组"><span class="nav-number">5.3.</span> <span class="nav-text">修改元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除元组"><span class="nav-number">5.4.</span> <span class="nav-text">删除元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元组运算符"><span class="nav-number">5.5.</span> <span class="nav-text">元组运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元组截取"><span class="nav-number">5.6.</span> <span class="nav-text">元组截取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置函数"><span class="nav-number">5.7.</span> <span class="nav-text">内置函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字典"><span class="nav-number">6.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建字典"><span class="nav-number">6.1.</span> <span class="nav-text">创建字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问字典"><span class="nav-number">6.2.</span> <span class="nav-text">访问字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改字典"><span class="nav-number">6.3.</span> <span class="nav-text">修改字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置函数-amp-方法"><span class="nav-number">6.4.</span> <span class="nav-text">内置函数&方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数-1"><span class="nav-number">6.4.1.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">6.4.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<div class="theme-info">
+	<div class="powered-by"></div>
+	<span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,2057 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="茶末园" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言网络爬虫(Web Spider)从网站某一个页面（通常是首页）开始，读取网页的内容，找到在网页中的其它链接地址，然后通过这些链接地址寻找下一个网页，一直循环下去，直到把这个网站所有的网页都抓取完为止。
+网络爬虫就是一个抓取网页的程序,基本操作就是抓取网页。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python3网络爬虫入门">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/home/2017/03/30/python网络爬虫/index.html">
+<meta property="og:site_name" content="茶末园">
+<meta property="og:description" content="前言网络爬虫(Web Spider)从网站某一个页面（通常是首页）开始，读取网页的内容，找到在网页中的其它链接地址，然后通过这些链接地址寻找下一个网页，一直循环下去，直到把这个网站所有的网页都抓取完为止。
+网络爬虫就是一个抓取网页的程序,基本操作就是抓取网页。">
+<meta property="og:updated_time" content="2017-07-22T08:52:24.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python3网络爬虫入门">
+<meta name="twitter:description" content="前言网络爬虫(Web Spider)从网站某一个页面（通常是首页）开始，读取网页的内容，找到在网页中的其它链接地址，然后通过这些链接地址寻找下一个网页，一直循环下去，直到把这个网站所有的网页都抓取完为止。
+网络爬虫就是一个抓取网页的程序,基本操作就是抓取网页。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/home/2017/03/30/python网络爬虫/"/>
+
+
+
+
+
+  <title> python3网络爬虫入门 | 茶末园 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/BlueSky-chamo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">茶末园</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/home/2017/03/30/python网络爬虫/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="茶末园">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python3网络爬虫入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/30/python网络爬虫/" class="leancloud_visitors" data-flag-title="python3网络爬虫入门">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>网络爬虫(Web Spider)从网站某一个页面（通常是首页）开始，读取网页的内容，找到在网页中的其它链接地址，然后通过这些链接地址寻找下一个网页，一直循环下去，直到把这个网站所有的网页都抓取完为止。</p>
+<p>网络爬虫就是一个抓取网页的程序,基本操作就是抓取网页。<br><a id="more"></a></p>
+<h2 id="浏览网页"><a href="#浏览网页" class="headerlink" title="浏览网页"></a>浏览网页</h2><p>在浏览器的地址栏中输入网页地址，打开网页的过程就是浏览器作为一个浏览的“客户端”，向服务器端发送了一次请求，把服务器端的文件“抓”到本地，再进行解释、展现。</p>
+<p>HTML是一种标记语言，用标签标记内容并加以解析和区分。浏览器的功能是将获取到的HTML代码进行解析，然后将原始的代码转变成直接看到的网站页面。</p>
+<h2 id="URI和URL"><a href="#URI和URL" class="headerlink" title="URI和URL"></a>URI和URL</h2><p>Web上每种可用的资源，如 HTML文档、图像、视频片段、程序等都由一个通用资源标志符(Universal Resource Identifier， URI)进行定位。 URI通常由三部分组成： </p>
+<ol>
+<li>访问资源的命名机制；  </li>
+<li>存放资源的主机名；  </li>
+<li>资源自身 的名称，由路径表示。  </li>
+</ol>
+<p>URL(Uniform Resource Locator)是URI的一个子集，译为“统一资源定位符”.通俗地说，URL是Internet上描述信息资源的字符串，主要用在各种WWW客户程序和服务器程序上。采用URL可以用一种统一的格式来描述各种信息资源，包括文件、服务器的地址和目录等。URL就是在浏览器端输入的<code>http://www.baidu.com</code>字符串。</p>
+<p>URL的一般格式为(带方括号[]的为可选项)：</p>
+<pre><code>protocol :// hostname[:port] / path / [;parameters][?query]#fragment
+</code></pre><p>URL的格式由三部分组成： </p>
+<ol>
+<li>第一部分是协议(或称为服务方式)。第一部分和第二部分用“://”符号隔开  </li>
+<li>第二部分是存有该资源的主机IP地址(也包括端口号),第二部分和第三部分用“/”符号隔开。  </li>
+<li>第三部分是主机资源的具体地址，如目录和文件名等。第三部分有时可以省略。   </li>
+</ol>
+<p>二者的区别在于，URI表示请求服务器的路径，定义这么一个资源。而URL同时说明要如何访问这个资源（<a href="http://）。" target="_blank" rel="external">http://）。</a></p>
+<p>例：<a href="http://www.peopledaily.com.cn/channel/welcome.htm" target="_blank" rel="external">http://www.peopledaily.com.cn/channel/welcome.htm</a><br>其计算机域名为www.peopledaily.com.cn。文本文件(文件类型为.html)是在目录 /channel下的welcome.htm。</p>
+<p>用URL表示文件时，服务器方式用file表示，后面要有主机IP地址、文件的存取路 径(即目录)和文件名等信息。有时可以省略目录和文件名，但“/”符号不能省略。<br>例：file://ftp.yoyodyne.com/pub/files/foobar.txt<br>URL代表存放在主机ftp.yoyodyne.com上的pub/files/目录下的一个文件，文件名是foobar.txt。<br>例：file://ftp.yoyodyne.com/pub<br>代表主机ftp.yoyodyne.com上的目录/pub。  </p>
+<h1 id="爬虫入门"><a href="#爬虫入门" class="headerlink" title="爬虫入门"></a>爬虫入门</h1><pre><code>from urllib import request
+
+if __name__ == &quot;__main__&quot;:
+    req=request.Request(&quot;http://fanyi.baidu.com&quot;)
+    response=request.urlopen(req)
+    html=response.read()
+    ##urlencode()将通俗的字符串转化为url格式。    
+    html=html.decode(&quot;utf-8&quot;)
+    print(html) 
+</code></pre><p><a href="https://docs.python.org/3/library/urllib.html" target="_blank" rel="external">urllib官方文档</a>显示urlib是一个包，包含request,error,parse,robotparser等模块。</p>
+<ol>
+<li><p>urllib.request模块是用来打开和读取URLs的；</p>
+</li>
+<li><p>urllib.error模块包含一些有urllib.request产生的错误，可以使用try进行捕捉处理；</p>
+</li>
+<li><p>urllib.parse模块包含了一些解析URLs的方法；</p>
+</li>
+<li><p>urllib.robotparser模块用来解析robots.txt文本文件.它提供了一个单独的RobotFileParser类，通过该类提供的can_fetch()方法测试爬虫是否可以下载一个页面。</p>
+</li>
+</ol>
+<p>urlopen() 函数返回一个 http.client.HTTPResponse 对象,该对象包含各种方法在<a href="https://docs.python.org/3/library/http.client.html#httpresponse-objects" target="_blank" rel="external">相应文档</a>。url表示需要打开的网址，data表示Post提交的数据，timeout表示设置网站的访问超时时间</p>
+<pre><code>urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False)
+</code></pre><p>urlopen（）获取页面page的数据格式为bytes类型，需要decode（）解码，转换成str类型。</p>
+<h2 id="网页编码方式"><a href="#网页编码方式" class="headerlink" title="网页编码方式"></a>网页编码方式</h2><p>常见编码方式：  </p>
+<ul>
+<li><p>ASCII编码：用来表示英文，它使用1个字节表示，其中第一位规定为0，其他7位存储数据，一共可以表示128个字符。</p>
+</li>
+<li><p>拓展ASCII编码：用于表示更多的欧洲文字，用8个位存储数据，一共可以表示256个字符</p>
+</li>
+<li><p>GBK/GB2312/GB18030：表示汉字。GBK/GB2312表示简体中文，GB18030表示繁体中文。</p>
+</li>
+<li><p>Unicode编码：包含世界上所有的字符，是一个字符集。</p>
+</li>
+<li><p>UTF-8：是Unicode字符的实现方式之一，它使用1-4个字符表示一个符号，根据不同的符号而变化字节长度。</p>
+</li>
+</ul>
+<p>安装第三方库chardet，它是用来判断编码的模块.</p>
+<pre><code>pip install chardet
+</code></pre><p>使用chardet.detect()方法，判断网页的编码方式:</p>
+<pre><code>from urllib import request
+import chardet
+
+if __name__ == &quot;__main__&quot;:
+    response = request.urlopen(&quot;http://fanyi.baidu.com/&quot;)
+    html = response.read()
+    charset = chardet.detect(html)
+    print(charset)
+</code></pre><p>输出结果：</p>
+<pre><code>{&apos;encoding&apos;: &apos;utf-8&apos;, &apos;confidence&apos;: 0.99, &apos;language&apos;: &apos;&apos;}
+</code></pre><h2 id="urlopen发送数据"><a href="#urlopen发送数据" class="headerlink" title="urlopen发送数据"></a>urlopen发送数据</h2><p>urlopen()使用data参数向服务器发送数据。根据HTTP规范，GET用于信息获取，POST是向服务器提交数据的一种请求，再换句话说：从客户端向服务器提交数据使用POST；从服务器获得数据到客户端使用GET。</p>
+<p>如果没有设置urlopen()函数的data参数，HTTP请求采用GET方式，也就是我们从服务器获取信息，如果设置data参数，HTTP请求采用POST方式，也就是向服务器传递数据。</p>
+<p>data参数有自己的格式，它是一个基于application/x-www.form-urlencoded的格式，可以使用urllib.parse.urlencode()函数将字符串自动转换成上面所说的格式。</p>
+<p>URL获取：打开有道-右键检查-选择右侧的network-输入单词自动翻译-选择右侧栏的headers<br>获取页面中URL与最下面的Form Data</p>
+<pre><code>from urllib import request
+from urllib import parse
+import json
+
+if __name__ == &quot;__main__&quot;:
+    #对应上图的Request URL
+    Request_URL = &apos;http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule&amp;smartresult=ugc&amp;sessionFrom=https://www.baidu.com/link&apos;
+    #创建Form_Data字典，存储上图的Form Data
+    Form_Data = {}
+    Form_Data[&apos;type&apos;] = &apos;AUTO&apos;
+    Form_Data[&apos;i&apos;] = &apos;Jack&apos;
+    Form_Data[&apos;doctype&apos;] = &apos;json&apos;
+    Form_Data[&apos;xmlVersion&apos;] = &apos;1.8&apos;
+    Form_Data[&apos;keyfrom&apos;] = &apos;fanyi.web&apos;
+    Form_Data[&apos;ue&apos;] = &apos;ue:UTF-8&apos;
+    Form_Data[&apos;action&apos;] = &apos;FY_BY_CLICKBUTTON&apos;
+    #使用urlencode方法转换标准格式
+    data = parse.urlencode(Form_Data).encode(&apos;utf-8&apos;)
+    #传递Request对象和转换完格式的数据
+    response = request.urlopen(Request_URL,data)
+    #读取信息并解码
+    html = response.read().decode(&apos;utf-8&apos;)
+    #使用JSON
+    translate_results = json.loads(html)
+    #找到翻译结果
+    translate_results = translate_results[&apos;translateResult&apos;][0][0][&apos;tgt&apos;]
+    #打印翻译信息
+    print(&quot;翻译的结果是：%s&quot; % translate_results)
+</code></pre><p>结果：</p>
+<pre><code>翻译的结果是：玫瑰
+</code></pre><h2 id="urllib-error异常"><a href="#urllib-error异常" class="headerlink" title="urllib.error异常"></a>urllib.error异常</h2><p> urllib.error可以接收有urllib.request产生的异常。urllib.error有两个方法，URLError和HTTPError。</p>
+<h3 id="URLError"><a href="#URLError" class="headerlink" title="URLError"></a>URLError</h3><pre><code>from urllib import request
+from urllib import error
+
+if __name__ == &quot;__main__&quot;:
+    #一个不存在的连接
+    url = &quot;http://www.iloveyou.com/&quot;
+    req = request.Request(url)
+    try:
+        response = request.urlopen(req)
+        html = response.read().decode(&apos;utf-8&apos;)
+        print(html)
+    except error.URLError as e:
+        print(e.reason)
+</code></pre><p>结果：</p>
+<pre><code>[Errno 11004] getaddrinfo failed
+</code></pre><h3 id="HTTPError"><a href="#HTTPError" class="headerlink" title="HTTPError"></a>HTTPError</h3><pre><code>from urllib import request
+from urllib import error
+
+if __name__ == &quot;__main__&quot;:
+    #一个不存在的连接
+    url = &quot;http://www.douyu.com/Jack_Cui.html&quot;
+    req = request.Request(url)
+    try:
+        responese = request.urlopen(req)
+        # html = responese.read()
+    except error.HTTPError as e:
+        print(e.code)
+</code></pre><p>结果：</p>
+<pre><code>404
+</code></pre><p>说明请求的资源没有在服务器上找到，www.douyu.com这个服务器是存在的，但是我们要查找的Jack_Cui.html资源是没有的，所以抛出404异常。</p>
+<h3 id="URLError和HTTPError混合"><a href="#URLError和HTTPError混合" class="headerlink" title="URLError和HTTPError混合"></a>URLError和HTTPError混合</h3><p>如果想用HTTPError和URLError一起捕获异常，那么需要将HTTPError放在URLError的前面，因为HTTPError是URLError的一个子类。如果URLError放在前面，出现HTTP异常会先响应URLError，这样HTTPError就捕获不到错误信息了。</p>
+<p>也可以使用hasattr函数判断URLError含有的属性，如果含有reason属性表明是URLError，如果含有code属性表明是HTTPError<br>    from urllib import request<br>    from urllib import error</p>
+<pre><code>if __name__ == &quot;__main__&quot;:
+#一个不存在的连接
+url = &quot;http://www.douyu.com/Jack_Cui.html&quot;
+req = request.Request(url)
+try:
+    responese = request.urlopen(req)
+except error.URLError as e:
+    if hasattr(e,&apos;code&apos;):
+        print(&quot;HTTPError&quot;)
+        print(e.code)
+    elif hasattr(e, &apos;reason&apos;):
+        print(&quot;URLError&quot;)
+        print(e.reason)
+</code></pre><p>结果：</p>
+<pre><code>HTTPError
+404
+</code></pre><h2 id="User-Agent和代理IP隐藏身份"><a href="#User-Agent和代理IP隐藏身份" class="headerlink" title="User Agent和代理IP隐藏身份"></a>User Agent和代理IP隐藏身份</h2><p>有一些网站不喜欢被爬虫程序访问，所以会检测连接对象，如果是爬虫程序，也就是非人点击访问，它就会不让你继续访问，所以为了要让程序可以正常运行，需要隐藏自己的爬虫程序的身份。此时可以通过设置User Agent的来达到隐藏身份的目的，User Agent的中文名为用户代理，简称UA。</p>
+<p>User Agent存放于Headers中，服务器就是通过查看Headers中的User Agent来判断是谁在访问。在python中，如果不设置User Agent，程序将使用默认的参数，那么这个User Agent就会有Python的字样，如果服务器检查User Agent，那么没有设置User Agent的Python程序将无法正常访问网站。Python允许修改这个User Agent来模拟浏览器访问。</p>
+<h3 id="常见的User-Agent"><a href="#常见的User-Agent" class="headerlink" title="常见的User Agent"></a>常见的User Agent</h3><ol>
+<li><p>Android  </p>
+<p> Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Safari/535.19</p>
+<p> Mozilla/5.0 (Linux; U; Android 4.0.4; en-gb; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30</p>
+<p> Mozilla/5.0 (Linux; U; Android 2.2; en-gb; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1</p>
+</li>
+<li><p>Firefox</p>
+<p> Mozilla/5.0 (Windows NT 6.2; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0</p>
+<p> Mozilla/5.0 (Android; Mobile; rv:14.0) Gecko/14.0 Firefox/14.0</p>
+</li>
+<li><p>Google Chrome</p>
+<p> Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36</p>
+<p> Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19</p>
+</li>
+<li><p>iOS</p>
+<p> Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3</p>
+<p> Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A101a Safari/419.3</p>
+<h3 id="设置User-Agent"><a href="#设置User-Agent" class="headerlink" title="设置User Agent"></a>设置User Agent</h3><p> class urllib.request.Request(url, data=None, headers={}, origin_req_host=None, unverifiable=False, method=None)<br>urllib.request.Request()在创建Request对象的时候，可以传入headers参数，想要设置User Agent，有两种方法：</p>
+</li>
+<li><p>在创建Request对象的时候，填入headers参数(包含User Agent信息)，这个Headers参数要求为字典；</p>
+</li>
+<li>在创建Request对象的时候不添加headers参数，在创建完成之后，使用add_header()的方法，添加headers。</li>
+</ol>
+<p>方式1：使用上面提到的android的第一个User Agent，在创建Request对象的时候传入headers参数</p>
+<pre><code># -*- coding: UTF-8 -*-
+from urllib import request
+
+if __name__ == &quot;__main__&quot;:
+    #以CSDN为例，CSDN不更改User Agent是无法访问的
+    url = &apos;http://www.csdn.net/&apos;
+    head = {}
+    #写入User Agent信息
+    head[&apos;User-Agent&apos;] = &apos;Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19&apos;
+ #创建Request对象
+    req = request.Request(url, headers=head)
+    #传入创建好的Request对象
+    response = request.urlopen(req)
+    #读取响应信息并解码
+    html = response.read().decode(&apos;utf-8&apos;)
+    #打印信息
+    print(html)
+</code></pre><p>方法二：使用上面提到的Android的第一个User Agent，在创建Request对象时不传入headers参数，创建之后使用add_header()方法，添加headers</p>
+<pre><code># -*- coding: UTF-8 -*-
+from urllib import request
+
+if __name__ == &quot;__main__&quot;:
+    #以CSDN为例，CSDN不更改User Agent是无法访问的
+    url = &apos;http://www.csdn.net/&apos;
+    #创建Request对象
+    req = request.Request(url)
+    #传入headers
+    req.add_header(&apos;User-Agent&apos;, &apos;Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19&apos;)
+    #传入创建好的Request对象
+    response = request.urlopen(req)
+    #读取响应信息并解码
+    html = response.read().decode(&apos;utf-8&apos;)
+    #打印信息
+    print(html)
+</code></pre><h3 id="IP代理的使用"><a href="#IP代理的使用" class="headerlink" title="IP代理的使用"></a>IP代理的使用</h3><p>如果我们利用一个爬虫程序在网站爬取东西，一个固定IP的访问频率就会很高，这不符合人为操作的标准，因为人操作不可能在几ms内，进行如此频繁的访问。所以一些网站会设置一个IP访问频率的阈值，如果一个IP访问频率超过这个阈值，说明这个不是人在访问，而是一个爬虫程序。</p>
+<p>一个简单的解决办法就是设置延时，但是这显然不符合爬虫快速爬取信息的目的，所以另一种更好的方法就是使用IP代理。使用代理的步骤：</p>
+<ol>
+<li>调用urlib.request.ProxyHandler()，proxies参数为一个字典。</li>
+<li><pre><code>class urllib.request.ProxyHandler(proxies=None)
+</code></pre></li>
+<li><p>创建Opener(类似于urlopen，这个代开方式是我们自己定制的)</p>
+<pre><code>urllib.request.build_opener([handler, ...])
+</code></pre></li>
+<li><p>安装Opener</p>
+<pre><code>urllib.request.install_opener(opener)
+</code></pre></li>
+</ol>
+<p>使用install_opener方法之后，会将程序默认的urlopen方法替换掉。也就是说，如果使用install_opener之后，在该文件中，再次调用urlopen会使用自己创建好的opener。如果不想替换掉，只是想临时使用一下，可以使用opener.open(url)，这样就不会对程序默认的urlopen有影响。</p>
+<p>先在代理IP网站选好一个IP地址，推荐<a href="http://www.xicidaili.com/" target="_blank" rel="external">西刺代理IP</a><br>从西刺网站选出信号好的IP，访问<a href="http://www.whatismyip.com.tw/，该网站是测试自己IP为多少的网址，服务器会返回访问者的IP" target="_blank" rel="external">http://www.whatismyip.com.tw/，该网站是测试自己IP为多少的网址，服务器会返回访问者的IP</a></p>
+<pre><code># -*- coding: UTF-8 -*-
+from urllib import request
+
+if __name__ == &quot;__main__&quot;:
+    #访问网址
+    url = &apos;http://www.whatismyip.com.tw/&apos;
+    #这是代理IP
+    proxy = {&apos;http&apos;:&apos;111.73.83.113&apos;}
+    #创建ProxyHandler
+    proxy_support = request.ProxyHandler(proxy)
+    #创建Opener
+    opener = request.build_opener(proxy_support)
+    #添加User Angent
+    opener.addheaders = [(&apos;User-Agent&apos;,&apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36&apos;)]
+    #安装OPener
+    request.install_opener(opener)
+    #使用自己安装好的Opener
+    response = request.urlopen(url)
+    #读取相应信息并解码
+    html = response.read().decode(&quot;utf-8&quot;)
+    #打印信息
+    print(html)
+</code></pre><p>直接访问会报如下错误：</p>
+<pre><code>urllib.error.URLError: &lt;urlopen error [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。&gt;
+</code></pre><p>若将request.install_opener(opener)注释便不会保错，该函数是使代理ip生效，说明该代理IP不成功。换了大量IP最后proxy = {‘http’:’119.36.92.41’}成功运行。，访问的IP已经伪装成了106.46.136.112。</p>
+<pre><code>IP位址&lt;/h1&gt; &lt;span data-ip=&apos;121.12.105.83&apos;&gt;
+</code></pre><h2 id="Cookie模拟登入"><a href="#Cookie模拟登入" class="headerlink" title="Cookie模拟登入"></a>Cookie模拟登入</h2><p>cookie指某些网站为了辨别用户身份、进行session跟踪而储存在用户本地终端上的数据（通常经过加密)。 比如说有些网站需要登录后才能访问某个页面，在登录之前，你想抓取某个页面内容，登陆前与登陆后是不同的，或者不允许的。使用Cookie和使用代理IP一样，也需要创建一个自己的opener。在HTTP包中，提供了cookiejar模块，用于提供对Cookie的支持。</p>
+<p>http.cookiejar功能强大，可以利用本模块的CookieJar类的对象来捕获cookie并在后续连接请求时重新发送，比如可以实现模拟登录功能。该模块主要的对象有CookieJar、FileCookieJar、MozillaCookieJar、LWPCookieJar。它们的关系： CookieJar–派生–&gt;FileCookieJar–派生–&gt;MozillaCookieJar和LWPCookieJar</p>
+<p>工作原理：创建一个带有cookie的opener，在访问登录的URL时，将登录后的cookie保存下来，然后利用这个cookie来访问其他网址</p>
+<h3 id="获取Cookie"><a href="#获取Cookie" class="headerlink" title="获取Cookie"></a>获取Cookie</h3><p>利用CookieJar对象实现获取cookie的功能，存储到变量中</p>
+<pre><code>from urllib import request
+from http import cookiejar
+
+if __name__ == &apos;__main__&apos;:
+    #声明一个CookieJar对象实例来保存cookie
+    cookie = cookiejar.CookieJar()
+    #利用urllib.request库的HTTPCookieProcessor对象来创建cookie处理器,也就CookieHandler
+    handler=request.HTTPCookieProcessor(cookie)
+    #通过CookieHandler创建opener
+    opener = request.build_opener(handler)
+    #此处的open方法打开网页
+    response = opener.open(&apos;http://www.baidu.com&apos;)
+    #打印cookie信息
+    for item in cookie:
+        print(&apos;Name = %s&apos; % item.name)
+        print(&apos;Value = %s&apos; % item.value)
+</code></pre><p>结果：</p>
+<pre><code>Name = BAIDUID
+Value = B7369EF14E25D8738EB85FBE2D84785E:FG=1
+Name = BIDUPSID
+Value = B7369EF14E25D8738EB85FBE2D84785E
+Name = H_PS_PSSID
+Value = 1428_21116_18559_17001_22159
+Name = PSTM
+Value = 1499327930
+Name = BDSVRTM
+Value = 0
+Name = BD_HOME
+Value = 0
+</code></pre><h3 id="保存Cookie到文件"><a href="#保存Cookie到文件" class="headerlink" title="保存Cookie到文件"></a>保存Cookie到文件</h3><p>如果想将cookie保存到文件中方便以后直接读取文件使用，就要用到FileCookieJar这个对象，在这里使用它的子类MozillaCookieJar来实现Cookie的保存，</p>
+<pre><code>from urllib import request
+from http import cookiejar
+
+if __name__ == &apos;__main__&apos;:
+
+    #设置保存cookie的文件，同级目录下的cookie.txt
+    filename = &apos;cookie.txt&apos;
+    #声明一个MozillaCookieJar对象实例来保存cookie，之后写入文件
+    cookie = cookiejar.MozillaCookieJar(filename)
+    #利用urllib.request库的HTTPCookieProcessor对象来创建cookie处理器,也就CookieHandler
+    handler=request.HTTPCookieProcessor(cookie)
+    #通过CookieHandler创建opener
+    opener = request.build_opener(handler)
+    #此处的open方法打开网页
+    response = opener.open(&apos;http://www.baidu.com&apos;)
+    #保存cookie到文件
+    cookie.save(ignore_discard=True, ignore_expires=True)
+</code></pre><p>cookie.save的参数说明：</p>
+<ul>
+<li><p>ignore_discard的意思是即使cookies将被丢弃也将它保存下来；</p>
+</li>
+<li><p>ignore_expires的意思是如果在该文件中cookies已经存在，则覆盖原文件写入。</p>
+</li>
+</ul>
+<h3 id="从文件中获取Cookie并访问"><a href="#从文件中获取Cookie并访问" class="headerlink" title="从文件中获取Cookie并访问"></a>从文件中获取Cookie并访问</h3><pre><code>from urllib import request
+from http import cookiejar
+
+if __name__ == &apos;__main__&apos;:
+    #设置保存cookie的文件的文件名,相对路径,也就是同级目录下
+    filename = &apos;cookie.txt&apos;
+    #创建MozillaCookieJar实例对象
+    cookie = cookiejar.MozillaCookieJar()
+    #从文件中读取cookie内容到变量
+    cookie.load(filename, ignore_discard=True, ignore_expires=True)
+    #利用urllib.request库的HTTPCookieProcessor对象来创建cookie处理器,也就CookieHandler
+    handler=request.HTTPCookieProcessor(cookie)
+    #通过CookieHandler创建opener
+    opener = request.build_opener(handler)
+    #此用opener的open方法打开网页
+    response = opener.open(&apos;http://www.baidu.com&apos;)
+    #打印信息
+    print(response.read().decode(&apos;utf-8&apos;))
+</code></pre><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><pre><code># -*- coding: UTF-8 -*-
+from urllib import request
+from urllib import error
+from urllib import parse
+from http import cookiejar
+
+if __name__ == &apos;__main__&apos;:
+    #登陆地址
+    login_url = &apos;http://www.jobbole.com/wp-admin/admin-ajax.php&apos;    
+    #User-Agent信息                   
+    user_agent = r&apos;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36&apos;
+    #Headers信息
+    head = {&apos;User-Agnet&apos;: user_agent, &apos;Connection&apos;: &apos;keep-alive&apos;}
+    #登陆Form_Data信息
+    Login_Data = {}
+    Login_Data[&apos;action&apos;] = &apos;user_login&apos;
+    Login_Data[&apos;redirect_url&apos;] = &apos;http://www.jobbole.com/&apos;
+    Login_Data[&apos;remember_me&apos;] = &apos;0&apos;         #是否一个月内自动登陆
+    Login_Data[&apos;user_login&apos;] = &apos;********&apos;       #改成你自己的用户名
+    Login_Data[&apos;user_pass&apos;] = &apos;********&apos;        #改成你自己的密码
+    #使用urlencode方法转换标准格式
+    logingpostdata = parse.urlencode(Login_Data).encode(&apos;utf-8&apos;)
+    #声明一个CookieJar对象实例来保存cookie
+    cookie = cookiejar.CookieJar()
+    #利用urllib.request库的HTTPCookieProcessor对象来创建cookie处理器,也就CookieHandler
+    cookie_support = request.HTTPCookieProcessor(cookie)
+    #通过CookieHandler创建opener
+    opener = request.build_opener(cookie_support)
+    #创建Request对象
+    req1 = request.Request(url=login_url, data=logingpostdata, headers=head)
+
+    #面向对象地址
+    date_url = &apos;http://date.jobbole.com/wp-admin/admin-ajax.php&apos;
+    #面向对象
+    Date_Data = {}
+    Date_Data[&apos;action&apos;] = &apos;get_date_contact&apos;
+    Date_Data[&apos;postId&apos;] = &apos;4128&apos;
+    #使用urlencode方法转换标准格式
+    datepostdata = parse.urlencode(Date_Data).encode(&apos;utf-8&apos;)
+    req2 = request.Request(url=date_url, data=datepostdata, headers=head)
+    try:
+        #使用自己创建的opener的open方法
+        response1 = opener.open(req1)
+        response2 = opener.open(req2)
+        html = response2.read().decode(&apos;utf-8&apos;)
+        index = html.find(&apos;jb_contact_email&apos;)
+        #打印查询结果
+        print(&apos;联系邮箱:%s&apos; % html[index+19:-2])
+
+    except error.URLError as e:
+        if hasattr(e, &apos;code&apos;):
+            print(&quot;HTTPError:%d&quot; % e.code)
+        elif hasattr(e, &apos;reason&apos;):
+            print(&quot;URLError:%s&quot; % e.reason)
+</code></pre><h2 id="Beautiful-Soup"><a href="#Beautiful-Soup" class="headerlink" title="Beautiful Soup"></a>Beautiful Soup</h2><p><a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">Beautiful Soup</a>是python的一个库，最主要的功能是从网页抓取数据。Beautiful Soup自动将输入文档转换为Unicode编码，输出文档转换为utf-8编码。Beautiful Soup已成为和lxml、html6lib一样出色的python解释器，为用户灵活地提供不同的解析策略或强劲的速度。</p>
+<p>安装Beautiful Soup</p>
+<pre><code>pip3 install beautifulsoup4
+</code></pre><h3 id="创建Beautiful-Soup对象"><a href="#创建Beautiful-Soup对象" class="headerlink" title="创建Beautiful Soup对象"></a>创建Beautiful Soup对象</h3><pre><code>from bs4 import BeautifulSoup
+
+html = &quot;&quot;&quot;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Jack_Cui&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;title&quot; name=&quot;blog&quot;&gt;&lt;b&gt;My Blog&lt;/b&gt;&lt;/p&gt;
+&lt;li&gt;&lt;!--注释--&gt;&lt;/li&gt;
+&lt;a href=&quot;http://blog.csdn.net/c406495762/article/details/58716886&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Python3网络爬虫(一)：利用urllib进行简单的网页抓取&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;http://blog.csdn.net/c406495762/article/details/59095864&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Python3网络爬虫(二)：利用urllib.urlopen发送数据&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;http://blog.csdn.net/c406495762/article/details/59488464&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Python3网络爬虫(三)：urllib.error异常&lt;/a&gt;&lt;br/&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&quot;&quot;&quot;
+soup = BeautifulSoup(html,&apos;lxml&apos;)
+#html的信息写入一个html文件也是一样的
+#soup = BeautifulSoup(open(test.html),&apos;lxml&apos;)
+
+#格式化输出
+print(soup.prettify())
+</code></pre><h3 id="Beautiful-Soup四大对象"><a href="#Beautiful-Soup四大对象" class="headerlink" title="Beautiful Soup四大对象"></a>Beautiful Soup四大对象</h3><p>Beautiful Soup将复杂HTML文档转换成一个复杂的树形结构,每个节点都是Python对象,所有对象可以归纳为4种:</p>
+<ul>
+<li>Tag</li>
+<li>NavigableString</li>
+<li>BeautifulSoup</li>
+<li><p>Comment</p>
+<h4 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h4><p>Tag就是HTML中的一个个标签，例如title就是HTML标签，标签加里面的内容就是Tag</p>
+<p>  <title>Jack_Cui</title><br>利用Beautiful Soup 可以方便地获取 Tags：<br>  from bs4 import BeautifulSoup</p>
+<p>  html = “””<br>  <html><br>  <head><br>  <title>Jack_Cui</title><br>  </head><br>  <body></body></html></p>
+  <p class="title" name="blog"><b>My Blog</b></p><br>  </li><li><!--注释--></li><br>  <a href="http://blog.csdn.net/c406495762/article/details/58716886" class="sister" id="link1" target="_blank" rel="external">Python3网络爬虫(一)：利用urllib进行简单的网页抓取</a><br><br>  <a href="http://blog.csdn.net/c406495762/article/details/59095864" class="sister" id="link2" target="_blank" rel="external">Python3网络爬虫(二)：利用urllib.urlopen发送数据</a><br><br>  <a href="http://blog.csdn.net/c406495762/article/details/59488464" class="sister" id="link3" target="_blank" rel="external">Python3网络爬虫(三)：urllib.error异常</a><br><br>  <br>  <br>  “””<br>  soup = BeautifulSoup(html,’lxml’)<br>  print(soup.title)<br>  print(soup.head)<br>  print(soup.a)<br>  print(soup.p)<br>输出结果：<br><br>  <title>Jack_Cui</title><br>  <head><br>  <title>Jack_Cui</title><br>  </head><br>  <a class="sister" href="http://blog.csdn.net/c406495762/article/details/58716886" id="link1" target="_blank" rel="external">Python3网络爬虫(一)：利用urllib进行简单的网页抓取</a><br>  <p class="title" name="blog"><b>My Blog</b></p>
+
+
+</ul>
+<p>对于Tag，有两个重要的属性：name和attrs</p>
+<p>name：soup 对象本身比较特殊，它的 name 即为 [document]，对于其他内部标签，输出的值便为标签本身的名称。</p>
+<pre><code>print(soup.name)
+print(soup.title.name)
+</code></pre><p>结果：</p>
+<pre><code>[document]
+title
+</code></pre><p>attrs：把 a 标签的所有属性打印输出，得到的类型是一个字典</p>
+<pre><code>print(soup.a.attrs)
+</code></pre><p>想要单独获取某个属性，例如我们获取a标签的class叫什么，两个等价的方法如下：</p>
+<pre><code>print(soup.a[&apos;class&apos;])
+print(soup.a.get(&apos;class&apos;))
+结果：
+[&apos;sister&apos;]
+[&apos;sister&apos;]
+</code></pre><p>要想获取标签内部的文字用 .string 即可：</p>
+<pre><code>print(soup.title.string)
+结果：
+Jack_Cui
+</code></pre><p>BeautifulSoup 对象表示的是一个文档的全部内容.可以把它当作 Tag 对象，是一个特殊的 Tag，我们可以分别获取它的类型，名称，以及属性：</p>
+<pre><code>print(type(soup.name))
+print(soup.name)
+print(soup.attrs)
+结果：
+&lt;class &apos;str&apos;&gt;
+[document]
+{}
+</code></pre><p>Comment对象是一个特殊类型的NavigableString对象，其实输出的内容仍然不包括注释符号，但是如果不好好处理它，可能会对文本处理造成意想不到的麻烦。使用前最好做一下判断，是否为 Comment 类型，然后再进行其他操作</p>
+<pre><code>if type(soup.li.string) == element.Comment:
+     print(soup.li.string)
+</code></pre><h3 id="遍历文档"><a href="#遍历文档" class="headerlink" title="遍历文档"></a>遍历文档</h3><h3 id="直接子节点-不包含孙节点"><a href="#直接子节点-不包含孙节点" class="headerlink" title="直接子节点(不包含孙节点)"></a>直接子节点(不包含孙节点)</h3><p>tag的content属性可以将tag的子节点以列表的方式输出：</p>
+<pre><code>print(soup.body.contents)
+结果：
+[&apos;\n&apos;, &lt;p class=&quot;title&quot; name=&quot;blog&quot;&gt;&lt;b&gt;My Blog&lt;/b&gt;&lt;/p&gt;, &apos;\n&apos;, &lt;li&gt;&lt;!--注释--&gt;&lt;/li&gt;, &apos;\n&apos;, &lt;a class=&quot;sister&quot; href=&quot;http://blog.csdn.net/c406495762/article/details/58716886&quot; id=&quot;link1&quot;&gt;Python3网络爬虫(一)：利用urllib进行简单的网页抓取&lt;/a&gt;, &lt;br/&gt;, &apos;\n&apos;, &lt;a class=&quot;sister&quot; href=&quot;http://blog.csdn.net/c406495762/article/details/59095864&quot; id=&quot;link2&quot;&gt;Python3网络爬虫(二)：利用urllib.urlopen发送数据&lt;/a&gt;, &lt;br/&gt;, &apos;\n&apos;, &lt;a class=&quot;sister&quot; href=&quot;http://blog.csdn.net/c406495762/article/details/59488464&quot; id=&quot;link3&quot;&gt;Python3网络爬虫(三)：urllib.error异常&lt;/a&gt;, &lt;br/&gt;, &apos;\n&apos;]
+</code></pre><p>输出方式为列表，可以用列表索引来获取它的某一个元素</p>
+<pre><code>print(soup.body.contents[1])
+结果：
+&lt;p class=&quot;title&quot; name=&quot;blog&quot;&gt;&lt;b&gt;My Blog&lt;/b&gt;&lt;/p&gt;
+</code></pre><p>children返回的不是一个 list，不过可以通过遍历获取所有子节点，它是一个 list 生成器对象</p>
+<pre><code>for child in soup.body.children:
+ print(child)
+结果：
+&lt;p class=&quot;title&quot; name=&quot;blog&quot;&gt;&lt;b&gt;My Blog&lt;/b&gt;&lt;/p&gt;
+
+&lt;li&gt;&lt;!--注释--&gt;&lt;/li&gt;
+
+&lt;a class=&quot;sister&quot; href=&quot;http://blog.csdn.net/c406495762/article/details/58716886&quot; id=&quot;link1&quot;&gt;Python3网络爬虫(一)：利用urllib进行简单的网页抓取&lt;/a&gt;
+&lt;br/&gt;
+
+&lt;a class=&quot;sister&quot; href=&quot;http://blog.csdn.net/c406495762/article/details/59095864&quot; id=&quot;link2&quot;&gt;Python3网络爬虫(二)：利用urllib.urlopen发送数据&lt;/a&gt;
+&lt;br/&gt;
+
+&lt;a class=&quot;sister&quot; href=&quot;http://blog.csdn.net/c406495762/article/details/59488464&quot; id=&quot;link3&quot;&gt;Python3网络爬虫(三)：urllib.error异常&lt;/a&gt;
+&lt;br/&gt;
+</code></pre><h4 id="搜索文档树"><a href="#搜索文档树" class="headerlink" title="搜索文档树"></a>搜索文档树</h4><p>find_all() 方法搜索当前tag的所有tag子节点,并判断是否符合过滤器的条件</p>
+<pre><code>find_all(name, attrs, recursive, text, limit, **kwargs)：
+</code></pre><p>1) name参数：name 参数可以查找所有名字为 name 的tag,字符串对象会被自动忽略掉。<br>传递字符：</p>
+<pre><code>print(soup.find_all(&apos;a&apos;))
+</code></pre><p>传递正则表达式：</p>
+<p>如果传入正则表达式作为参数,Beautiful Soup会通过正则表达式的 match() 来匹配内容.下面例子中找出所有以b开头的标签,这表示<code>&lt;body&gt;</code>和<code>&lt;b&gt;</code>标签都应该被找到</p>
+<pre><code>import re
+for tag in soup.find_all(re.compile(&quot;^b&quot;)):
+     print(tag.name)
+</code></pre><p>传递列表：</p>
+<p>如果传入列表参数，Beautiful Soup会将与列表中任一元素匹配的内容返回，下面代码找到文档中所有<code>&lt;title&gt;</code>标签和<code>&lt;b&gt;</code>标签</p>
+<pre><code>print(soup.find_all([&apos;title&apos;,&apos;b&apos;]))
+</code></pre><p>传递True：</p>
+<p>True 可以匹配任何值,下面代码查找到所有的tag,但是不会返回字符串节点：</p>
+<pre><code>for tag in soup.find_all(True):
+     print(tag.name)
+结果：
+html
+head
+title
+body
+p
+b
+li
+a
+br
+a
+br
+a
+br
+</code></pre><p>2)attrs参数</p>
+<p>可以通过 find_all() 方法的 attrs 参数定义一个字典参数来搜索包含特殊属性的tag。</p>
+<pre><code>print(soup.find_all(attrs={&quot;class&quot;:&quot;title&quot;}))
+结果:
+[&lt;p class=&quot;title&quot; name=&quot;blog&quot;&gt;&lt;b&gt;My Blog&lt;/b&gt;&lt;/p&gt;]
+</code></pre><p>3)recursive参数</p>
+<p>调用tag的 find_all() 方法时,Beautiful Soup会检索当前tag的所有子孙节点,如果只想搜索tag的直接子节点,可以使用参数 recursive=False</p>
+<p>4)text参数</p>
+<p>通过 text 参数可以搜搜文档中的字符串内容，与 name 参数的可选值一样, text 参数接受字符串 , 正则表达式 , 列表, True。</p>
+<p>5)limit参数</p>
+<p>find_all() 方法返回全部的搜索结构,如果文档树很大那么搜索会很慢.如果我们不需要全部结果,可以使用 limit 参数限制返回结果的数量.当搜索到的结果数量达到 limit 的限制时,就停止搜索返回结果。</p>
+<pre><code>print(soup.find_all(&quot;a&quot;, limit=2))
+</code></pre><p>6)kwargs参数</p>
+<p>如果传入 class 参数,Beautiful Soup 会搜索每个 class 属性为 title 的 tag 。kwargs 接收字符串，正则表达式</p>
+<pre><code>print(soup.find_all(class_=&quot;title&quot;))
+结果：
+[&lt;p class=&quot;title&quot; name=&quot;blog&quot;&gt;&lt;b&gt;My Blog&lt;/b&gt;&lt;/p&gt;]
+</code></pre><h3 id="单章小说内容爬取"><a href="#单章小说内容爬取" class="headerlink" title="单章小说内容爬取"></a>单章小说内容爬取</h3><pre><code># -*- coding:UTF-8 -*-
+from urllib import request
+from bs4 import BeautifulSoup
+
+if __name__ == &quot;__main__&quot;:
+    download_url = &apos;http://www.biqukan.com/1_1094/5403177.html&apos;
+    head = {}
+    head[&apos;User-Agent&apos;] = &apos;Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19&apos;
+    download_req = request.Request(url = download_url, headers = head)
+    download_response = request.urlopen(download_req)
+    download_html = download_response.read().decode(&apos;gbk&apos;,&apos;ignore&apos;)
+    soup_texts = BeautifulSoup(download_html, &apos;lxml&apos;)
+    texts = soup_texts.find_all(id = &apos;content&apos;, class_ = &apos;showtxt&apos;)
+    soup_text = BeautifulSoup(str(texts), &apos;lxml&apos;)
+    #将\xa0无法解码的字符删除
+    print(soup_text.div.text.replace(&apos;\xa0&apos;,&apos;&apos;))
+</code></pre><h3 id="各章小说链接爬取"><a href="#各章小说链接爬取" class="headerlink" title="各章小说链接爬取"></a>各章小说链接爬取</h3><pre><code># -*- coding:UTF-8 -*-
+from urllib import request
+from bs4 import BeautifulSoup
+
+if __name__ == &quot;__main__&quot;:
+    target_url = &apos;http://www.biqukan.com/1_1094/&apos;
+    head = {}
+    head[&apos;User-Agent&apos;] = &apos;Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19&apos;
+    target_req = request.Request(url = target_url, headers = head)
+    target_response = request.urlopen(target_req)
+    target_html = target_response.read().decode(&apos;gbk&apos;,&apos;ignore&apos;)
+    #创建BeautifulSoup对象
+    listmain_soup = BeautifulSoup(target_html,&apos;lxml&apos;)
+    #搜索文档树,找出div标签中class为listmain的所有子标签
+    chapters = listmain_soup.find_all(&apos;div&apos;,class_ = &apos;listmain&apos;)
+    #使用查询结果再创建一个BeautifulSoup对象,对其继续进行解析
+    download_soup = BeautifulSoup(str(chapters), &apos;lxml&apos;)
+    #开始记录内容标志位,只要正文卷下面的链接,最新章节列表链接剔除
+    begin_flag = False
+    #遍历dl标签下所有子节点
+    for child in download_soup.dl.children:
+        #滤除回车
+        if child != &apos;\n&apos;:
+            #找到《一念永恒》正文卷,使能标志位
+            if child.string == u&quot;《一念永恒》正文卷&quot;:
+                begin_flag = True
+            #爬取链接
+            if begin_flag == True and child.a != None:
+                download_url = &quot;http://www.biqukan.com&quot; + child.a.get(&apos;href&apos;)
+                download_name = child.string
+                print(download_name + &quot; : &quot; + download_url)
+</code></pre><h3 id="爬取所有章节内容，并保存到文件中"><a href="#爬取所有章节内容，并保存到文件中" class="headerlink" title="爬取所有章节内容，并保存到文件中"></a>爬取所有章节内容，并保存到文件中</h3><h1 id="coding-UTF-8"><a href="#coding-UTF-8" class="headerlink" title="-- coding:UTF-8 --"></a>-<em>- coding:UTF-8 -</em>-</h1><p>from urllib import request<br>from bs4 import BeautifulSoup<br>import collections<br>import re<br>import os<br>import time<br>import sys<br>import types</p>
+<p>“””<br>类说明:下载《笔趣看》网小说: url:<a href="http://www.biqukan.com/" target="_blank" rel="external">http://www.biqukan.com/</a><br>Parameters:<br>    target - 《笔趣看》网指定的小说目录地址(string)<br>Returns:<br>    无<br>Modify:<br>    2017-05-06<br>“””<br>class download(object):<br>    def <strong>init</strong>(self, target):<br>        self.<strong>target_url = target<br>        self.</strong>head = {‘User-Agent’:’Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19’,}</p>
+<pre><code>&quot;&quot;&quot;
+函数说明:获取下载链接
+Parameters:
+    无
+Returns:
+    novel_name + &apos;.txt&apos; - 保存的小说名(string)
+    numbers - 章节数(int)
+    download_dict - 保存章节名称和下载链接的字典(dict)
+Modify:
+    2017-05-06
+&quot;&quot;&quot;
+def get_download_url(self):
+    charter = re.compile(u&apos;[第弟](.+)章&apos;, re.IGNORECASE)
+    target_req = request.Request(url = self.__target_url, headers = self.__head)
+    target_response = request.urlopen(target_req)
+    target_html = target_response.read().decode(&apos;gbk&apos;,&apos;ignore&apos;)
+    listmain_soup = BeautifulSoup(target_html,&apos;lxml&apos;)
+    chapters = listmain_soup.find_all(&apos;div&apos;,class_ = &apos;listmain&apos;)
+    download_soup = BeautifulSoup(str(chapters), &apos;lxml&apos;)
+    novel_name = str(download_soup.dl.dt).split(&quot;》&quot;)[0][5:]
+    flag_name = &quot;《&quot; + novel_name + &quot;》&quot; + &quot;正文卷&quot;
+    numbers = (len(download_soup.dl.contents) - 1) / 2 - 8
+    download_dict = collections.OrderedDict()
+    begin_flag = False
+    numbers = 1
+    for child in download_soup.dl.children:
+        if child != &apos;\n&apos;:
+            if child.string == u&quot;%s&quot; % flag_name:
+                begin_flag = True
+            if begin_flag == True and child.a != None:
+                download_url = &quot;http://www.biqukan.com&quot; + child.a.get(&apos;href&apos;)
+                download_name = child.string
+                names = str(download_name).split(&apos;章&apos;)
+                name = charter.findall(names[0] + &apos;章&apos;)
+                if name:
+                        download_dict[&apos;第&apos; + str(numbers) + &apos;章 &apos; + names[1]] = download_url
+                        numbers += 1
+    return novel_name + &apos;.txt&apos;, numbers, download_dict
+
+&quot;&quot;&quot;
+函数说明:爬取文章内容
+Parameters:
+    url - 下载连接(string)
+Returns:
+    soup_text - 章节内容(string)
+Modify:
+    2017-05-06
+&quot;&quot;&quot;
+def Downloader(self, url):
+    download_req = request.Request(url = url, headers = self.__head)
+    download_response = request.urlopen(download_req)
+    download_html = download_response.read().decode(&apos;gbk&apos;,&apos;ignore&apos;)
+    soup_texts = BeautifulSoup(download_html, &apos;lxml&apos;)
+    texts = soup_texts.find_all(id = &apos;content&apos;, class_ = &apos;showtxt&apos;)
+    soup_text = BeautifulSoup(str(texts), &apos;lxml&apos;).div.text.replace(&apos;\xa0&apos;,&apos;&apos;)
+    return soup_text
+
+&quot;&quot;&quot;
+函数说明:将爬取的文章内容写入文件
+Parameters:
+    name - 章节名称(string)
+    path - 当前路径下,小说保存名称(string)
+    text - 章节内容(string)
+Returns:
+    无
+Modify:
+    2017-05-06
+&quot;&quot;&quot;
+def Writer(self, name, path, text):
+    write_flag = True
+    with open(path, &apos;a&apos;, encoding=&apos;utf-8&apos;) as f:
+        f.write(name + &apos;\n\n&apos;)
+        for each in text:
+            if each == &apos;h&apos;:
+                write_flag = False
+            if write_flag == True and each != &apos; &apos;:
+                f.write(each)
+            if write_flag == True and each == &apos;\r&apos;:
+                f.write(&apos;\n&apos;)            
+        f.write(&apos;\n\n&apos;)
+</code></pre><p>if <strong>name</strong> == “<strong>main</strong>“:<br>    print(“\n\t\t欢迎使用《笔趣看》小说下载小工具\n\n\t\t作者:Jack-Cui\t时间:2017-05-06\n”)<br>    print(“<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>“)</p>
+<pre><code>#小说地址
+target_url = str(input(&quot;请输入小说目录下载地址:\n&quot;))
+
+#实例化下载类
+d = download(target = target_url)
+name, numbers, url_dict = d.get_download_url()
+if name in os.listdir():
+    os.remove(name)
+index = 1
+
+#下载中
+print(&quot;《%s》下载中:&quot; % name[:-4])
+for key, value in url_dict.items():
+    d.Writer(key, name, d.Downloader(value))
+    sys.stdout.write(&quot;已下载:%.3f%%&quot; %  float(index/numbers) + &apos;\r&apos;)
+    sys.stdout.flush()
+    index += 1    
+
+print(&quot;《%s》下载完成！&quot; % name[:-4])
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+	  
+	</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" <i class="fa fa-tag"></i> python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/linux命令学习-磁盘命令之du命令/" rel="next" title="linux命令学习之磁盘命令-du命令">
+                <i class="fa fa-chevron-left"></i> linux命令学习之磁盘命令-du命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/linux目录结构/" rel="prev" title="linux目录结构">
+                linux目录结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTI2OC81ODM2"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">23</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览网页"><span class="nav-number">1.1.</span> <span class="nav-text">浏览网页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URI和URL"><span class="nav-number">1.2.</span> <span class="nav-text">URI和URL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爬虫入门"><span class="nav-number">2.</span> <span class="nav-text">爬虫入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网页编码方式"><span class="nav-number">2.1.</span> <span class="nav-text">网页编码方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#urlopen发送数据"><span class="nav-number">2.2.</span> <span class="nav-text">urlopen发送数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#urllib-error异常"><span class="nav-number">2.3.</span> <span class="nav-text">urllib.error异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URLError"><span class="nav-number">2.3.1.</span> <span class="nav-text">URLError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPError"><span class="nav-number">2.3.2.</span> <span class="nav-text">HTTPError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLError和HTTPError混合"><span class="nav-number">2.3.3.</span> <span class="nav-text">URLError和HTTPError混合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Agent和代理IP隐藏身份"><span class="nav-number">2.4.</span> <span class="nav-text">User Agent和代理IP隐藏身份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的User-Agent"><span class="nav-number">2.4.1.</span> <span class="nav-text">常见的User Agent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置User-Agent"><span class="nav-number">2.4.2.</span> <span class="nav-text">设置User Agent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP代理的使用"><span class="nav-number">2.4.3.</span> <span class="nav-text">IP代理的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie模拟登入"><span class="nav-number">2.5.</span> <span class="nav-text">Cookie模拟登入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取Cookie"><span class="nav-number">2.5.1.</span> <span class="nav-text">获取Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存Cookie到文件"><span class="nav-number">2.5.2.</span> <span class="nav-text">保存Cookie到文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从文件中获取Cookie并访问"><span class="nav-number">2.5.3.</span> <span class="nav-text">从文件中获取Cookie并访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.5.4.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beautiful-Soup"><span class="nav-number">2.6.</span> <span class="nav-text">Beautiful Soup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Beautiful-Soup对象"><span class="nav-number">2.6.1.</span> <span class="nav-text">创建Beautiful Soup对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beautiful-Soup四大对象"><span class="nav-number">2.6.2.</span> <span class="nav-text">Beautiful Soup四大对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tag"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">Tag</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历文档"><span class="nav-number">2.6.3.</span> <span class="nav-text">遍历文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接子节点-不包含孙节点"><span class="nav-number">2.6.4.</span> <span class="nav-text">直接子节点(不包含孙节点)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索文档树"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">搜索文档树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单章小说内容爬取"><span class="nav-number">2.6.5.</span> <span class="nav-text">单章小说内容爬取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各章小说链接爬取"><span class="nav-number">2.6.6.</span> <span class="nav-text">各章小说链接爬取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬取所有章节内容，并保存到文件中"><span class="nav-number">2.6.7.</span> <span class="nav-text">爬取所有章节内容，并保存到文件中</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-UTF-8"><span class="nav-number">3.</span> <span class="nav-text">-- coding:UTF-8 --</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<div class="theme-info">
+	<div class="powered-by"></div>
+	<span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
