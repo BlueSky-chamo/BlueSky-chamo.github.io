@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://BlueSky-chamo.github.io/home/"/>
-  <updated>2017-07-18T11:58:40.520Z</updated>
+  <updated>2017-07-22T08:59:04.569Z</updated>
   <id>http://BlueSky-chamo.github.io/home/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://BlueSky-chamo.github.io/home/2017/07/22/git%E7%94%A8%E6%B3%95%E4%B9%8B%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/07/22/git用法之创建版本库/</id>
+    <published>2017-07-22T09:08:35.426Z</published>
+    <updated>2017-07-22T08:59:04.569Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>title: git用法之创建版本库<br>date: 2017-03-30<br>categories: github</p>
+<h2 id="tags-github"><a href="#tags-github" class="headerlink" title="tags: [github]"></a>tags: [github]</h2><p>#前言#<br>版本库即repository，可以简单理解成一个目录，目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。<br><a id="more"></a></p>
+<p>#创建版本库#</p>
+<p>##版本库初始化##</p>
+<pre><code>git init
+</code></pre><p>目录下会产生<code>.git</code>的隐藏目录，是Git来跟踪管理版本库的。用<code>ls -ah</code>命令就可以看到该目录。</p>
+<p>##添加文件##<br>    git add file<br><code>git add</code>只是将文件file暂存，这是提交文件之前的必要步骤。</p>
+<p>##查看状态##<br>    git status<br><code>git status</code>可查看版本库下是否有变更。</p>
+<p>##提交文件##<br>    git commit -m “日志消息”</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;title: git用法之创建版本库&lt;br&gt;date: 2017-03-30&lt;br&gt;categories: github&lt;/p&gt;
+&lt;h2 id=&quot;tags-github&quot;&gt;&lt;a href=&quot;#tags-github&quot; class=&quot;headerlink&quot; title=&quot;tags: [github]&quot;&gt;&lt;/a&gt;tags: [github]&lt;/h2&gt;&lt;p&gt;#前言#&lt;br&gt;版本库即repository，可以简单理解成一个目录，目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title></title>
@@ -289,93 +319,42 @@ TR0 = 1;         //打开定时器0
   </entry>
   
   <entry>
-    <title>linux终端设备-基本类型</title>
-    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87%E5%AD%A6%E4%B9%A0%E2%80%94%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"/>
-    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux终端设备学习—基本类型/</id>
-    <published>2017-03-29T16:00:00.000Z</published>
-    <updated>2017-05-09T02:40:16.631Z</updated>
+    <title>github创建本地仓库</title>
+    <link href="http://BlueSky-chamo.github.io/home/2017/04/12/github%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/04/12/github创建本地仓库/</id>
+    <published>2017-04-11T16:00:00.000Z</published>
+    <updated>2017-07-22T08:59:04.570Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="linux终端设备类型"><a href="#linux终端设备类型" class="headerlink" title="linux终端设备类型"></a><strong>linux终端设备类型</strong></h1><p>linux下有多种终端设备类型，包括当前终端，前台控制终断，串口以及虚拟终端主设备。可在linux的/proc/tty下查看各设备的基本信息。<br><a id="more"></a><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/60452449.jpg" alt=""><br>将这些终端设备统一由TTY管理，从而屏蔽硬件实现。同时，将所有的设备分别映射成一个文件（设备文件）。因此，可由文件管理函数IO函数操作这些文件，达到控制终端设备的目的。</p>
-<h1 id="实际的物理串口"><a href="#实际的物理串口" class="headerlink" title="实际的物理串口"></a><strong>实际的物理串口</strong></h1><p>串口终端/dev/ttyS[n],ttyS系列指物理串行接口，即ttyS0为COM1,ttyS1为COM2。在/sys下的主次设备号如下：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/47591658.jpg" alt=""><br>即物理串口设备主设备好为4，次设备号从64开始。<br>相关的资源信息：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/69291890.jpg" alt=""></p>
-<p>可通过如下命令想串口发送数据：<br>echo ttyS1&gt;/dev/ttyS1<br>echo hello world &gt;/dev/ttys1<br>虚拟机下：采用windows的文件来代替串口，然后在window下查看该文件内容。<br>设置：虚拟机下的setting中设置add一个串口设备号（没有要再关机情况下添加）,添加后在底部图标可看到添加的串口号以及window下的文件。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/45440514.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/16216918.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/44997515.jpg" alt=""></p>
-<h1 id="控制台终端"><a href="#控制台终端" class="headerlink" title="控制台终端"></a><strong>控制台终端</strong></h1><p>tty1-tty6为控制台终端，即非图像界面下的命令行输入模式。<br>控制台终端设备主设备号为4，次设备号从1开始<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/14107730.jpg" alt="">  </p>
-<h1 id="虚拟终端"><a href="#虚拟终端" class="headerlink" title="虚拟终端"></a><strong>虚拟终端</strong></h1><p>当下多数使用linux都是通过网络连接到服务器的方式，如telent和ssh工具。如果是在服务器的图像界面下，运行命令一般会打开一个虚拟终端窗口。这两类情况在服务器上显示的是虚拟网络终端。<br>虚拟网络终端有两个虚拟设备：/dev/ptmx和/dev/pts   </p>
-<ol>
-<li><p>/dev/ptmx虚拟设备<br>/dev/ptmx是一个字符文件，用于创建虚拟网络终端设备master/slave配对设备。要打开一个未使用的虚拟终端，通过调用posix_openpt()函数，来打开/dev/ptmx设备。每次open打开这个文件，返回一个独立的master设备的文件描述符，可通过这个描述符找到关联的slave设备，且slave设备会在/dev/pts/目录下创建。  </p>
-</li>
-<li><p>/dev/pts虚拟终端<br>通过网络telent到linux主机或者windows环境下打开一个终端，将在/dev/pts目录下依次创建一个虚拟终端设备，相应地退出一个虚拟终端，将自动减少一个设备文件。  </p>
-</li>
-</ol>
-<h1 id="当前终端"><a href="#当前终端" class="headerlink" title="当前终端"></a><strong>当前终端</strong></h1><p>当前控制台终端/dev/console<br>/dev/console代表当前系统使用的实际控制台终端（tty1-tty6）。<br>/dev/console设备号信息如下：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/54820041.jpg" alt=""><br>其主设备号为5，次设备号为1.它始终代表当前主机打开的实际控制台终端  </p>
-<p>当前终端/dev/tty<br>/dev/tty代表当前终端，无论是通过控制台终端还是虚拟终端，/dev/tty都代表自己。该设备信息如下：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/45986718.jpg" alt=""><br>在任意终端下。如telent下连接终端执行，即向/dev/tty发送消息，会直接回显<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-22/14494147.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;linux终端设备类型&quot;&gt;&lt;a href=&quot;#linux终端设备类型&quot; class=&quot;headerlink&quot; title=&quot;linux终端设备类型&quot;&gt;&lt;/a&gt;&lt;strong&gt;linux终端设备类型&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;linux下有多种终端设备类型，包括当前终端，前台控制终断，串口以及虚拟终端主设备。可在linux的/proc/tty下查看各设备的基本信息。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="http://BlueSky-chamo.github.io/home/categories/linux/"/>
-    
-    
-      <category term="linux终端设备" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python简介及安装</title>
-    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/python%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/"/>
-    <id>http://BlueSky-chamo.github.io/home/2017/03/30/python简介及安装/</id>
-    <published>2017-03-29T16:00:00.000Z</published>
-    <updated>2017-07-22T08:39:38.788Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="python简介"><a href="#python简介" class="headerlink" title="python简介"></a>python简介</h1><p>Python是著名的“龟叔”Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言。Python为我们提供了非常完善的基础代码库，覆盖了网络、文件、GUI、数据库、文本等大量内容，被形象地称作“内置电池（batteries included）”。除了内置的库外，Python还有大量的第三方库供你直接使用。 龟叔给Python的定位是“优雅”、“明确”、“简单”，Python的哲学就是简单优雅，尽量写容易看明白的代码，尽量写少的代码。<br><a id="more"></a><br>Python适合开发网络应用，包括网站、后台服务等等。其次是许多日常需要的小工具，包括系统管理员需要的脚本任务等等；另外就是把其他语言开发的程序再包装起来，方便使用。</p>
-<p>任何编程语言都有缺点，Python也不例外。第一个缺点就是运行速度慢，和C程序相比非常慢，因为Python是解释型语言，你的代码在执行时会一行一行地翻译成CPU能理解的机器码，这个翻译过程非常耗时，所以很慢。而C程序是运行前直接编译成CPU能执行的机器码，所以非常快。 但是大量的应用程序不需要这么快的运行速度，用户根本感觉不出来。第二个缺点就是代码不能加密。如果要发布你的Python程序，实际上就是发布源代码，这一点跟C语言不同，C语言不用发布源代码，只需要把编译后的机器码（也就是你在Windows上常见的xxx.exe文件）发布出去。要从机器码反推出C代码是不可能的，所以，凡是编译型的语言，都没有这个问题，而解释型的语言，则必须把源码发布出去。 </p>
-<h1 id="python安装"><a href="#python安装" class="headerlink" title="python安装"></a>python安装</h1><h2 id="Ubuntu12-04"><a href="#Ubuntu12-04" class="headerlink" title="Ubuntu12.04"></a>Ubuntu12.04</h2><h3 id="STEP1"><a href="#STEP1" class="headerlink" title="STEP1"></a>STEP1</h3><p>ubuntu12.04，系统默认已经安装了python2.7。可以在终端输入python，运行如下结果。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/20170110090024509.png" alt=""></p>
-<h3 id="STEP2"><a href="#STEP2" class="headerlink" title="STEP2"></a>STEP2</h3><p>/usr/bin下面，只有一个python2.7是真正的python，另外两个只是软链接。<br>增加软链接的目的是：不管用户输入的是python或者python2，都能够正确的链到python2.7。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/python%E5%AE%89%E8%A3%852.png" alt=""></p>
-<h3 id="STEP3"><a href="#STEP3" class="headerlink" title="STEP3"></a>STEP3</h3><p>安装Python3.5.2   </p>
-<p>在<a href="https//www.python.org/">python下载</a>找到linux适用的source release版本   </p>
-<pre><code>tar xzvf Python-3.5.2.tgz   
-cd Pyton-3.5.2   
-sudo mkdir /usr/local/python3   
-sudo chmod 777 /usr/local/python3/   
-./configure –prefix=/usr/local/python3#配置python3.5安装路径   
-sudo make#编译   
-sudo make install#安装  
-</code></pre><p>其中，编译结束时如果提示缺少zlib和_ssl，这会对后面安装pip3和setuptools有影响。所以，需要把他们都安装上。<br>安装zlib： </p>
-<pre><code>sudo apt-get install –reinstall zlibc zlib1g zlib1g-dev 
-</code></pre><p>安装_ssl：   </p>
-<pre><code>sudo apt-get install libssl-dev 
-</code></pre><p>然后重新make, make install.</p>
-<h3 id="STEP4"><a href="#STEP4" class="headerlink" title="STEP4"></a>STEP4</h3><p>给python3.5 和它对应的pip版本做一个软链接了，和python2.7版本区分。  </p>
-<pre><code>cd /usr/bin 
-sudo ln -s /usr/local/python3/bin/python /usr/bin/python3 # 
-sudo ln -s /usr/local/python3/bin/pip /usr/bin/pip3 
-python3 –version #查看版本 
-pip3 –version #看到输出路径来自python3.5 
-</code></pre><p><img src="http://ogdiq8qnd.bkt.clouddn.com/python%E5%AE%89%E8%A3%853.png" alt=""><br>若软连接已存在，删除一个软连接<br><img src="http://ogdiq8qnd.bkt.clouddn.com/python%E5%AE%89%E8%A3%854.png" alt=""></p>
-<h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><h3 id="STEP-1"><a href="#STEP-1" class="headerlink" title="STEP 1"></a>STEP 1</h3><p>下载<a href="https://www.python.org/downloads/" target="_blank" rel="external">python</a>,一路安装即可，记录下此时安装位置<br>D:\python3.6</p>
-<h3 id="STEP-2"><a href="#STEP-2" class="headerlink" title="STEP 2"></a>STEP 2</h3><p>下载<a href="https://pypi.python.org/pypi/pip#downloads" target="_blank" rel="external">pip</a>,下载完成之后，解压到一个文件夹，用CMD控制台进入解压目录，输入：</p>
-<pre><code>python setup.py install
-</code></pre><p>安装完后会显示一个Scripts的安装路径：D:\python3.6\Scripts</p>
-<h3 id="STEP-3"><a href="#STEP-3" class="headerlink" title="STEP 3"></a>STEP 3</h3><p>添加系统环境变量path,分别加入：</p>
-<pre><code>D:\python3.6;D:\python3.6\Scripts
-</code></pre><h3 id="STEP-4"><a href="#STEP-4" class="headerlink" title="STEP 4"></a>STEP 4</h3><p>测试安装成功与否,cmd下输入：</p>
-<pre><code>python
-pip list
+    <content type="html"><![CDATA[<h1 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h1><p>在github上创建新仓库new repository,取名为Demo。勾选Initialize this repository with a README，可以省略本地创建README的步骤。</p>
+<a id="more"></a>
+<h1 id="创建本地仓库"><a href="#创建本地仓库" class="headerlink" title="创建本地仓库"></a>创建本地仓库</h1><p>新建文件夹后右键选择git bash here,进入git控制台</p>
+<h1 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h1><h2 id="创建ssh-key"><a href="#创建ssh-key" class="headerlink" title="创建ssh key"></a>创建ssh key</h2><pre><code>ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;
+</code></pre><p>之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在c/Users/Administator下生成.ssh文件夹，打开id_rsa.pub，复制里面的key。<br>回到github，进入Account Settings，左边选择SSH Keys，Add SSH Key,title随便填，粘贴key</p>
+<h2 id="验证ssh-key"><a href="#验证ssh-key" class="headerlink" title="验证ssh key"></a>验证ssh key</h2><pre><code>ssh -T git@github.com
+</code></pre><p>如出现You’ve successfully authenticated, but GitHub does not provide shell access ，则就表示已成功连上github。</p>
+<h2 id="关联本地仓库与远程仓库"><a href="#关联本地仓库与远程仓库" class="headerlink" title="关联本地仓库与远程仓库"></a>关联本地仓库与远程仓库</h2><pre><code>git config --global user.name &quot;your name&quot;
+git config --global user.email &quot;your_email@youremail.com&quot;
+git remote add origin https://github.com/yourName/yourRepo.git  
+</code></pre><p>后面的yourName和yourRepo表示你再github的用户名和刚才新建的仓库，加完之后进入.git，打开config，这里会多出一个remote “origin”内容，这就是刚才添加的远程地址，也可以直接修改config来配置远程地址。<br>如果执行git remote add origin <a href="https://github.com/findingsea/myRepoForBlog.git，出现错误：" target="_blank" rel="external">https://github.com/findingsea/myRepoForBlog.git，出现错误：</a><br>fatal: remote origin already exists<br>则执行以下语句： </p>
+<pre><code>git remote rm origin
+</code></pre><h1 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h1><pre><code>git add text.txt //添加指定文件
+git add .        //添加所有文件
+</code></pre><h1 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h1><pre><code>git commit -m &quot;first add&quot;  //提交，后面为当前提交说明
+</code></pre><h1 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h1><pre><code>git push origin master //本地仓库推送到远程服务器。
+</code></pre><p>在执行git push origin master时，报错：error:failed to push som refs to…….</p>
+<pre><code>git pull origin master
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;python简介&quot;&gt;&lt;a href=&quot;#python简介&quot; class=&quot;headerlink&quot; title=&quot;python简介&quot;&gt;&lt;/a&gt;python简介&lt;/h1&gt;&lt;p&gt;Python是著名的“龟叔”Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言。Python为我们提供了非常完善的基础代码库，覆盖了网络、文件、GUI、数据库、文本等大量内容，被形象地称作“内置电池（batteries included）”。除了内置的库外，Python还有大量的第三方库供你直接使用。 龟叔给Python的定位是“优雅”、“明确”、“简单”，Python的哲学就是简单优雅，尽量写容易看明白的代码，尽量写少的代码。&lt;br&gt;
+      &lt;h1 id=&quot;创建远程仓库&quot;&gt;&lt;a href=&quot;#创建远程仓库&quot; class=&quot;headerlink&quot; title=&quot;创建远程仓库&quot;&gt;&lt;/a&gt;创建远程仓库&lt;/h1&gt;&lt;p&gt;在github上创建新仓库new repository,取名为Demo。勾选Initialize this repository with a README，可以省略本地创建README的步骤。&lt;/p&gt;
     
     </summary>
     
-      <category term="python" scheme="http://BlueSky-chamo.github.io/home/categories/python/"/>
+      <category term="github" scheme="http://BlueSky-chamo.github.io/home/categories/github/"/>
     
     
-      <category term="python" scheme="http://BlueSky-chamo.github.io/home/tags/python/"/>
+      <category term="github" scheme="http://BlueSky-chamo.github.io/home/tags/github/"/>
     
   </entry>
   
