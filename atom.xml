@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://BlueSky-chamo.github.io/home/"/>
-  <updated>2017-07-22T09:29:08.933Z</updated>
+  <updated>2017-07-22T09:40:02.648Z</updated>
   <id>http://BlueSky-chamo.github.io/home/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="http://BlueSky-chamo.github.io/home/2017/07/22/hexo%E9%85%8D%E7%BD%AE/"/>
     <id>http://BlueSky-chamo.github.io/home/2017/07/22/hexo配置/</id>
     <published>2017-07-22T09:23:12.221Z</published>
-    <updated>2017-07-22T09:29:08.933Z</updated>
+    <updated>2017-07-22T09:40:02.648Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <p>title: hexo个人配置<br>date: 2017-03-30<br>categories: hexo<br>tags: [hexo]</p>
 <hr>
-<h1 id="实现fork-me-on-github"><a href="#实现fork-me-on-github" class="headerlink" title="实现fork me on github"></a>实现fork me on github</h1><a id="more"></a>
+<h1 id="实现fork-me"><a href="#实现fork-me" class="headerlink" title="实现fork me"></a>实现fork me</h1><a id="more"></a>
 <p>点击<a href="https://github.com/blog/273-github-ribbons" target="_blank" rel="external">这里</a> 挑选自己喜欢的样式，并复制代码到 themes/next/layout/_layout.swig 文件中div class=”headband”下面，并把 href 改为你的github地址。  </p>
 <pre><code>&lt;a href=&quot;https://github.com/you&quot;&gt;&lt;img style=&quot;position: absolute; top: 0;  right: 0; border: 0;&quot; src=&quot;https://camo.githubusercontent.com/  a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67&quot; alt=&quot;Fork me on GitHub&quot; data-canonical-src=&quot;https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png&quot;&gt;&lt;/a&gt;
 </code></pre><h1 id="添加RSS"><a href="#添加RSS" class="headerlink" title="添加RSS"></a>添加RSS</h1><p>安装 Hexo 插件：(这个插件会放在 node_modules 这个文件夹里)  </p>
@@ -251,7 +251,7 @@ baidusitemap:
       &lt;hr&gt;
 &lt;p&gt;title: hexo个人配置&lt;br&gt;date: 2017-03-30&lt;br&gt;categories: hexo&lt;br&gt;tags: [hexo]&lt;/p&gt;
 &lt;hr&gt;
-&lt;h1 id=&quot;实现fork-me-on-github&quot;&gt;&lt;a href=&quot;#实现fork-me-on-github&quot; class=&quot;headerlink&quot; title=&quot;实现fork me on github&quot;&gt;&lt;/a&gt;实现fork me on github&lt;/h1&gt;
+&lt;h1 id=&quot;实现fork-me&quot;&gt;&lt;a href=&quot;#实现fork-me&quot; class=&quot;headerlink&quot; title=&quot;实现fork me&quot;&gt;&lt;/a&gt;实现fork me&lt;/h1&gt;
     
     </summary>
     
@@ -263,7 +263,7 @@ baidusitemap:
     <link href="http://BlueSky-chamo.github.io/home/2017/07/22/markdown%E8%AF%AD%E6%B3%95/"/>
     <id>http://BlueSky-chamo.github.io/home/2017/07/22/markdown语法/</id>
     <published>2017-07-22T09:11:18.184Z</published>
-    <updated>2017-07-22T09:37:12.256Z</updated>
+    <updated>2017-07-22T09:40:20.079Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <p>title: markdown语法<br>date: 2017-03-30<br>categories: 软件工具<br>tags: [markdown]</p>
