@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://BlueSky-chamo.github.io/home/"/>
-  <updated>2017-07-22T09:40:20.079Z</updated>
+  <updated>2017-06-21T06:21:33.253Z</updated>
   <id>http://BlueSky-chamo.github.io/home/</id>
   
   <author>
@@ -14,159 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://BlueSky-chamo.github.io/home/2017/07/22/markdown%E8%AF%AD%E6%B3%95/"/>
-    <id>http://BlueSky-chamo.github.io/home/2017/07/22/markdown语法/</id>
-    <published>2017-07-22T09:11:18.184Z</published>
-    <updated>2017-07-22T09:40:20.079Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<p>title: markdown语法<br>date: 2017-03-30<br>categories: 软件工具<br>tags: [markdown]</p>
-<hr>
-<p>#标题设置#<br>第一种：通过在文字下方添加“=”和“-”，分别表示一级标题和二级标题。  </p>
-<p>第二种：在文字开头加上 “#”，通过“#”数量表示几级标题。<br><a id="more"></a></p>
-<p>#块注释#<br>文字开头添加“&gt;”表示块注释(&gt;和文字之间添加五个空格）</p>
-<blockquote>
-<pre><code>块注释
-</code></pre></blockquote>
-<p>#引用#<br>行首使用&gt;加上一个空格表示引用段落，内部可以嵌套多个引用。  </p>
-<blockquote>
-<p>引用</p>
-</blockquote>
-<p>#斜体#<br>设置为斜体的文字两端使用1个“*”或者“_”夹起来</p>
-<p>#粗体#<br>设置为粗体的文字两端使用2个“*”或者“_”夹起来</p>
-<p>#无序列表#<br>文字开头添加(<em>, +, and -)实现无序列表。但是要注意在(</em>, +, and -)和文字之间需要添加空格。<br>例如：</p>
-<pre><code>* 1
-* 2
-* 3
-* 4
-</code></pre><p>#有序列表#<br>使用数字后面跟上英文句号，与文字间要有空格）。例如：</p>
-<pre><code>1. 首先
-2. 其次
-3. 然后
-4. 最后
-</code></pre><p>#链接#<br>形式：方括号+括号<br>方括号中为文字，括号中为链接地址</p>
-<p>内联方式：<br>This is an <a href="http://example.com/" target="_blank" rel="external">example link</a>.<br>引用方式：<br>I get 10 times more traffic from <a href="http://google.com/" title="Google" target="_blank" rel="external">Google</a> than from <a href="http://search.yahoo.com/" title="Yahoo Search" target="_blank" rel="external">Yahoo</a> or <a href="http://search.msn.com/" title="MSN Search" target="_blank" rel="external">MSN</a>.  </p>
-<p>#图片#<br>图片的处理方式和链接的处理方式类似<br>形式：感叹号+方括号+括号  </p>
-<pre><code>![name](url)
-</code></pre><p>#代码#<br>方式1：简单文字出现一个代码框<br>ESC下面~中的`，夹住代码    </p>
-<pre><code>`#include &lt;stdio.h&gt;`
-</code></pre><p>方式2：大片文字需要实现代码框<br>使用Tab或四个空格  </p>
-<pre><code>#include &lt;stdio.h&gt;
-</code></pre><p>#下划线#<br>在空白行下方添加三条“-”横线  </p>
-<pre><code>---
-</code></pre><p>#换行#<br>在文字的末尾使用两个或两个以上的空格来表示换行。</p>
-<p>#分隔线#<br>在一行中使用三个或三个以上的*、-或_可以添加分隔线，其中可以有空白，但是不能有其他字符。</p>
-<pre><code>***
----
-___
-</code></pre><p>#表格#<br>语法说明：</p>
-<p>Markdown 写的表格最终会被解析成 HTML 代码，如果使用的编辑器支持自定义 CSS，就能方便的调整样式。如果可以引入 JavaScript，样式自适应也能较好地实现。</p>
-<pre><code>基础概念
-
-&lt;table&gt;: 表格  
-&lt;thead&gt;: table header 表头区  
-&lt;th&gt;: table headings 表头单元格内容  
-&lt;tbody&gt;: 表格内容区   
-&lt;tr&gt;: table row 表行  
-&lt;td&gt;: table data 单元格内容  
-基本样式
-
-table {
-    width: 100%; /*表格宽度*/
-    max-width: 65em; /*表格最大宽度，避免表格过宽*/
-    border: 1px solid #dedede; /*表格外边框设置*/
-    margin: 15px auto; /*外边距*/
-    border-collapse: collapse; /*使用单一线条的边框*/
-    empty-cells: show; /*单元格无内容依旧绘制边框*/
-}
-
-table th,
-table td {
-  height: 35px; /*统一每一行的默认高度*/
-  border: 1px solid #dedede; /*内部边框样式*/
-  padding: 0 10px; /*内边距*/
-}
-表头样式
-
-table th {
-    font-weight: bold; /*加粗*/
-    text-align: center !important; /*内容居中，加上 !important 避免被 Markdown 样式覆盖*/
-    background: rgba(158,188,226,0.2); /*背景色*/
-}
-隔行变色
-
-使用选择器选取复数行设置背景色。一般 Markdown 表格编译后都有 &lt;tbody&gt; 包裹内容，那下面就相当于从表格第二行开始计数
-table tbody tr:nth-child(2n) {
-    background: rgba(158,188,226,0.12); 
-}
-悬浮变色
-
-鼠标悬浮时该行改变背景色
-table tr:hover {
-    background: #efefef; 
-}
-表头不换行
-
-设置表头单元格内容不换行，这样可以通过表头控制该列的最小宽度，避免浏览器窗口缩小时内容被压缩得太紧
-table th {
-white-space: nowrap; /*表头内容强制在一行显示*/
-}
-</code></pre><p>##表格背景色##<br>    <table><tbody><br>        <tr><br>            <th>方法说明</th><th>颜色名称</th><th>颜色</th><br>        </tr><br>        <tr><br>            <td><font color="Hotpink">此处实现方法利用 CSDN-markdown 内嵌 html 语言的优势</font></td><td><font color="Hotpink">Hotpink</font></td><td bgcolor="Hotpink">rgb(240, 248, 255)</td><br>        </tr><br>        <tr><br>            <td><font color="Pink">借助 table, tr, td 等表格标签的 bgcolor 属性实现背景色设置</font></td><td><font color="pink">AntiqueWhite</font></td><td bgcolor="Pink">rgb(255, 192, 203)</td><br>        </tr><br>    </tbody></table></p>
-<table><tbody><br>    <tr><br>        <th>方法说明</th><th>颜色名称</th><th>颜色</th><br>    </tr><br>    <tr><br>        <td><font color="Hotpink">此处实现方法利用 CSDN-markdown 内嵌 html 语言的优势</font></td><td><font color="Hotpink">Hotpink</font></td><td bgcolor="Hotpink">rgb(240, 248, 255)</td><br>    </tr><br>    <tr><br>        <td><font color="Pink">借助 table, tr, td 等表格标签的 bgcolor 属性实现背景色设置</font></td><td><font color="pink">AntiqueWhite</font></td><td bgcolor="Pink">rgb(255, 192, 203)</td><br>    </tr><br></tbody></table><br><a href="http://blog.csdn.net/thither_shore/article/details/52328313" target="_blank" rel="external">颜色列表查看</a><br>##字体字号##<br>    <font face="黑体">我是黑体字</font><br>    <font face="微软雅黑">我是微软雅黑</font><br>    <font face="STCAIYUN">我是华文彩云</font><br>    <font color="#0099ff" size="7" face="黑体">color=#0099ff size=72 face=”黑体”</font><br>    <font color="#00ffff" size="72">color=#00ffff</font><br>    <font color="gray" size="72">color=gray</font><br><br>##跨行表格##<br>    <table><tbody><br>        <tr><br>            <th rowspan="3">我占了三行</th><br>            <th>第一列</th><br>            <th>第二列</th><br>            <th>第三列</th><br>        </tr><br>        <tr><br>            <td>第一列</td><br>            <td>第二列</td><br>            <td>第三列</td><br>        </tr><br>        <tr><br>            <td>第一列</td><br>            <td>第二列</td><br>            <td>第三列</td><br>        </tr><br>    </tbody></table><br><table><tbody><br>    <tr><br>        <th rowspan="3">我占了三行</th><br>        <th>第一列</th><br>        <th>第二列</th><br>        <th>第三列</th><br>    </tr><br>    <tr><br>        <td>第一列</td><br>        <td>第二列</td><br>        <td>第三列</td><br>    </tr><br>    <tr><br>        <td>第一列</td><br>        <td>第二列</td><br>        <td>第三列</td><br>    </tr><br></tbody></table>  
-
-
-<p>#参考文章#<br><a href="http://www.cnblogs.com/hnrainll/p/3514637.html" target="_blank" rel="external">markdown的11中基本语法</a></p>
-<p><a href="http://equation85.github.io/blog/markdown-examples/" target="_blank" rel="external">markdown语法示例</a>  </p>
-<p><a href="http://www.tuicool.com/articles/mueEZjr" target="_blank" rel="external">markdown样式调整</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;p&gt;title: markdown语法&lt;br&gt;date: 2017-03-30&lt;br&gt;categories: 软件工具&lt;br&gt;tags: [markdown]&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;#标题设置#&lt;br&gt;第一种：通过在文字下方添加“=”和“-”，分别表示一级标题和二级标题。  &lt;/p&gt;
-&lt;p&gt;第二种：在文字开头加上 “#”，通过“#”数量表示几级标题。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://BlueSky-chamo.github.io/home/2017/07/22/git%E7%94%A8%E6%B3%95%E4%B9%8B%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/"/>
-    <id>http://BlueSky-chamo.github.io/home/2017/07/22/git用法之创建版本库/</id>
-    <published>2017-07-22T09:08:35.426Z</published>
-    <updated>2017-07-22T09:36:31.066Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<p>title: git创建版本库<br>date: 2017-03-30<br>categories: hgithub<br>tags: [github]</p>
-<hr>
-<p>#前言#<br>版本库即repository，可以简单理解成一个目录，目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。<br><a id="more"></a></p>
-<p>#创建版本库#</p>
-<p>##版本库初始化##</p>
-<pre><code>git init
-</code></pre><p>目录下会产生<code>.git</code>的隐藏目录，是Git来跟踪管理版本库的。用<code>ls -ah</code>命令就可以看到该目录。</p>
-<p>##添加文件##<br>    git add file<br><code>git add</code>只是将文件file暂存，这是提交文件之前的必要步骤。</p>
-<p>##查看状态##<br>    git status<br><code>git status</code>可查看版本库下是否有变更。</p>
-<p>##提交文件##<br>    git commit -m “日志消息”</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;p&gt;title: git创建版本库&lt;br&gt;date: 2017-03-30&lt;br&gt;categories: hgithub&lt;br&gt;tags: [github]&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;#前言#&lt;br&gt;版本库即repository，可以简单理解成一个目录，目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>回顾51单片机之enum用法</title>
@@ -511,6 +358,283 @@ int tcsetattr(int fd , int actions , const struct termios *termios_h);
     
     
       <category term="linux终端设备" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo配置</title>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/hexo%E9%85%8D%E7%BD%AE/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/hexo配置/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-07-23T02:45:27.596Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实现fork-me"><a href="#实现fork-me" class="headerlink" title="实现fork me"></a>实现fork me</h1><a id="more"></a>
+<p>点击<a href="https://github.com/blog/273-github-ribbons" target="_blank" rel="external">这里</a> 挑选自己喜欢的样式，并复制代码到 themes/next/layout/_layout.swig 文件中div class=”headband”下面，并把 href 改为你的github地址。  </p>
+<pre><code>&lt;a href=&quot;https://github.com/you&quot;&gt;&lt;img style=&quot;position: absolute; top: 0;  right: 0; border: 0;&quot; src=&quot;https://camo.githubusercontent.com/  a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67&quot; alt=&quot;Fork me on GitHub&quot; data-canonical-src=&quot;https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png&quot;&gt;&lt;/a&gt;
+</code></pre><h1 id="添加RSS"><a href="#添加RSS" class="headerlink" title="添加RSS"></a>添加RSS</h1><p>安装 Hexo 插件：(这个插件会放在 node_modules 这个文件夹里)  </p>
+<pre><code>npm install --save hexo-generator-feed
+</code></pre><p>站点配置文件末尾添加：  </p>
+<pre><code># Extensions
+## Plugins: http://hexo.io/plugins/
+plugins: hexo-generate-feed
+</code></pre><p>next主题配置文件添加：  </p>
+<pre><code># Set rss to false to disable feed link.
+# Leave rss as empty to use site&apos;s feed link.
+# Set rss to specific value if you have burned your feed already.
+rss: /atom.xml  
+</code></pre><p>配置完之后运行：</p>
+<pre><code>hexo g
+</code></pre><p>重新生成一次，你会在 ./public 文件夹中看到 atom.xml 文件。然后启动服务器查看是否有效，之后再部署到 Github 中。</p>
+<h1 id="添加动态背景"><a href="#添加动态背景" class="headerlink" title="添加动态背景"></a>添加动态背景</h1><p>打开 next/layout/_layout.swig<br>在 &lt; /body&gt;之前添加代码(注意不要放在&lt; /head&gt;的后面)  </p>
+<pre><code>&lt;!-- 背景动画 --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/particle.js&quot;&gt;&lt;/script&gt;
+&lt;!-- 页面点击小红心 --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/love.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>想设置动画线条颜色可改为：</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; color=&quot;255,0,0&quot; opacity=&quot;0.3&quot; count=&quot;99&quot; src=&quot;/js/src/particle.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>color ：线条颜色, 默认: ‘0,0,0’；三个数字分别为(R,G,B)<br>opacity: 线条透明度（0~1）, 默认: 0.5<br>count: 线条的总数量, 默认: 150<br>zIndex: 背景的z-index属性，css属性用于控制所在层的位置, 默认: -1   </p>
+<h1 id="文章底部的那个带-号的标签"><a href="#文章底部的那个带-号的标签" class="headerlink" title="文章底部的那个带#号的标签"></a>文章底部的那个带#号的标签</h1><p>修改模板 /themes/next/layout/_macro/post.swig ，搜索 rel=”tag”&gt;# ，将 # 换成 <i class="fa fa-tag"></i> </p>
+<h1 id="文章末尾统一添加“本文结束”标记"><a href="#文章末尾统一添加“本文结束”标记" class="headerlink" title="文章末尾统一添加“本文结束”标记"></a>文章末尾统一添加“本文结束”标记</h1><p>在路径 \themes\next\layout_macro 中新建 passage-end-tag.swig 文件,并添加以下内容：</p>
+<pre><code>&lt;div&gt;
+    {% if not is_index %}
+	        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+	    {% endif %}
+&lt;/div&gt;
+</code></pre><p>接着打开 \themes\next\layout_macro\post.swig 文件，在 post-body 之后， post-footer 之前添加如下画红色部分代码（post-footer之前两个DIV）：</p>
+<pre><code>&lt;div&gt;
+  {% if not is_index %}
+	    {% include 'passage-end-tag.swig' %}
+	  {% endif %}
+&lt;/div&gt;  
+</code></pre><p>在主题配置文件 _config.yml 中添加以下字段开启此功能：</p>
+<pre><code># 文章末尾添加“本文结束”标记
+passage_end_tag:
+  enabled: true 
+</code></pre><h1 id="修改作者头像并旋转"><a href="#修改作者头像并旋转" class="headerlink" title="修改作者头像并旋转"></a>修改作者头像并旋转</h1><p>打开 \themes\next\source\css_common\components\sidebar\sidebar-author.styl ，在里面添加如下代码：  </p>
+<pre><code>.site-author-image {
+  display: block;
+  margin: 0 auto;
+  padding: $site-author-image-padding;
+  max-width: $site-author-image-width;
+  height: $site-author-image-height;
+  border: $site-author-image-border-width solid $site-author-image-border-color;
+
+  /* 头像圆形 */
+  border-radius: 80px;
+  -webkit-border-radius: 80px;
+  -moz-border-radius: 80px;
+  box-shadow: inset 0 -1px 0 #333sf;
+
+  /* 设置循环动画 [animation: (play)动画名称 (2s)动画播放时长单位秒或微秒 (ase-out)动画播放的速度曲线为以低速结束 
+    (1s)等待1秒然后开始动画 (1)动画播放次数(infinite为循环播放) ]*/
+
+
+  /* 鼠标经过头像旋转360度 */
+  -webkit-transition: -webkit-transform 1.0s ease-out;
+  -moz-transition: -moz-transform 1.0s ease-out;
+  transition: transform 1.0s ease-out;
+}
+
+img:hover {
+  /* 鼠标经过停止头像旋转 
+  -webkit-animation-play-state:paused;
+  animation-play-state:paused;*/
+
+  /* 鼠标经过头像旋转360度 */
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
+  transform: rotateZ(360deg);
+}
+
+/* Z 轴旋转动画 */
+@-webkit-keyframes play {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(-360deg);
+  }
+}
+@-moz-keyframes play {
+  0% {
+    -moz-transform: rotateZ(0deg);
+  }
+  100% {
+    -moz-transform: rotateZ(-360deg);
+  }
+}
+@keyframes play {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}
+</code></pre><h1 id="作者头像变成圆形"><a href="#作者头像变成圆形" class="headerlink" title="作者头像变成圆形"></a>作者头像变成圆形</h1><p>打开自定义CSS： \themes\next\source\css_custom\custom.styl 加入  </p>
+<pre><code>.site-author-image {
+  border-radius: 100%;
+  padding: 2px;
+  border: 2px dashed #fff;
+  animation: cycle 2s 0.5s forwards;
+  transition: border-radius 2s;
+}
+</code></pre><p>博主名字号大小,也在 custom.styl 文件:</p>
+<pre><code>.site-author-name {
+  font-size: 16px;
+}
+</code></pre><h1 id="网站底部加上访问量"><a href="#网站底部加上访问量" class="headerlink" title="网站底部加上访问量"></a>网站底部加上访问量</h1><p>打开 \themes\next\layout_partials\footer.swig 文件,在copyright前加上  </p>
+<p><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><br>然后在该文件添加显示统计的代码：  </p>
+<pre><code>&lt;div class=&quot;powered-by&quot;&gt;
+&lt;i class=&quot;fa fa-user-md&quot;&gt;&lt;/i&gt;&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
+  本站访客数:&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><p>footer.swig完整代码</p>
+<pre><code>&lt;script async src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;copyright&quot; &gt;
+  {% set current = date(Date.now(), "YYYY") %}
+  &amp;copy; {% if theme.since and theme.since != current %} {{ theme.since }} - {% endif %}
+	  <span itemprop="copyrightYear">{{ current }}</span>
+	  <span class="with-love">
+	    <i class="fa fa-{{ theme.authoricon }}"></i>
+	  </span>
+	  <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
+	
+	{% if theme.copyright %}
+	<div class="powered-by">
+	<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+	  本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+	</div>
+	<div class="powered-by">
+	  {{ __('footer.powered', '<a class="theme-link" href="https://hexo.io" target="_blank" rel="external">Hexo</a>') }}
+	</div>
+	
+	<div class="theme-info">
+	  {{ __('footer.theme') }} -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">
+	    NexT.{{ theme.scheme }}
+	  </a>
+	</div>
+	{% endif %}
+</code></pre><p>在这里有两中不同计算方式的统计代码：</p>
+<p>pv的方式，单个用户连续点击n篇文章，记录n次访问量</p>
+<pre><code>&lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;
+    本站总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次
+&lt;/span&gt;
+</code></pre><p>uv的方式，单个用户连续点击n篇文章，只记录1次访客数</p>
+<pre><code>&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
+  本站总访问量&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;次
+&lt;/span&gt;
+</code></pre><h1 id="添加热度"><a href="#添加热度" class="headerlink" title="添加热度"></a>添加热度</h1><p>主题配置文件 </p>
+<pre><code>leancloud_visitors:
+      enable: true
+</code></pre><p>next主题集成 leanCloud ，打开 /themes/next/layout/_macro/post.swig ,在画红线的区域添加 ℃ ：  </p>
+<pre><code>{% if theme.leancloud_visitors.enable %}
+	             <span id="{{ url_for(post.path) }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
+	               <span class="post-meta-divider">|</span>
+	               <span class="post-meta-item-icon">
+	                 <i class="fa fa-eye"></i>
+	               </span>
+	               {% if theme.post_meta.item_text %}
+	                 <span class="post-meta-item-text">{{__('post.visitors')}} </span>
+	               {% endif %}
+       &lt;span class=&quot;leancloud-visitors-count&quot;&gt;&lt;/span&gt;
+       &lt;span&gt;℃&lt;/span&gt;
+   &lt;/span&gt;
+{% endif %}
+</span></code></pre><p>然后打开/themes/next/languages/zh-Hans.yml 更改如下:</p>
+<pre><code>visitors: 热度
+</code></pre><h1 id="网站底部字数统计"><a href="#网站底部字数统计" class="headerlink" title="网站底部字数统计"></a>网站底部字数统计</h1><p>切换到根目录下，然后运行如下代码</p>
+<pre><code>npm install hexo-wordcount --save
+</code></pre><p>然后在 /themes/next/layout/_partials/footer.swig 文件尾部加上：</p>
+<pre><code>&lt;div class=&quot;theme-info&quot;&gt;
+  &lt;div class=&quot;powered-by&quot;&gt;&lt;/div&gt;
+  &lt;span class=&quot;post-count&quot;&gt;博客全站共{{ totalcount(site) }}字&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><h1 id="设置网站的图标Favicon"><a href="#设置网站的图标Favicon" class="headerlink" title="设置网站的图标Favicon"></a>设置网站的图标Favicon</h1><p>在<a href="http://www.easyicon.net/" target="_blank" rel="external">EasyIcon</a> 中找一张（32*32）的 ico 图标,或者去别的网站下载或者制作，并将图标名称改为 favicon.ico ，然后把图标放在 /themes/next/source/images 里，并且修改主题配置文件：</p>
+<pre><code>favicon: /favicon.ico
+</code></pre><h1 id="实现统计功能"><a href="#实现统计功能" class="headerlink" title="实现统计功能"></a>实现统计功能</h1><p>切换到根目录下，然后运行如下代码</p>
+<pre><code>npm install hexo-wordcount --save
+</code></pre><p>主题配置文件：</p>
+<p>   post_wordcount:<br>      item_text: true<br>      wordcount: true<br>      min2read: true</p>
+<h1 id="添加顶部加载条"><a href="#添加顶部加载条" class="headerlink" title="添加顶部加载条"></a>添加顶部加载条</h1><p>打开 /themes/next/layout/_partials/head.swig 文件，顶部加入：</p>
+<pre><code>&lt;meta charset=&quot;UTF-8&quot;/&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;/&gt;
+&lt;script src=&quot;//cdn.bootcss.com/pace/1.0.2/pace.min.js&quot;&gt;&lt;/script&gt;
+&lt;link href=&quot;//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;style&gt;
+.pace .pace-progress {
+    background: #1E92FB; /*进度条颜色*/
+    height: 3px;
+}
+.pace .pace-progress-inner {
+     box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+}
+.pace .pace-activity {
+    border-top-color: #1E92FB;    /*上边框颜色*/
+    border-left-color: #1E92FB;    /*左边框颜色*/
+}
+&lt;/style&gt;
+</code></pre><h1 id="添加sitemap网站地图"><a href="#添加sitemap网站地图" class="headerlink" title="添加sitemap网站地图"></a>添加sitemap网站地图</h1><p>进入 hexo 根目录，打开 git</p>
+<pre><code>npm install hexo-generator-sitemap --save
+npm install hexo-generator-baidu-sitemap --save
+</code></pre><p>hexo站点的_config.yml添加下面的代码</p>
+<pre><code>sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+</code></pre><h1 id="主要参考"><a href="#主要参考" class="headerlink" title="主要参考"></a>主要参考</h1><p><a href="https://segmentfault.com/a/1190000009595779" target="_blank" rel="external">Hexo-next主题个性化配置</a><br><a href="http://www.tuicool.com/articles/2Yz22e3" target="_blank" rel="external">hexo的next主题个性化配置教程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;实现fork-me&quot;&gt;&lt;a href=&quot;#实现fork-me&quot; class=&quot;headerlink&quot; title=&quot;实现fork me&quot;&gt;&lt;/a&gt;实现fork me&lt;/h1&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://BlueSky-chamo.github.io/home/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://BlueSky-chamo.github.io/home/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux下SSH服务</title>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E4%B8%8BSSH%E6%9C%8D%E5%8A%A1%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%85%A5/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux下SSH服务远程登入/</id>
+    <published>2017-03-29T16:00:00.000Z</published>
+    <updated>2017-06-21T06:19:39.912Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SSH原理"><a href="#SSH原理" class="headerlink" title="SSH原理"></a><strong>SSH原理</strong></h1><p>SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH最初是UNIX系统上的一个程序，后来又迅速扩展到其他操作平台。SSH在正确使用时可弥补网络中的漏洞。SSH客户端适用于多种平台。<br><a id="more"></a><br>从客户端来看，SSH提供两种级别的安全验证：<br><strong>第一种级别是基于口令的安全验证</strong><br>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密， 但是不能保证你正在连接的服务器就是你想连接的服务器。这个过程如下：<br>1）远程主机收到用户的登录请求，把自己的公钥发给用户。<br>2）用户使用这个公钥，将登录密码加密后，发送回来。<br>3）远程主机用自己的私钥，解密登录密码，如果密码正确，就同意用户登录。这种方式可能会有别的服务器在冒充真正的服务器，将公钥发送给客户端，客户端就会将密码加密后发送给冒充的服务器，冒充的服务器就可以拿自己的私钥获取到密码，也就是受到“中间人”这种方式的攻击。<br>当第一次链接远程主机时，会提示您当前主机的“公钥指纹”，询问您是否继续，如果选择继续后就可以输入密码进行登录了，当远程的主机接受以后，该台服务器的公钥就会保存到~/.ssh/known_hosts文件中。<br><strong>第二种级别是基于密匙的安全验证</strong><br>需要依靠密匙，也就是必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到SSH服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的私人密匙解密再把它发送给服务器。用这种方式，你必须知道自己密匙的口令。    </p>
+<p>但是，与第一种级别相比，第二种级别不需要在网络上传送口令。第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程可能需要10秒，但是相比输入密码的方式来说10秒也不长。</p>
+<h1 id="安装SSH"><a href="#安装SSH" class="headerlink" title="安装SSH"></a><strong>安装SSH</strong></h1><p>sudo apt-get update<br>sudo apt-get openssh-server openssh-client</p>
+<h1 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a><strong>配置SSH</strong></h1><p>sudo gedit /etc/ssh/sshd_config”<br>该文件下是SSH的相关配置，包括端口22。如下，允许root用户登入   </p>
+<p><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/83709838.jpg" alt=""></p>
+<h1 id="启动SSH"><a href="#启动SSH" class="headerlink" title="启动SSH"></a><strong>启动SSH</strong></h1><p>sudo ps -e |grep ssh”–&gt;回车–&gt;有sshd,说明ssh服务已经启动<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/94198166.jpg" alt=""><br>如果没有启动，”sudo service ssh start”–&gt;回车–&gt;ssh服务就会启动<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/3845994.jpg" alt=""></p>
+<h1 id="查看SSH状态"><a href="#查看SSH状态" class="headerlink" title="查看SSH状态"></a><strong>查看SSH状态</strong></h1><p><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/80794591.jpg" alt=""></p>
+<h1 id="SSH远程登入"><a href="#SSH远程登入" class="headerlink" title="SSH远程登入"></a><strong>SSH远程登入</strong></h1><p>使用putty进行ssh远程登入，默认端口22<br>第一次登录的时候，OpenSSH将会提示用户它不知道这台登录的主机，只要键入“yes”，就会把这台登录主机的“识别标记”加到“~/.ssh/know_hosts”文件中。第二次访问这台主机的时候就不会再显示这条提示信息了。然后，SSH提示用户输入远程主机上用户账号的口令。这样，就建立了SSH连接，这之后就可以象使用telnet那样方便地使用SSH了。<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/13635471.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/10463484.jpg" alt=""></p>
+<h1 id="秘钥登入"><a href="#秘钥登入" class="headerlink" title="秘钥登入"></a><strong>秘钥登入</strong></h1><p>秘钥登入不要每次登入输入密码， 使用通信短语即可。<br>使用的是secureCRT<br>1，快速链接-公钥-属性设置-创建身份文件<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/86845951.jpg" alt=""></p>
+<p>2，按照生成向导一步步完成<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/60764861.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/91827768.jpg" alt=""><br>这里选择OpneSSH格式<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/11044588.jpg" alt=""><br>通行短语类似于密码作用，在登入时会用到，如下：<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/86383046.jpg" alt="">  </p>
+<p>3，完成后，将公钥传入要登入的服务器（linux）,可以采用虚拟机的文件共享方式。本地公钥在公钥文件名下可看到</p>
+<p>4，在服务器段，建立要登入用户的.SSH文件<br>mkdir -p ~/.ssh &amp;&amp; chmod -R 700 ~/.ssh<br>chmod -R 600 ~/.ssh/ authorized_keys </p>
+<p>5，将公钥文件的内容复制到authorized_keys中去（可直接粘贴复制）</p>
+<p>6，在secrueCRT下，将公钥放在最前面，输入主机名，用户名<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/32316648.jpg" alt=""><br>接下来会提示输入通信短语，输入确定即可<br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/86383046.jpg" alt=""><br><img src="http://ogdiq8qnd.bkt.clouddn.com/public/16-11-18/14358158.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;SSH原理&quot;&gt;&lt;a href=&quot;#SSH原理&quot; class=&quot;headerlink&quot; title=&quot;SSH原理&quot;&gt;&lt;/a&gt;&lt;strong&gt;SSH原理&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH最初是UNIX系统上的一个程序，后来又迅速扩展到其他操作平台。SSH在正确使用时可弥补网络中的漏洞。SSH客户端适用于多种平台。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/categories/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="linux服务器" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
