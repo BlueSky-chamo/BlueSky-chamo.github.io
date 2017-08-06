@@ -1,0 +1,1715 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tcl," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="茶末园" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="tcl环境搭建windows环境下，安装activite tcl。所有程序下tclsh86即为tcl控制台，为了方便配置notepad++为tcl编辑器，点击notepad++运行，在运行程序名中输入如下,同时点击保存设置运行快捷键，比如设置ctrl+T，只需在tcl程序中通过快捷键即可运行该tcl脚本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tcl基础学习">
+<meta property="og:url" content="http://BlueSky-chamo.github.io/home/2017/03/30/tcl基础学习/index.html">
+<meta property="og:site_name" content="茶末园">
+<meta property="og:description" content="tcl环境搭建windows环境下，安装activite tcl。所有程序下tclsh86即为tcl控制台，为了方便配置notepad++为tcl编辑器，点击notepad++运行，在运行程序名中输入如下,同时点击保存设置运行快捷键，比如设置ctrl+T，只需在tcl程序中通过快捷键即可运行该tcl脚本。">
+<meta property="og:updated_time" content="2017-08-06T04:32:06.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tcl基础学习">
+<meta name="twitter:description" content="tcl环境搭建windows环境下，安装activite tcl。所有程序下tclsh86即为tcl控制台，为了方便配置notepad++为tcl编辑器，点击notepad++运行，在运行程序名中输入如下,同时点击保存设置运行快捷键，比如设置ctrl+T，只需在tcl程序中通过快捷键即可运行该tcl脚本。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BlueSky-chamo.github.io/home/2017/03/30/tcl基础学习/"/>
+
+
+
+
+
+  <title> tcl基础学习 | 茶末园 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cfcdad0766f8fe424b515910e11c144d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/BlueSky-chamo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">茶末园</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Different every day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/home" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文档分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            文档标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/download" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+	  <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/Neveryu)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://BlueSky-chamo.github.io/home/2017/03/30/tcl基础学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chamo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="茶末园">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                tcl基础学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tcl/" itemprop="url" rel="index">
+                    <span itemprop="name">tcl</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/30/tcl基础学习/" class="leancloud_visitors" data-flag-title="tcl基础学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="tcl环境搭建"><a href="#tcl环境搭建" class="headerlink" title="tcl环境搭建"></a>tcl环境搭建</h1><p>windows环境下，安装activite tcl。所有程序下tclsh86即为tcl控制台，为了方便配置notepad++为tcl编辑器，点击notepad++运行，在运行程序名中输入如下,同时点击保存设置运行快捷键，比如设置ctrl+T，只需在tcl程序中通过快捷键即可运行该tcl脚本。<br><a id="more"></a></p>
+<pre><code>cmd /k tclsh86 &quot;$(FULL_CURRENT_PATH)&quot; &amp; PAUSE &amp; EXIT 
+</code></pre><h1 id="tcl基础学习"><a href="#tcl基础学习" class="headerlink" title="tcl基础学习"></a>tcl基础学习</h1><h2 id="脚本，命令和单词"><a href="#脚本，命令和单词" class="headerlink" title="脚本，命令和单词"></a>脚本，命令和单词</h2><p>一个TCL脚本可以包含一个或多个命令，命令之间必须用换行符或分号隔开。每一个命令包含一个或几个单词，第一个单词代表命令名，另外的单词则是这个命令的参数，单词之间必须用空格或TAB键隔开。</p>
+<pre><code>set a 10
+puts $a
+</code></pre><h2 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h2><p>TCL解释器对一个命令的求值过程分为两部分：分析和执行。</p>
+<p>在分析阶段，TCL 解释器运用规则把命令分成一个个独立的单词，同时进行必要的置换(substitution)；</p>
+<p>在执行阶段，TCL 解释器会把第一个单词当作命令名，并查看这个命令是否有定义，如果有定义就激活这个命令对应的C/C++过程，并把所有的单词作为参数传递给该命令过程，让命令过程进行处理。</p>
+<h3 id="变量置换"><a href="#变量置换" class="headerlink" title="变量置换"></a>变量置换</h3><p>变量置换由一个＄符号标记，变量置换会导致变量的值插入一个单词中</p>
+<pre><code>set a 10
+puts $a+10
+结果：10+10
+</code></pre><p>TCL解释器把10+10看成是一个字符串而不是表达式，a要想得到值20，还必须用命令置换，使得TCL会把10+10看成一个表达式并求值。</p>
+<h3 id="命令置换"><a href="#命令置换" class="headerlink" title="命令置换"></a>命令置换</h3><p>命令置换是由[]括起来的TCL命令及其参数，命令置换会导致某一个命令的所有或部分单词被另一个命令的结果所代替。，[]中必须是一个合法的TCL脚本即命令，长度不限。[]中脚本的值为最后一个命令的返回值</p>
+<pre><code>puts [expr $a+10]
+</code></pre><h3 id="反斜杠置换"><a href="#反斜杠置换" class="headerlink" title="反斜杠置换"></a>反斜杠置换</h3><p>反斜杠置换主要用于在单词符号中插入诸如换行符、空格、[、$等被TCL解释器当作特殊符号对待的字符。</p>
+<pre><code>set msg sss\ ssss
+puts $msg
+结果：sss ssss
+</code></pre><p>如果没有’\’的话，TCL会报错，因为解释器会把这里最后两个单词之间的空格认为是分隔符，于是发现set命令有多于两个参数，从而报错</p>
+<h2 id="双引号和花括号"><a href="#双引号和花括号" class="headerlink" title="双引号和花括号"></a>双引号和花括号</h2><p>除了反斜杠外，TCL提供双引号和花括号使得解释器把分隔符和置换符等特殊字符当作普通字符，而不作特殊处理。</p>
+<p>TCL解释器对双引号中的各种分隔符将不作处理，但是对换行符 及＄和[]两种置换符会照常处理<br>而在花括号中，所有特殊字符都将成为普通字符，失去其特殊意义，TCL解释器不会对其作特殊处理。</p>
+<pre><code>set x 100
+set y &quot;$x ddd&quot;
+puts $y
+结果：100 ddd
+
+set y {/n$x [expr 10+100]}
+结果：/n$x [expr 10+100]
+</code></pre><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>TCL中的注释符是’＃’，’＃’和直到所在行结尾的所有字符都被TCL看作注释，同一行中， ‘＃’必须在命令的分号后面，表示该命令的结束。</p>
+<pre><code>set y 10
+puts $y #读取y，错误
+puts $y;#读取y,正确
+</code></pre><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量的名字和值可以是任意字符串。但是TCL变量置换即读取变量时，只把从＄符号往后直到第一个非字母、数字或下划线的字符之间的单词符号作为要被置换的变量。</p>
+<p>如果变量名中有不是字母、数字或下划线的字符，又要用置换，可以用花括号把变量名括起来</p>
+<pre><code>set a 2
+puts $a；
+set a.1 4
+puts ${a.1}；#结果为4，a.1当做变量
+set b $a.1
+puts $b;#结果为2.1，$a为2，读取时只把a当做了变量，后面当做了字符
+</code></pre><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>在TCL中，不能单独声明一个数组，数组只能和数组元素一起声明。数组元素的名字包含两部分：数组名和数组中元素名，TCL中数组元素名（下标〕可以为任何字符串。数组索引是由圆括号（）来指定的，每个数组元素变量名的格式是“数组名(索引值)。有点类似于字典，key与value的关系。</p>
+<p>数组定义：<br>[语法]：set  arrName(index) value<br>[语法]：array set arrName { index1 value1 index2 value2 …} </p>
+<pre><code>set day(monday) 1;#数组名为day，数组元素名为monday的值为1
+</code></pre><h3 id="数组操作命令"><a href="#数组操作命令" class="headerlink" title="数组操作命令"></a>数组操作命令</h3><p>array exists  arr：判断 arr 是否为数组变量，是返回 1  </p>
+<p>array get arr  ?pattern?：返回一个包含交替出现索引、元素值的列表。pattern 选择匹配索引。如果不指定 pattern，返回所有的元素索引和值。</p>
+<p>array names  arr ?pattern?：返回索引</p>
+<p>array  size  arr：数组大小</p>
+<p>array  startsearch  arr：返回用于 arr 进行搜索的搜索标记</p>
+<p>parray arr：打印出 arr 的所有元素变量名和元素值</p>
+<p>array  nextelement arr index：返回下一个元素值，如果已在尾部的话，返回空串</p>
+<h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><h3 id="unset"><a href="#unset" class="headerlink" title="unset"></a>unset</h3><p>从解释器中删除变量，后面可以有任意多个参数，每个参数是一个变量名,可以是简单变量，也可以是数组或数组元素。数组day并没有删除，其他元素还存在，要删除整个数组，只需给出数组的名字</p>
+<pre><code>set day(monday) 1;
+set day(tuesday) 2;
+unset day(monday);数组day并没有删除，其他元素还存在
+#unset day；#删除整个数组
+puts $day(tuesday)
+</code></pre><h3 id="append"><a href="#append" class="headerlink" title="append"></a>append</h3><p>append命令把文本加到一个变量的后面</p>
+<pre><code>set txt hello;
+append txt &quot;!how are you&quot;;
+puts $txt
+结果：
+hello！how are you
+</code></pre><h3 id="incr"><a href="#incr" class="headerlink" title="incr"></a>incr</h3><p>incr命令把一个变量值加上一个整数。incr要求变量原来的值和新加的值都必须是整数。incr a类似于a++,自增1。</p>
+<pre><code>set a 2;
+incr a;
+puts $a
+结果：3
+</code></pre><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>list是由一堆元素组成的有序集合，支持嵌套，每个元素可以是任意字符串，也可以是list。空的list为{}</p>
+<p>###list（创建列表）###<br>list命令用来创建列表，也可以直接用{}表示</p>
+<pre><code>set 11 [list sun monday tuesday]；
+puts $11
+结果：sun monday tuesday
+set 12 [list $11 wed]
+puts $12
+结果：{sun monday tuesday} wed
+或者
+set 11 &quot;sun mon tue&quot;;
+puts $11;
+set 12 [list $11 wed];
+puts $12;
+</code></pre><h3 id="concat（连接）"><a href="#concat（连接）" class="headerlink" title="concat（连接）"></a>concat（连接）</h3><p>把多个list合成一个list，每个list变成新list的一个元素</p>
+<pre><code>set x {1 2};
+set y [concat $x {3 4}]
+puts $y
+结果：1 2 3 4
+</code></pre><h3 id="lindex（索引）"><a href="#lindex（索引）" class="headerlink" title="lindex（索引）"></a>lindex（索引）</h3><p>返回list的第index个(0-based)元素</p>
+<pre><code>set x [list 1 2 3 4]
+set y [lindex $x 2]
+puts $y
+结果：3
+</code></pre><h3 id="llength（长度）"><a href="#llength（长度）" class="headerlink" title="llength（长度）"></a>llength（长度）</h3><p>返回list的元素个数</p>
+<pre><code>set x [list 1 2 3 4]
+set y [llength $x]
+puts $y
+结果：4
+</code></pre><h3 id="linsert（插入）"><a href="#linsert（插入）" class="headerlink" title="linsert（插入）"></a>linsert（插入）</h3><p>语法：linsert list index value ?value…?<br>返回一个新串，新串是把所有的value参数值插入list的第index个(0-based)元素之前得到<br>    set x [list 1 2 3 4]<br>    set y [linsert $x 2 5 6 7]；#在3前插入5 6 7<br>    puts $y<br>    结果：1 2 5 6 7 3 4</p>
+<h3 id="lreplace（替代）"><a href="#lreplace（替代）" class="headerlink" title="lreplace（替代）"></a>lreplace（替代）</h3><p>语法：lreplace list first last ?value value …?<br>返回一个新串，新串是把list的第firs (0-based)t到第last 个(0-based)元素用所有的value参数替换得到的。</p>
+<p>如果没有value参数，就表示删除第first到第last个元素。</p>
+<pre><code>set x [list 1 2 3 4]
+set y [lreplace $x 1 2 6 7]
+puts $y
+结果：1 6 7 4
+
+set x [list 1 2 3 4]
+set y [lreplace $x 1 2 ]；#删除2和3
+puts $y
+结果：1 4
+</code></pre><h3 id="lrange（范围）"><a href="#lrange（范围）" class="headerlink" title="lrange（范围）"></a>lrange（范围）</h3><p>语法:lrange list first last<br>返回list的第first (0-based)到第last (0-based)元素组成的串。</p>
+<p>如果last的值是end。就是从第first个直到串的最后。<br>    set x [list 1 2 3 4]<br>    set y [lrange $x 1 end ]<br>    puts $y<br>    结果：2 3 4</p>
+<h3 id="lappend（追加）"><a href="#lappend（追加）" class="headerlink" title="lappend（追加）"></a>lappend（追加）</h3><p>语法：lappend list value ?value…?<br>将新元素追加到原来列表 list 后组成新的列表,这里使用与上述有点不同，lappend list不能是lappend $list。</p>
+<pre><code>set x [list 1 2 3 4]
+set y [lappend x 5]
+puts $y
+结果：1 2 3 4 5 
+set x [list 1 2 3 4]
+set y [lappend $x 5]
+puts $y
+结果：5
+</code></pre><h3 id="lsearch（搜索匹配）"><a href="#lsearch（搜索匹配）" class="headerlink" title="lsearch（搜索匹配）"></a>lsearch（搜索匹配）</h3><p>语法：lsearch ?mode? list value<br>根据匹配模式 mode，查找 list 中与 value 匹配的元素位置索引，如果找不到匹配就返回-1。</p>
+<p>-exact、-glob、 -regexp是三种模式匹配的技术。<br>-exact表示精确匹配；<br>-glob的匹配方式和string match命令的匹配方式相同，缺省时使用-glob匹配<br>-regexp表示正规表达式匹配  </p>
+<pre><code>set x [list this is a list]
+set y [lsearch $x l*];#匹配l开头的
+puts $y
+结果：3
+set x [list this is a list]
+set y [lsearch -exact $x l*]；#精确匹配，因此返回-1
+puts $y
+结果：-1
+set z [lsearch -exact $x list]；#精确匹配list，索引为3
+puts $z
+结果：3
+</code></pre><h3 id="lsort（排序）"><a href="#lsort（排序）" class="headerlink" title="lsort（排序）"></a>lsort（排序）</h3><p>语法：lsort ?switches? list<br>-ascii 按ASCII字符的顺序排序比较.这是缺省情况。  </p>
+<p>-dictionary 按字典排序,与-ascii不同的地方是：<br>(1)不考虑大小写<br>(2)如果元素中有数字的话,数字被当作整数来排序. 因此：bigBoy排在bigbang和bigboy之间, x10y 排在x9y和x11y之间.</p>
+<p>-integer 把list的元素转换成整数,按整数排序.<br>-real 把list的元素转换成浮点数,按浮点数排序.<br>-increasing 升序(按ASCII字符比较)<br>-decreasing 降序(按ASCII字符比较)<br>-command command TCL自动利用command 命令把每两个元素一一比较,然后给出排序结果。  </p>
+<pre><code>set x [list this is a list]
+set y [lsort -ascii $x]
+puts $y
+结果：a is list this
+</code></pre><h3 id="split（分割）"><a href="#split（分割）" class="headerlink" title="split（分割）"></a>split（分割）</h3><p>语法：split string ?splitChars?<br>把字符串string按分隔符splitChars分成一个个单词，返回由这些单词组成的串。如果splitChars 是一个空字符{}，string被按字符分开。如果splitChars没有给出,以空格为分隔符<br>    set x “how are you”<br>    set y [split $x {}]<br>    puts $y<br>    结果：h o w ｛　｝ａ　ｒ　ｅ ｛　｝y o u</p>
+<h3 id="join（合并）"><a href="#join（合并）" class="headerlink" title="join（合并）"></a>join（合并）</h3><p>语法:join list ?joinString?<br>把list的所有元素合并到一个字符串中，中间以joinString分开。缺省的joinString是空格</p>
+<pre><code>set x &quot;how are you&quot;
+set y [join $x 1]
+puts $y
+结果：how1are1you
+</code></pre><p>##控制结构##</p>
+<p>###if/else结构###<br>if 命令根据表达式的结果来执行命令体：如果表达式结果为真，则执行命令体，否则会执行另外一个条件命令体</p>
+<pre><code> if { test expr 测试表达式 } {  
+
+body 1
+
+} elseif {test expr 测试表达式}  { 
+
+  body2
+
+} else {
+
+test expr
+
+}
+</code></pre><p>实例：</p>
+<pre><code>set x 10;
+set z 10;
+if {$x&gt;1} {
+    set y 11;
+} else {
+    set z 12;
+}
+puts $y;
+puts $z;
+</code></pre><p>注意：<br>若报错extra characters after close-brace 检查空格问题</p>
+<ol>
+<li><p>if与{间有空格，}与{间有空格，}与else有空格， else与{有空格</p>
+</li>
+<li><p>花括号一定要和 if 命令在同一行上</p>
+</li>
+<li><p>花括号括起的表达式、执行命令体或者其他内容相当于变量存在，所以前后与其他命令元素之前要有空格</p>
+</li>
+<li><p>表达式支持变量替换和命令替换。</p>
+</li>
+</ol>
+<p>###while循环###<br>只要 test 为真，while 就执行循环体直到 test 变为假</p>
+<pre><code>while {test } {
+
+                 body
+
+              } 
+</code></pre><p>例子：</p>
+<pre><code>set x 10;
+while {$x&gt;1} {
+    set y 11
+    set x [incr x -1]
+}
+puts $y
+puts $x
+</code></pre><p>###for循环###<br>for 命令有四个变元，start为初始条件，test<br>expr 是条件表达式，如果是真，则执行循环体，如果假则退出命令。如果表达式真，则在执行循环体后处理 next 命令，即 next 是一个后置命令执行体。</p>
+<p>前三个变元可以选择置空，而将相应的处理放到循环体 body 中去。 </p>
+<pre><code>for {start} {test expr} {next} {body 
+
+}
+</code></pre><p>例子：</p>
+<pre><code>for {set i 0} {$i&lt;=100} {incr i} {
+    incr sum $i;
+}
+puts $sum
+</code></pre><p>###switch选择###</p>
+<pre><code>switch [option] string {
+
+   a -  
+
+   b {body2}                        
+
+   n {bodyn}
+   default {}
+
+                        } 
+</code></pre><p>a的后面跟一个’－’表示使用和下一个模式相同的脚本。default表示匹配任意值</p>
+<p>option 主要有：</p>
+<p>-exact ：用精确匹配（默认）；</p>
+<p>-glob：用 glob 格式行模式匹配； </p>
+<p>-regexp   用 正则表达式模式匹配； </p>
+<p>例子：</p>
+<pre><code>set x 10;
+switch $x {
+10 -；#和下一个模式相同脚本，即incr x，-必须为拼音模式下-
+11 {incr x}
+default {incr x 3}
+
+}
+puts $x
+结果：11
+</code></pre><p>###break和continue###<br>在循环体中，可以用break和continue命令中断循环。其中break命令结束整个循环过程，并从循环中跳出，continue只是结束本次循环</p>
+<p>##string字符串操作##</p>
+<p>###format格式化###<br>语法：format formatstring ?vlue value…?<br>按formatstring提供的格式，把各个value的值组合到formatstring中形成一个新字符串，并返回</p>
+<pre><code>set name john 
+set age 20
+set msg [format &quot;%s is %d years old&quot; $name $age]
+puts $msg
+结果：john is 20 years old
+</code></pre><p>###scan###<br>语法：scan string format varName ?varName …?<br>按format提供的格式分析string字符串，然后把结果存到变量varName中,除了空格和TAB键之外，string 和format中的字符和’%’必须匹配。</p>
+<pre><code>scan &quot;12.34.56.78&quot; &quot;%d.%d.%d.%d&quot; a b c d
+puts $a;#12
+puts $b;#34
+puts $c;#56
+puts $d;#78
+</code></pre><p>###string命令###</p>
+<h4 id="string-compare"><a href="#string-compare" class="headerlink" title="string compare"></a>string compare</h4><p>语法：string compare ?-nocase? ?-length int? string1 string2</p>
+<p>把字符串string1和string2进行比较：，根据词典顺序比较字符串<br>string1小于string2，返回-1  (str1 的顺序比 str2 靠前)<br>string1等于string2，返回0<br>string1大于string2，返回1  </p>
+<p>如果有 -length 参数，那么只比较前 int 个字符，如果 int为负数，那么这个参数被忽略。 </p>
+<p>如果有 -nocase参数，那么比较时不区分大小写。</p>
+<pre><code>set my_name john
+set you_name alla
+set flag [string compare $my_name $you_name]
+puts $flag
+结果：1
+</code></pre><h4 id="string-equal"><a href="#string-equal" class="headerlink" title="string equal"></a>string equal</h4><p>string equal ?-nocase? ?-length int? string1 string2</p>
+<p>把字符串string1和string2进行比较，如果两者相同，返回值为1，否则返回0</p>
+<pre><code>set my_name john
+set you_name alla
+set flag [string equal $my_name $you_name]
+puts $flag
+结果：0
+</code></pre><h4 id="string-first"><a href="#string-first" class="headerlink" title="string first"></a>string first</h4><p>语法：string first string1 string2 ?startindex?</p>
+<p>在string2 中从头查找与string1匹配的字符序列，如果找到，那么就返回匹配的第一个字母所在的位置(0-based)。如果没有找到，那么返回-1。如果给出了startindex变量，那么将从startindex处开始查找</p>
+<pre><code>set my_name helloworld
+set you_name ell
+set flag [string first $you_name $my_name]
+puts $flag
+结果：1
+set you_name eld；#查找时string必须完全匹配
+结果：-1
+</code></pre><h4 id="string-last"><a href="#string-last" class="headerlink" title="string last"></a>string last</h4><p>与string first的区别是从后往前查找</p>
+<h4 id="string-index"><a href="#string-index" class="headerlink" title="string index"></a>string index</h4><p>语法：string index string charIndex</p>
+<p>返回string 中第charIndex个字符(0-based)。charIndex可以是下面的值：</p>
+<p>整数n: 字符串中第n个字符(0-based)<br>end : 最后一个字符<br>end－整数n：倒数第n个字符。string index “abcd” end-1 返回字符’c’<br>如果charIndex小于0，或者大于字符串string的长度，那么返回空。 </p>
+<pre><code>set you_name hexd
+set flag [string index $you_name 1]
+puts $flag
+结果：e
+</code></pre><h4 id="string-length"><a href="#string-length" class="headerlink" title="string length"></a>string length</h4><p>语法：string length string<br>返回字符串string的长度</p>
+<pre><code>set you_name hexd
+set flag [string length $you_name]
+puts $flag
+结果：4
+</code></pre><h4 id="string-match"><a href="#string-match" class="headerlink" title="string match"></a>string match</h4><p>语法：string match ?-nocase? pattern string</p>
+<p>如果pattern 匹配string,那么返回1,否则返回0.如果有-nocase参数,那么就不区分大小写.</p>
+<p>在pattern 中可以使用通配符:  </p>
+<ul>
+<li><p>匹配string中的任意长的任意字符串,包括空字符串.<br>? 匹配string中任意单个字符<br>[chars] 匹配字符集合chars中给出的任意字符,其中可以使用 A-Z这种形式<br>\x 匹配单个字符x,使用’\’是为了让x可以为字符*,-,[,].  </p>
+<p>  set you_name hexd<br>  set flag [string match e* $you_name]；#无法匹配任何e开头的<br>  puts $flag;#0</p>
+</li>
+</ul>
+<h4 id="string-range"><a href="#string-range" class="headerlink" title="string range"></a>string range</h4><p>语法：string range string first last</p>
+<p>返回字符串string中从第first个到第last个字符的子字符串(0-based)。如果first&lt;0，那么first被看作0，如果last大于或等于字符串的长度，那么last被看作end，如果first比last大，那么返回空。</p>
+<pre><code>set you_name hexd
+set flag [string range $you_name 0 1]
+puts $flag
+结果：he
+</code></pre><h4 id="string-repeat"><a href="#string-repeat" class="headerlink" title="string repeat"></a>string repeat</h4><p>语法：string repeat string count</p>
+<p>返回string字符串重复count次的新字符串</p>
+<pre><code>set you_name hexd
+set flag [string repeat $you_name 2]
+puts $flag
+结果：hexdhexd
+</code></pre><h4 id="string-replace"><a href="#string-replace" class="headerlink" title="string replace"></a>string replace</h4><p>string replace string first last ?newstring?<br>返回值为：从字符串string 中删除了第first到第last个字符(0-based)的字符串，如果给出了newstring变量，那么就用newstring替换从第first到第last个字符。</p>
+<p>如果first&lt;0，那么first被看作0，如果last大于或等于字符串的长度，那么last被看作end</p>
+<p>如果first比last大或者大于字符串string的长度或者last小于0，那么原封不动的返回string 。</p>
+<pre><code>set you_name hexd
+set flag [string replace $you_name 1 2 gk]
+puts $flag
+结果：hgkd
+</code></pre><h4 id="string-tolower"><a href="#string-tolower" class="headerlink" title="string tolower"></a>string tolower</h4><p>语法：string tolower string ?first? ?last?</p>
+<p>返回值为：把字符串string转换成小写后的字符串，如果给出了first和last变量，就只转换first和last之间的字符。  </p>
+<pre><code>set you_name HEDC
+set flag [string tolower $you_name 1 2]
+puts $flag
+结果：HedC
+</code></pre><h4 id="string-toupper"><a href="#string-toupper" class="headerlink" title="string toupper"></a>string toupper</h4><p>语法：string toupper string ?first? ?last?</p>
+<p>转换成大写，与tolower一样</p>
+<h4 id="string-trim"><a href="#string-trim" class="headerlink" title="string trim"></a>string trim</h4><p>语法：string trim string ?chars?</p>
+<p>从string字符串删除字符集合chars中的字符后的字符串。如果没有给出chars，那么将删除掉spaces、tabs、newlines、carriage returns这些字符。</p>
+<pre><code>set you_name hedx
+set flag [string trim $you_name he]
+puts $flag
+结果：dx
+</code></pre><p>##procedure过程##<br>TCL中的过程类似于C中的函数。proc命令的第一个参数是要定义的过程的名字，第二个参数是过程的参数列表，参数之间用空格隔开，第三个参数是一个TCL脚本，代表过程体。 proc生成一个新的命令，可以象固有命令一样调用。过程的返回值是过程体中最后执行的那条命令的返回值。</p>
+<pre><code>proc add {x y } {
+    expr $x+$y}
+</code></pre><p>###局部变量和全局变量###<br>局部变量：在过程中定义的变量，只能在过程中被访问，并且当过程退出时会被自动删除</p>
+<p>全局变量：所有过程之外定义的变量</p>
+<p>局部变量的作用域是它所在的过程的内部；全局变量的作用域则不包括所有过程的内部。</p>
+<h3 id="缺省参数"><a href="#缺省参数" class="headerlink" title="缺省参数"></a>缺省参数</h3><p>可以为过程的部分或全部参数提供缺省值，如果调用过程时未提供那些参数的值，那么过程会自动使用缺省值赋给相应的参数<br>    proc add {val1 {val2 2} {val3 3}} {<br>        expr $val1+$val2+$val3<br>    }<br>    set x [add 1]；#val3,val3未提供参数，使用缺省参数<br>    puts $x;<br>    set y [add 2 20]；#val3未提供参数，使用缺省参数<br>    puts $y</p>
+<p>###引用upval###<br>语法:upvar ?level? otherVar myVar ?otherVar myVar …?</p>
+<p>upvar命令使得用户可以在过程中对全局变量或其他过程中的局部变量进行访问。 upvar命令的第一个参数otherVar是希望以引用方式访问的参数的名字，第二个参数myVar 是这个过程中的局部变量的名字，一旦使用了upvar 命令把otherVar 和myVar 绑定,那么在过程中对局部变量myVar 的读写就相当于对这个过程的调用者中otherVar 所代表的局部变量的读写。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+	  
+	</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="Chamo WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tcl/" <i class="fa fa-tag"></i> tcl</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/linux下SSH服务远程登入/" rel="next" title="linux下SSH服务">
+                <i class="fa fa-chevron-left"></i> linux下SSH服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/12/github创建本地仓库/" rel="prev" title="github创建本地仓库">
+                github创建本地仓库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTI2OC81ODM2"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/avatar.png"
+               alt="Chamo" />
+          <p class="site-author-name" itemprop="name">Chamo</p>
+           
+              <p class="site-description motion-element" itemprop="description">好记忆不如动动手</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+			<div class="site-state-item site-state-tags">
+				<a href="/tags">
+					<span class="site-state-item-count">27</span>
+					<span class="site-state-item-name">标签</span>
+				</a>
+			</div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/BlueSky-chamo" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tcl环境搭建"><span class="nav-number">1.</span> <span class="nav-text">tcl环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tcl基础学习"><span class="nav-number">2.</span> <span class="nav-text">tcl基础学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本，命令和单词"><span class="nav-number">2.1.</span> <span class="nav-text">脚本，命令和单词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#置换"><span class="nav-number">2.2.</span> <span class="nav-text">置换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量置换"><span class="nav-number">2.2.1.</span> <span class="nav-text">变量置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令置换"><span class="nav-number">2.2.2.</span> <span class="nav-text">命令置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反斜杠置换"><span class="nav-number">2.2.3.</span> <span class="nav-text">反斜杠置换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双引号和花括号"><span class="nav-number">2.3.</span> <span class="nav-text">双引号和花括号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">2.4.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">2.5.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">2.6.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组操作命令"><span class="nav-number">2.6.1.</span> <span class="nav-text">数组操作命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关命令"><span class="nav-number">2.7.</span> <span class="nav-text">相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unset"><span class="nav-number">2.7.1.</span> <span class="nav-text">unset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append"><span class="nav-number">2.7.2.</span> <span class="nav-text">append</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#incr"><span class="nav-number">2.7.3.</span> <span class="nav-text">incr</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">2.8.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#concat（连接）"><span class="nav-number">2.8.1.</span> <span class="nav-text">concat（连接）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lindex（索引）"><span class="nav-number">2.8.2.</span> <span class="nav-text">lindex（索引）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#llength（长度）"><span class="nav-number">2.8.3.</span> <span class="nav-text">llength（长度）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linsert（插入）"><span class="nav-number">2.8.4.</span> <span class="nav-text">linsert（插入）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lreplace（替代）"><span class="nav-number">2.8.5.</span> <span class="nav-text">lreplace（替代）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lrange（范围）"><span class="nav-number">2.8.6.</span> <span class="nav-text">lrange（范围）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lappend（追加）"><span class="nav-number">2.8.7.</span> <span class="nav-text">lappend（追加）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsearch（搜索匹配）"><span class="nav-number">2.8.8.</span> <span class="nav-text">lsearch（搜索匹配）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsort（排序）"><span class="nav-number">2.8.9.</span> <span class="nav-text">lsort（排序）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#split（分割）"><span class="nav-number">2.8.10.</span> <span class="nav-text">split（分割）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join（合并）"><span class="nav-number">2.8.11.</span> <span class="nav-text">join（合并）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#string-compare"><span class="nav-number">2.8.11.1.</span> <span class="nav-text">string compare</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-equal"><span class="nav-number">2.8.11.2.</span> <span class="nav-text">string equal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-first"><span class="nav-number">2.8.11.3.</span> <span class="nav-text">string first</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-last"><span class="nav-number">2.8.11.4.</span> <span class="nav-text">string last</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-index"><span class="nav-number">2.8.11.5.</span> <span class="nav-text">string index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-length"><span class="nav-number">2.8.11.6.</span> <span class="nav-text">string length</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-match"><span class="nav-number">2.8.11.7.</span> <span class="nav-text">string match</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-range"><span class="nav-number">2.8.11.8.</span> <span class="nav-text">string range</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-repeat"><span class="nav-number">2.8.11.9.</span> <span class="nav-text">string repeat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-replace"><span class="nav-number">2.8.11.10.</span> <span class="nav-text">string replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-tolower"><span class="nav-number">2.8.11.11.</span> <span class="nav-text">string tolower</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-toupper"><span class="nav-number">2.8.11.12.</span> <span class="nav-text">string toupper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string-trim"><span class="nav-number">2.8.11.13.</span> <span class="nav-text">string trim</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺省参数"><span class="nav-number">2.8.12.</span> <span class="nav-text">缺省参数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chamo</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<div class="theme-info">
+	<div class="powered-by"></div>
+	<span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://BlueSky-chamo.github.io/home/"/>
-  <updated>2017-06-21T06:21:33.253Z</updated>
+  <updated>2017-06-21T07:09:24.791Z</updated>
   <id>http://BlueSky-chamo.github.io/home/</id>
   
   <author>
@@ -14,6 +14,196 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://BlueSky-chamo.github.io/home/2017/07/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%93%BE%E8%A1%A8%E5%AE%9E%E4%BE%8B%EF%BC%88%E9%80%9A%E8%AE%AF%E5%BD%95%EF%BC%89/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/07/23/数据结构之链表实例（通讯录）/</id>
+    <published>2017-07-23T11:10:59.548Z</published>
+    <updated>2017-06-21T07:09:24.791Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>title: 数据结构之链表实例（通讯录）<br>date: 2017-03-30<br>categories: C语言</p>
+<h2 id="tags-C链表"><a href="#tags-C链表" class="headerlink" title="tags: [C链表]"></a>tags: [C链表]</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>环境：VC6.0<br>利用C链表创建通讯录，实现添加，修改，查找，删除等功能操作。<br><a id="more"></a></p>
+<h1 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h1><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;conio.h&gt;
+#include &lt;string.h&gt;
+typedef struct node
+{
+    char num[20];//学号
+    char name[20];//用户姓名
+    char phone[20];//电话号码
+    struct node *next;
+}node;
+</code></pre><h1 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h1><pre><code>void main()
+{
+ char choice;
+ struct node *head=(struct node*)malloc(sizeof(struct node));
+ head-&gt;next=NULL;
+
+ printf(&quot;\t*****************************\n&quot;);
+ printf(&quot;\t1,添加一条记录\n&quot;);
+ printf(&quot;\t2,修改一条记录\n&quot;);
+ printf(&quot;\t3,删除一条记录\n&quot;);
+ printf(&quot;\t4,按学号查找\n&quot;);
+ printf(&quot;\t5,按姓名查找\n&quot;);
+ printf(&quot;\t6,退出\n&quot;);
+ printf(&quot;\t请按键选择\n&quot;);
+ printf(&quot;\t*****************************\n&quot;);
+
+ while(1)  //无穷循环
+ {
+  printf(&quot;请按键选择操作：\n&quot;);
+  fflush(stdin); //清除缓冲区
+  choice=getch();//获取键盘输入
+  switch(choice)
+  {
+  case &apos;1&apos;:
+   insert(head);//插入操作
+   break;
+  case &apos;2&apos;:
+   modify(head);//修改操作
+   break;
+  case &apos;3&apos;:
+   delRecord(head);//删除操作
+   break;
+  case &apos;4&apos;:
+   findByNum(head);//按学号查找
+   break;
+  case &apos;5&apos;:
+   findByName(head);//按姓名查找
+   break;
+  case &apos;6&apos;:
+   exit(0);//退出
+  default:
+   printf(&quot;输入错误\n&quot;);
+  }
+ }
+}
+</code></pre><h1 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h1><pre><code>void insert(node* head)//添加一条记录
+{
+ node *p=head;
+ struct node *newStud=(struct node*)malloc(sizeof(struct node));
+ printf(&quot;输入添加用户信息\n&quot;);
+ printf(&quot;学号:&quot;);
+ scanf(&quot;%s&quot;,newStud-&gt;num);
+ printf(&quot;姓名:&quot;);
+ scanf(&quot;%s&quot;,newStud-&gt;name);
+ printf(&quot;电话:&quot;);
+ scanf(&quot;%s&quot;,newStud-&gt;phone);
+ while(p-&gt;next!=NULL)
+ {
+  if(strcmp(p-&gt;num,newStud-&gt;num)==0)
+  {
+   printf(&quot;此学号的用户已存在!\n&quot;);
+   return;
+  }
+  p=p-&gt;next;
+ }
+ p-&gt;next=newStud;
+ newStud-&gt;next=NULL;
+ printf(&quot;添加成功\n&quot;);
+}
+</code></pre><h1 id="修改操作"><a href="#修改操作" class="headerlink" title="修改操作"></a>修改操作</h1><pre><code>void modify(node *head)//修改一条记录
+{
+ node *p=head-&gt;next;
+ char num[20];
+ printf(&quot;输入待修改用户学号:&quot;);
+ scanf(&quot;%s&quot;,num);
+ while(p!=NULL)
+ {
+  if(strcmp(p-&gt;num,num)==0)
+  {
+   printf(&quot;输入修改后信息\n&quot;);
+   printf(&quot;学号:&quot;);
+   scanf(&quot;%s&quot;,&amp;p-&gt;num);
+   printf(&quot;姓名:&quot;);
+   scanf(&quot;%s&quot;,&amp;p-&gt;name);
+   printf(&quot;电话:&quot;);
+   scanf(&quot;%s&quot;,&amp;p-&gt;phone);
+
+
+   printf(&quot;修改成功\n&quot;);
+   return;
+  }
+  p=p-&gt;next;
+ }
+ printf(&quot;不存在此学号的用户&quot;);
+}
+</code></pre><h1 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h1><pre><code>void delRecord(node *head)  //删除一条记录
+{
+ char num[20];
+ node *p1,*p2;
+ p1=head;
+ p2=p1-&gt;next;
+ printf(&quot;输入待删除用户学号:&quot;);
+ scanf(&quot;%s&quot;,num);
+ while(p2!=NULL)
+ {
+  if(strcmp(p2-&gt;num,num)==0)//找到则删除此用户
+  {
+   p1-&gt;next=p2-&gt;next;
+   free(p2);
+   printf(&quot;删除成功\n&quot;);
+   return;
+  }
+  p1=p2;         //没找到则继续遍历
+  p2=p2-&gt;next;
+ }
+ printf(&quot;不存在此学号的用户\n&quot;);
+}
+</code></pre><h1 id="学号查找操作"><a href="#学号查找操作" class="headerlink" title="学号查找操作"></a>学号查找操作</h1><pre><code>void findByNum(node *head)//按学号查找
+{
+ node *p=head-&gt;next;
+ char num[20];
+ printf(&quot;输入待查找用户学号:&quot;);
+ scanf(&quot;%s&quot;,num);
+ while(p!=NULL)
+ {
+  if(strcmp(p-&gt;num,num)==0)
+  {
+   printf(&quot;学号:%s\n&quot;,p-&gt;num);
+   printf(&quot;姓名:%s\n&quot;,p-&gt;name);
+   printf(&quot;电话:%s\n&quot;,p-&gt;phone);
+   return;
+  }
+  p=p-&gt;next;
+ }
+ printf(&quot;不存在此学号的用户\n&quot;);
+}
+</code></pre><h1 id="姓名查找操作"><a href="#姓名查找操作" class="headerlink" title="姓名查找操作"></a>姓名查找操作</h1><pre><code>void findByName(node *head)//按姓名查找
+{
+ node *p=head-&gt;next;
+ char name[20];
+ printf(&quot;输入待查找用户姓名:&quot;);
+ scanf(&quot;%s&quot;,name);
+ while(p!=NULL)
+ {
+  if(strcmp(p-&gt;name,name)==0)
+  {
+   printf(&quot;学号:%s\n&quot;,p-&gt;num);
+   printf(&quot;姓名:%s\n&quot;,p-&gt;name);
+   printf(&quot;电话:%s\n&quot;,p-&gt;phone);
+   return;
+  }
+  p=p-&gt;next;
+ }
+ printf(&quot;不存在此姓名的用户\n&quot;);
+}
+</code></pre><h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><p><img src="http://ogdiq8qnd.bkt.clouddn.com/17-4-18/38986925-file_1492477363582_6eae.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;title: 数据结构之链表实例（通讯录）&lt;br&gt;date: 2017-03-30&lt;br&gt;categories: C语言&lt;/p&gt;
+&lt;h2 id=&quot;tags-C链表&quot;&gt;&lt;a href=&quot;#tags-C链表&quot; class=&quot;headerlink&quot; title=&quot;tags: [C链表]&quot;&gt;&lt;/a&gt;tags: [C链表]&lt;/h2&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;环境：VC6.0&lt;br&gt;利用C链表创建通讯录，实现添加，修改，查找，删除等功能操作。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>回顾51单片机之enum用法</title>
@@ -306,299 +496,358 @@ git add .        //添加所有文件
   </entry>
   
   <entry>
-    <title>linux终端设备-终端属性termios</title>
-    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/linux%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87%E5%AD%A6%E4%B9%A0%E2%80%94%E7%BB%88%E7%AB%AF%E5%B1%9E%E6%80%A7termios%E7%BB%93%E6%9E%84%E4%BD%93/"/>
-    <id>http://BlueSky-chamo.github.io/home/2017/03/30/linux终端设备学习—终端属性termios结构体/</id>
+    <title>tcl基础学习</title>
+    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/tcl%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://BlueSky-chamo.github.io/home/2017/03/30/tcl基础学习/</id>
     <published>2017-03-29T16:00:00.000Z</published>
-    <updated>2017-05-11T07:56:16.041Z</updated>
+    <updated>2017-08-06T04:32:06.870Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="termios结构体简介"><a href="#termios结构体简介" class="headerlink" title="termios结构体简介"></a><strong>termios结构体简介</strong></h1><hr>
-<p>为便于用户层统一管理终端属性，linux使用termios结构体来统一管理<br><a id="more"></a><br>struct termios<br>{<br> unsigned short c_iflag; /<em> 输入模式标志</em>/<br> unsigned short c_oflag; /<em> 输出模式标志</em>/<br> unsigned short c_cflag; /<em> 控制模式标志</em>/<br> unsigned short c_lflag; /<em>区域模式标志或本地模式标志或局部模式</em>/<br> unsigned char c_line; /<em>行控制line discipline </em>/<br> unsigned char c_cc[NCC]; /<em> 控制字符特性</em>/<br>};<br>可以调用函数tcgetattr来初始化一个终端对应的termios结构，该函数的原型如下：  </p>
-<pre><code>#include&lt;termios.h&gt;  
-int tcgetattr(int fd, struct termios *termios_p);   
-</code></pre><p>这个函数调用获取fd所指向的当前终端对象fd的相关属性，并写入termios_p参数指向的结构。</p>
-<p>通过调用函数tcsetattr来重新配置某个终端的属性，函数原型如下：  </p>
-<pre><code>#include&lt;termios.h&gt;  
-int tcsetattr(int fd , int actions , const struct termios *termios_h);  
-</code></pre><p>函数根据actions所指示的行为来设置与fp所指向的终端设备的属性<br>参数actions控制修改方式，共有三种修改方式，如下所示。<br>1.TCSANOW：立刻对值进行修改<br>2.TCSADRAIN：等当前的输出完成后再对值进行修改。<br>3.TCSAFLUSH：等当前的输出完成之后，再对值进行修改，但丢弃还未从read调用返回的当前的可用的任何输入。  </p>
-<hr>
-<h1 id="五种模式标志"><a href="#五种模式标志" class="headerlink" title="五种模式标志"></a><strong>五种模式标志</strong></h1><hr>
-<h2 id="输入模式标志c-iflag"><a href="#输入模式标志c-iflag" class="headerlink" title="输入模式标志c_iflag"></a><strong>输入模式标志c_iflag</strong></h2><p><strong>输入模式控制输入数据在传递给程序之前的处理方式。通过设置termios结构中的c_iflag成员的标志对它们进行控制。所有的标志都被定义为宏,并可通过按位或的方式结合起来。</strong><br><strong>可用于c_iflag成员的宏如下所示：</strong><br>BRKINT：当在输入行中检测到一个终止状态时，产生一个中断。<br>TGNBRK：忽略输入行中的终止状态。<br>TCRNL：将接受到的回车符转换为新行符。<br>TGNCR：忽略接受到的新行符。<br>INLCR：将接受到的新行符转换为回车符。<br>IGNPAR：忽略奇偶校检错误的字符。<br>INPCK：对接收到的字符执行奇偶校检。<br>PARMRK：对奇偶校检错误作出标记。<br>ISTRIP：将所有接收的字符裁减为7比特。<br>IXOFF：对输入启用软件流控。<br>IXON：对输出启用软件流控。  </p>
+    <content type="html"><![CDATA[<h1 id="tcl环境搭建"><a href="#tcl环境搭建" class="headerlink" title="tcl环境搭建"></a>tcl环境搭建</h1><p>windows环境下，安装activite tcl。所有程序下tclsh86即为tcl控制台，为了方便配置notepad++为tcl编辑器，点击notepad++运行，在运行程序名中输入如下,同时点击保存设置运行快捷键，比如设置ctrl+T，只需在tcl程序中通过快捷键即可运行该tcl脚本。<br><a id="more"></a></p>
+<pre><code>cmd /k tclsh86 &quot;$(FULL_CURRENT_PATH)&quot; &amp; PAUSE &amp; EXIT 
+</code></pre><h1 id="tcl基础学习"><a href="#tcl基础学习" class="headerlink" title="tcl基础学习"></a>tcl基础学习</h1><h2 id="脚本，命令和单词"><a href="#脚本，命令和单词" class="headerlink" title="脚本，命令和单词"></a>脚本，命令和单词</h2><p>一个TCL脚本可以包含一个或多个命令，命令之间必须用换行符或分号隔开。每一个命令包含一个或几个单词，第一个单词代表命令名，另外的单词则是这个命令的参数，单词之间必须用空格或TAB键隔开。</p>
+<pre><code>set a 10
+puts $a
+</code></pre><h2 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h2><p>TCL解释器对一个命令的求值过程分为两部分：分析和执行。</p>
+<p>在分析阶段，TCL 解释器运用规则把命令分成一个个独立的单词，同时进行必要的置换(substitution)；</p>
+<p>在执行阶段，TCL 解释器会把第一个单词当作命令名，并查看这个命令是否有定义，如果有定义就激活这个命令对应的C/C++过程，并把所有的单词作为参数传递给该命令过程，让命令过程进行处理。</p>
+<h3 id="变量置换"><a href="#变量置换" class="headerlink" title="变量置换"></a>变量置换</h3><p>变量置换由一个＄符号标记，变量置换会导致变量的值插入一个单词中</p>
+<pre><code>set a 10
+puts $a+10
+结果：10+10
+</code></pre><p>TCL解释器把10+10看成是一个字符串而不是表达式，a要想得到值20，还必须用命令置换，使得TCL会把10+10看成一个表达式并求值。</p>
+<h3 id="命令置换"><a href="#命令置换" class="headerlink" title="命令置换"></a>命令置换</h3><p>命令置换是由[]括起来的TCL命令及其参数，命令置换会导致某一个命令的所有或部分单词被另一个命令的结果所代替。，[]中必须是一个合法的TCL脚本即命令，长度不限。[]中脚本的值为最后一个命令的返回值</p>
+<pre><code>puts [expr $a+10]
+</code></pre><h3 id="反斜杠置换"><a href="#反斜杠置换" class="headerlink" title="反斜杠置换"></a>反斜杠置换</h3><p>反斜杠置换主要用于在单词符号中插入诸如换行符、空格、[、$等被TCL解释器当作特殊符号对待的字符。</p>
+<pre><code>set msg sss\ ssss
+puts $msg
+结果：sss ssss
+</code></pre><p>如果没有’\’的话，TCL会报错，因为解释器会把这里最后两个单词之间的空格认为是分隔符，于是发现set命令有多于两个参数，从而报错</p>
+<h2 id="双引号和花括号"><a href="#双引号和花括号" class="headerlink" title="双引号和花括号"></a>双引号和花括号</h2><p>除了反斜杠外，TCL提供双引号和花括号使得解释器把分隔符和置换符等特殊字符当作普通字符，而不作特殊处理。</p>
+<p>TCL解释器对双引号中的各种分隔符将不作处理，但是对换行符 及＄和[]两种置换符会照常处理<br>而在花括号中，所有特殊字符都将成为普通字符，失去其特殊意义，TCL解释器不会对其作特殊处理。</p>
+<pre><code>set x 100
+set y &quot;$x ddd&quot;
+puts $y
+结果：100 ddd
+
+set y {/n$x [expr 10+100]}
+结果：/n$x [expr 10+100]
+</code></pre><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>TCL中的注释符是’＃’，’＃’和直到所在行结尾的所有字符都被TCL看作注释，同一行中， ‘＃’必须在命令的分号后面，表示该命令的结束。</p>
+<pre><code>set y 10
+puts $y #读取y，错误
+puts $y;#读取y,正确
+</code></pre><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量的名字和值可以是任意字符串。但是TCL变量置换即读取变量时，只把从＄符号往后直到第一个非字母、数字或下划线的字符之间的单词符号作为要被置换的变量。</p>
+<p>如果变量名中有不是字母、数字或下划线的字符，又要用置换，可以用花括号把变量名括起来</p>
+<pre><code>set a 2
+puts $a；
+set a.1 4
+puts ${a.1}；#结果为4，a.1当做变量
+set b $a.1
+puts $b;#结果为2.1，$a为2，读取时只把a当做了变量，后面当做了字符
+</code></pre><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>在TCL中，不能单独声明一个数组，数组只能和数组元素一起声明。数组元素的名字包含两部分：数组名和数组中元素名，TCL中数组元素名（下标〕可以为任何字符串。数组索引是由圆括号（）来指定的，每个数组元素变量名的格式是“数组名(索引值)。有点类似于字典，key与value的关系。</p>
+<p>数组定义：<br>[语法]：set  arrName(index) value<br>[语法]：array set arrName { index1 value1 index2 value2 …} </p>
+<pre><code>set day(monday) 1;#数组名为day，数组元素名为monday的值为1
+</code></pre><h3 id="数组操作命令"><a href="#数组操作命令" class="headerlink" title="数组操作命令"></a>数组操作命令</h3><p>array exists  arr：判断 arr 是否为数组变量，是返回 1  </p>
+<p>array get arr  ?pattern?：返回一个包含交替出现索引、元素值的列表。pattern 选择匹配索引。如果不指定 pattern，返回所有的元素索引和值。</p>
+<p>array names  arr ?pattern?：返回索引</p>
+<p>array  size  arr：数组大小</p>
+<p>array  startsearch  arr：返回用于 arr 进行搜索的搜索标记</p>
+<p>parray arr：打印出 arr 的所有元素变量名和元素值</p>
+<p>array  nextelement arr index：返回下一个元素值，如果已在尾部的话，返回空串</p>
+<h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><h3 id="unset"><a href="#unset" class="headerlink" title="unset"></a>unset</h3><p>从解释器中删除变量，后面可以有任意多个参数，每个参数是一个变量名,可以是简单变量，也可以是数组或数组元素。数组day并没有删除，其他元素还存在，要删除整个数组，只需给出数组的名字</p>
+<pre><code>set day(monday) 1;
+set day(tuesday) 2;
+unset day(monday);数组day并没有删除，其他元素还存在
+#unset day；#删除整个数组
+puts $day(tuesday)
+</code></pre><h3 id="append"><a href="#append" class="headerlink" title="append"></a>append</h3><p>append命令把文本加到一个变量的后面</p>
+<pre><code>set txt hello;
+append txt &quot;!how are you&quot;;
+puts $txt
+结果：
+hello！how are you
+</code></pre><h3 id="incr"><a href="#incr" class="headerlink" title="incr"></a>incr</h3><p>incr命令把一个变量值加上一个整数。incr要求变量原来的值和新加的值都必须是整数。incr a类似于a++,自增1。</p>
+<pre><code>set a 2;
+incr a;
+puts $a
+结果：3
+</code></pre><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>list是由一堆元素组成的有序集合，支持嵌套，每个元素可以是任意字符串，也可以是list。空的list为{}</p>
+<p>###list（创建列表）###<br>list命令用来创建列表，也可以直接用{}表示</p>
+<pre><code>set 11 [list sun monday tuesday]；
+puts $11
+结果：sun monday tuesday
+set 12 [list $11 wed]
+puts $12
+结果：{sun monday tuesday} wed
+或者
+set 11 &quot;sun mon tue&quot;;
+puts $11;
+set 12 [list $11 wed];
+puts $12;
+</code></pre><h3 id="concat（连接）"><a href="#concat（连接）" class="headerlink" title="concat（连接）"></a>concat（连接）</h3><p>把多个list合成一个list，每个list变成新list的一个元素</p>
+<pre><code>set x {1 2};
+set y [concat $x {3 4}]
+puts $y
+结果：1 2 3 4
+</code></pre><h3 id="lindex（索引）"><a href="#lindex（索引）" class="headerlink" title="lindex（索引）"></a>lindex（索引）</h3><p>返回list的第index个(0-based)元素</p>
+<pre><code>set x [list 1 2 3 4]
+set y [lindex $x 2]
+puts $y
+结果：3
+</code></pre><h3 id="llength（长度）"><a href="#llength（长度）" class="headerlink" title="llength（长度）"></a>llength（长度）</h3><p>返回list的元素个数</p>
+<pre><code>set x [list 1 2 3 4]
+set y [llength $x]
+puts $y
+结果：4
+</code></pre><h3 id="linsert（插入）"><a href="#linsert（插入）" class="headerlink" title="linsert（插入）"></a>linsert（插入）</h3><p>语法：linsert list index value ?value…?<br>返回一个新串，新串是把所有的value参数值插入list的第index个(0-based)元素之前得到<br>    set x [list 1 2 3 4]<br>    set y [linsert $x 2 5 6 7]；#在3前插入5 6 7<br>    puts $y<br>    结果：1 2 5 6 7 3 4</p>
+<h3 id="lreplace（替代）"><a href="#lreplace（替代）" class="headerlink" title="lreplace（替代）"></a>lreplace（替代）</h3><p>语法：lreplace list first last ?value value …?<br>返回一个新串，新串是把list的第firs (0-based)t到第last 个(0-based)元素用所有的value参数替换得到的。</p>
+<p>如果没有value参数，就表示删除第first到第last个元素。</p>
+<pre><code>set x [list 1 2 3 4]
+set y [lreplace $x 1 2 6 7]
+puts $y
+结果：1 6 7 4
+
+set x [list 1 2 3 4]
+set y [lreplace $x 1 2 ]；#删除2和3
+puts $y
+结果：1 4
+</code></pre><h3 id="lrange（范围）"><a href="#lrange（范围）" class="headerlink" title="lrange（范围）"></a>lrange（范围）</h3><p>语法:lrange list first last<br>返回list的第first (0-based)到第last (0-based)元素组成的串。</p>
+<p>如果last的值是end。就是从第first个直到串的最后。<br>    set x [list 1 2 3 4]<br>    set y [lrange $x 1 end ]<br>    puts $y<br>    结果：2 3 4</p>
+<h3 id="lappend（追加）"><a href="#lappend（追加）" class="headerlink" title="lappend（追加）"></a>lappend（追加）</h3><p>语法：lappend list value ?value…?<br>将新元素追加到原来列表 list 后组成新的列表,这里使用与上述有点不同，lappend list不能是lappend $list。</p>
+<pre><code>set x [list 1 2 3 4]
+set y [lappend x 5]
+puts $y
+结果：1 2 3 4 5 
+set x [list 1 2 3 4]
+set y [lappend $x 5]
+puts $y
+结果：5
+</code></pre><h3 id="lsearch（搜索匹配）"><a href="#lsearch（搜索匹配）" class="headerlink" title="lsearch（搜索匹配）"></a>lsearch（搜索匹配）</h3><p>语法：lsearch ?mode? list value<br>根据匹配模式 mode，查找 list 中与 value 匹配的元素位置索引，如果找不到匹配就返回-1。</p>
+<p>-exact、-glob、 -regexp是三种模式匹配的技术。<br>-exact表示精确匹配；<br>-glob的匹配方式和string match命令的匹配方式相同，缺省时使用-glob匹配<br>-regexp表示正规表达式匹配  </p>
+<pre><code>set x [list this is a list]
+set y [lsearch $x l*];#匹配l开头的
+puts $y
+结果：3
+set x [list this is a list]
+set y [lsearch -exact $x l*]；#精确匹配，因此返回-1
+puts $y
+结果：-1
+set z [lsearch -exact $x list]；#精确匹配list，索引为3
+puts $z
+结果：3
+</code></pre><h3 id="lsort（排序）"><a href="#lsort（排序）" class="headerlink" title="lsort（排序）"></a>lsort（排序）</h3><p>语法：lsort ?switches? list<br>-ascii 按ASCII字符的顺序排序比较.这是缺省情况。  </p>
+<p>-dictionary 按字典排序,与-ascii不同的地方是：<br>(1)不考虑大小写<br>(2)如果元素中有数字的话,数字被当作整数来排序. 因此：bigBoy排在bigbang和bigboy之间, x10y 排在x9y和x11y之间.</p>
+<p>-integer 把list的元素转换成整数,按整数排序.<br>-real 把list的元素转换成浮点数,按浮点数排序.<br>-increasing 升序(按ASCII字符比较)<br>-decreasing 降序(按ASCII字符比较)<br>-command command TCL自动利用command 命令把每两个元素一一比较,然后给出排序结果。  </p>
+<pre><code>set x [list this is a list]
+set y [lsort -ascii $x]
+puts $y
+结果：a is list this
+</code></pre><h3 id="split（分割）"><a href="#split（分割）" class="headerlink" title="split（分割）"></a>split（分割）</h3><p>语法：split string ?splitChars?<br>把字符串string按分隔符splitChars分成一个个单词，返回由这些单词组成的串。如果splitChars 是一个空字符{}，string被按字符分开。如果splitChars没有给出,以空格为分隔符<br>    set x “how are you”<br>    set y [split $x {}]<br>    puts $y<br>    结果：h o w ｛　｝ａ　ｒ　ｅ ｛　｝y o u</p>
+<h3 id="join（合并）"><a href="#join（合并）" class="headerlink" title="join（合并）"></a>join（合并）</h3><p>语法:join list ?joinString?<br>把list的所有元素合并到一个字符串中，中间以joinString分开。缺省的joinString是空格</p>
+<pre><code>set x &quot;how are you&quot;
+set y [join $x 1]
+puts $y
+结果：how1are1you
+</code></pre><p>##控制结构##</p>
+<p>###if/else结构###<br>if 命令根据表达式的结果来执行命令体：如果表达式结果为真，则执行命令体，否则会执行另外一个条件命令体</p>
+<pre><code> if { test expr 测试表达式 } {  
+
+body 1
+
+} elseif {test expr 测试表达式}  { 
+
+  body2
+
+} else {
+
+test expr
+
+}
+</code></pre><p>实例：</p>
+<pre><code>set x 10;
+set z 10;
+if {$x&gt;1} {
+    set y 11;
+} else {
+    set z 12;
+}
+puts $y;
+puts $z;
+</code></pre><p>注意：<br>若报错extra characters after close-brace 检查空格问题</p>
+<ol>
+<li><p>if与{间有空格，}与{间有空格，}与else有空格， else与{有空格</p>
+</li>
+<li><p>花括号一定要和 if 命令在同一行上</p>
+</li>
+<li><p>花括号括起的表达式、执行命令体或者其他内容相当于变量存在，所以前后与其他命令元素之前要有空格</p>
+</li>
+<li><p>表达式支持变量替换和命令替换。</p>
+</li>
+</ol>
+<p>###while循环###<br>只要 test 为真，while 就执行循环体直到 test 变为假</p>
+<pre><code>while {test } {
+
+                 body
+
+              } 
+</code></pre><p>例子：</p>
+<pre><code>set x 10;
+while {$x&gt;1} {
+    set y 11
+    set x [incr x -1]
+}
+puts $y
+puts $x
+</code></pre><p>###for循环###<br>for 命令有四个变元，start为初始条件，test<br>expr 是条件表达式，如果是真，则执行循环体，如果假则退出命令。如果表达式真，则在执行循环体后处理 next 命令，即 next 是一个后置命令执行体。</p>
+<p>前三个变元可以选择置空，而将相应的处理放到循环体 body 中去。 </p>
+<pre><code>for {start} {test expr} {next} {body 
+
+}
+</code></pre><p>例子：</p>
+<pre><code>for {set i 0} {$i&lt;=100} {incr i} {
+    incr sum $i;
+}
+puts $sum
+</code></pre><p>###switch选择###</p>
+<pre><code>switch [option] string {
+
+   a -  
+
+   b {body2}                        
+
+   n {bodyn}
+   default {}
+
+                        } 
+</code></pre><p>a的后面跟一个’－’表示使用和下一个模式相同的脚本。default表示匹配任意值</p>
+<p>option 主要有：</p>
+<p>-exact ：用精确匹配（默认）；</p>
+<p>-glob：用 glob 格式行模式匹配； </p>
+<p>-regexp   用 正则表达式模式匹配； </p>
+<p>例子：</p>
+<pre><code>set x 10;
+switch $x {
+10 -；#和下一个模式相同脚本，即incr x，-必须为拼音模式下-
+11 {incr x}
+default {incr x 3}
+
+}
+puts $x
+结果：11
+</code></pre><p>###break和continue###<br>在循环体中，可以用break和continue命令中断循环。其中break命令结束整个循环过程，并从循环中跳出，continue只是结束本次循环</p>
+<p>##string字符串操作##</p>
+<p>###format格式化###<br>语法：format formatstring ?vlue value…?<br>按formatstring提供的格式，把各个value的值组合到formatstring中形成一个新字符串，并返回</p>
+<pre><code>set name john 
+set age 20
+set msg [format &quot;%s is %d years old&quot; $name $age]
+puts $msg
+结果：john is 20 years old
+</code></pre><p>###scan###<br>语法：scan string format varName ?varName …?<br>按format提供的格式分析string字符串，然后把结果存到变量varName中,除了空格和TAB键之外，string 和format中的字符和’%’必须匹配。</p>
+<pre><code>scan &quot;12.34.56.78&quot; &quot;%d.%d.%d.%d&quot; a b c d
+puts $a;#12
+puts $b;#34
+puts $c;#56
+puts $d;#78
+</code></pre><p>###string命令###</p>
+<h4 id="string-compare"><a href="#string-compare" class="headerlink" title="string compare"></a>string compare</h4><p>语法：string compare ?-nocase? ?-length int? string1 string2</p>
+<p>把字符串string1和string2进行比较：，根据词典顺序比较字符串<br>string1小于string2，返回-1  (str1 的顺序比 str2 靠前)<br>string1等于string2，返回0<br>string1大于string2，返回1  </p>
+<p>如果有 -length 参数，那么只比较前 int 个字符，如果 int为负数，那么这个参数被忽略。 </p>
+<p>如果有 -nocase参数，那么比较时不区分大小写。</p>
+<pre><code>set my_name john
+set you_name alla
+set flag [string compare $my_name $you_name]
+puts $flag
+结果：1
+</code></pre><h4 id="string-equal"><a href="#string-equal" class="headerlink" title="string equal"></a>string equal</h4><p>string equal ?-nocase? ?-length int? string1 string2</p>
+<p>把字符串string1和string2进行比较，如果两者相同，返回值为1，否则返回0</p>
+<pre><code>set my_name john
+set you_name alla
+set flag [string equal $my_name $you_name]
+puts $flag
+结果：0
+</code></pre><h4 id="string-first"><a href="#string-first" class="headerlink" title="string first"></a>string first</h4><p>语法：string first string1 string2 ?startindex?</p>
+<p>在string2 中从头查找与string1匹配的字符序列，如果找到，那么就返回匹配的第一个字母所在的位置(0-based)。如果没有找到，那么返回-1。如果给出了startindex变量，那么将从startindex处开始查找</p>
+<pre><code>set my_name helloworld
+set you_name ell
+set flag [string first $you_name $my_name]
+puts $flag
+结果：1
+set you_name eld；#查找时string必须完全匹配
+结果：-1
+</code></pre><h4 id="string-last"><a href="#string-last" class="headerlink" title="string last"></a>string last</h4><p>与string first的区别是从后往前查找</p>
+<h4 id="string-index"><a href="#string-index" class="headerlink" title="string index"></a>string index</h4><p>语法：string index string charIndex</p>
+<p>返回string 中第charIndex个字符(0-based)。charIndex可以是下面的值：</p>
+<p>整数n: 字符串中第n个字符(0-based)<br>end : 最后一个字符<br>end－整数n：倒数第n个字符。string index “abcd” end-1 返回字符’c’<br>如果charIndex小于0，或者大于字符串string的长度，那么返回空。 </p>
+<pre><code>set you_name hexd
+set flag [string index $you_name 1]
+puts $flag
+结果：e
+</code></pre><h4 id="string-length"><a href="#string-length" class="headerlink" title="string length"></a>string length</h4><p>语法：string length string<br>返回字符串string的长度</p>
+<pre><code>set you_name hexd
+set flag [string length $you_name]
+puts $flag
+结果：4
+</code></pre><h4 id="string-match"><a href="#string-match" class="headerlink" title="string match"></a>string match</h4><p>语法：string match ?-nocase? pattern string</p>
+<p>如果pattern 匹配string,那么返回1,否则返回0.如果有-nocase参数,那么就不区分大小写.</p>
+<p>在pattern 中可以使用通配符:  </p>
 <ul>
-<li>注意：<br>如果BRKINT和TGNBRK标志都未被设置，则输入行中的终止状态就被读取为NULL（0X00）字符。<br>对于PARKMRK如果没有设置IGNPAR,在有奇偶校验错误的字符前插入\337\0<br>如果没有设置IGNPAR也没有设置PARMRK，将有奇偶校验错误或帧错误的字符视为/0<br>对于BRKINT,如果设置了IGNBRK,将忽略BREAK,如果没有设置，但是设置了BRKINT,那么BREAK将使得输入和输出队列被刷新。<br>如果终端是一个前台进程组的控制终端，这个进程组所有进程将收到SIGINT信号。<br>如果既未设置IGNBRK也为设置BRKINT,BRKINT将视为与NUL字符同意。除非设置了PARMRK，这种情况下被视为序列/337/0/0  </li>
+<li><p>匹配string中的任意长的任意字符串,包括空字符串.<br>? 匹配string中任意单个字符<br>[chars] 匹配字符集合chars中给出的任意字符,其中可以使用 A-Z这种形式<br>\x 匹配单个字符x,使用’\’是为了让x可以为字符*,-,[,].  </p>
+<p>  set you_name hexd<br>  set flag [string match e* $you_name]；#无法匹配任何e开头的<br>  puts $flag;#0</p>
+</li>
 </ul>
-<hr>
-<h2 id="输出模式标志c-oflag"><a href="#输出模式标志c-oflag" class="headerlink" title="输出模式标志c_oflag"></a><strong>输出模式标志c_oflag</strong></h2><p>输出模式控制输出字符的处理方式,即由程序发出的字符在传递到串行口或屏幕之前如何处理.通过设置c_oflag成员的标识对输出模式进行控制.<br><strong>可用于c_iflag成员的宏如下所示（部分）：</strong><br>OPSOT:打开输出处理功能<br>OLCUC:将输出的小写字母映射为大写字母<br>ONLCR:将输出中的换行符转换为回车符<br>OCRNL:将回车符转换为换行符<br>ONOCR:第０行不输出回车符<br>ONLRET:不输出回车符<br>NLDLY:换行符延时选择<br>CRDLY:回车符延时<br>TABDLY:制表符延时         </p>
-<hr>
-<h2 id="控制模式标志c-cflag"><a href="#控制模式标志c-cflag" class="headerlink" title="控制模式标志c_cflag"></a><strong>控制模式标志c_cflag</strong></h2><p>控制模式控制终端的硬件特性,通过c_cflag成员标识配置. 包括：波特率，数据位长度，停止位长度，奇偶校验位等<br>CBAUD ：(不属于 POSIX) 波特率掩码 (4+1 位)。<br>CSIZE：字符长度掩码（传送或接收字元时用的位数）。 取值为CS5（传送或接收字元时用5bits）, CS6, CS7, 或 CS8。<br>CSTOPB ：设置两个停止位，而不是一个。<br>CREAD ：打开接受者。<br>PARENB ：允许输出产生奇偶信息以及输入的奇偶校验（启用同位产生与侦测）。<br>PARODD ：输入和输出是奇校验（使用奇同位而非偶同位）。<br>HUPCL ：在最后一个进程关闭设备后，降低 modem 控制线 (挂断)。<br>CLOCAL ：忽略 modem 控制线。<br>LOBLK :(不属于 POSIX) 从非当前 shell 层阻塞输出。<br>CIBAUD :(不属于 POSIX) 输入速度的掩码。CIBAUD 各位的值与CBAUD 各位相同，左移了 IBSHIFT 位。<br>CRTSCTS :(不属于 POSIX) 启用 RTS/CTS (硬件) 流控制</p>
-<hr>
-<h3 id="设置波特率"><a href="#设置波特率" class="headerlink" title="设置波特率"></a><strong>设置波特率</strong></h3><p>波特率即调制速率，指信号被调制以后在单位时间内的变化。即单位时间内载波参数变化的次数。<br>为了减少用户编程负担，函数cfgetospeed()将获取存储于struct stermios结构中的输出波特率属性<br>函数cfgetispeed()将获取存储于struct stermios结构中的输入波特率属性，不需要自己进行位操作。<br>函数cfsetospeed()和cfsetispeed分别设置存储于termios结构的输出和输入波特率。<br>cfsetspeed()可以同时设置termios结构的输入和输出波特率。<br>例子：<br>struct termios options;<br>tcgetattr(fd,&amp;options);<br>cfsetispeed(&amp;options,B19200);  //输入波特率19200<br>cfsetospeed(&amp;options,B19200);  //输出波特率19200<br>options.c_cflag | =(CLOCAL | CREAD );  //允许接收，本地模式<br>tcsetattr(fd,TCSANOW,&amp;options);   //生效时间立即生效  </p>
-<h3 id="设置帧数据位宽度"><a href="#设置帧数据位宽度" class="headerlink" title="设置帧数据位宽度"></a><strong>设置帧数据位宽度</strong></h3><p>终端可以设置为每帧数据位为5，6，7,8bit。<br>修改数据位宽度如下：<br>options.c_cflag &amp;=~CSIZE;  //清除现在数据位宽度<br>options.c_cflag ｜＝CS8;   //设置为每帧8bit</p>
-<h3 id="设置奇偶校验"><a href="#设置奇偶校验" class="headerlink" title="设置奇偶校验"></a><strong>设置奇偶校验</strong></h3><p>奇偶校验是串行通信所采用的简单的差错检测方式。<br>例子：<br>设置为8N1，即每帧数据位8bit，无奇偶校验，一位停止位<br>options.c_cflag &amp; =~PARENG;<br>options.c_cflag &amp; =~CSTOPB;<br>options.c_cflag &amp; =~CSIZE;<br>options.c_cflag &amp; =~CS8；  </p>
-<hr>
-<h2 id="本地模式标志c-lflag"><a href="#本地模式标志c-lflag" class="headerlink" title="本地模式标志c_lflag"></a><strong>本地模式标志c_lflag</strong></h2><p>本地模式标志用来管理用何种方式输入字符，一般设置为标准模式或者原始模式。<br>标准模式：回显由客户端完成，用户输入的字符先缓存到一个缓存区，直到用户输入回车或者换行才发送到服务端<br>原始模式：又称为字符模式，回显由服务端完成。用户输入的一个字符立即发送到服务端，服务端然后将该字符回显到客户端。<br>ISIG   ： 当输入INTR、QUIT、SUSP或DSUSP时，产生相应的信号<br>ICANON ： 使用标准输入模式<br>XCASE  ： 在ICANON和XCASE同时设置的情况下，终端只使用大写。如果只设置了XCASE，则输入字符将被转换为小写字符，除非字符使用了转义字符（非POSIX，且Linux不支持该参数）<br>ECHO   ： 显示输入字符<br>ECHOE  ： 如果ICANON同时设置，ERASE将删除输入的字符，WERASE将删除输入的单词<br>ECHOK  ： 如果ICANON同时设置，KILL将删除当前行<br>ECHONL ： 如果ICANON同时设置，即使ECHO没有设置依然显示换行符<br>ECHOPRT： 如果ECHO和ICANON同时设置，将删除打印出的字符（非POSIX）<br>TOSTOP ： 向后台输出发送SIGTTOU信号  </p>
-<hr>
-<h2 id="控制字符标志c-cc-NCCS"><a href="#控制字符标志c-cc-NCCS" class="headerlink" title="控制字符标志c_cc[NCCS]"></a><strong>控制字符标志c_cc[NCCS]</strong></h2><p>标准模式和非标准模式下,c_cc数组的下标有不同的值:<br>标准模式:<br>VEOF:ＥＯＦ字符<br>VEOL:ＥＯＬ字符<br>VERASE:ERASE字符<br>VINTR:INTR字符<br>VKILL:KILL字符<br>VQUIT:QUIT字符<br>VSTART:START字符<br>VSTOP:STOP字符<br>非标准模式:<br>VINTR:INTR字符<br>VMIN:MIN值<br>VQUIT:QUIT字符<br>VSUSP:SUSP字符<br>VTIME:TIME值<br>VSTART:START字符<br>VSTOP:STOP字符  </p>
-<p><strong>字符</strong><br>INTR:该字符使终端驱动程序向与终端相连的进程以送SIGINT信号<br>QUIT:该字符使终端驱动程序向与终端相连的进程发送SIGQUIT信号<br>EOF;该字符使终端驱动程序将输入行中的全部字符传递给正在读取输入的应用程序.如果输入行为空,read调用将返回０,就好像在文件尾调用read一样  </p>
-<p><strong>TIME和MIN值</strong>  </p>
-<p>这两个值只用于非标准模式,两者结合共同控制对输入的读取方式,还能控制在一个程序试图与一个终端关联的文件描述符时将发生的情况<br>MIN = 0, TIME = 0时:read立即返回,如果有待处理的字符,它们就会被返回,如果没有,read调用返回0,且不读取任何字符<br>MIN = 0, TIME &gt; 0时:有字符处理或经过TIME个0.1秒后返回<br>MIN &gt; 0, TIME = 0时:read一直等待,直到有ＭＩＮ个字符可以读取,返回值是字符的数量.到达文件尾时返回0<br>MIN &gt; 0, TIME &gt; 0时:read调用时,它会等待接收一个字符.在接收到第一个字符及其后续的每个字符后,启用一个字符间隔定时器.当有ＭＩＮ个字符可读或两字符间的时间间隔超进TIME个0.1秒时,read返回<br>通过设置ＭＩＮ和ＴＩＭＥ值,我们可以逐个字符地对输入进行处理</p>
-<hr>
-<h1 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a><strong>其他函数</strong></h1><p>这些函数直接作用于文件描述符,不需要读写termios结构:<br><strong>#include <termios.h></termios.h></strong><br>int tcdrain(int fd);让调用程序一直等待,直到所有排队的输出都发送完毕<br>int tcflow(int, int flowtype);暂停或重新开始输出<br>int tcflush(int fd, int in_out_selector);清空输入,输出或两者都清空    </p>
-<hr>
+<h4 id="string-range"><a href="#string-range" class="headerlink" title="string range"></a>string range</h4><p>语法：string range string first last</p>
+<p>返回字符串string中从第first个到第last个字符的子字符串(0-based)。如果first&lt;0，那么first被看作0，如果last大于或等于字符串的长度，那么last被看作end，如果first比last大，那么返回空。</p>
+<pre><code>set you_name hexd
+set flag [string range $you_name 0 1]
+puts $flag
+结果：he
+</code></pre><h4 id="string-repeat"><a href="#string-repeat" class="headerlink" title="string repeat"></a>string repeat</h4><p>语法：string repeat string count</p>
+<p>返回string字符串重复count次的新字符串</p>
+<pre><code>set you_name hexd
+set flag [string repeat $you_name 2]
+puts $flag
+结果：hexdhexd
+</code></pre><h4 id="string-replace"><a href="#string-replace" class="headerlink" title="string replace"></a>string replace</h4><p>string replace string first last ?newstring?<br>返回值为：从字符串string 中删除了第first到第last个字符(0-based)的字符串，如果给出了newstring变量，那么就用newstring替换从第first到第last个字符。</p>
+<p>如果first&lt;0，那么first被看作0，如果last大于或等于字符串的长度，那么last被看作end</p>
+<p>如果first比last大或者大于字符串string的长度或者last小于0，那么原封不动的返回string 。</p>
+<pre><code>set you_name hexd
+set flag [string replace $you_name 1 2 gk]
+puts $flag
+结果：hgkd
+</code></pre><h4 id="string-tolower"><a href="#string-tolower" class="headerlink" title="string tolower"></a>string tolower</h4><p>语法：string tolower string ?first? ?last?</p>
+<p>返回值为：把字符串string转换成小写后的字符串，如果给出了first和last变量，就只转换first和last之间的字符。  </p>
+<pre><code>set you_name HEDC
+set flag [string tolower $you_name 1 2]
+puts $flag
+结果：HedC
+</code></pre><h4 id="string-toupper"><a href="#string-toupper" class="headerlink" title="string toupper"></a>string toupper</h4><p>语法：string toupper string ?first? ?last?</p>
+<p>转换成大写，与tolower一样</p>
+<h4 id="string-trim"><a href="#string-trim" class="headerlink" title="string trim"></a>string trim</h4><p>语法：string trim string ?chars?</p>
+<p>从string字符串删除字符集合chars中的字符后的字符串。如果没有给出chars，那么将删除掉spaces、tabs、newlines、carriage returns这些字符。</p>
+<pre><code>set you_name hedx
+set flag [string trim $you_name he]
+puts $flag
+结果：dx
+</code></pre><p>##procedure过程##<br>TCL中的过程类似于C中的函数。proc命令的第一个参数是要定义的过程的名字，第二个参数是过程的参数列表，参数之间用空格隔开，第三个参数是一个TCL脚本，代表过程体。 proc生成一个新的命令，可以象固有命令一样调用。过程的返回值是过程体中最后执行的那条命令的返回值。</p>
+<pre><code>proc add {x y } {
+    expr $x+$y}
+</code></pre><p>###局部变量和全局变量###<br>局部变量：在过程中定义的变量，只能在过程中被访问，并且当过程退出时会被自动删除</p>
+<p>全局变量：所有过程之外定义的变量</p>
+<p>局部变量的作用域是它所在的过程的内部；全局变量的作用域则不包括所有过程的内部。</p>
+<h3 id="缺省参数"><a href="#缺省参数" class="headerlink" title="缺省参数"></a>缺省参数</h3><p>可以为过程的部分或全部参数提供缺省值，如果调用过程时未提供那些参数的值，那么过程会自动使用缺省值赋给相应的参数<br>    proc add {val1 {val2 2} {val3 3}} {<br>        expr $val1+$val2+$val3<br>    }<br>    set x [add 1]；#val3,val3未提供参数，使用缺省参数<br>    puts $x;<br>    set y [add 2 20]；#val3未提供参数，使用缺省参数<br>    puts $y</p>
+<p>###引用upval###<br>语法:upvar ?level? otherVar myVar ?otherVar myVar …?</p>
+<p>upvar命令使得用户可以在过程中对全局变量或其他过程中的局部变量进行访问。 upvar命令的第一个参数otherVar是希望以引用方式访问的参数的名字，第二个参数myVar 是这个过程中的局部变量的名字，一旦使用了upvar 命令把otherVar 和myVar 绑定,那么在过程中对局部变量myVar 的读写就相当于对这个过程的调用者中otherVar 所代表的局部变量的读写。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;termios结构体简介&quot;&gt;&lt;a href=&quot;#termios结构体简介&quot; class=&quot;headerlink&quot; title=&quot;termios结构体简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;termios结构体简介&lt;/strong&gt;&lt;/h1&gt;&lt;hr&gt;
-&lt;p&gt;为便于用户层统一管理终端属性，linux使用termios结构体来统一管理&lt;br&gt;
+      &lt;h1 id=&quot;tcl环境搭建&quot;&gt;&lt;a href=&quot;#tcl环境搭建&quot; class=&quot;headerlink&quot; title=&quot;tcl环境搭建&quot;&gt;&lt;/a&gt;tcl环境搭建&lt;/h1&gt;&lt;p&gt;windows环境下，安装activite tcl。所有程序下tclsh86即为tcl控制台，为了方便配置notepad++为tcl编辑器，点击notepad++运行，在运行程序名中输入如下,同时点击保存设置运行快捷键，比如设置ctrl+T，只需在tcl程序中通过快捷键即可运行该tcl脚本。&lt;br&gt;
     
     </summary>
     
-      <category term="linux" scheme="http://BlueSky-chamo.github.io/home/categories/linux/"/>
+      <category term="tcl" scheme="http://BlueSky-chamo.github.io/home/categories/tcl/"/>
     
     
-      <category term="linux终端设备" scheme="http://BlueSky-chamo.github.io/home/tags/linux%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo配置</title>
-    <link href="http://BlueSky-chamo.github.io/home/2017/03/30/hexo%E9%85%8D%E7%BD%AE/"/>
-    <id>http://BlueSky-chamo.github.io/home/2017/03/30/hexo配置/</id>
-    <published>2017-03-29T16:00:00.000Z</published>
-    <updated>2017-07-23T02:45:27.596Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="实现fork-me"><a href="#实现fork-me" class="headerlink" title="实现fork me"></a>实现fork me</h1><a id="more"></a>
-<p>点击<a href="https://github.com/blog/273-github-ribbons" target="_blank" rel="external">这里</a> 挑选自己喜欢的样式，并复制代码到 themes/next/layout/_layout.swig 文件中div class=”headband”下面，并把 href 改为你的github地址。  </p>
-<pre><code>&lt;a href=&quot;https://github.com/you&quot;&gt;&lt;img style=&quot;position: absolute; top: 0;  right: 0; border: 0;&quot; src=&quot;https://camo.githubusercontent.com/  a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67&quot; alt=&quot;Fork me on GitHub&quot; data-canonical-src=&quot;https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png&quot;&gt;&lt;/a&gt;
-</code></pre><h1 id="添加RSS"><a href="#添加RSS" class="headerlink" title="添加RSS"></a>添加RSS</h1><p>安装 Hexo 插件：(这个插件会放在 node_modules 这个文件夹里)  </p>
-<pre><code>npm install --save hexo-generator-feed
-</code></pre><p>站点配置文件末尾添加：  </p>
-<pre><code># Extensions
-## Plugins: http://hexo.io/plugins/
-plugins: hexo-generate-feed
-</code></pre><p>next主题配置文件添加：  </p>
-<pre><code># Set rss to false to disable feed link.
-# Leave rss as empty to use site&apos;s feed link.
-# Set rss to specific value if you have burned your feed already.
-rss: /atom.xml  
-</code></pre><p>配置完之后运行：</p>
-<pre><code>hexo g
-</code></pre><p>重新生成一次，你会在 ./public 文件夹中看到 atom.xml 文件。然后启动服务器查看是否有效，之后再部署到 Github 中。</p>
-<h1 id="添加动态背景"><a href="#添加动态背景" class="headerlink" title="添加动态背景"></a>添加动态背景</h1><p>打开 next/layout/_layout.swig<br>在 &lt; /body&gt;之前添加代码(注意不要放在&lt; /head&gt;的后面)  </p>
-<pre><code>&lt;!-- 背景动画 --&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/particle.js&quot;&gt;&lt;/script&gt;
-&lt;!-- 页面点击小红心 --&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/love.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>想设置动画线条颜色可改为：</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot; color=&quot;255,0,0&quot; opacity=&quot;0.3&quot; count=&quot;99&quot; src=&quot;/js/src/particle.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>color ：线条颜色, 默认: ‘0,0,0’；三个数字分别为(R,G,B)<br>opacity: 线条透明度（0~1）, 默认: 0.5<br>count: 线条的总数量, 默认: 150<br>zIndex: 背景的z-index属性，css属性用于控制所在层的位置, 默认: -1   </p>
-<h1 id="文章底部的那个带-号的标签"><a href="#文章底部的那个带-号的标签" class="headerlink" title="文章底部的那个带#号的标签"></a>文章底部的那个带#号的标签</h1><p>修改模板 /themes/next/layout/_macro/post.swig ，搜索 rel=”tag”&gt;# ，将 # 换成 <i class="fa fa-tag"></i> </p>
-<h1 id="文章末尾统一添加“本文结束”标记"><a href="#文章末尾统一添加“本文结束”标记" class="headerlink" title="文章末尾统一添加“本文结束”标记"></a>文章末尾统一添加“本文结束”标记</h1><p>在路径 \themes\next\layout_macro 中新建 passage-end-tag.swig 文件,并添加以下内容：</p>
-<pre><code>&lt;div&gt;
-    {% if not is_index %}
-	        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-	    {% endif %}
-&lt;/div&gt;
-</code></pre><p>接着打开 \themes\next\layout_macro\post.swig 文件，在 post-body 之后， post-footer 之前添加如下画红色部分代码（post-footer之前两个DIV）：</p>
-<pre><code>&lt;div&gt;
-  {% if not is_index %}
-	    {% include 'passage-end-tag.swig' %}
-	  {% endif %}
-&lt;/div&gt;  
-</code></pre><p>在主题配置文件 _config.yml 中添加以下字段开启此功能：</p>
-<pre><code># 文章末尾添加“本文结束”标记
-passage_end_tag:
-  enabled: true 
-</code></pre><h1 id="修改作者头像并旋转"><a href="#修改作者头像并旋转" class="headerlink" title="修改作者头像并旋转"></a>修改作者头像并旋转</h1><p>打开 \themes\next\source\css_common\components\sidebar\sidebar-author.styl ，在里面添加如下代码：  </p>
-<pre><code>.site-author-image {
-  display: block;
-  margin: 0 auto;
-  padding: $site-author-image-padding;
-  max-width: $site-author-image-width;
-  height: $site-author-image-height;
-  border: $site-author-image-border-width solid $site-author-image-border-color;
-
-  /* 头像圆形 */
-  border-radius: 80px;
-  -webkit-border-radius: 80px;
-  -moz-border-radius: 80px;
-  box-shadow: inset 0 -1px 0 #333sf;
-
-  /* 设置循环动画 [animation: (play)动画名称 (2s)动画播放时长单位秒或微秒 (ase-out)动画播放的速度曲线为以低速结束 
-    (1s)等待1秒然后开始动画 (1)动画播放次数(infinite为循环播放) ]*/
-
-
-  /* 鼠标经过头像旋转360度 */
-  -webkit-transition: -webkit-transform 1.0s ease-out;
-  -moz-transition: -moz-transform 1.0s ease-out;
-  transition: transform 1.0s ease-out;
-}
-
-img:hover {
-  /* 鼠标经过停止头像旋转 
-  -webkit-animation-play-state:paused;
-  animation-play-state:paused;*/
-
-  /* 鼠标经过头像旋转360度 */
-  -webkit-transform: rotateZ(360deg);
-  -moz-transform: rotateZ(360deg);
-  transform: rotateZ(360deg);
-}
-
-/* Z 轴旋转动画 */
-@-webkit-keyframes play {
-  0% {
-    -webkit-transform: rotateZ(0deg);
-  }
-  100% {
-    -webkit-transform: rotateZ(-360deg);
-  }
-}
-@-moz-keyframes play {
-  0% {
-    -moz-transform: rotateZ(0deg);
-  }
-  100% {
-    -moz-transform: rotateZ(-360deg);
-  }
-}
-@keyframes play {
-  0% {
-    transform: rotateZ(0deg);
-  }
-  100% {
-    transform: rotateZ(-360deg);
-  }
-}
-</code></pre><h1 id="作者头像变成圆形"><a href="#作者头像变成圆形" class="headerlink" title="作者头像变成圆形"></a>作者头像变成圆形</h1><p>打开自定义CSS： \themes\next\source\css_custom\custom.styl 加入  </p>
-<pre><code>.site-author-image {
-  border-radius: 100%;
-  padding: 2px;
-  border: 2px dashed #fff;
-  animation: cycle 2s 0.5s forwards;
-  transition: border-radius 2s;
-}
-</code></pre><p>博主名字号大小,也在 custom.styl 文件:</p>
-<pre><code>.site-author-name {
-  font-size: 16px;
-}
-</code></pre><h1 id="网站底部加上访问量"><a href="#网站底部加上访问量" class="headerlink" title="网站底部加上访问量"></a>网站底部加上访问量</h1><p>打开 \themes\next\layout_partials\footer.swig 文件,在copyright前加上  </p>
-<p><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><br>然后在该文件添加显示统计的代码：  </p>
-<pre><code>&lt;div class=&quot;powered-by&quot;&gt;
-&lt;i class=&quot;fa fa-user-md&quot;&gt;&lt;/i&gt;&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
-  本站访客数:&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;
-&lt;/span&gt;
-&lt;/div&gt;
-</code></pre><p>footer.swig完整代码</p>
-<pre><code>&lt;script async src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;
-&lt;div class=&quot;copyright&quot; &gt;
-  {% set current = date(Date.now(), "YYYY") %}
-  &amp;copy; {% if theme.since and theme.since != current %} {{ theme.since }} - {% endif %}
-	  <span itemprop="copyrightYear">{{ current }}</span>
-	  <span class="with-love">
-	    <i class="fa fa-{{ theme.authoricon }}"></i>
-	  </span>
-	  <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
-	
-	{% if theme.copyright %}
-	<div class="powered-by">
-	<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
-	  本站访客数:<span id="busuanzi_value_site_uv"></span>
-	</span>
-	</div>
-	<div class="powered-by">
-	  {{ __('footer.powered', '<a class="theme-link" href="https://hexo.io" target="_blank" rel="external">Hexo</a>') }}
-	</div>
-	
-	<div class="theme-info">
-	  {{ __('footer.theme') }} -
-	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">
-	    NexT.{{ theme.scheme }}
-	  </a>
-	</div>
-	{% endif %}
-</code></pre><p>在这里有两中不同计算方式的统计代码：</p>
-<p>pv的方式，单个用户连续点击n篇文章，记录n次访问量</p>
-<pre><code>&lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;
-    本站总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次
-&lt;/span&gt;
-</code></pre><p>uv的方式，单个用户连续点击n篇文章，只记录1次访客数</p>
-<pre><code>&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
-  本站总访问量&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;次
-&lt;/span&gt;
-</code></pre><h1 id="添加热度"><a href="#添加热度" class="headerlink" title="添加热度"></a>添加热度</h1><p>主题配置文件 </p>
-<pre><code>leancloud_visitors:
-      enable: true
-</code></pre><p>next主题集成 leanCloud ，打开 /themes/next/layout/_macro/post.swig ,在画红线的区域添加 ℃ ：  </p>
-<pre><code>{% if theme.leancloud_visitors.enable %}
-	             <span id="{{ url_for(post.path) }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
-	               <span class="post-meta-divider">|</span>
-	               <span class="post-meta-item-icon">
-	                 <i class="fa fa-eye"></i>
-	               </span>
-	               {% if theme.post_meta.item_text %}
-	                 <span class="post-meta-item-text">{{__('post.visitors')}} </span>
-	               {% endif %}
-       &lt;span class=&quot;leancloud-visitors-count&quot;&gt;&lt;/span&gt;
-       &lt;span&gt;℃&lt;/span&gt;
-   &lt;/span&gt;
-{% endif %}
-</span></code></pre><p>然后打开/themes/next/languages/zh-Hans.yml 更改如下:</p>
-<pre><code>visitors: 热度
-</code></pre><h1 id="网站底部字数统计"><a href="#网站底部字数统计" class="headerlink" title="网站底部字数统计"></a>网站底部字数统计</h1><p>切换到根目录下，然后运行如下代码</p>
-<pre><code>npm install hexo-wordcount --save
-</code></pre><p>然后在 /themes/next/layout/_partials/footer.swig 文件尾部加上：</p>
-<pre><code>&lt;div class=&quot;theme-info&quot;&gt;
-  &lt;div class=&quot;powered-by&quot;&gt;&lt;/div&gt;
-  &lt;span class=&quot;post-count&quot;&gt;博客全站共{{ totalcount(site) }}字&lt;/span&gt;
-&lt;/div&gt;
-</code></pre><h1 id="设置网站的图标Favicon"><a href="#设置网站的图标Favicon" class="headerlink" title="设置网站的图标Favicon"></a>设置网站的图标Favicon</h1><p>在<a href="http://www.easyicon.net/" target="_blank" rel="external">EasyIcon</a> 中找一张（32*32）的 ico 图标,或者去别的网站下载或者制作，并将图标名称改为 favicon.ico ，然后把图标放在 /themes/next/source/images 里，并且修改主题配置文件：</p>
-<pre><code>favicon: /favicon.ico
-</code></pre><h1 id="实现统计功能"><a href="#实现统计功能" class="headerlink" title="实现统计功能"></a>实现统计功能</h1><p>切换到根目录下，然后运行如下代码</p>
-<pre><code>npm install hexo-wordcount --save
-</code></pre><p>主题配置文件：</p>
-<p>   post_wordcount:<br>      item_text: true<br>      wordcount: true<br>      min2read: true</p>
-<h1 id="添加顶部加载条"><a href="#添加顶部加载条" class="headerlink" title="添加顶部加载条"></a>添加顶部加载条</h1><p>打开 /themes/next/layout/_partials/head.swig 文件，顶部加入：</p>
-<pre><code>&lt;meta charset=&quot;UTF-8&quot;/&gt;
-&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;/&gt;
-&lt;script src=&quot;//cdn.bootcss.com/pace/1.0.2/pace.min.js&quot;&gt;&lt;/script&gt;
-&lt;link href=&quot;//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;style&gt;
-.pace .pace-progress {
-    background: #1E92FB; /*进度条颜色*/
-    height: 3px;
-}
-.pace .pace-progress-inner {
-     box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
-}
-.pace .pace-activity {
-    border-top-color: #1E92FB;    /*上边框颜色*/
-    border-left-color: #1E92FB;    /*左边框颜色*/
-}
-&lt;/style&gt;
-</code></pre><h1 id="添加sitemap网站地图"><a href="#添加sitemap网站地图" class="headerlink" title="添加sitemap网站地图"></a>添加sitemap网站地图</h1><p>进入 hexo 根目录，打开 git</p>
-<pre><code>npm install hexo-generator-sitemap --save
-npm install hexo-generator-baidu-sitemap --save
-</code></pre><p>hexo站点的_config.yml添加下面的代码</p>
-<pre><code>sitemap:
-  path: sitemap.xml
-baidusitemap:
-  path: baidusitemap.xml
-</code></pre><h1 id="主要参考"><a href="#主要参考" class="headerlink" title="主要参考"></a>主要参考</h1><p><a href="https://segmentfault.com/a/1190000009595779" target="_blank" rel="external">Hexo-next主题个性化配置</a><br><a href="http://www.tuicool.com/articles/2Yz22e3" target="_blank" rel="external">hexo的next主题个性化配置教程</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;实现fork-me&quot;&gt;&lt;a href=&quot;#实现fork-me&quot; class=&quot;headerlink&quot; title=&quot;实现fork me&quot;&gt;&lt;/a&gt;实现fork me&lt;/h1&gt;
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://BlueSky-chamo.github.io/home/categories/hexo/"/>
-    
-    
-      <category term="hexo" scheme="http://BlueSky-chamo.github.io/home/tags/hexo/"/>
+      <category term="tcl" scheme="http://BlueSky-chamo.github.io/home/tags/tcl/"/>
     
   </entry>
   
